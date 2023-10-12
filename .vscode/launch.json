@@ -1,0 +1,38 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Flutter Dev",
+            "request": "launch",
+            "type": "dart",
+            // "preLaunchTask": "CheckCoverage_And_Analyze",
+            "program": "lib/main/main_dev.dart",
+            "args": [
+                "--flavor",
+                "dev"
+            ]
+        },
+        {
+            "name": "Flutter Staging",
+            "request": "launch",
+            "type": "dart",
+            // "preLaunchTask": "CheckCoverage_And_Analyze",
+            "program": "lib/main/main_staging.dart",
+            "args": [
+                "--flavor",
+                "staging"
+            ]
+        },
+        {
+            "name": "Flutter Prod",
+            "request": "launch",
+            "type": "dart",
+            // "preLaunchTask": "CheckCoverage_And_Analyze",
+            "program": "lib/main/main_prod.dart",
+            "args": [
+                "--flavor",
+                "prod"
+            ]
+        },
+    ]
+}

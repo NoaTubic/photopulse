@@ -1,0 +1,21 @@
+{# templates/release_notes_template.txt #}
+
+# Changelog overview
+
+## Tags list
+{% for build_number in build_numbers %}
+    {% if loop.index0 < (release_notes | length) and release_notes[loop.index0] | length > 0  %}
+* [{{ build_number }}](#{{ build_number | replace(".", "") | replace(" ", "-") }})
+    {% endif %}
+{% endfor %}
+
+
+{% for build_number in build_numbers %}
+    {% if loop.index0 < (release_notes | length) and release_notes[loop.index0] | length > 0  %}
+## {{ build_number }}
+### {{ dates[loop.index0] }}
+        {% for (issue_name, issue_url, release_text) in release_notes[loop.index0] %}
+* {% if issue_name != None and issue_url != None %}[{{ issue_name }}]({{ issue_url }}) {% endif %}{{ release_text }}
+        {% endfor %}
+    {% endif %}
+{% endfor %}

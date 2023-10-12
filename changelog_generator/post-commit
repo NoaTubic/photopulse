@@ -1,0 +1,12 @@
+#!/bin/sh
+
+cd changelog_generator || exit
+source config
+bash generate_changelog.sh
+if [ -f "$DESTINATION_FILE_NAME" ]; then
+    git diff --quiet "$DESTINATION_FILE_NAME"
+    if [ "$?" -eq 1 ]; then
+        git add "$DESTINATION_FILE_NAME"
+        git commit --amend --no-edit
+    fi
+fi

@@ -1,0 +1,44 @@
+{# templates/release_notes_template.txt #}
+
+<html>
+    <head>
+    </head>
+
+    <body>
+        <div>
+            <ul>
+                {% for build_number in build_numbers %}
+                    {% if loop.index0 < (release_notes | length) and release_notes[loop.index0] | length > 0  %}
+                        <li><a href="#{{ build_number }}">{{ build_number }}</a></li>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+        </div>
+
+        <div>
+            <div>
+                {% for build_number in build_numbers %}
+                    {% if loop.index0 < (release_notes | length) and release_notes[loop.index0] | length > 0  %}
+                        <section id="{{ build_number }}"></section>
+                        <div>
+                            <h3>{{ build_number }}</h3>
+                            <h4>{{ dates[loop.index0] }}</h4>
+                        </div>
+                        <div>
+                            <ul>
+                                {% for (issue_name, issue_url, release_text) in release_notes[loop.index0] %}
+                                    <li>
+                                        {% if issue_name != None and issue_url != None %}
+                                        <a href="{{ issue_url }}">{{ issue_name }}</a>: 
+                                        {% endif %}    
+                                        {{ release_text }}
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+    </body>
+</html>

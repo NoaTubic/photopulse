@@ -1,0 +1,5 @@
+{
+    "@@locale": "en",
+    "unknown_error_occurred": "Unknown error occurred",
+    "permission_denied": "Permission has been denied, please enable it in device settings"
+}
