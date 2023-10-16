@@ -2,8 +2,6 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../../common/presentation/build_context_extensions.dart';
-
 class UserDetailsPage extends ConsumerWidget {
   static const routeName = '/details/$pathPattern';
   static const pathPattern = ':userId';
@@ -27,7 +25,7 @@ class UserDetailsPage extends ConsumerWidget {
         children: [
           Text(
             'User id: $userId',
-            style: context.appTextStyles.boldLarge,
+            // style: context.appTextStyles.bold,
             textAlign: TextAlign.center,
           ),
         ],

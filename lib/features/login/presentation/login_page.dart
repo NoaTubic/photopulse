@@ -1,12 +1,14 @@
 // ignore_for_file: always_use_package_imports
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-
-import '../../../common/domain/router/navigation_extensions.dart';
-import '../../../common/presentation/app_sizes.dart';
-import '../../auth/domain/notifiers/auth_notifier.dart';
-import '../../register/presentation/register_page.dart';
-import '../../reset_password/presentation/reset_password_page.dart';
+import 'package:photopulse/common/presentation/app_sizes.dart';
+import 'package:photopulse/common/presentation/image_assets.dart';
+import 'package:photopulse/common/presentation/photo_pulse_scaffold.dart';
+import 'package:photopulse/common/presentation/photo_pulse_text__form_field.dart';
+import 'package:photopulse/common/presentation/text/display_text.dart';
+import 'package:photopulse/generated/l10n.dart';
+import 'package:photopulse/theme/app_colors.dart';
+import 'package:photopulse/theme/theme.dart';
 
 class LoginPage extends ConsumerWidget {
   static const routeName = '/login';
@@ -15,29 +17,39 @@ class LoginPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return Scaffold(
-      appBar: AppBar(title: const Text('Login')),
-      body: ListView(
-        children: [
-          TextButton(
-            onPressed: () => ref
-                .read(authNotifierProvider.notifier)
-                .login(email: 'email', password: 'password'),
-            child: const Text('Login'),
-          ),
-          const SizedBox(height: AppSizes.normalSpacing),
-          TextButton(
-            onPressed: () =>
-                ref.pushNamed('$routeName${ResetPasswordPage.routeName}'),
-            child: const Text('Reset Password'),
-          ),
-          const SizedBox(height: AppSizes.normalSpacing),
-          TextButton(
-            onPressed: () =>
-                ref.pushNamed('$routeName${RegisterPage.routeName}'),
-            child: const Text('Register'),
-          ),
-        ],
+    return PhotoPulseScaffold(
+      gradientBackground: true,
+      body: Center(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            const SizedBox(
+              height: AppSizes.largeSpacing,
+            ),
+            Image.asset(ImageAssets.logo, height: AppSizes.appLogo),
+            const SizedBox(
+              height: AppSizes.mediumSpacing,
+            ),
+            DisplayText(
+              S.current.photo_pulse,
+              color: AppColors.primaryDefault,
+              fontSize: FontSizes.s30,
+            ),
+            const SizedBox(
+              height: AppSizes.xLargeSpacing,
+            ),
+            PhotoPulseTextFormField.normalTextField(
+              name: 'name',
+              labelText: S.current.email,
+            ),
+            const SizedBox(height: AppSizes.largeSpacing),
+            PhotoPulseTextFormField.passwordTextField(
+              name: 'name',
+              labelText: S.current.password,
+            ),
+          ],
+        ),
       ),
     );
   }

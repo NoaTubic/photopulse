@@ -2,7 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../../common/presentation/build_context_extensions.dart';
+// import '../../../common/presentation/build_context_extensions.dart';
 
 class NotificationDetailsPage extends ConsumerWidget {
   static const routeName = '/$pathPattern';
@@ -23,7 +23,7 @@ class NotificationDetailsPage extends ConsumerWidget {
         children: [
           Text(
             'Notification id: $notificationId',
-            style: context.appTextStyles.boldLarge,
+            // style: context.appTextStyles.bold,
             textAlign: TextAlign.center,
           ),
         ],

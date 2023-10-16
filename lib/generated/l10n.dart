@@ -69,6 +69,136 @@ class S {
       args: [],
     );
   }
+
+  /// `PhotoPulse`
+  String get photo_pulse {
+    return Intl.message(
+      'PhotoPulse',
+      name: 'photo_pulse',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `This field is required`
+  String get required_field {
+    return Intl.message(
+      'This field is required',
+      name: 'required_field',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please enter your password to continue.`
+  String get enter_your_password {
+    return Intl.message(
+      'Please enter your password to continue.',
+      name: 'enter_your_password',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please enter your email to continue.`
+  String get enter_your_email {
+    return Intl.message(
+      'Please enter your email to continue.',
+      name: 'enter_your_email',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Email`
+  String get email {
+    return Intl.message(
+      'Email',
+      name: 'email',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Your email`
+  String get your_email {
+    return Intl.message(
+      'Your email',
+      name: 'your_email',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Password`
+  String get password {
+    return Intl.message(
+      'Password',
+      name: 'password',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Your password`
+  String get your_password {
+    return Intl.message(
+      'Your password',
+      name: 'your_password',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Login`
+  String get login {
+    return Intl.message(
+      'Login',
+      name: 'login',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Not a valid e-mail address`
+  String get not_valid_email {
+    return Intl.message(
+      'Not a valid e-mail address',
+      name: 'not_valid_email',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Don’t have an account?`
+  String get dont_have_account {
+    return Intl.message(
+      'Don’t have an account?',
+      name: 'dont_have_account',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Create a Boost Account`
+  String get create_boost_account {
+    return Intl.message(
+      'Create a Boost Account',
+      name: 'create_boost_account',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Forgot your password?`
+  String get forgot_password {
+    return Intl.message(
+      'Forgot your password?',
+      name: 'forgot_password',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {
@@ -77,6 +207,7 @@ class AppLocalizationDelegate extends LocalizationsDelegate<S> {
   List<Locale> get supportedLocales {
     return const <Locale>[
       Locale.fromSubtags(languageCode: 'en'),
+      Locale.fromSubtags(languageCode: 'hr'),
     ];
   }
 

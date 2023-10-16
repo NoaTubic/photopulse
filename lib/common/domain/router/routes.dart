@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../common/domain/utils/string_extension.dart';
-import '../../../example/example_routes.dart';
 import '../../../features/dashboard/presentation/dashboard_page.dart';
 import '../../../features/directories/presentation/directories_page.dart';
 import '../../../features/home/presentation/home_page.dart';
@@ -73,7 +72,6 @@ RouteBase _statefulShellRoute({
                     ? null
                     : UsersPage.routeName,
               ),
-              getExampleRoutes(rootNavigatorKey: rootNavigatorKey),
             ],
           ),
         ]),

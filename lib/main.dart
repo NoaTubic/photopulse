@@ -52,8 +52,7 @@ class MyApp extends ConsumerWidget {
     return MaterialApp.router(
       debugShowCheckedModeBanner: EnvInfo.environment != AppEnvironment.PROD,
       title: EnvInfo.appTitle,
-      theme: primaryTheme,
-      darkTheme: secondaryTheme,
+      theme: lightTheme,
       themeMode: ThemeMode.system,
       localizationsDelegates: const [
         S.delegate,

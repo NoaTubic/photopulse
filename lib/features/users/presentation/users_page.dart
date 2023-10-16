@@ -4,7 +4,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../common/domain/router/navigation_extensions.dart';
 import '../../../common/presentation/app_sizes.dart';
-import '../../../common/presentation/build_context_extensions.dart';
+// import '../../../common/presentation/build_context_extensions.dart';
 import '../../../features/users/presentation/user_details_page.dart';
 
 class UsersPage extends ConsumerWidget {
@@ -16,9 +16,9 @@ class UsersPage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return ListView(
       children: [
-        Text(
+        const Text(
           'Users',
-          style: context.appTextStyles.boldLarge,
+          // style: context.appTextStyles.bold,
           textAlign: TextAlign.center,
         ),
         const SizedBox(height: AppSizes.normalSpacing),
@@ -28,9 +28,9 @@ class UsersPage extends ConsumerWidget {
               UserDetailsPage.getRouteNameWithParams(1, optional: 'abc'),
             ),
           ),
-          child: Text(
+          child: const Text(
             'User 1',
-            style: context.appTextStyles.bold,
+            // style: context.appTextStyles.bold,
           ),
         ),
         const SizedBox(height: AppSizes.normalSpacing),
@@ -41,9 +41,9 @@ class UsersPage extends ConsumerWidget {
               keepExistingQueryString: false,
             ),
           ),
-          child: Text(
+          child: const Text(
             'User 2',
-            style: context.appTextStyles.bold,
+            // style: context.appTextStyles.bold,
           ),
         ),
         const SizedBox(height: AppSizes.normalSpacing),
@@ -51,9 +51,9 @@ class UsersPage extends ConsumerWidget {
           onPressed: () => ref.pushNamed(
             '${UsersPage.routeName}${UserDetailsPage.routeName.replaceAll(UserDetailsPage.pathPattern, 'R')}',
           ),
-          child: Text(
+          child: const Text(
             'User R',
-            style: context.appTextStyles.bold,
+            // style: context.appTextStyles.bold,
           ),
         ),
       ],

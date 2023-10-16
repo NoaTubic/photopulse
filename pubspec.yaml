@@ -32,6 +32,8 @@ dependencies:
   json_annotation: ^4.8.1
   loggy: ^2.0.3
   q_architecture: ^0.1.5
+  remove_emoji_input_formatter: ^0.0.1+1
+  responsive_framework: ^1.1.1
   retrofit: ^4.0.2
   reusable_widgets_docs_generator:
     git:
@@ -59,3 +61,16 @@ flutter:
   assets:
     - assets/images/
 
+  fonts:
+    - family: Cocogoose Pro
+      fonts:
+        - asset: assets/fonts/Cocogoose Pro-Bold.ttf
+          weight: 700
+        - asset: assets/fonts/Cocogoose Pro-SemiBold.ttf
+          weight: 600
+        - asset: assets/fonts/Cocogoose Pro-Medium.ttf
+          weight: 500
+        - asset: assets/fonts/Cocogoose Pro-Regular.ttf
+          weight: 400
+        - asset: assets/fonts/Cocogoose Pro-Light.ttf
+          weight: 300
