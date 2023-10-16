@@ -199,6 +199,36 @@ class S {
       args: [],
     );
   }
+
+  /// `Invalid email and password combination`
+  String get login_error_wrong_credentials {
+    return Intl.message(
+      'Invalid email and password combination',
+      name: 'login_error_wrong_credentials',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Email already in use`
+  String get login_error_email_already_in_user {
+    return Intl.message(
+      'Email already in use',
+      name: 'login_error_email_already_in_user',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Server error occured`
+  String get server_error {
+    return Intl.message(
+      'Server error occured',
+      name: 'server_error',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

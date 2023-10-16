@@ -14,5 +14,8 @@
   "not_valid_email": "Not a valid e-mail address",
   "dont_have_account": "Don’t have an account?",
   "create_boost_account": "Create a Boost Account",
-  "forgot_password": "Forgot your password?"
+  "forgot_password": "Forgot your password?",
+  "login_error_wrong_credentials": "Invalid email and password combination",
+  "login_error_email_already_in_user": "Email already in use",
+  "server_error": "Server error occured"
 }

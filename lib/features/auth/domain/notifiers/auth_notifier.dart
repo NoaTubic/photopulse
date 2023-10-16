@@ -27,23 +27,23 @@ class AuthNotifier extends Notifier<AuthState> implements Listenable {
 
   Future<void> checkIfAuthenticated() async {
     await 100.milliseconds;
-    ref.read(globalLoadingProvider.notifier).update((_) => true);
-    final result = await _authRepository.getTokenIfAuthenticated();
-    result.fold(
-      (failure) {
-        ref.read(globalLoadingProvider.notifier).update((_) => false);
-        ref.read(globalFailureProvider.notifier).update((_) => failure);
-        state = const AuthState.unauthenticated();
-        _routerListener?.call();
-      },
-      (token) {
-        ref.read(globalLoadingProvider.notifier).update((_) => false);
-        state = token != null
-            ? const AuthState.authenticated()
-            : const AuthState.unauthenticated();
-        _routerListener?.call();
-      },
-    );
+    // ref.read(globalLoadingProvider.notifier).update((_) => true);
+    // final result = await _authRepository.getTokenIfAuthenticated();
+    // result.fold(
+    //   (failure) {
+    //     ref.read(globalLoadingProvider.notifier).update((_) => false);
+    //     ref.read(globalFailureProvider.notifier).update((_) => failure);
+    //     state = const AuthState.unauthenticated();
+    //     _routerListener?.call();
+    //   },
+    //   (token) {
+    //     ref.read(globalLoadingProvider.notifier).update((_) => false);
+    //     state = token != null
+    //         ? const AuthState.authenticated()
+    //         : const AuthState.unauthenticated();
+    //     _routerListener?.call();
+    //   },
+    // );
   }
 
   Future<void> login({

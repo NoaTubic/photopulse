@@ -1,30 +1,64 @@
 // ignore_for_file: always_use_package_imports
+import 'dart:developer';
+
 import 'package:either_dart/either.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:photopulse/common/data/firebase_error_resolver.dart';
 import 'package:q_architecture/q_architecture.dart';
 
-import '../../../../common/data/generic_error_resolver.dart';
+// import '../../../../common/data/generic_error_resolver.dart';
 
 final authRepositoryProvider =
     Provider<AuthRepository>((ref) => AuthRepositoryImpl());
 
 abstract interface class AuthRepository {
+  EitherFailureOr<void> register({
+    required String email,
+    required String password,
+  });
+
+  EitherFailureOr<void> verifyEmail();
+
   EitherFailureOr<void> login({
     required String email,
     required String password,
   });
 
-  EitherFailureOr<String?> getTokenIfAuthenticated();
+  EitherFailureOr<void> loginWithGoogle();
+
+  EitherFailureOr<void> signInAnonymously();
 }
 
 class AuthRepositoryImpl with ErrorToFailureMixin implements AuthRepository {
+  final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
+
   @override
-  EitherFailureOr<String?> getTokenIfAuthenticated() => execute(
+  EitherFailureOr<void> register({
+    required String email,
+    required String password,
+  }) =>
+      execute(
         () async {
-          await 1.seconds;
+          await _firebaseAuth.createUserWithEmailAndPassword(
+            email: email,
+            password: password,
+          );
           return const Right(null);
         },
-        errorResolver: const GenericErrorResolver(),
+        errorResolver: const FirebaseErrorResolver(),
+      );
+
+  @override
+  EitherFailureOr<void> verifyEmail() => execute(
+        () async {
+          final User? user = _firebaseAuth.currentUser;
+          if (user != null && !user.emailVerified) {
+            await user.sendEmailVerification();
+          }
+          return const Right(null);
+        },
+        errorResolver: const FirebaseErrorResolver(),
       );
 
   @override
@@ -34,9 +68,28 @@ class AuthRepositoryImpl with ErrorToFailureMixin implements AuthRepository {
   }) =>
       execute(
         () async {
-          await 1.seconds;
+          await _firebaseAuth.signInWithEmailAndPassword(
+            email: email,
+            password: password,
+          );
           return const Right(null);
         },
-        errorResolver: const GenericErrorResolver(),
+        errorResolver: const FirebaseErrorResolver(),
+      );
+
+  @override
+  EitherFailureOr<void> loginWithGoogle() {
+    // TODO: implement loginWithGoogle
+    throw UnimplementedError();
+  }
+
+  @override
+  EitherFailureOr<void> signInAnonymously() => execute(
+        () async {
+          await _firebaseAuth.signInAnonymously();
+          return const Right(null);
+        },
+        onSuccess: () => log('success'),
+        errorResolver: const FirebaseErrorResolver(),
       );
 }
