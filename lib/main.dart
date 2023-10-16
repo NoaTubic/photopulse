@@ -1,5 +1,6 @@
 // ignore_for_file: always_use_package_imports
 
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -7,6 +8,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_loggy/flutter_loggy.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:loggy/loggy.dart';
+import 'package:photopulse/firebase_options.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
 
 import 'common/domain/providers/base_router_provider.dart';
@@ -19,6 +21,9 @@ import 'theme/theme.dart';
 
 Future<void> mainCommon(AppEnvironment environment) async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   EnvInfo.initialize(environment);
   Loggy.initLoggy(
     logPrinter: !EnvInfo.isProduction || kDebugMode

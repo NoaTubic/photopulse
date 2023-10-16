@@ -1,4 +1,4 @@
-package com.example.photopulse
+package com.omnithread.photopulse
 
 import io.flutter.embedding.android.FlutterActivity
 
