@@ -26,4 +26,5 @@ abstract class AppSizes {
   static const double largeAvatarRadius = 128;
   static const double xLargeAvatarRadius = 160;
   static const double chatBubbleCircularRadius = 16;
+  static const double maxWidth = 300;
 }

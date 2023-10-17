@@ -160,11 +160,31 @@ class S {
     );
   }
 
-  /// `Not a valid e-mail address`
-  String get not_valid_email {
+  /// `Invalid email format`
+  String get invalid_email_format {
     return Intl.message(
-      'Not a valid e-mail address',
-      name: 'not_valid_email',
+      'Invalid email format',
+      name: 'invalid_email_format',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Invalid password format`
+  String get invalid_password_format {
+    return Intl.message(
+      'Invalid password format',
+      name: 'invalid_password_format',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Email is required`
+  String get required_email {
+    return Intl.message(
+      'Email is required',
+      name: 'required_email',
       desc: '',
       args: [],
     );

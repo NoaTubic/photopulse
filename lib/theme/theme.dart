@@ -70,6 +70,7 @@ final lightTheme = ThemeData(
   ),
   filledButtonTheme: FilledButtonThemeData(
     style: FilledButton.styleFrom(
+      maximumSize: const Size(AppSizes.maxWidth, AppSizes.filledButtonHeight),
       backgroundColor: AppColors.primaryDefault,
       textStyle: TextStyles.semiBold(
         color: Colors.white,
@@ -78,7 +79,7 @@ final lightTheme = ThemeData(
       shape: const RoundedRectangleBorder(
         borderRadius: appBorderRadius,
       ),
-      minimumSize: const Size.fromHeight(AppSizes.filledButtonHeight),
+      minimumSize: const Size(AppSizes.maxWidth, AppSizes.filledButtonHeight),
       disabledBackgroundColor: AppColors.wireframeLight,
       disabledForegroundColor: AppColors.greyDark,
     ),
@@ -124,7 +125,7 @@ const appBorderRadius =
     BorderRadius.all(Radius.circular(AppSizes.normalCircularRadius));
 
 final inputDecorationTheme = InputDecorationTheme(
-  constraints: const BoxConstraints(maxWidth: 300),
+  constraints: const BoxConstraints(maxWidth: AppSizes.maxWidth),
   floatingLabelBehavior: FloatingLabelBehavior.always,
   isDense: true,
   filled: true,

@@ -1,13 +1,9 @@
 // ignore_for_file: always_use_package_imports
-import 'dart:developer';
-
 import 'package:either_dart/either.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:photopulse/common/data/firebase_error_resolver.dart';
 import 'package:q_architecture/q_architecture.dart';
-
-// import '../../../../common/data/generic_error_resolver.dart';
 
 final authRepositoryProvider =
     Provider<AuthRepository>((ref) => AuthRepositoryImpl());
@@ -89,7 +85,6 @@ class AuthRepositoryImpl with ErrorToFailureMixin implements AuthRepository {
           await _firebaseAuth.signInAnonymously();
           return const Right(null);
         },
-        onSuccess: () => log('success'),
         errorResolver: const FirebaseErrorResolver(),
       );
 }
