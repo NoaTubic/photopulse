@@ -91,7 +91,7 @@ final lightTheme = ThemeData(
         color: AppColors.wireFrameMedium,
         fontSize: FontSizes.s14,
       ),
-      backgroundColor: Colors.white,
+      backgroundColor: Colors.transparent,
       foregroundColor: AppColors.wireFrameMedium,
     ),
   ),

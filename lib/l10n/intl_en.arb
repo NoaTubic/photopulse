@@ -19,5 +19,5 @@
   "forgot_password": "Forgot your password?",
   "login_error_wrong_credentials": "Invalid email and password combination",
   "login_error_email_already_in_user": "Email already in use",
-  "server_error": "Server error occured"
+  "server_error": "Server error occurred"
 }

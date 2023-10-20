@@ -13,6 +13,7 @@ class PhotoPulseButton extends StatelessWidget {
   final Color? textColor;
   final Color? backgroundColor;
   final Color? borderColor;
+  final double? width;
 
   const PhotoPulseButton._({
     Key? key,
@@ -24,6 +25,7 @@ class PhotoPulseButton extends StatelessWidget {
     this.textColor,
     this.backgroundColor,
     this.borderColor,
+    this.width,
   }) : super(key: key);
 
   factory PhotoPulseButton.primary({
@@ -98,44 +100,60 @@ class PhotoPulseButton extends StatelessWidget {
     );
   }
 
+  factory PhotoPulseButton.socialLogin({
+    String? icon,
+    bool isLoading = false,
+    required void Function()? onTap,
+  }) {
+    return PhotoPulseButton._(
+      width: AppSizes.socialLoginButtonSize,
+      child: Image.asset(
+        icon ?? '',
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
-    return FilledButton(
-      onPressed: isEnabled
-          ? isLoading
-              ? () {}
-              : onTap
-          : null,
-      style: FilledButton.styleFrom(
-        backgroundColor: isLoading
-            ? backgroundColor
-            : backgroundColor ?? AppColors.primaryDefault,
-        textStyle: TextStyles.semiBold(
-          color: textColor ?? AppColors.white,
-          fontSize: FontSizes.s14,
+    return SizedBox(
+      width: width,
+      child: FilledButton(
+        onPressed: isEnabled
+            ? isLoading
+                ? () {}
+                : onTap
+            : null,
+        style: FilledButton.styleFrom(
+          backgroundColor: isLoading
+              ? backgroundColor
+              : backgroundColor ?? AppColors.primaryDefault,
+          textStyle: TextStyles.semiBold(
+            color: textColor ?? AppColors.white,
+            fontSize: FontSizes.s14,
+          ),
+          shape: const RoundedRectangleBorder(
+            borderRadius: appBorderRadius,
+          ),
+          foregroundColor: textColor ?? AppColors.white,
+          side: BorderSide(
+            color: borderColor ?? Colors.transparent,
+            width: 1,
+            style: BorderStyle.solid,
+          ),
+          disabledBackgroundColor: AppColors.wireframeLight,
+          disabledForegroundColor: AppColors.graysLight,
         ),
-        shape: const RoundedRectangleBorder(
-          borderRadius: appBorderRadius,
-        ),
-        foregroundColor: textColor ?? AppColors.white,
-        side: BorderSide(
-          color: borderColor ?? Colors.transparent,
-          width: 1,
-          style: BorderStyle.solid,
-        ),
-        disabledBackgroundColor: AppColors.wireframeLight,
-        disabledForegroundColor: AppColors.graysLight,
+        child: isLoading
+            ? SizedBox(
+                height: AppSizes.mediaButtonSize,
+                width: AppSizes.mediaButtonSize,
+                child: CircularProgressIndicator(
+                  color: AppColors.graysUltraLight,
+                  backgroundColor: textColor,
+                ),
+              )
+            : child ?? Text(label!),
       ),
-      child: isLoading
-          ? SizedBox(
-              height: AppSizes.mediaButtonSize,
-              width: AppSizes.mediaButtonSize,
-              child: CircularProgressIndicator(
-                color: AppColors.graysUltraLight,
-                backgroundColor: textColor,
-              ),
-            )
-          : child ?? Text(label!),
     );
   }
 }

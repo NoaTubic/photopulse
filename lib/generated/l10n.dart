@@ -240,10 +240,10 @@ class S {
     );
   }
 
-  /// `Server error occured`
+  /// `Server error occurred`
   String get server_error {
     return Intl.message(
-      'Server error occured',
+      'Server error occurred',
       name: 'server_error',
       desc: '',
       args: [],
