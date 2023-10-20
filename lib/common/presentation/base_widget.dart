@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:loggy/loggy.dart';
 import 'package:q_architecture/q_architecture.dart';
+import 'package:responsive_framework/responsive_breakpoints.dart';
+import 'package:responsive_framework/responsive_framework.dart';
 import 'package:shake/shake.dart';
 
 import '../../main/app_environment.dart';
@@ -63,7 +65,31 @@ class _BaseWidgetState extends ConsumerState<BaseWidget> {
     final showLoading = ref.watch(globalLoadingProvider);
     return Stack(
       children: [
-        widget.child,
+        ResponsiveBreakpoints.builder(
+          child: (widget.child),
+          breakpoints: [
+            const Breakpoint(
+              start: 0,
+              end: 450,
+              name: MOBILE,
+            ),
+            const Breakpoint(
+              start: 768,
+              end: 1024,
+              name: TABLET,
+            ),
+            const Breakpoint(
+              start: 1025,
+              end: 1920,
+              name: DESKTOP,
+            ),
+            const Breakpoint(
+              start: 1921,
+              end: double.infinity,
+              name: '4K',
+            ),
+          ],
+        ),
         if (showLoading) const BaseLoadingIndicator(),
       ],
     );

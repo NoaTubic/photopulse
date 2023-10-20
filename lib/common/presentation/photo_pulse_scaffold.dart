@@ -33,13 +33,16 @@ class PhotoPulseScaffold extends StatelessWidget {
       resizeToAvoidBottomInset: resizeToAvoidBottomInset,
       appBar: appBar ?? PhotoPulseAppBar.titleOnly(''),
       body: gradientBackground
-          ? GradientBackground(
-              child: SafeArea(
-                child: Padding(
-                  padding: padding,
-                  child: body,
+          ? Stack(
+              children: [
+                const GradientBackground(),
+                SafeArea(
+                  child: Padding(
+                    padding: padding,
+                    child: body,
+                  ),
                 ),
-              ),
+              ],
             )
           : SafeArea(
               child: Padding(
