@@ -7,6 +7,7 @@ class DisplayText extends StatelessWidget {
   final bool isCentered;
   final bool isBold;
   final double? fontSize;
+  final String? fontFamily;
 
   const DisplayText(
     this.text, {
@@ -15,6 +16,7 @@ class DisplayText extends StatelessWidget {
     this.isBold = false,
     this.color,
     this.fontSize,
+    this.fontFamily,
   }) : super(key: key);
 
   @override
@@ -26,6 +28,7 @@ class DisplayText extends StatelessWidget {
         fontWeight: isBold ? FontWeight.w700 : null,
         fontSize: fontSize,
         height: 1.5,
+        fontFamily: fontFamily,
       ),
       textAlign: isCentered ? TextAlign.center : null,
     );

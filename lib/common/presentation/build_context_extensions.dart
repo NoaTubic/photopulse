@@ -1,5 +1,6 @@
 // ignore_for_file: always_use_package_imports
 import 'package:flutter/material.dart';
+import 'package:responsive_framework/responsive_framework.dart';
 
 import '../../theme/app_colors.dart';
 
@@ -32,4 +33,14 @@ extension BuildContextExtensions on BuildContext {
   TextStyle? get bodyLarge => Theme.of(this).textTheme.bodyLarge;
 
   TextStyle? get labelMedium => Theme.of(this).textTheme.labelMedium;
+
+  bool get isDesktop => ResponsiveBreakpoints.of(this).isDesktop;
+  bool get isTablet => ResponsiveBreakpoints.of(this).isTablet;
+  bool get isMobile => ResponsiveBreakpoints.of(this).isMobile;
+  bool get isPhone => ResponsiveBreakpoints.of(this).isPhone;
+
+  bool get isLargerThanMobile =>
+      ResponsiveBreakpoints.of(this).largerThan(MOBILE);
+  bool get isLargerThanTablet =>
+      ResponsiveBreakpoints.of(this).smallerThan(TABLET);
 }

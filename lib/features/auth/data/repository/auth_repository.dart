@@ -3,6 +3,7 @@ import 'package:either_dart/either.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:photopulse/common/data/firebase_error_resolver.dart';
+import 'package:photopulse/features/auth/domain/entities/user_credentials.dart';
 import 'package:q_architecture/q_architecture.dart';
 
 final authRepositoryProvider =
@@ -17,8 +18,7 @@ abstract interface class AuthRepository {
   EitherFailureOr<void> verifyEmail();
 
   EitherFailureOr<void> login({
-    required String email,
-    required String password,
+    required UserCredentials userCredentials,
   });
 
   EitherFailureOr<void> loginWithGoogle();
@@ -59,14 +59,13 @@ class AuthRepositoryImpl with ErrorToFailureMixin implements AuthRepository {
 
   @override
   EitherFailureOr<void> login({
-    required String email,
-    required String password,
+    required UserCredentials userCredentials,
   }) =>
       execute(
         () async {
           await _firebaseAuth.signInWithEmailAndPassword(
-            email: email,
-            password: password,
+            email: userCredentials.email,
+            password: userCredentials.password,
           );
           return const Right(null);
         },

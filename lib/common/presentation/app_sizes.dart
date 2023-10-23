@@ -10,7 +10,8 @@ abstract class AppSizes {
   static const double bodyPaddingVertical = 16;
   static const double normalCircularRadius = 6;
   static const double filledButtonHeight = 56;
-  static const double appLogo = 200;
+  static const double appLogo = 120;
+  static const double appLogoWeb = 200;
   static const double logoSmall = 24;
   static const double mediumCircularRadius = 24;
   static const double commentBoxMaxHeight = 150;

@@ -22,6 +22,7 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_form_builder: ^9.1.1
+  flutter_hooks: ^0.20.3
   flutter_localizations:
     sdk: flutter
   flutter_loggy: ^2.0.2
@@ -75,4 +76,16 @@ flutter:
         - asset: assets/fonts/Cocogoose Pro-Regular.ttf
           weight: 400
         - asset: assets/fonts/Cocogoose Pro-Light.ttf
+          weight: 300
+    - family: FreightSans Pro
+      fonts:
+        - asset: assets/fonts/FreightSans Pro-Bold.ttf
+          weight: 700
+        - asset: assets/fonts/FreightSans Pro-SemiBold.ttf
+          weight: 600
+        - asset: assets/fonts/FreightSans Pro-Medium.ttf
+          weight: 500
+        - asset: assets/fonts/FreightSans Pro-Regular.ttf
+          weight: 400
+        - asset: assets/fonts/FreightSans Pro-Light.ttf
           weight: 300

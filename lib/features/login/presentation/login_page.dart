@@ -4,6 +4,7 @@ import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:photopulse/common/presentation/app_sizes.dart';
+import 'package:photopulse/common/presentation/build_context_extensions.dart';
 import 'package:photopulse/common/presentation/buttons/photo_pulse_button.dart';
 import 'package:photopulse/common/presentation/common_validators.dart';
 import 'package:photopulse/common/presentation/image_assets.dart';
@@ -35,14 +36,24 @@ class LoginPage extends ConsumerWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            Image.asset(ImageAssets.logo, height: AppSizes.appLogo),
+            const SizedBox(
+              height: AppSizes.mediumSpacing,
+            ),
+            Image.asset(
+              ImageAssets.logo,
+              height: context.isLargerThanMobile
+                  ? AppSizes.appLogoWeb
+                  : AppSizes.appLogo,
+            ),
             const SizedBox(
               height: AppSizes.normalSpacing,
             ),
             DisplayText(
               S.current.photo_pulse,
               color: AppColors.primaryDefault,
-              fontSize: FontSizes.s30,
+              fontSize:
+                  context.isLargerThanMobile ? FontSizes.s30 : FontSizes.s24,
+              fontFamily: 'Cocogoose Pro',
             ),
             const SizedBox(
               height: AppSizes.mediumSpacing,
@@ -79,7 +90,7 @@ class LoginPage extends ConsumerWidget {
                     isEnabled: ref.watch(isNextEnabled),
                   ),
                   const SizedBox(
-                    height: AppSizes.xLargeSpacing,
+                    height: AppSizes.largeSpacing,
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -120,6 +131,7 @@ void _refreshNextEnabled(WidgetRef ref) =>
     WidgetsBinding.instance.addPostFrameCallback(
       (_) {
         ref.read(isNextEnabled.notifier).state =
-            formKey.currentState?.saveAndValidate() ?? false;
+            formKey.currentState?.saveAndValidate(focusOnInvalid: false) ??
+                false;
       },
     );

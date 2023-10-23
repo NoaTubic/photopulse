@@ -12,8 +12,7 @@ final lightTheme = ThemeData(
   splashColor: AppColors.graysUltraLight,
   highlightColor: AppColors.graysUltraLight,
   useMaterial3: true,
-  fontFamily: 'Cocogoose Pro',
-
+  fontFamily: 'FreightSans Pro',
   primarySwatch: Colors.cyan,
   colorScheme: _theme.colorScheme.copyWith(secondary: Colors.cyan),
   scaffoldBackgroundColor: Colors.white,

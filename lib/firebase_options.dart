@@ -17,7 +17,10 @@ import 'package:flutter/foundation.dart'
 class DefaultFirebaseOptions {
   static FirebaseOptions get currentPlatform {
     if (kIsWeb) {
-      return web;
+      throw UnsupportedError(
+        'DefaultFirebaseOptions have not been configured for web - '
+        'you can reconfigure this by running the FlutterFire CLI again.',
+      );
     }
     switch (defaultTargetPlatform) {
       case TargetPlatform.android:
@@ -26,10 +29,7 @@ class DefaultFirebaseOptions {
           'you can reconfigure this by running the FlutterFire CLI again.',
         );
       case TargetPlatform.iOS:
-        throw UnsupportedError(
-          'DefaultFirebaseOptions have not been configured for ios - '
-          'you can reconfigure this by running the FlutterFire CLI again.',
-        );
+        return ios;
       case TargetPlatform.macOS:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for macos - '
@@ -52,13 +52,14 @@ class DefaultFirebaseOptions {
     }
   }
 
-  static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyD_YB9ntgunNWHWJu60k_boBSOFq5zya6A',
-    appId: '1:1022619391177:web:0d744ab2f0b26a6ccd2918',
+  static const FirebaseOptions ios = FirebaseOptions(
+    apiKey: 'AIzaSyAeIWv0nhoVFlzsWITPqTs8pSHZ3SYNlqE',
+    appId: '1:1022619391177:ios:e2978533ef8af60acd2918',
     messagingSenderId: '1022619391177',
     projectId: 'photopulse-cd89c',
-    authDomain: 'photopulse-cd89c.firebaseapp.com',
     storageBucket: 'photopulse-cd89c.appspot.com',
-    measurementId: 'G-GC52BCN7GN',
+    androidClientId: '1022619391177-q5gcot254jvs69n02l6tv1ng9j68j5p1.apps.googleusercontent.com',
+    iosClientId: '1022619391177-fmv0fmpisvrih0p5qoq61hhatp4egsf7.apps.googleusercontent.com',
+    iosBundleId: 'com.omnithread.photopulse',
   );
 }

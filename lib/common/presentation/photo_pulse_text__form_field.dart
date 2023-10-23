@@ -1,8 +1,8 @@
 // ignore_for_file: unused_element
-// ignore_for_file: avoid_nested_conditional_expressions
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:photopulse/common/constants/constants.dart';
 import 'package:photopulse/common/presentation/app_sizes.dart';
@@ -11,7 +11,7 @@ import 'package:photopulse/common/presentation/input_formatters/rune_aware_forma
 import 'package:photopulse/theme/app_colors.dart';
 import 'package:photopulse/theme/theme.dart';
 
-class PhotoPulseTextFormField extends StatefulWidget {
+class PhotoPulseTextFormField extends HookWidget {
   final String name;
   final List<String? Function(String?)>? validators;
   final String hintText;
@@ -272,47 +272,44 @@ class PhotoPulseTextFormField extends StatefulWidget {
     );
   }
 
-  @override
-  State<PhotoPulseTextFormField> createState() =>
-      _PhotoPulseTextFormFieldState();
-}
-
-class _PhotoPulseTextFormFieldState extends State<PhotoPulseTextFormField> {
-  late bool _isObscured;
-  late final TextEditingController _controller;
-
-  @override
-  void initState() {
-    _isObscured = widget.obscureText;
-    _controller =
-        widget.controller ?? TextEditingController(text: widget.initialValue);
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    if (widget.controller == null) {
-      _controller.dispose();
-    }
-    super.dispose();
-  }
+  // @override
+  // void dispose() {
+  //   if (controller == null) {
+  //     _controller.dispose();
+  //   }
+  //   super.dispose();
+  // }
 
   @override
   Widget build(BuildContext context) {
+    final isObscured = useState(obscureText);
+    final controller = useTextEditingController(text: initialValue);
+
+    useEffect(
+      () {
+        return () {
+          // ignore: unnecessary_null_comparison
+          if (controller == null) {
+            controller.dispose();
+          }
+        };
+      },
+      const [],
+    );
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        if (widget.labelText != null) ...[
+        if (labelText != null) ...[
           RichText(
             textAlign: TextAlign.start,
             text: TextSpan(
               children: [
                 TextSpan(
-                  text: widget.labelText,
+                  text: labelText,
                   style: Theme.of(context).inputDecorationTheme.labelStyle,
                   children: <TextSpan>[
-                    widget.isMandatory
+                    isMandatory
                         ? TextSpan(
                             text: '*',
                             style: Theme.of(context)
@@ -329,41 +326,42 @@ class _PhotoPulseTextFormFieldState extends State<PhotoPulseTextFormField> {
           const SizedBox(height: AppSizes.tinySpacing),
         ],
         FormBuilderField(
-          name: widget.name,
-          autovalidateMode: widget.autoValidateMode,
-          validator: widget.validators != null
-              ? FormBuilderValidators.compose(widget.validators!)
+          name: name,
+          autovalidateMode: autoValidateMode,
+          validator: validators != null
+              ? FormBuilderValidators.compose(validators!)
               : null,
-          initialValue: widget.initialValue,
+          initialValue: initialValue,
           builder: (field) => TextField(
-            focusNode: widget.focusNode,
-            controller: _controller,
+            focusNode: focusNode,
+            controller: controller,
             onChanged: (value) {
               field.didChange(value);
             },
-            enableInteractiveSelection: widget.enableInteractiveSelection,
-            enabled: widget.isEnabled,
-            readOnly: widget.readOnly,
-            decoration: widget.isEnabled
+            enableInteractiveSelection: enableInteractiveSelection,
+            enabled: isEnabled,
+            readOnly: readOnly,
+            decoration: isEnabled
                 ? InputDecoration(
-                    fillColor: widget.fillColor ??
+                    fillColor: fillColor ??
                         (field.hasError
                             ? AppColors.alertCritical.withOpacity(0.1)
                             : null),
-                    errorText: widget.errorText ?? field.errorText,
-                    hintText: widget.hintText,
+                    errorText: errorText ?? field.errorText,
+                    hintText: hintText,
                     hintStyle: Theme.of(context).textTheme.bodyMedium,
-                    suffix: widget.suffix,
-                    suffixIcon: widget.obscureText
+                    suffix: suffix,
+                    suffixIcon: obscureText
                         ? IconButton(
                             icon: Icon(
-                              _isObscured
+                              isObscured.value
                                   ? Icons.remove_red_eye
                                   : Icons.remove_red_eye_outlined,
                             ),
-                            onPressed: _changeTextVisibility,
+                            onPressed: () =>
+                                isObscured.value = !isObscured.value,
                           )
-                        : widget.suffixIcon ??
+                        : suffixIcon ??
                             (field.hasError
                                 ? IconButton(
                                     onPressed: () => _clearInput(field),
@@ -372,38 +370,32 @@ class _PhotoPulseTextFormFieldState extends State<PhotoPulseTextFormField> {
                                     ),
                                   )
                                 : null),
-                    prefixIcon: widget.prefixIcon,
-                    border: widget.border,
-                    enabledBorder: widget.enabledBorder,
-                    disabledBorder: widget.disabledBorder,
-                    focusedBorder: widget.focusedBorder,
-                    focusedErrorBorder: widget.focusedErrorBorder,
-                    errorBorder: widget.errorBorder,
-                    contentPadding: widget.contentPadding,
+                    prefixIcon: prefixIcon,
+                    border: border,
+                    enabledBorder: enabledBorder,
+                    disabledBorder: disabledBorder,
+                    focusedBorder: focusedBorder,
+                    focusedErrorBorder: focusedErrorBorder,
+                    errorBorder: errorBorder,
+                    contentPadding: contentPadding,
                   )
                 : const InputDecoration(),
-            keyboardType: widget.textInputType,
-            textInputAction: widget.textInputAction,
-            obscureText: _isObscured,
-            enableSuggestions: !_isObscured,
-            autocorrect: !_isObscured,
-            inputFormatters: widget.inputFormatters,
-            maxLines: widget.maxLines,
-            onTap: widget.onTap,
+            keyboardType: textInputType,
+            textInputAction: textInputAction,
+            obscureText: isObscured.value,
+            enableSuggestions: !isObscured.value,
+            autocorrect: !isObscured.value,
+            inputFormatters: inputFormatters,
+            maxLines: maxLines,
+            onTap: onTap,
           ),
         ),
       ],
     );
   }
 
-  Future<void> _clearInput(FormFieldState<String> field) async {
+  void _clearInput(FormFieldState<String> field) {
     field.reset();
-    _controller.clear();
-  }
-
-  void _changeTextVisibility() {
-    setState(() {
-      _isObscured = !_isObscured;
-    });
+    controller?.clear();
   }
 }

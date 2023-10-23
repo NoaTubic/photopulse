@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:photopulse/common/presentation/app_sizes.dart';
 import 'package:photopulse/common/presentation/gradient_background.dart';
-import 'package:photopulse/common/presentation/photo_pulse_app_bar.dart';
 
 class PhotoPulseScaffold extends StatelessWidget {
   final Widget? body;
@@ -31,7 +30,7 @@ class PhotoPulseScaffold extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: resizeToAvoidBottomInset,
-      appBar: appBar ?? PhotoPulseAppBar.titleOnly(''),
+      appBar: appBar,
       body: gradientBackground
           ? Stack(
               children: [

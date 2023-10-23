@@ -22,7 +22,7 @@ class AuthNotifier extends Notifier<AuthState> implements Listenable {
   @override
   AuthState build() {
     _authRepository = ref.watch(authRepositoryProvider);
-    return const AuthState.initial();
+    return const AuthState.unauthenticated();
   }
 
   Future<void> checkIfAuthenticated() async {
@@ -46,30 +46,30 @@ class AuthNotifier extends Notifier<AuthState> implements Listenable {
     // );
   }
 
-  Future<void> login({
-    required String email,
-    required String password,
-  }) async {
-    ref.read(globalLoadingProvider.notifier).update((_) => true);
-    state = const AuthState.authenticating();
-    final result = await _authRepository.login(
-      email: email,
-      password: password,
-    );
-    result.fold(
-      (failure) {
-        ref.read(globalLoadingProvider.notifier).update((_) => false);
-        ref.read(globalFailureProvider.notifier).update((_) => failure);
-        state = const AuthState.unauthenticated();
-        _routerListener?.call();
-      },
-      (response) {
-        ref.read(globalLoadingProvider.notifier).update((_) => false);
-        state = const AuthState.authenticated();
-        _routerListener?.call();
-      },
-    );
-  }
+  // Future<void> login({
+  //   required String email,
+  //   required String password,
+  // }) async {
+  //   ref.read(globalLoadingProvider.notifier).update((_) => true);
+  //   state = const AuthState.authenticating();
+  //   final result = await _authRepository.login(
+  //     email: email,
+  //     password: password,
+  //   );
+  //   result.fold(
+  //     (failure) {
+  //       ref.read(globalLoadingProvider.notifier).update((_) => false);
+  //       ref.read(globalFailureProvider.notifier).update((_) => failure);
+  //       state = const AuthState.unauthenticated();
+  //       _routerListener?.call();
+  //     },
+  //     (response) {
+  //       ref.read(globalLoadingProvider.notifier).update((_) => false);
+  //       state = const AuthState.authenticated();
+  //       _routerListener?.call();
+  //     },
+  //   );
+  // }
 
   Future<void> logout() async {
     await 500.milliseconds;
