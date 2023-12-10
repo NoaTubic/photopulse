@@ -23,7 +23,7 @@ class PhotoPulseScaffold extends StatelessWidget {
     this.appBar,
     this.floatingActionButton,
     this.floatingActionButtonLocation,
-    this.gradientBackground = false,
+    this.gradientBackground = true,
   });
 
   @override

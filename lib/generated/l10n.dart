@@ -150,10 +150,10 @@ class S {
     );
   }
 
-  /// `Login`
+  /// `Log In`
   String get login {
     return Intl.message(
-      'Login',
+      'Log In',
       name: 'login',
       desc: '',
       args: [],
@@ -200,11 +200,11 @@ class S {
     );
   }
 
-  /// `Create a Boost Account`
-  String get create_boost_account {
+  /// `Create new account`
+  String get create_new_account {
     return Intl.message(
-      'Create a Boost Account',
-      name: 'create_boost_account',
+      'Create new account',
+      name: 'create_new_account',
       desc: '',
       args: [],
     );

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:photopulse/common/domain/router/navigation_extensions.dart';
 import 'package:photopulse/common/presentation/app_sizes.dart';
 import 'package:photopulse/common/presentation/build_context_extensions.dart';
 import 'package:photopulse/common/presentation/buttons/photo_pulse_button.dart';
@@ -15,6 +16,7 @@ import 'package:photopulse/common/presentation/text/display_text.dart';
 import 'package:photopulse/common/presentation/text/text.dart';
 import 'package:photopulse/features/auth/forms/login_form_config.dart';
 import 'package:photopulse/features/login/widgets/social_login_section.dart';
+import 'package:photopulse/features/registration/presentation/registration_page.dart';
 import 'package:photopulse/generated/l10n.dart';
 import 'package:photopulse/theme/app_colors.dart';
 import 'package:photopulse/theme/theme.dart';
@@ -30,7 +32,6 @@ class LoginPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return PhotoPulseScaffold(
-      gradientBackground: true,
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -73,7 +74,6 @@ class LoginPage extends ConsumerWidget {
                     ],
                     labelText: S.current.email,
                   ),
-                  const SizedBox(height: AppSizes.normalSpacing),
                   PhotoPulseTextFormField.passwordTextField(
                     autoValidateMode: AutovalidateMode.onUserInteraction,
                     name: LoginFormConfig.passwordKey,
@@ -82,31 +82,32 @@ class LoginPage extends ConsumerWidget {
                     ],
                     labelText: S.current.password,
                   ),
-                  const SizedBox(height: AppSizes.largeSpacing),
+                  const SizedBox(
+                    height: AppSizes.normalSpacing,
+                  ),
                   PhotoPulseButton.primary(
                     label: S.current.login,
-                    isLoading: false,
-                    onTap: () {},
+                    onTap: () => ref.pushNamed(
+                      '$routeName${RegistrationPage.routeName}',
+                    ),
                     isEnabled: ref.watch(isNextEnabled),
+                    isLoading: false,
                   ),
                   const SizedBox(
-                    height: AppSizes.largeSpacing,
+                    height: AppSizes.compactSpacing,
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      const BodyText('Don\'t have an account?'),
-                      const SizedBox(
-                        width: AppSizes.smallSpacing,
-                      ),
-                      TextButton(
-                        onPressed: () {},
-                        child: BodyText(
-                          'Register',
-                          color: AppColors.black,
-                        ),
-                      ),
-                    ],
+                  TextButton(
+                    onPressed: () {},
+                    child: const BodyText(
+                      'Forgotten password?',
+                    ),
+                  ),
+                  SizedBox(
+                    height: MediaQuery.of(context).size.height * 0.1,
+                  ),
+                  PhotoPulseButton.secondary(
+                    label: S.current.create_new_account,
+                    onTap: () {},
                   ),
                   const OrDivider(),
                   const SocialLoginSection(),

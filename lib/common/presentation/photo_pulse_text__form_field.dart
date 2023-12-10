@@ -8,6 +8,7 @@ import 'package:photopulse/common/constants/constants.dart';
 import 'package:photopulse/common/presentation/app_sizes.dart';
 import 'package:photopulse/common/presentation/input_formatters/emoji_aware_length_formatter.dart';
 import 'package:photopulse/common/presentation/input_formatters/rune_aware_formatter.dart';
+import 'package:photopulse/common/presentation/text/text.dart';
 import 'package:photopulse/theme/app_colors.dart';
 import 'package:photopulse/theme/theme.dart';
 
@@ -69,7 +70,7 @@ class PhotoPulseTextFormField extends HookWidget {
     this.focusedErrorBorder,
     this.focusedBorder,
     this.disabledBorder,
-    this.padding,
+    this.padding = const EdgeInsets.only(bottom: AppSizes.compactSpacing),
     this.fillColor,
     this.contentPadding,
     this.errorText,
@@ -151,7 +152,6 @@ class PhotoPulseTextFormField extends HookWidget {
       ),
       focusedErrorBorder: InputBorder.none,
       disabledBorder: InputBorder.none,
-      padding: EdgeInsets.zero,
       inputFormatters: [
         EmojisAwareLengthFormatter(
           allowedLength: Constants.commentMaximumCharacters,
@@ -272,14 +272,6 @@ class PhotoPulseTextFormField extends HookWidget {
     );
   }
 
-  // @override
-  // void dispose() {
-  //   if (controller == null) {
-  //     _controller.dispose();
-  //   }
-  //   super.dispose();
-  // }
-
   @override
   Widget build(BuildContext context) {
     final isObscured = useState(obscureText);
@@ -296,101 +288,106 @@ class PhotoPulseTextFormField extends HookWidget {
       },
       const [],
     );
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.start,
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        if (labelText != null) ...[
-          RichText(
-            textAlign: TextAlign.start,
-            text: TextSpan(
-              children: [
-                TextSpan(
-                  text: labelText,
-                  style: Theme.of(context).inputDecorationTheme.labelStyle,
-                  children: <TextSpan>[
-                    isMandatory
-                        ? TextSpan(
-                            text: '*',
-                            style: Theme.of(context)
-                                .inputDecorationTheme
-                                .labelStyle!
-                                .copyWith(color: AppColors.alertCritical),
-                          )
-                        : const TextSpan(),
-                  ],
-                ),
-              ],
+    return Padding(
+      padding: padding ?? EdgeInsets.zero,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          // if (labelText != null) ...[
+          //   RichText(
+          //     textAlign: TextAlign.start,
+          //     text: TextSpan(
+          //       children: [
+          //         TextSpan(
+          //           text: labelText,
+          //           style: Theme.of(context).inputDecorationTheme.labelStyle,
+          //           children: <TextSpan>[
+          //             isMandatory
+          //                 ? TextSpan(
+          //                     text: '*',
+          //                     style: Theme.of(context)
+          //                         .inputDecorationTheme
+          //                         .labelStyle!
+          //                         .copyWith(color: AppColors.alertCritical),
+          //                   )
+          //                 : const TextSpan(),
+          //           ],
+          //         ),
+          //       ],
+          //     ),
+          //   ),
+          //   const SizedBox(height: AppSizes.tinySpacing),
+          // ],
+          FormBuilderField(
+            name: name,
+            autovalidateMode: autoValidateMode,
+            validator: validators != null
+                ? FormBuilderValidators.compose(validators!)
+                : null,
+            initialValue: initialValue,
+            builder: (field) => TextField(
+              focusNode: focusNode,
+              controller: controller,
+              onChanged: (value) {
+                field.didChange(value);
+              },
+              enableInteractiveSelection: enableInteractiveSelection,
+              enabled: isEnabled,
+              readOnly: readOnly,
+              decoration: isEnabled
+                  ? InputDecoration(
+                      label: BodyText(labelText ?? ''),
+                      floatingLabelBehavior: FloatingLabelBehavior.auto,
+                      fillColor: fillColor ??
+                          (field.hasError
+                              ? AppColors.alertCritical.withOpacity(0.1)
+                              : null),
+                      errorText: errorText ?? field.errorText,
+                      hintText: hintText,
+                      hintStyle: Theme.of(context).textTheme.bodyMedium,
+                      suffix: suffix,
+                      suffixIcon: obscureText
+                          ? IconButton(
+                              icon: Icon(
+                                isObscured.value
+                                    ? Icons.remove_red_eye
+                                    : Icons.remove_red_eye_outlined,
+                              ),
+                              onPressed: () =>
+                                  isObscured.value = !isObscured.value,
+                            )
+                          : suffixIcon ??
+                              (field.hasError
+                                  ? IconButton(
+                                      onPressed: () => _clearInput(field),
+                                      icon: const Icon(
+                                        Icons.clear_rounded,
+                                      ),
+                                    )
+                                  : null),
+                      prefixIcon: prefixIcon,
+                      border: border,
+                      enabledBorder: enabledBorder,
+                      disabledBorder: disabledBorder,
+                      focusedBorder: focusedBorder,
+                      focusedErrorBorder: focusedErrorBorder,
+                      errorBorder: errorBorder,
+                      contentPadding: contentPadding,
+                    )
+                  : const InputDecoration(),
+              keyboardType: textInputType,
+              textInputAction: textInputAction,
+              obscureText: isObscured.value,
+              enableSuggestions: !isObscured.value,
+              autocorrect: !isObscured.value,
+              inputFormatters: inputFormatters,
+              maxLines: maxLines,
+              onTap: onTap,
             ),
           ),
-          const SizedBox(height: AppSizes.tinySpacing),
         ],
-        FormBuilderField(
-          name: name,
-          autovalidateMode: autoValidateMode,
-          validator: validators != null
-              ? FormBuilderValidators.compose(validators!)
-              : null,
-          initialValue: initialValue,
-          builder: (field) => TextField(
-            focusNode: focusNode,
-            controller: controller,
-            onChanged: (value) {
-              field.didChange(value);
-            },
-            enableInteractiveSelection: enableInteractiveSelection,
-            enabled: isEnabled,
-            readOnly: readOnly,
-            decoration: isEnabled
-                ? InputDecoration(
-                    fillColor: fillColor ??
-                        (field.hasError
-                            ? AppColors.alertCritical.withOpacity(0.1)
-                            : null),
-                    errorText: errorText ?? field.errorText,
-                    hintText: hintText,
-                    hintStyle: Theme.of(context).textTheme.bodyMedium,
-                    suffix: suffix,
-                    suffixIcon: obscureText
-                        ? IconButton(
-                            icon: Icon(
-                              isObscured.value
-                                  ? Icons.remove_red_eye
-                                  : Icons.remove_red_eye_outlined,
-                            ),
-                            onPressed: () =>
-                                isObscured.value = !isObscured.value,
-                          )
-                        : suffixIcon ??
-                            (field.hasError
-                                ? IconButton(
-                                    onPressed: () => _clearInput(field),
-                                    icon: const Icon(
-                                      Icons.clear_rounded,
-                                    ),
-                                  )
-                                : null),
-                    prefixIcon: prefixIcon,
-                    border: border,
-                    enabledBorder: enabledBorder,
-                    disabledBorder: disabledBorder,
-                    focusedBorder: focusedBorder,
-                    focusedErrorBorder: focusedErrorBorder,
-                    errorBorder: errorBorder,
-                    contentPadding: contentPadding,
-                  )
-                : const InputDecoration(),
-            keyboardType: textInputType,
-            textInputAction: textInputAction,
-            obscureText: isObscured.value,
-            enableSuggestions: !isObscured.value,
-            autocorrect: !isObscured.value,
-            inputFormatters: inputFormatters,
-            maxLines: maxLines,
-            onTap: onTap,
-          ),
-        ),
-      ],
+      ),
     );
   }
 

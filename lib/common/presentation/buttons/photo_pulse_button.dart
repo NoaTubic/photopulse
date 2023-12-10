@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import 'package:photopulse/common/presentation/app_sizes.dart';
 import 'package:photopulse/theme/app_colors.dart';
 import 'package:photopulse/theme/app_text_styles.dart';
@@ -77,7 +78,7 @@ class PhotoPulseButton extends StatelessWidget {
       isLoading: isLoading,
       textColor: AppColors.primaryDefault,
       backgroundColor: AppColors.white,
-      borderColor: AppColors.graysLight,
+      borderColor: AppColors.primaryLight,
       child: child,
     );
   }
@@ -132,7 +133,7 @@ class PhotoPulseButton extends StatelessWidget {
             fontSize: FontSizes.s14,
           ),
           shape: const RoundedRectangleBorder(
-            borderRadius: appBorderRadius,
+            borderRadius: appBorderRadiusHigh,
           ),
           foregroundColor: textColor ?? AppColors.white,
           side: BorderSide(

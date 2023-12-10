@@ -13,7 +13,7 @@ final lightTheme = ThemeData(
   highlightColor: AppColors.graysUltraLight,
   useMaterial3: true,
   fontFamily: 'FreightSans Pro',
-  primarySwatch: Colors.cyan,
+
   colorScheme: _theme.colorScheme.copyWith(secondary: Colors.cyan),
   scaffoldBackgroundColor: Colors.white,
   // ignore: deprecated_member_use
@@ -76,7 +76,7 @@ final lightTheme = ThemeData(
         fontSize: FontSizes.s14,
       ),
       shape: const RoundedRectangleBorder(
-        borderRadius: appBorderRadius,
+        borderRadius: appBorderRadiusHigh,
       ),
       minimumSize: const Size(AppSizes.maxWidth, AppSizes.filledButtonHeight),
       disabledBackgroundColor: AppColors.wireframeLight,
@@ -122,6 +122,9 @@ final lightTheme = ThemeData(
 
 const appBorderRadius =
     BorderRadius.all(Radius.circular(AppSizes.normalCircularRadius));
+
+const appBorderRadiusHigh =
+    BorderRadius.all(Radius.circular(AppSizes.highCircularRadius));
 
 final inputDecorationTheme = InputDecorationTheme(
   constraints: const BoxConstraints(maxWidth: AppSizes.maxWidth),

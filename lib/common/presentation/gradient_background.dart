@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:photopulse/theme/app_colors.dart';
 
 class GradientBackground extends StatelessWidget {
   final Widget? child;
@@ -9,15 +10,7 @@ class GradientBackground extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: const BoxDecoration(
-        gradient: LinearGradient(
-          begin: Alignment.topCenter,
-          end: Alignment.bottomCenter,
-          colors: [
-            Colors.white,
-            Color(0xFFB2B2FF),
-            Color(0xFF8C8CFF),
-          ],
-        ),
+        gradient: AppColors.backgroundGradient,
       ),
       child: child,
     );

@@ -11,7 +11,7 @@ import '../../../features/login/presentation/login_page.dart';
 import '../../../features/notifications/presentation/all_notifications_page.dart';
 import '../../../features/notifications/presentation/notification_details_page.dart';
 import '../../../features/notifications/presentation/notifications_page.dart';
-import '../../../features/register/presentation/register_page.dart';
+import '../../../features/registration/presentation/registration_page.dart';
 import '../../../features/reset_password/presentation/reset_password_page.dart';
 import '../../../features/users/presentation/user_details_page.dart';
 import '../../../features/users/presentation/users_page.dart';
@@ -38,8 +38,8 @@ List<RouteBase> getRoutes({
             builder: (context, state) => const ResetPasswordPage(),
           ),
           GoRoute(
-            path: RegisterPage.routeName.lastPart,
-            builder: (context, state) => const RegisterPage(),
+            path: RegistrationPage.routeName.lastPart,
+            builder: (context, state) => const RegistrationPage(),
           ),
         ],
       ),

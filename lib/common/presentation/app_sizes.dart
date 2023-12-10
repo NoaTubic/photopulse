@@ -6,10 +6,11 @@ abstract class AppSizes {
   static const double mediumSpacing = 24;
   static const double largeSpacing = 32;
   static const double xLargeSpacing = 48;
-  static const double bodyPaddingHorizontal = 28;
+  static const double bodyPaddingHorizontal = 20;
   static const double bodyPaddingVertical = 16;
-  static const double normalCircularRadius = 6;
-  static const double filledButtonHeight = 56;
+  static const double normalCircularRadius = 16;
+  static const double highCircularRadius = 40;
+  static const double filledButtonHeight = 44;
   static const double appLogo = 120;
   static const double appLogoWeb = 200;
   static const double logoSmall = 24;
@@ -27,6 +28,6 @@ abstract class AppSizes {
   static const double largeAvatarRadius = 128;
   static const double xLargeAvatarRadius = 160;
   static const double chatBubbleCircularRadius = 16;
-  static const double maxWidth = 300;
+  static const double maxWidth = 360;
   static const double socialLoginButtonSize = 72;
 }

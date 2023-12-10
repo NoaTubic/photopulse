@@ -4,7 +4,7 @@ abstract class AppColors {
   static final Color black = HexColor.fromHex('#000000');
   static final Color primaryDefault = HexColor.fromHex('#6C6CFF');
   static final Color primaryDark = HexColor.fromHex('#0A6B78');
-  static final Color primaryLight = HexColor.fromHex('#E0FAFE');
+  static final Color primaryLight = HexColor.fromHex('#c7c7ff');
   static final Color additionalMedium = HexColor.fromHex('#004B87');
   static final Color additionalLight = HexColor.fromHex('#D4F8CD');
   static final Color greyDark30 = HexColor.fromHex('#555555');
@@ -41,6 +41,17 @@ abstract class AppColors {
     colors: [
       HexColor.fromHex('#4ED6DF'),
       HexColor.fromHex('#009FB5'),
+    ],
+  );
+
+  static const LinearGradient backgroundGradient = LinearGradient(
+    begin: Alignment.topCenter,
+    end: Alignment.bottomCenter,
+    colors: [
+      Colors.white,
+      Color(0xFFc7c7ff),
+      // Color(0xFFB2B2FF),
+      // Color(0xFF8C8CFF),
     ],
   );
 
