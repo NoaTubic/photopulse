@@ -58,7 +58,7 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyDdht2O0GB5LgdqLEFTA0Oo3lH4gWBTetY',
-    appId: '1:1022619391177:android:3cc76f5f3cfda1d8cd2918',
+    appId: '1:1022619391177:android:4577ec38c2c70defcd2918',
     messagingSenderId: '1022619391177',
     projectId: 'photopulse-cd89c',
     storageBucket: 'photopulse-cd89c.appspot.com',

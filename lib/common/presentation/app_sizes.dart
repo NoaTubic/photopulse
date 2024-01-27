@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+
 abstract class AppSizes {
   static const double tinySpacing = 4;
   static const double smallSpacing = 8;
@@ -8,7 +10,7 @@ abstract class AppSizes {
   static const double xLargeSpacing = 48;
   static const double bodyPaddingHorizontal = 20;
   static const double bodyPaddingVertical = 16;
-  static const double normalCircularRadius = 16;
+  static const double normalCircularRadius = 10;
   static const double highCircularRadius = 40;
   static const double filledButtonHeight = 44;
   static const double appLogo = 120;
@@ -30,4 +32,13 @@ abstract class AppSizes {
   static const double chatBubbleCircularRadius = 16;
   static const double maxWidth = 360;
   static const double socialLoginButtonSize = 72;
+
+  static const double navigationRailWidth = 330;
+
+  static const double navigationRailBreakingPoint = 640;
+
+  static const BorderRadiusGeometry normalCircularBorderRadius =
+      BorderRadius.all(
+    Radius.circular(normalCircularRadius),
+  );
 }

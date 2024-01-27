@@ -12,7 +12,7 @@ final lightTheme = ThemeData(
   splashColor: AppColors.graysUltraLight,
   highlightColor: AppColors.graysUltraLight,
   useMaterial3: true,
-  fontFamily: 'FreightSans Pro',
+  fontFamily: Fonts.fontFamily,
 
   colorScheme: _theme.colorScheme.copyWith(secondary: Colors.cyan),
   scaffoldBackgroundColor: Colors.white,
@@ -143,15 +143,15 @@ final inputDecorationTheme = InputDecorationTheme(
       _theme.textTheme.bodyMedium!.copyWith(color: AppColors.wireFrameDark),
   border: OutlineInputBorder(
     borderRadius: appBorderRadius,
-    borderSide: BorderSide(color: AppColors.wireFrameMedium2),
+    borderSide: BorderSide(color: AppColors.graysLight),
   ),
   enabledBorder: OutlineInputBorder(
     borderRadius: appBorderRadius,
-    borderSide: BorderSide(color: AppColors.wireFrameMedium2),
+    borderSide: BorderSide(color: AppColors.graysLight),
   ),
   focusedBorder: OutlineInputBorder(
     borderRadius: appBorderRadius,
-    borderSide: BorderSide(color: AppColors.wireFrameDark),
+    borderSide: BorderSide(color: AppColors.primaryLight),
   ),
   errorBorder: OutlineInputBorder(
     borderRadius: appBorderRadius,

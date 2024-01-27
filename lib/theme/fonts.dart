@@ -1,7 +1,7 @@
 part of 'theme.dart';
 
 abstract class Fonts {
-  static const String fontFamily = 'Cocogoose Pro';
+  static const String fontFamily = 'SFProDisplay';
 }
 
 abstract class FontWeights {

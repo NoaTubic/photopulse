@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:photopulse/common/presentation/build_context_extensions.dart';
+import 'package:photopulse/theme/app_colors.dart';
 
 class HeadlineText extends StatelessWidget {
   final String text;
@@ -24,7 +25,7 @@ class HeadlineText extends StatelessWidget {
     return Text(
       text,
       style: context.headlineMedium?.copyWith(
-        color: color,
+        color: color ?? AppColors.black,
         fontWeight: isBold ? FontWeight.w700 : FontWeight.w500,
         overflow: textOverflow,
       ),

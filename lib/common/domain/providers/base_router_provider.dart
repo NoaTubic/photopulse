@@ -10,14 +10,14 @@ import '../router/base_router.dart';
 import '../router/go_router_router.dart';
 import '../router/routes.dart';
 
-final _rootNavigatorKey = GlobalKey<NavigatorState>(debugLabel: 'root');
+final rootNavigatorKey = GlobalKey<NavigatorState>(debugLabel: 'root');
 
 final baseRouterProvider = Provider<BaseRouter>((ref) {
   final authNotifier = ref.read(authNotifierProvider.notifier);
   final goRouter = GoRouter(
-    navigatorKey: _rootNavigatorKey,
+    navigatorKey: rootNavigatorKey,
     initialLocation: HomePage.routeName,
-    routes: getRoutes(rootNavigatorKey: _rootNavigatorKey, stateful: true),
+    routes: getRoutes(rootNavigatorKey: rootNavigatorKey),
     refreshListenable: authNotifier,
     redirect: (context, state) =>
         authNotifier.redirect(state: state, showErrorIfNonExistentRoute: true),

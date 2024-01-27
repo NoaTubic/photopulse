@@ -48,6 +48,42 @@
           ]
         }
       }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1022619391177:android:4577ec38c2c70defcd2918",
+        "android_client_info": {
+          "package_name": "com.omnithread.photopulse.dev"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1022619391177-v4kgauqrbqni33ft8hp170hmt81t76jg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDdht2O0GB5LgdqLEFTA0Oo3lH4gWBTetY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1022619391177-v4kgauqrbqni33ft8hp170hmt81t76jg.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1022619391177-fmv0fmpisvrih0p5qoq61hhatp4egsf7.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.omnithread.photopulse"
+              }
+            }
+          ]
+        }
+      }
     }
   ],
   "configuration_version": "1"

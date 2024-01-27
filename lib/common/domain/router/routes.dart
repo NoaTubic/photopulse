@@ -1,34 +1,81 @@
-// ignore_for_file: always_use_package_imports
-
+// ignore_for_file: always_use_package_imports, avoid-unused-parameters
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-
+import 'package:photopulse/features/auth/presentation/pages/login_page.dart';
+import 'package:photopulse/features/auth/presentation/pages/registration_page.dart';
+import 'package:photopulse/features/navbar/presentation/pages/nav_bar.dart';
+import 'package:photopulse/features/profile/presentation/pages/profile_page.dart';
+import 'package:photopulse/features/subscription_management/presentation/pages/subscription_management_page.dart';
+import 'package:photopulse/features/upload_content/presentation/pages/upload_content_page.dart';
 import '../../../common/domain/utils/string_extension.dart';
-import '../../../features/dashboard/presentation/dashboard_page.dart';
-import '../../../features/directories/presentation/directories_page.dart';
 import '../../../features/home/presentation/home_page.dart';
-import '../../../features/login/presentation/login_page.dart';
-import '../../../features/notifications/presentation/all_notifications_page.dart';
-import '../../../features/notifications/presentation/notification_details_page.dart';
-import '../../../features/notifications/presentation/notifications_page.dart';
-import '../../../features/registration/presentation/registration_page.dart';
-import '../../../features/reset_password/presentation/reset_password_page.dart';
-import '../../../features/users/presentation/user_details_page.dart';
-import '../../../features/users/presentation/users_page.dart';
+import '../../../features/auth/presentation/pages/reset_password_page.dart';
+
+final GlobalKey<NavigatorState> _homeKey =
+    GlobalKey<NavigatorState>(debugLabel: 'home');
+final GlobalKey<NavigatorState> _contentKey =
+    GlobalKey<NavigatorState>(debugLabel: 'home');
+final GlobalKey<NavigatorState> _profileKey =
+    GlobalKey<NavigatorState>(debugLabel: 'home');
 
 List<RouteBase> getRoutes({
   required GlobalKey<NavigatorState> rootNavigatorKey,
-  bool stateful = true,
 }) =>
     [
+      // GoRoute(
+      //   path: Pages.splash,
+      //   redirect: (context, state) => Pages.splash,
+      // ),
       GoRoute(
-        path: HomePage.routeName,
-        redirect: (context, state) => DashboardPage.routeName,
+        path: '/',
+        redirect: (context, state) => HomePage.routeName,
       ),
-      if (stateful)
-        _statefulShellRoute(rootNavigatorKey: rootNavigatorKey)
-      else
-        _shellRoute(rootNavigatorKey: rootNavigatorKey),
+      StatefulShellRoute.indexedStack(
+        builder: (context, state, navigationShell) =>
+            NavBar(navigationShell: navigationShell),
+        branches: [
+          StatefulShellBranch(
+            navigatorKey: _homeKey,
+            routes: [
+              GoRoute(
+                path: HomePage.routeName,
+                builder: (context, state) => const HomePage(),
+                routes: [
+                  GoRoute(
+                    path:
+                        SubscriptionManagementPage.routeName.removeLeadingSlash,
+                    builder: (context, state) =>
+                        const SubscriptionManagementPage(),
+                  ),
+                ],
+              ),
+              GoRoute(
+                path: SubscriptionManagementPage.routeName,
+                builder: (context, state) => const SubscriptionManagementPage(),
+              ),
+            ],
+          ),
+          StatefulShellBranch(
+            routes: [
+              GoRoute(
+                path: UploadContentPage.routeName,
+                builder: (context, state) => const UploadContentPage(),
+                routes: const [],
+              ),
+            ],
+          ),
+          StatefulShellBranch(
+            navigatorKey: _profileKey,
+            routes: [
+              GoRoute(
+                path: ProfilePage.routeName,
+                builder: (context, state) => const ProfilePage(),
+                routes: const [],
+              ),
+            ],
+          ),
+        ],
+      ),
       GoRoute(
         path: LoginPage.routeName,
         builder: (context, state) => const LoginPage(),
@@ -43,266 +90,8 @@ List<RouteBase> getRoutes({
           ),
         ],
       ),
+      // GoRoute(
+      //   path: SubscriptionManagementPage.routeName,
+      //   builder: (context, state) => const SubscriptionManagementPage(),
+      // ),
     ];
-
-RouteBase _statefulShellRoute({
-  required GlobalKey<NavigatorState> rootNavigatorKey,
-}) =>
-    StatefulShellRoute.indexedStack(
-      builder: (context, state, navigationShell) =>
-          HomePage(navigationShell: navigationShell),
-      branches: [
-        StatefulShellBranch(routes: [
-          GoRoute(
-            path: DashboardPage.routeName,
-            builder: (context, state) => const DashboardPage(),
-            routes: [
-              GoRoute(
-                path: UserDetailsPage.routeName.removeLeadingSlash,
-                builder: (context, state) => UserDetailsPage(
-                  userId: int.parse(state.pathParameters[
-                      UserDetailsPage.pathPattern.removeLeadingColon]!),
-                ),
-                redirect: (context, state) => state.pathParameters.containsKey(
-                          UserDetailsPage.pathPattern.removeLeadingColon,
-                        ) &&
-                        int.tryParse(state.pathParameters[UserDetailsPage
-                                .pathPattern.removeLeadingColon]!) !=
-                            null
-                    ? null
-                    : UsersPage.routeName,
-              ),
-            ],
-          ),
-        ]),
-        StatefulShellBranch(routes: [
-          GoRoute(
-            path: UsersPage.routeName,
-            builder: (context, state) => const UsersPage(),
-            routes: [
-              GoRoute(
-                path: UserDetailsPage.routeName.removeLeadingSlash,
-                builder: (context, state) => UserDetailsPage(
-                  userId: int.parse(state.pathParameters[
-                      UserDetailsPage.pathPattern.removeLeadingColon]!),
-                ),
-                redirect: (context, state) => state.pathParameters.containsKey(
-                          UserDetailsPage.pathPattern.removeLeadingColon,
-                        ) &&
-                        int.tryParse(state.pathParameters[UserDetailsPage
-                                .pathPattern.removeLeadingColon]!) !=
-                            null
-                    ? null
-                    : UsersPage.routeName,
-              ),
-            ],
-          ),
-        ]),
-        StatefulShellBranch(routes: [
-          GoRoute(
-            path: NotificationsPage.routeName,
-            builder: (context, state) => const NotificationsPage(),
-            routes: [
-              GoRoute(
-                path: AllNotificationsPage.routeName.removeLeadingSlash,
-                builder: (context, state) => const AllNotificationsPage(),
-                routes: [
-                  GoRoute(
-                    path: NotificationDetailsPage.routeName.removeLeadingSlash,
-                    builder: (context, state) => NotificationDetailsPage(
-                      notificationId: int.parse(state.pathParameters[
-                          NotificationDetailsPage
-                              .pathPattern.removeLeadingColon]!),
-                    ),
-                    redirect: (context, state) => state.pathParameters
-                                .containsKey(
-                              NotificationDetailsPage
-                                  .pathPattern.removeLeadingColon,
-                            ) &&
-                            int.tryParse(state.pathParameters[
-                                    NotificationDetailsPage
-                                        .pathPattern.removeLeadingColon]!) !=
-                                null
-                        ? null
-                        : '${NotificationsPage.routeName}${AllNotificationsPage.routeName}',
-                  ),
-                ],
-              ),
-              GoRoute(
-                path: NotificationDetailsPage.routeName.removeLeadingSlash,
-                builder: (context, state) => NotificationDetailsPage(
-                  notificationId: int.parse(state.pathParameters[
-                      NotificationDetailsPage.pathPattern.removeLeadingColon]!),
-                ),
-                redirect: (context, state) => state.pathParameters.containsKey(
-                          NotificationDetailsPage
-                              .pathPattern.removeLeadingColon,
-                        ) &&
-                        int.tryParse(state.pathParameters[
-                                NotificationDetailsPage
-                                    .pathPattern.removeLeadingColon]!) !=
-                            null
-                    ? null
-                    : NotificationsPage.routeName,
-              ),
-            ],
-          ),
-        ]),
-        StatefulShellBranch(routes: [
-          GoRoute(
-            path: DirectoriesPage.routeName,
-            builder: (context, state) => const DirectoriesPage(),
-            routes: [
-              _buildRoutesRecursively(
-                depth: 10,
-                pathCallback: (depth) => DirectoriesPage.pathPattern(depth),
-                builderCallback: (context, state, depth) => DirectoriesPage(
-                  directoryName: state.pathParameters[
-                      DirectoriesPage.pathPattern(depth).removeLeadingColon],
-                  canGoDeeper: depth > 1,
-                ),
-              ),
-            ],
-          ),
-        ]),
-      ],
-    );
-
-RouteBase _shellRoute({required GlobalKey<NavigatorState> rootNavigatorKey}) =>
-    ShellRoute(
-      builder: (context, state, child) => HomePage(child: child),
-      routes: [
-        GoRoute(
-          path: DashboardPage.routeName,
-          builder: (context, state) => const DashboardPage(),
-          routes: [
-            GoRoute(
-              path: UserDetailsPage.routeName.removeLeadingSlash,
-              builder: (context, state) => UserDetailsPage(
-                userId: int.parse(state.pathParameters[
-                    UserDetailsPage.pathPattern.removeLeadingColon]!),
-              ),
-              redirect: (context, state) => state.pathParameters.containsKey(
-                        UserDetailsPage.pathPattern.removeLeadingColon,
-                      ) &&
-                      int.tryParse(state.pathParameters[UserDetailsPage
-                              .pathPattern.removeLeadingColon]!) !=
-                          null
-                  ? null
-                  : UsersPage.routeName,
-            ),
-          ],
-        ),
-        GoRoute(
-          path: UsersPage.routeName,
-          builder: (context, state) => const UsersPage(),
-          routes: [
-            GoRoute(
-              path: UserDetailsPage.routeName.removeLeadingSlash,
-              builder: (context, state) => UserDetailsPage(
-                userId: int.parse(state.pathParameters['userId']!),
-              ),
-              redirect: (context, state) =>
-                  state.pathParameters.containsKey('userId') &&
-                          int.tryParse(state.pathParameters['userId']!) != null
-                      ? null
-                      : UsersPage.routeName,
-            ),
-          ],
-        ),
-        GoRoute(
-          path: NotificationsPage.routeName,
-          builder: (context, state) => const NotificationsPage(),
-          routes: [
-            GoRoute(
-              path: AllNotificationsPage.routeName.removeLeadingSlash,
-              builder: (context, state) => const AllNotificationsPage(),
-              routes: [
-                GoRoute(
-                  path: NotificationDetailsPage.routeName.removeLeadingSlash,
-                  builder: (context, state) => NotificationDetailsPage(
-                    notificationId: int.parse(state.pathParameters[
-                        NotificationDetailsPage
-                            .pathPattern.removeLeadingColon]!),
-                  ),
-                  redirect: (context, state) => state.pathParameters
-                              .containsKey(
-                            NotificationDetailsPage
-                                .pathPattern.removeLeadingColon,
-                          ) &&
-                          int.tryParse(state.pathParameters[
-                                  NotificationDetailsPage
-                                      .pathPattern.removeLeadingColon]!) !=
-                              null
-                      ? null
-                      : '${NotificationsPage.routeName}${AllNotificationsPage.routeName}',
-                ),
-              ],
-            ),
-            GoRoute(
-              path: NotificationDetailsPage.routeName.removeLeadingSlash,
-              builder: (context, state) => NotificationDetailsPage(
-                notificationId: int.parse(state.pathParameters[
-                    NotificationDetailsPage.pathPattern.removeLeadingColon]!),
-              ),
-              redirect: (context, state) => state.pathParameters.containsKey(
-                        NotificationDetailsPage.pathPattern.removeLeadingColon,
-                      ) &&
-                      int.tryParse(state.pathParameters[NotificationDetailsPage
-                              .pathPattern.removeLeadingColon]!) !=
-                          null
-                  ? null
-                  : NotificationsPage.routeName,
-            ),
-          ],
-        ),
-        GoRoute(
-          path: DirectoriesPage.routeName,
-          builder: (context, state) => const DirectoriesPage(),
-          routes: [
-            _buildRoutesRecursively(
-              depth: 10,
-              pathCallback: (depth) => DirectoriesPage.pathPattern(depth),
-              builderCallback: (context, state, depth) => DirectoriesPage(
-                directoryName: state.pathParameters[
-                    DirectoriesPage.pathPattern(depth).removeLeadingColon],
-                canGoDeeper: depth > 1,
-              ),
-            ),
-          ],
-        ),
-      ],
-    );
-
-GoRoute _buildRoutesRecursively({
-  required int depth,
-  required Function(int depth) pathCallback,
-  Page Function(BuildContext context, GoRouterState state, int depth)?
-      pageBuilderCallback,
-  Widget Function(BuildContext context, GoRouterState state, int depth)?
-      builderCallback,
-  GlobalKey<NavigatorState>? parentNavigatorKey,
-}) {
-  assert(pageBuilderCallback != null || builderCallback != null);
-  return GoRoute(
-    parentNavigatorKey: parentNavigatorKey,
-    path: pathCallback(depth),
-    pageBuilder: pageBuilderCallback != null
-        ? (context, state) => pageBuilderCallback(context, state, depth)
-        : null,
-    builder: builderCallback != null
-        ? (context, state) => builderCallback(context, state, depth)
-        : null,
-    routes: depth == 1
-        ? <RouteBase>[]
-        : [
-            _buildRoutesRecursively(
-              depth: depth - 1,
-              pathCallback: pathCallback,
-              pageBuilderCallback: pageBuilderCallback,
-              builderCallback: builderCallback,
-              parentNavigatorKey: parentNavigatorKey,
-            ),
-          ],
-  );
-}

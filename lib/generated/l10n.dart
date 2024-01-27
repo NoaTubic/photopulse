@@ -130,11 +130,41 @@ class S {
     );
   }
 
+  /// `Username`
+  String get username {
+    return Intl.message(
+      'Username',
+      name: 'username',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please enter your username to continue.`
+  String get enter_your_username {
+    return Intl.message(
+      'Please enter your username to continue.',
+      name: 'enter_your_username',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Password`
   String get password {
     return Intl.message(
       'Password',
       name: 'password',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Confirm password`
+  String get confirm_password {
+    return Intl.message(
+      'Confirm password',
+      name: 'confirm_password',
       desc: '',
       args: [],
     );
@@ -220,6 +250,16 @@ class S {
     );
   }
 
+  /// `Continue without signing in`
+  String get anonymous_login {
+    return Intl.message(
+      'Continue without signing in',
+      name: 'anonymous_login',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Invalid email and password combination`
   String get login_error_wrong_credentials {
     return Intl.message(
@@ -235,6 +275,46 @@ class S {
     return Intl.message(
       'Email already in use',
       name: 'login_error_email_already_in_user',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Confirm password is required`
+  String get confirm_password_required {
+    return Intl.message(
+      'Confirm password is required',
+      name: 'confirm_password_required',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Passwords don't match`
+  String get passwords_dont_match {
+    return Intl.message(
+      'Passwords don\'t match',
+      name: 'passwords_dont_match',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Go back`
+  String get go_back {
+    return Intl.message(
+      'Go back',
+      name: 'go_back',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Email not verified. Please check your email for verification link.`
+  String get email_not_verified {
+    return Intl.message(
+      'Email not verified. Please check your email for verification link.',
+      name: 'email_not_verified',
       desc: '',
       args: [],
     );

@@ -1,10 +1,10 @@
 // ignore_for_file: always_use_package_imports
 // ignore_for_file: avoid-dynamic
+import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:photopulse/common/domain/providers/global_navigation_provider.dart';
 
-import '../../../features/home/presentation/home_page.dart';
 import '../providers/base_router_provider.dart';
-import '../providers/global_navigation_provider.dart';
 import 'route_action.dart';
 
 extension NavigationExtensions on WidgetRef {
@@ -12,6 +12,7 @@ extension NavigationExtensions on WidgetRef {
       read(globalNavigationProvider.notifier).update((_) => PopAction());
 
   void pushNamed(String routeName, {dynamic data}) =>
+      // GoRouter.of(context).go(routeName, extra: data);
       read(globalNavigationProvider.notifier)
           .update((_) => PushNamedAction(routeName, data));
 
@@ -24,7 +25,7 @@ extension NavigationExtensions on WidgetRef {
     final location = read(baseRouterProvider).currentLocationUri;
     final currentRoute = location.path;
     return (
-      currentRouteName: currentRoute == HomePage.routeName ? '' : currentRoute,
+      currentRouteName: currentRoute,
       queryParameters: location.queryParameters
     );
   }

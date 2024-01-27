@@ -18,6 +18,7 @@ class PhotoPulseScaffold extends StatelessWidget {
     this.bottomNavigationBar,
     this.padding = const EdgeInsets.symmetric(
       horizontal: AppSizes.bodyPaddingHorizontal,
+      vertical: AppSizes.bodyPaddingVertical,
     ),
     this.resizeToAvoidBottomInset = false,
     this.appBar,

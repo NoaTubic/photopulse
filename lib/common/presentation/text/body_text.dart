@@ -35,7 +35,7 @@ class BodyText extends StatelessWidget {
         decoration: isUnderlined ? TextDecoration.underline : null,
         fontSize: fontSize,
       ),
-      textAlign: isCentered ? TextAlign.center : null,
+      textAlign: isCentered ? TextAlign.center : TextAlign.justify,
     );
   }
 }

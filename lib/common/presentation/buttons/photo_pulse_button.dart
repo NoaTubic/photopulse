@@ -103,11 +103,17 @@ class PhotoPulseButton extends StatelessWidget {
 
   factory PhotoPulseButton.socialLogin({
     String? icon,
-    bool isLoading = false,
     required void Function()? onTap,
   }) {
     return PhotoPulseButton._(
+      onTap: onTap,
+      isEnabled: true,
+      isLoading: false,
       width: AppSizes.socialLoginButtonSize,
+      backgroundColor: AppColors.white,
+      borderColor: AppColors.primaryLight,
+      label: '',
+      textColor: AppColors.primaryDefault,
       child: Image.asset(
         icon ?? '',
       ),

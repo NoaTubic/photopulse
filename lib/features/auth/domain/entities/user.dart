@@ -1,24 +1,36 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:photopulse/features/subscription_management/domain/entities/subscription_package.dart';
 
 part 'user.g.dart';
 
 @JsonSerializable()
-class User {
+class PhotoPulseUser {
   final String id;
   final String username;
   final String email;
-  final String photoUrl;
-  final bool isAdmin;
+  final String? photoUrl;
+  final bool? isAdmin;
+  final bool isFirstLogin;
+  final SubscriptionPackage? subscriptionPackage;
+  final int dailyUploads;
+  final int maxSpend;
+  final bool canChangeSubscription;
 
-  User({
+  PhotoPulseUser({
     required this.id,
     required this.username,
     required this.email,
-    required this.photoUrl,
-    required this.isAdmin,
+    this.photoUrl = '',
+    this.isAdmin = false,
+    this.isFirstLogin = true,
+    this.subscriptionPackage = SubscriptionPackage.free,
+    this.dailyUploads = 0,
+    this.maxSpend = 0,
+    this.canChangeSubscription = true,
   });
 
-  factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
+  factory PhotoPulseUser.fromJson(Map<String, dynamic> json) =>
+      _$PhotoPulseUserFromJson(json);
 
-  Map<String, dynamic> toJson() => _$UserToJson(this);
+  Map<String, dynamic> toJson() => _$PhotoPulseUserToJson(this);
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:photopulse/common/presentation/build_context_extensions.dart';
+import 'package:photopulse/theme/app_colors.dart';
 import 'package:photopulse/theme/theme.dart';
 
 class TitleText extends StatelessWidget {
@@ -23,7 +24,7 @@ class TitleText extends StatelessWidget {
     return Text(
       text,
       style: context.titleMedium?.copyWith(
-        color: color,
+        color: color ?? AppColors.black,
         fontWeight: isBold ? FontWeight.w700 : null,
         fontSize: fontSize,
       ),

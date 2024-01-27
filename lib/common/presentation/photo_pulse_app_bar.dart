@@ -33,14 +33,17 @@ class PhotoPulseAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   factory PhotoPulseAppBar.withBackNav({
     String title = '',
-    onTap,
+    required void Function() onTap,
   }) =>
       PhotoPulseAppBar(
-        leadingWidth: AppSizes.xLargeSpacing,
         title: title,
-        titleAlignment: Alignment.bottomLeft,
-        leading: IconButton(
-            onPressed: onTap, icon: const Icon(Icons.arrow_back_rounded)),
+        titleAlignment: Alignment.topCenter,
+        leading: GestureDetector(
+          onTap: onTap,
+          child: const Icon(
+            Icons.arrow_back_rounded,
+          ),
+        ),
       );
 
   factory PhotoPulseAppBar.titleOnly(
@@ -49,37 +52,41 @@ class PhotoPulseAppBar extends StatelessWidget implements PreferredSizeWidget {
       PhotoPulseAppBar(
         title: title,
         titleOnly: true,
-        titleAlignment: Alignment.topLeft,
+        titleAlignment: Alignment.topCenter,
         leadingWidth: AppSizes.smallSpacing,
       );
 
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      backgroundColor: backgroundColor,
-      flexibleSpace: flexibleSpace,
-      toolbarHeight: height,
-      title: centerAction ??
-          Align(
-            alignment: titleAlignment,
-            child: Text(
-              title ?? '',
-            ),
-          ),
-      bottom: bottom,
-      leadingWidth: leadingWidth,
-      leading: titleOnly
-          ? const SizedBox()
-          : leading ??
-              const Padding(
-                padding: EdgeInsets.symmetric(
-                  horizontal: AppSizes.normalSpacing,
-                ),
-                child: SizedBox(),
+        automaticallyImplyLeading: false,
+        forceMaterialTransparency: true,
+        backgroundColor: backgroundColor,
+        flexibleSpace: flexibleSpace,
+        toolbarHeight: height,
+        title: centerAction ??
+            Align(
+              alignment: titleAlignment,
+              child: Text(
+                title ?? '',
               ),
-      actions: actions,
-      centerTitle: false,
-    );
+            ),
+        bottom: bottom,
+        leading: leading != null
+            ? Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: AppSizes.smallSpacing,
+                ),
+                child: leading,
+              )
+            : const SizedBox(),
+        leadingWidth: leadingWidth,
+        actions: actions ??
+            [
+              SizedBox(
+                width: leadingWidth,
+              ),
+            ]);
   }
 
   @override

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:photopulse/common/presentation/app_sizes.dart';
 import 'package:photopulse/common/presentation/text/body_text.dart';
+import 'package:photopulse/theme/app_colors.dart';
 
 class OrDivider extends StatelessWidget {
   const OrDivider({
@@ -18,9 +19,8 @@ class OrDivider extends StatelessWidget {
             child: Divider(
               indent: AppSizes.tinySpacing,
               endIndent: AppSizes.compactSpacing,
-              thickness: AppSizes.tinySpacing,
-              height: 2,
-              color: Colors.grey.withOpacity(0.5),
+              thickness: 1,
+              color: AppColors.graysLight,
             ),
           ),
           const BodyText('OR'),
@@ -28,9 +28,8 @@ class OrDivider extends StatelessWidget {
             child: Divider(
               indent: AppSizes.tinySpacing,
               endIndent: AppSizes.compactSpacing,
-              thickness: AppSizes.tinySpacing,
-              height: 2,
-              color: Colors.grey.withOpacity(0.5),
+              thickness: 1,
+              color: AppColors.graysLight,
             ),
           ),
         ],

@@ -2,16 +2,15 @@
 import 'package:flutter/foundation.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:q_architecture/q_architecture.dart';
-
+import 'package:photopulse/features/auth/domain/notifiers/user_notifier.dart';
+import 'package:photopulse/features/auth/presentation/pages/login_page.dart';
 import '../../../../common/domain/providers/base_router_provider.dart';
 import '../../../home/presentation/home_page.dart';
-import '../../../login/presentation/login_page.dart';
 import '../../data/repository/auth_repository.dart';
 import 'auth_state.dart';
 
 final authNotifierProvider = NotifierProvider<AuthNotifier, AuthState>(
-  () => AuthNotifier()..checkIfAuthenticated(),
+  () => AuthNotifier(),
 );
 
 class AuthNotifier extends Notifier<AuthState> implements Listenable {
@@ -25,54 +24,24 @@ class AuthNotifier extends Notifier<AuthState> implements Listenable {
     return const AuthState.unauthenticated();
   }
 
-  Future<void> checkIfAuthenticated() async {
-    await 100.milliseconds;
-    // ref.read(globalLoadingProvider.notifier).update((_) => true);
-    // final result = await _authRepository.getTokenIfAuthenticated();
-    // result.fold(
-    //   (failure) {
-    //     ref.read(globalLoadingProvider.notifier).update((_) => false);
-    //     ref.read(globalFailureProvider.notifier).update((_) => failure);
-    //     state = const AuthState.unauthenticated();
-    //     _routerListener?.call();
-    //   },
-    //   (token) {
-    //     ref.read(globalLoadingProvider.notifier).update((_) => false);
-    //     state = token != null
-    //         ? const AuthState.authenticated()
-    //         : const AuthState.unauthenticated();
-    //     _routerListener?.call();
-    //   },
-    // );
-  }
-
-  // Future<void> login({
-  //   required String email,
-  //   required String password,
-  // }) async {
-  //   ref.read(globalLoadingProvider.notifier).update((_) => true);
-  //   state = const AuthState.authenticating();
-  //   final result = await _authRepository.login(
-  //     email: email,
-  //     password: password,
-  //   );
-  //   result.fold(
-  //     (failure) {
-  //       ref.read(globalLoadingProvider.notifier).update((_) => false);
-  //       ref.read(globalFailureProvider.notifier).update((_) => failure);
-  //       state = const AuthState.unauthenticated();
-  //       _routerListener?.call();
-  //     },
-  //     (response) {
-  //       ref.read(globalLoadingProvider.notifier).update((_) => false);
-  //       state = const AuthState.authenticated();
-  //       _routerListener?.call();
-  //     },
-  //   );
-  // }
+  Future<void> listenAuthChanges() async =>
+      _authRepository.subscribeToAuthChanges().listen(
+        (user) {
+          final newState = user != null && user.emailVerified
+              ? const AuthState.authenticated()
+              : const AuthState.unauthenticated();
+          if (state != newState) {
+            if (newState is AuthStateAuthenticated) {
+              ref.read(userProvider);
+            }
+            state = newState;
+            _routerListener?.call();
+          }
+        },
+      );
 
   Future<void> logout() async {
-    await 500.milliseconds;
+    await _authRepository.logout();
     state = const AuthState.unauthenticated();
     _routerListener?.call();
   }
@@ -101,6 +70,7 @@ class AuthNotifier extends Notifier<AuthState> implements Listenable {
           _deepLink = null;
           return tmpDeepLink;
         }
+
         return HomePage.routeName;
       }
       return null;

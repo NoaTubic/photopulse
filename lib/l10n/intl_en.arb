@@ -8,7 +8,10 @@
   "enter_your_email": "Please enter your email to continue.",
   "email": "Email",
   "your_email": "Your email",
+  "username": "Username",
+  "enter_your_username": "Please enter your username to continue.",
   "password": "Password",
+  "confirm_password": "Confirm password",
   "your_password": "Your password",
   "login": "Log In",
   "invalid_email_format": "Invalid email format",
@@ -17,7 +20,12 @@
   "dont_have_account": "Don’t have an account?",
   "create_new_account": "Create new account",
   "forgot_password": "Forgot your password?",
+  "anonymous_login": "Continue without signing in",
   "login_error_wrong_credentials": "Invalid email and password combination",
   "login_error_email_already_in_user": "Email already in use",
+  "confirm_password_required": "Confirm password is required",
+  "passwords_dont_match": "Passwords don't match",
+  "go_back": "Go back",
+  "email_not_verified": "Email not verified. Please check your email for verification link.",
   "server_error": "Server error occurred"
 }

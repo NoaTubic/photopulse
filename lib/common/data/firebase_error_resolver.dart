@@ -1,3 +1,5 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/services.dart';
 import 'package:photopulse/common/constants/firebase_constants.dart';
 
 import 'package:photopulse/generated/l10n.dart';
@@ -10,8 +12,16 @@ final class FirebaseErrorResolver implements ErrorResolver {
 
   @override
   Failure resolve<T>(Object err, [StackTrace? stackTrace]) {
-    final message = err is String ? err : S.current.unknown_error_occurred;
+    final message = err is PlatformException
+        ? err.message
+        : (err as FirebaseAuthException).code;
     switch (message) {
+      case FirebaseConstants.invalidLoginCredentials:
+        return Failure.generic(
+          title: failureTitle ?? S.current.login_error_wrong_credentials,
+          error: err,
+          stackTrace: stackTrace,
+        );
       case FirebaseConstants.accountAlreadyExistsError:
         return Failure.generic(
           title: failureTitle ?? S.current.login_error_email_already_in_user,
