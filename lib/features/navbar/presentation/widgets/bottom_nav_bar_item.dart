@@ -3,21 +3,31 @@ import 'package:photopulse/common/domain/router/pages.dart';
 import 'package:photopulse/features/home/presentation/home_page.dart';
 import 'package:photopulse/features/profile/presentation/pages/profile_page.dart';
 import 'package:photopulse/features/upload_content/presentation/pages/upload_content_page.dart';
+import 'package:photopulse/theme/app_colors.dart';
 
 enum BottomNavBarItem {
   home(
-    icon: Icon(Icons.home_rounded),
+    icon: Icon(
+      Icons.home_rounded,
+      color: Colors.black,
+    ),
     routeName: HomePage.routeName,
     snakeCaseTitle: Pages.home,
   ),
 
   uploadContent(
-    icon: Icon(Icons.add_box_outlined),
+    icon: Icon(
+      Icons.add_box_outlined,
+      color: Colors.black,
+    ),
     routeName: UploadContentPage.routeName,
     snakeCaseTitle: Pages.uploadContent,
   ),
   profile(
-    icon: Icon(Icons.person_rounded),
+    icon: Icon(
+      Icons.person_rounded,
+      color: Colors.black,
+    ),
     routeName: ProfilePage.routeName,
     snakeCaseTitle: Pages.profile,
   );

@@ -17,6 +17,7 @@ import 'package:photopulse/features/profile/presentation/widgets/profile_tile.da
 import 'package:photopulse/features/subscription_management/domain/entities/subscription_package.dart';
 import 'package:photopulse/features/subscription_management/presentation/pages/subscription_management_page.dart';
 import 'package:photopulse/features/subscription_management/presentation/widgets/subscription_package_card_text_row.dart';
+import 'package:photopulse/features/upload_content/presentation/pages/upload_content_page.dart';
 import 'package:photopulse/theme/app_colors.dart';
 import 'package:photopulse/theme/theme.dart';
 
@@ -76,7 +77,7 @@ class CurrentSubscriptionSection extends ConsumerWidget {
           child: InkWell(
             onTap: user.canChangeSubscription
                 ? () => ref.pushNamed(
-                      '${ProfilePage.routeName}${SubscriptionManagementPage.routeName}',
+                      '${UploadContentPage.routeName}${SubscriptionManagementPage.routeName}',
                     )
                 : () => const PhotoPulseToast(
                       message:

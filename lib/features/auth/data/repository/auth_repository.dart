@@ -202,7 +202,9 @@ class AuthRepositoryImpl with ErrorToFailureMixin implements AuthRepository {
 
   @override
   Future<void> logout() async {
-    await _firebaseAuth.signOut();
-    await _googleSignIn.signOut();
+    try {
+      await _firebaseAuth.signOut();
+      await _googleSignIn.signOut();
+    } catch (_) {}
   }
 }

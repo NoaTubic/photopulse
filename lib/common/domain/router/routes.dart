@@ -40,14 +40,7 @@ List<RouteBase> getRoutes({
               GoRoute(
                 path: HomePage.routeName,
                 builder: (context, state) => const HomePage(),
-                routes: [
-                  GoRoute(
-                    path:
-                        SubscriptionManagementPage.routeName.removeLeadingSlash,
-                    builder: (context, state) =>
-                        const SubscriptionManagementPage(),
-                  ),
-                ],
+                routes: const [],
               ),
               GoRoute(
                 path: SubscriptionManagementPage.routeName,
@@ -60,7 +53,14 @@ List<RouteBase> getRoutes({
               GoRoute(
                 path: UploadContentPage.routeName,
                 builder: (context, state) => const UploadContentPage(),
-                routes: const [],
+                routes: [
+                  GoRoute(
+                    path:
+                        SubscriptionManagementPage.routeName.removeLeadingSlash,
+                    builder: (context, state) =>
+                        const SubscriptionManagementPage(),
+                  ),
+                ],
               ),
             ],
           ),
