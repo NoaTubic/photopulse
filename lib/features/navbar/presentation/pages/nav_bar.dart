@@ -8,6 +8,7 @@ import 'package:photopulse/common/presentation/build_context_extensions.dart';
 import 'package:photopulse/common/presentation/image_assets.dart';
 import 'package:photopulse/common/presentation/text/display_text.dart';
 import 'package:photopulse/features/auth/domain/notifiers/user_notifier.dart';
+import 'package:photopulse/features/navbar/domain/notifiers/nav_bar_visibility_provider.dart';
 import 'package:photopulse/features/navbar/presentation/widgets/bottom_nav_bar_item.dart';
 import 'package:photopulse/features/navbar/presentation/widgets/navigation_rail_divider.dart';
 import 'package:photopulse/features/navbar/presentation/widgets/navigation_rail_item.dart';
@@ -100,11 +101,13 @@ class NavBar extends ConsumerWidget {
         ],
       ),
       bottomNavigationBar: screenWidth < AppSizes.navigationRailBreakingPoint &&
-              !(ref.watch(userProvider)?.isFirstLogin ?? true)
+              !(ref.watch(userProvider)?.isFirstLogin ?? true) &&
+              ref.watch(navBarVisibilityProvider)
           ? AnimatedOpacity(
               duration: const Duration(seconds: 1),
               opacity: screenWidth < AppSizes.navigationRailBreakingPoint &&
-                      !(ref.watch(userProvider)?.isFirstLogin ?? true)
+                      !(ref.watch(userProvider)?.isFirstLogin ?? true) &&
+                      ref.watch(navBarVisibilityProvider)
                   ? 1
                   : 0,
               child: NavigationBar(

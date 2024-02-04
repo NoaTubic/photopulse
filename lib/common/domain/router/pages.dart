@@ -8,4 +8,6 @@ abstract class Pages {
   static const String uploadContent = '/upload_content';
   static const String profile = '/profile';
   static const String subscriptionManagement = '/subscription_management';
+  static const String camera = '/camera';
+  static const String reviewPhoto = '/review_photo';
 }

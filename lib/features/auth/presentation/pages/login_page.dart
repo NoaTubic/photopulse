@@ -17,7 +17,7 @@ import 'package:photopulse/common/presentation/common_validators.dart';
 import 'package:photopulse/common/presentation/image_assets.dart';
 import 'package:photopulse/common/presentation/or_divider.dart';
 import 'package:photopulse/common/presentation/photo_pulse_scaffold.dart';
-import 'package:photopulse/common/presentation/photo_pulse_text_button.dart';
+import 'package:photopulse/common/presentation/buttons/photo_pulse_text_button.dart';
 import 'package:photopulse/common/presentation/photo_pulse_text_form_field.dart';
 import 'package:photopulse/common/presentation/photo_pulse_toast.dart';
 import 'package:photopulse/common/presentation/text/display_text.dart';

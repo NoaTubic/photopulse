@@ -14,7 +14,7 @@ import 'package:photopulse/common/presentation/buttons/photo_pulse_button.dart';
 import 'package:photopulse/common/presentation/common_validators.dart';
 import 'package:photopulse/common/presentation/photo_pulse_app_bar.dart';
 import 'package:photopulse/common/presentation/photo_pulse_scaffold.dart';
-import 'package:photopulse/common/presentation/photo_pulse_text_button.dart';
+import 'package:photopulse/common/presentation/buttons/photo_pulse_text_button.dart';
 import 'package:photopulse/common/presentation/photo_pulse_text_form_field.dart';
 import 'package:photopulse/common/presentation/photo_pulse_toast.dart';
 import 'package:photopulse/features/auth/domain/notifiers/registration_notifier.dart';

@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:photopulse/features/auth/presentation/pages/login_page.dart';
 import 'package:photopulse/features/auth/presentation/pages/registration_page.dart';
+import 'package:photopulse/features/camera/presentation/pages/photo_pulse_camera.dart';
+import 'package:photopulse/features/camera/presentation/pages/review_photo_page.dart';
 import 'package:photopulse/features/navbar/presentation/pages/nav_bar.dart';
 import 'package:photopulse/features/profile/presentation/pages/profile_page.dart';
 import 'package:photopulse/features/subscription_management/presentation/pages/subscription_management_page.dart';
@@ -59,6 +61,25 @@ List<RouteBase> getRoutes({
                         SubscriptionManagementPage.routeName.removeLeadingSlash,
                     builder: (context, state) =>
                         const SubscriptionManagementPage(),
+                  ),
+                  GoRoute(
+                    path: PhotoPulseCamera.routeName.removeLeadingSlash,
+                    builder: (context, state) => const PhotoPulseCamera(),
+                    routes: [
+                      GoRoute(
+                        path: ReviewPhotoPage.routeName.removeLeadingSlash,
+                        builder: (context, state) => ReviewPhotoPage(
+                          isFromGallery:
+                              state.pathParameters['param'] == 'true',
+                        ),
+                      ),
+                    ],
+                  ),
+                  GoRoute(
+                    path: ReviewPhotoPage.routeName.removeLeadingSlash,
+                    builder: (context, state) => ReviewPhotoPage(
+                      isFromGallery: state.pathParameters['param'] == 'true',
+                    ),
                   ),
                 ],
               ),

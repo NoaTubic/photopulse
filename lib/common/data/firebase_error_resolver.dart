@@ -22,6 +22,12 @@ final class FirebaseErrorResolver implements ErrorResolver {
           error: err,
           stackTrace: stackTrace,
         );
+      case FirebaseConstants.invalidCredential:
+        return Failure.generic(
+          title: failureTitle ?? S.current.login_error_wrong_credentials,
+          error: err,
+          stackTrace: stackTrace,
+        );
       case FirebaseConstants.accountAlreadyExistsError:
         return Failure.generic(
           title: failureTitle ?? S.current.login_error_email_already_in_user,
