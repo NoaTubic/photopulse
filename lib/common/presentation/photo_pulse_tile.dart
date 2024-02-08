@@ -33,7 +33,7 @@ class PhotoPulseTile extends StatelessWidget {
           decoration: BoxDecoration(
             borderRadius: AppSizes.normalCircularBorderRadius,
             border: Border.all(
-              color: AppColors.primaryLight.withOpacity(0.7),
+              color: AppColors.black.withOpacity(0.7),
             ),
           ),
           child: Row(

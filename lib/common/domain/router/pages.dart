@@ -10,4 +10,5 @@ abstract class Pages {
   static const String subscriptionManagement = '/subscription_management';
   static const String camera = '/camera';
   static const String reviewPhoto = '/review_photo';
+  static const String postPage = '/post_page';
 }

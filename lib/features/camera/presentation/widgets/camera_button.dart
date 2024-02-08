@@ -6,6 +6,7 @@ import 'package:photopulse/features/camera/domain/notifiers/camera_notifier.dart
 import 'package:photopulse/features/camera/presentation/pages/photo_pulse_camera.dart';
 import 'package:photopulse/features/camera/presentation/pages/review_photo_page.dart';
 import 'package:photopulse/features/navbar/domain/notifiers/nav_bar_visibility_provider.dart';
+import 'package:photopulse/features/post/domain/notifiers/post_notifier.dart';
 import 'package:photopulse/features/upload_content/presentation/pages/upload_content_page.dart';
 import 'package:photopulse/theme/app_colors.dart';
 
@@ -62,13 +63,15 @@ Future<void> _onTapUp(
   WidgetRef ref,
 ) async {
   animationController.reverse();
-  ref.read(navBarVisibilityProvider.notifier).toggleNavBarVisibility();
+
   await cameraNotifier.takePicture().whenComplete(
-        () => ref.pushNamed(
-          '${UploadContentPage.routeName}${PhotoPulseCamera.routeName}${ReviewPhotoPage.routeName}',
-          data: false,
-        ),
+    () {
+      ref.pushNamed(
+        '${UploadContentPage.routeName}${PhotoPulseCamera.routeName}${ReviewPhotoPage.routeName}',
+        data: false,
       );
+    },
+  );
 }
 
 void _onTapCancel(

@@ -26,10 +26,10 @@ class NavigationRailItem extends StatelessWidget {
       ),
       decoration: isSelected
           ? BoxDecoration(
-              color: AppColors.primaryLight,
+              color: AppColors.white,
               border: Border(
                 right: BorderSide(
-                  color: AppColors.primaryDefault,
+                  color: AppColors.white,
                   width: AppSizes.tinySpacing,
                 ),
               ),
@@ -42,7 +42,7 @@ class NavigationRailItem extends StatelessWidget {
           // SvgPicture.asset(
           //   iconPath,
           //   colorFilter: ColorFilter.mode(
-          //     isSelected ? AppColors.black : AppColors.greyDark30,
+          //     isSelected ? AppColors.primaryDark : AppColors.greyDark30,
           //     BlendMode.srcIn,
           //   ),
           // ),

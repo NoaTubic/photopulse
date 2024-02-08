@@ -64,7 +64,7 @@ class NavBar extends ConsumerWidget {
                     ),
                     DisplayText(
                       S.current.photo_pulse,
-                      color: AppColors.primaryDefault,
+                      color: AppColors.black,
                       fontSize: context.isLargerThanMobile
                           ? FontSizes.s30
                           : FontSizes.s24,
@@ -111,7 +111,10 @@ class NavBar extends ConsumerWidget {
                   ? 1
                   : 0,
               child: NavigationBar(
+                surfaceTintColor: Colors.transparent,
+                backgroundColor: Colors.transparent,
                 selectedIndex: selectedIndex,
+                indicatorColor: AppColors.black.withOpacity(0.05),
                 onDestinationSelected: (index) => _onDestinationSelected(
                   index: index,
                 ),

@@ -10,6 +10,7 @@ import 'package:photopulse/common/domain/router/navigation_extensions.dart';
 import 'package:photopulse/common/domain/router/pages.dart';
 import 'package:photopulse/common/domain/utils/base_state_extensions.dart';
 import 'package:photopulse/common/domain/utils/form_key_extensions.dart';
+import 'package:photopulse/common/presentation/animated_widgets/animated_column.dart';
 import 'package:photopulse/common/presentation/app_sizes.dart';
 import 'package:photopulse/common/presentation/build_context_extensions.dart';
 import 'package:photopulse/common/presentation/buttons/photo_pulse_button.dart';
@@ -67,107 +68,98 @@ class LoginPage extends ConsumerWidget {
       },
     );
     return PhotoPulseScaffold(
-      body: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            const Gap(
-              AppSizes.mediumSpacing,
-            ),
-            Image.asset(
-              ImageAssets.logo,
-              height: context.isLargerThanMobile
-                  ? AppSizes.appLogoWeb
-                  : AppSizes.appLogo,
-            ),
-            const Gap(
-              AppSizes.smallSpacing,
-            ),
-            DisplayText(
-              S.current.photo_pulse,
-              color: AppColors.primaryDefault,
-              fontSize:
-                  context.isLargerThanMobile ? FontSizes.s30 : FontSizes.s24,
-              fontFamily: 'Cocogoose Pro',
-            ),
-            const Gap(
-              AppSizes.mediumSpacing,
-            ),
-            FormBuilder(
-              key: formKey,
-              onChanged: () => refreshNextEnabled(
-                formKey: formKey,
-                isFormSubmissionEnabledProvider:
-                    isFormSubmissionEnabledProvider,
-                ref: ref,
-                formIdentifier: Pages.login,
+      body: Center(
+        child: SingleChildScrollView(
+          child: AnimatedColumn(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const SizedBox(
+                height: AppSizes.mediumSpacing,
               ),
-              child: Column(
-                children: [
-                  PhotoPulseTextFormField.normalTextField(
-                    textInputType: TextInputType.emailAddress,
-                    autoValidateMode: AutovalidateMode.onUserInteraction,
-                    name: LoginFormConfig.emailKey,
-                    validators: [
-                      CommonValidators.email(),
-                      CommonValidators.requiredEmail(),
-                    ],
-                    labelText: S.current.email,
-                  ),
-                  PhotoPulseTextFormField.passwordTextField(
-                    autoValidateMode: AutovalidateMode.onUserInteraction,
-                    name: LoginFormConfig.passwordKey,
-                    validators: [
-                      FormBuilderValidators.required(),
-                    ],
-                    labelText: S.current.password,
-                  ),
-                  const Gap(
-                    AppSizes.normalSpacing,
-                  ),
-                  PhotoPulseButton.primary(
-                    label: S.current.login,
-                    onTap: () => formKey.submitForm(
-                      (formMap) => loginNotifier.login(formMap),
-                    ),
-                    isEnabled:
-                        ref.watch(isFormSubmissionEnabledProvider(Pages.login)),
-                    isLoading: loginState.isLoading,
-                  ),
-                  const Gap(
-                    AppSizes.compactSpacing,
-                  ),
-                  PhotoPulseTextButton(
-                    onTap: () {},
-                    label: S.current.forgot_password,
-                  ),
-                  Gap(
-                    MediaQuery.of(context).size.height * 0.05,
-                  ),
-                  PhotoPulseButton.secondary(
-                    label: S.current.create_new_account,
-                    onTap: () => ref.pushNamed(
-                      '$routeName${RegistrationPage.routeName}',
-                    ),
-                  ),
-                  const OrDivider(),
-                  const SocialLoginSection(),
-                  const Gap(
-                    AppSizes.largeSpacing,
-                  ),
-                  PhotoPulseTextButton(
-                    onTap: () => FirebaseAuth.instance.signOut(),
-                    // loginNotifier.loginAnonymously(),
-                    label: S.current.anonymous_login,
-                  ),
-                  const Gap(
-                    AppSizes.mediumSpacing,
-                  ),
-                ],
+              // Image.asset(
+              //   ImageAssets.logo,
+              //   height: context.isLargerThanMobile
+              //       ? AppSizes.appLogoWeb
+              //       : AppSizes.appLogo,
+              //   color: AppColors.black,
+              // ),
+              const SizedBox(height: AppSizes.smallSpacing),
+              DisplayText(
+                S.current.photo_pulse,
+                color: AppColors.black,
+                fontSize:
+                    context.isLargerThanMobile ? FontSizes.s30 : FontSizes.s24,
+                fontFamily: 'Cocogoose Pro',
               ),
-            ),
-          ],
+              const SizedBox(
+                height: AppSizes.mediumSpacing,
+              ),
+              FormBuilder(
+                key: formKey,
+                child: Column(
+                  children: [
+                    PhotoPulseTextFormField.normalTextField(
+                      autoValidateMode: AutovalidateMode.onUserInteraction,
+                      textInputType: TextInputType.emailAddress,
+                      name: LoginFormConfig.emailKey,
+                      validators: [
+                        CommonValidators.email(),
+                        CommonValidators.requiredEmail(),
+                      ],
+                      labelText: S.current.email,
+                    ),
+                    PhotoPulseTextFormField.passwordTextField(
+                      name: LoginFormConfig.passwordKey,
+                      validators: [
+                        FormBuilderValidators.required(),
+                      ],
+                      labelText: S.current.password,
+                    ),
+                    const SizedBox(
+                      height: AppSizes.normalSpacing,
+                    ),
+                    PhotoPulseButton.primary(
+                      label: S.current.login,
+                      onTap: () => formKey.submitForm(
+                        (formMap) => loginNotifier.login(formMap),
+                      ),
+                      isLoading: loginState.isLoading,
+                    ),
+                    const SizedBox(
+                      height: AppSizes.compactSpacing,
+                    ),
+                    PhotoPulseTextButton(
+                      onTap: () {},
+                      label: S.current.forgot_password,
+                    ),
+                    SizedBox(
+                      height: MediaQuery.of(context).size.height * 0.05,
+                    ),
+                    PhotoPulseButton.secondary(
+                      label: S.current.create_new_account,
+                      onTap: () => ref.pushNamed(
+                        '$routeName${RegistrationPage.routeName}',
+                      ),
+                    ),
+                    const OrDivider(),
+                    const SocialLoginSection(),
+                    const SizedBox(
+                      height: AppSizes.largeSpacing,
+                    ),
+                    PhotoPulseTextButton(
+                      onTap: () => FirebaseAuth.instance.signOut(),
+                      // loginNotifier.loginAnonymously(),
+                      label: S.current.anonymous_login,
+                    ),
+                    const SizedBox(
+                      height: AppSizes.mediumSpacing,
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

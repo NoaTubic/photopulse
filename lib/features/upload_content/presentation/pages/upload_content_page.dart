@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:photopulse/common/domain/router/navigation_extensions.dart';
 import 'package:photopulse/common/domain/router/pages.dart';
+import 'package:photopulse/common/presentation/animated_widgets/animated_column.dart';
 import 'package:photopulse/common/presentation/app_sizes.dart';
 import 'package:photopulse/common/presentation/dialogs/permission_dialog.dart';
 import 'package:photopulse/common/presentation/photo_pulse_app_bar.dart';
@@ -48,7 +50,7 @@ class UploadContentPage extends ConsumerWidget {
       appBar: const PhotoPulseAppBar(
         title: 'Upload Content',
       ),
-      body: Column(
+      body: AnimatedColumn(
         children: [
           PhotoPulseTile(
             label: 'Take photo',
@@ -62,7 +64,7 @@ class UploadContentPage extends ConsumerWidget {
               );
             },
           ),
-          const Gap(AppSizes.normalSpacing),
+          const SizedBox(height: AppSizes.normalSpacing),
           PhotoPulseTile(
             label: 'Load from gallery',
             icon: Icons.image_rounded,
@@ -72,7 +74,7 @@ class UploadContentPage extends ConsumerWidget {
               context,
             ),
           ),
-          const Gap(AppSizes.normalSpacing),
+          const SizedBox(height: AppSizes.normalSpacing),
           const PhotoPulseExpansionTile(
             title: 'Subscription Package',
             leadingIcon: Icons.edit_calendar_outlined,

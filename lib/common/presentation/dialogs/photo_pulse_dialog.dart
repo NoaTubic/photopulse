@@ -91,6 +91,16 @@ class PhotoPulseDialog extends StatelessWidget {
     );
   }
 
+  factory PhotoPulseDialog.postSuccessful() {
+    return const PhotoPulseDialog(
+      disableBack: true,
+      title: 'Post successful',
+      topWidget: Icon(Icons.task_alt_rounded),
+      bodyText: 'You content was posted to the Family Feed',
+      removeBottomBodyPadding: true,
+    );
+  }
+
   Future<void> show(
     BuildContext context, {
     bool barrierDismissible = false,

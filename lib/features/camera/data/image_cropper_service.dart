@@ -26,9 +26,9 @@ class ImageCropperServiceImpl implements ImageCropperService {
       uiSettings: [
         AndroidUiSettings(
           toolbarTitle: '',
-          toolbarColor: AppColors.primaryDefault,
+          toolbarColor: AppColors.white,
           toolbarWidgetColor: AppColors.white,
-          activeControlsWidgetColor: AppColors.primaryDefault,
+          activeControlsWidgetColor: AppColors.white,
           initAspectRatio: CropAspectRatioPreset.original,
           lockAspectRatio: false,
         ),

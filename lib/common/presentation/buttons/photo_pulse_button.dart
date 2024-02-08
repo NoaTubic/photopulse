@@ -41,11 +41,13 @@ class PhotoPulseButton extends StatelessWidget {
       onTap: onTap,
       isEnabled: isEnabled ?? true,
       isLoading: isLoading,
+      borderColor: AppColors.black,
+      backgroundColor: AppColors.black,
       child: child,
     );
   }
 
-  factory PhotoPulseButton.primaryLight({
+  factory PhotoPulseButton.white({
     String? label,
     Widget? child,
     bool isLoading = false,
@@ -57,9 +59,9 @@ class PhotoPulseButton extends StatelessWidget {
       onTap: onTap,
       isEnabled: isEnabled ?? true,
       isLoading: isLoading,
-      textColor: AppColors.primaryDefault,
-      backgroundColor: AppColors.primaryLight,
-      borderColor: AppColors.primaryLight,
+      textColor: AppColors.white,
+      backgroundColor: AppColors.accentDark,
+      borderColor: AppColors.black,
       child: child,
     );
   }
@@ -76,9 +78,9 @@ class PhotoPulseButton extends StatelessWidget {
       onTap: onTap,
       isEnabled: isEnabled ?? true,
       isLoading: isLoading,
-      textColor: AppColors.primaryDefault,
+      textColor: AppColors.black,
       backgroundColor: AppColors.white,
-      borderColor: AppColors.primaryLight,
+      borderColor: AppColors.black,
       child: child,
     );
   }
@@ -94,8 +96,8 @@ class PhotoPulseButton extends StatelessWidget {
       onTap: onTap,
       isEnabled: isEnabled ?? true,
       isLoading: isLoading,
-      textColor: AppColors.secondaryRed,
-      backgroundColor: AppColors.secondaryRed.withOpacity(0.1),
+      textColor: AppColors.white,
+      backgroundColor: AppColors.white.withOpacity(0.1),
       borderColor: Colors.transparent,
       child: child,
     );
@@ -111,9 +113,9 @@ class PhotoPulseButton extends StatelessWidget {
       isLoading: false,
       width: AppSizes.socialLoginButtonSize,
       backgroundColor: AppColors.white,
-      borderColor: AppColors.primaryLight,
+      borderColor: AppColors.black,
       label: '',
-      textColor: AppColors.primaryDefault,
+      textColor: AppColors.white,
       child: Image.asset(
         icon ?? '',
       ),
@@ -128,12 +130,16 @@ class PhotoPulseButton extends StatelessWidget {
         onPressed: isEnabled
             ? isLoading
                 ? () {}
-                : onTap
+                : () {
+                    if (FocusScope.of(context).hasFocus) {
+                      FocusScope.of(context).unfocus();
+                    }
+                    onTap!();
+                  }
             : null,
         style: FilledButton.styleFrom(
-          backgroundColor: isLoading
-              ? backgroundColor
-              : backgroundColor ?? AppColors.primaryDefault,
+          backgroundColor:
+              isLoading ? backgroundColor : backgroundColor ?? AppColors.black,
           textStyle: TextStyles.semiBold(
             color: textColor ?? AppColors.white,
             fontSize: FontSizes.s14,
@@ -147,15 +153,16 @@ class PhotoPulseButton extends StatelessWidget {
             width: 1,
             style: BorderStyle.solid,
           ),
-          disabledBackgroundColor: AppColors.wireframeLight,
-          disabledForegroundColor: AppColors.graysLight,
+          // disabledBackgroundColor: backgroundColor!,
+          // disabledForegroundColor: textColor,
         ),
         child: isLoading
-            ? SizedBox(
+            ? Container(
+                padding: const EdgeInsets.all(AppSizes.tinySpacing),
                 height: AppSizes.mediaButtonSize,
                 width: AppSizes.mediaButtonSize,
                 child: CircularProgressIndicator(
-                  color: AppColors.graysUltraLight,
+                  color: AppColors.white,
                   backgroundColor: textColor,
                 ),
               )

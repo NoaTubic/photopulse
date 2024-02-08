@@ -1,8 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:photopulse/common/domain/router/navigation_extensions.dart';
 import 'package:photopulse/common/presentation/app_sizes.dart';
 import 'package:photopulse/common/presentation/text/body_text.dart';
 import 'package:photopulse/features/camera/domain/notifiers/camera_notifier.dart';
+import 'package:photopulse/features/camera/presentation/pages/photo_pulse_camera.dart';
+import 'package:photopulse/features/camera/presentation/pages/review_photo_page.dart';
+import 'package:photopulse/features/gallery/domain/notifier/gallery_notifier.dart';
+import 'package:photopulse/features/post/presentation/pages/post_page.dart';
+import 'package:photopulse/features/upload_content/presentation/pages/upload_content_page.dart';
 import 'package:photopulse/theme/app_colors.dart';
 
 class ReviewContentButtons extends ConsumerWidget {
@@ -13,6 +19,7 @@ class ReviewContentButtons extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final isGallery = ref.watch(cameraNotifierProvider).content != null;
+
     return Container(
       height: MediaQuery.of(context).size.height * 0.13,
       padding: const EdgeInsets.only(
@@ -35,11 +42,12 @@ class ReviewContentButtons extends ConsumerWidget {
                 Navigator.of(context).pop();
               },
               style: TextButton.styleFrom(
-                backgroundColor: Colors.transparent,
+                backgroundColor: AppColors.black,
                 foregroundColor: AppColors.white,
               ),
               child: BodyText(
                 isGallery ? 'Cancel' : 'Retake',
+                color: AppColors.white,
               ),
             ),
           ),
@@ -48,7 +56,10 @@ class ReviewContentButtons extends ConsumerWidget {
               width: 160,
               height: 40,
               child: FilledButton(
-                onPressed: () async {
+                onPressed: () {
+                  ref.pushNamed(
+                    '${UploadContentPage.routeName}${PhotoPulseCamera.routeName}${ReviewPhotoPage.routeName}${PostPage.routeName}',
+                  );
                   // Navigator.of(context).pushNamed(
                   //   PostPage.routeName,
                   //   arguments: cameraState.isVideo

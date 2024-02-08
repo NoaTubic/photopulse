@@ -26,11 +26,11 @@ class SubscriptionPackageCard extends ConsumerWidget {
         horizontal: AppSizes.smallSpacing,
       ),
       child: Material(
-        color: AppColors.primaryLight.withOpacity(0.5),
+        color: AppColors.white.withOpacity(0.5),
         borderRadius: AppSizes.normalCircularBorderRadius,
         child: InkWell(
-          splashColor: AppColors.primaryLight.withOpacity(0.3),
-          highlightColor: AppColors.primaryLight.withOpacity(0.3),
+          splashColor: AppColors.white.withOpacity(0.3),
+          highlightColor: AppColors.white.withOpacity(0.3),
           onTap: onTap,
           child: Container(
             decoration: BoxDecoration(
@@ -40,8 +40,8 @@ class SubscriptionPackageCard extends ConsumerWidget {
                         ref.watch(
                           selectedSubscriptionPackageProvider,
                         )
-                    ? AppColors.primaryDefault
-                    : AppColors.primaryDefault.withOpacity(0.5),
+                    ? AppColors.black
+                    : AppColors.black.withOpacity(0.5),
                 width: subscription ==
                         ref.watch(
                           selectedSubscriptionPackageProvider,
@@ -60,7 +60,7 @@ class SubscriptionPackageCard extends ConsumerWidget {
                     subscription.iconPath,
                     width: 100,
                     height: 100,
-                    color: AppColors.primaryDefault.withOpacity(0.5),
+                    color: AppColors.black,
                   ),
                   TitleText(
                     subscription.name.toUpperCase(),

@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:photopulse/common/presentation/app_sizes.dart';
+import 'package:photopulse/common/presentation/text/display_text.dart';
+import 'package:photopulse/theme/app_colors.dart';
 
 class PhotoPulseAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String? title;
+  final Color? titleColor;
   final Widget? leading;
   final Widget? centerAction;
   final List<Widget>? actions;
@@ -18,6 +21,7 @@ class PhotoPulseAppBar extends StatelessWidget implements PreferredSizeWidget {
   const PhotoPulseAppBar({
     Key? key,
     this.title,
+    this.titleColor,
     this.leading,
     this.centerAction,
     this.actions,
@@ -34,14 +38,18 @@ class PhotoPulseAppBar extends StatelessWidget implements PreferredSizeWidget {
   factory PhotoPulseAppBar.withBackNav({
     String title = '',
     required void Function() onTap,
+    Color iconColor = Colors.black,
+    Color? titleColor,
   }) =>
       PhotoPulseAppBar(
         title: title,
+        titleColor: titleColor,
         titleAlignment: Alignment.topCenter,
         leading: GestureDetector(
           onTap: onTap,
-          child: const Icon(
+          child: Icon(
             Icons.arrow_back_rounded,
+            color: iconColor,
           ),
         ),
       );
@@ -67,8 +75,9 @@ class PhotoPulseAppBar extends StatelessWidget implements PreferredSizeWidget {
         title: centerAction ??
             Align(
               alignment: titleAlignment,
-              child: Text(
+              child: DisplayText(
                 title ?? '',
+                color: titleColor ?? AppColors.black,
               ),
             ),
         bottom: bottom,

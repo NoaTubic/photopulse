@@ -6,6 +6,8 @@ import 'package:photopulse/features/auth/presentation/pages/registration_page.da
 import 'package:photopulse/features/camera/presentation/pages/photo_pulse_camera.dart';
 import 'package:photopulse/features/camera/presentation/pages/review_photo_page.dart';
 import 'package:photopulse/features/navbar/presentation/pages/nav_bar.dart';
+import 'package:photopulse/features/post/domain/entities/post.dart';
+import 'package:photopulse/features/post/presentation/pages/post_page.dart';
 import 'package:photopulse/features/profile/presentation/pages/profile_page.dart';
 import 'package:photopulse/features/subscription_management/presentation/pages/subscription_management_page.dart';
 import 'package:photopulse/features/upload_content/presentation/pages/upload_content_page.dart';
@@ -67,12 +69,19 @@ List<RouteBase> getRoutes({
                     builder: (context, state) => const PhotoPulseCamera(),
                     routes: [
                       GoRoute(
-                        path: ReviewPhotoPage.routeName.removeLeadingSlash,
-                        builder: (context, state) => ReviewPhotoPage(
-                          isFromGallery:
-                              state.pathParameters['param'] == 'true',
-                        ),
-                      ),
+                          path: ReviewPhotoPage.routeName.removeLeadingSlash,
+                          builder: (context, state) => ReviewPhotoPage(
+                                isFromGallery:
+                                    state.pathParameters['param'] == 'true',
+                              ),
+                          routes: [
+                            GoRoute(
+                              path: PostPage.routeName.removeLeadingSlash,
+                              builder: (context, state) => PostPage(
+                                post: state.extra as Post?,
+                              ),
+                            ),
+                          ]),
                     ],
                   ),
                   GoRoute(

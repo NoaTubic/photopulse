@@ -21,7 +21,6 @@ class PhotoPulseTextFormField extends HookWidget {
   final String? labelText;
   final bool isMandatory;
   final Widget? suffixIcon;
-  final Widget? suffix;
   final Widget? prefixIcon;
   final TextInputType textInputType;
   final TextInputAction textInputAction;
@@ -63,7 +62,6 @@ class PhotoPulseTextFormField extends HookWidget {
     this.maxLines = 1,
     this.controller,
     this.autoValidateMode,
-    this.suffix,
     this.border,
     this.enabledBorder,
     this.errorBorder,
@@ -144,11 +142,11 @@ class PhotoPulseTextFormField extends HookWidget {
       border: InputBorder.none,
       enabledBorder: OutlineInputBorder(
         borderRadius: appBorderRadius,
-        borderSide: BorderSide(color: AppColors.graysInput),
+        borderSide: BorderSide(color: AppColors.accentDark),
       ),
       focusedBorder: OutlineInputBorder(
         borderRadius: appBorderRadius,
-        borderSide: BorderSide(color: AppColors.graysInput),
+        borderSide: BorderSide(color: AppColors.accentDark),
       ),
       focusedErrorBorder: InputBorder.none,
       disabledBorder: InputBorder.none,
@@ -174,6 +172,7 @@ class PhotoPulseTextFormField extends HookWidget {
     required int maxCharacters,
     required TextEditingController textEditingController,
     String? initialValue,
+    Widget? suffixAction,
   }) {
     return PhotoPulseTextFormField._(
       name: name,
@@ -201,6 +200,7 @@ class PhotoPulseTextFormField extends HookWidget {
           allowedLength: maxCharacters,
         ),
       ],
+      suffixIcon: suffixAction,
       controller: textEditingController,
       fillColor: maxCharacterExceeded
           ? AppColors.alertCritical.withOpacity(0.1)
@@ -346,7 +346,6 @@ class PhotoPulseTextFormField extends HookWidget {
                       errorText: errorText ?? field.errorText,
                       hintText: hintText,
                       hintStyle: Theme.of(context).textTheme.bodyMedium,
-                      suffix: suffix,
                       suffixIcon: obscureText
                           ? IconButton(
                               icon: Icon(

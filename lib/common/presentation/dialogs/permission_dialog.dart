@@ -31,7 +31,7 @@ class PermissionsDialog extends ConsumerWidget {
               vertical: AppSizes.largeSpacing,
             ),
             decoration: BoxDecoration(
-              color: AppColors.primaryDefault,
+              color: AppColors.white,
               borderRadius: const BorderRadius.only(
                 topLeft: Radius.circular(
                   AppSizes.normalCircularRadius,

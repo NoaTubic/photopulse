@@ -7,70 +7,41 @@ import 'app_text_styles.dart';
 
 part 'fonts.dart';
 
-final _theme = ThemeData();
-final lightTheme = ThemeData(
-  splashColor: AppColors.graysUltraLight,
-  highlightColor: AppColors.graysUltraLight,
-  useMaterial3: true,
-  fontFamily: Fonts.fontFamily,
+// final _theme = ThemeData();
 
-  colorScheme: _theme.colorScheme.copyWith(secondary: Colors.cyan),
-  scaffoldBackgroundColor: Colors.white,
-  // ignore: deprecated_member_use
-  backgroundColor: Colors.grey,
-  appBarTheme: AppBarTheme(
-    scrolledUnderElevation: 0,
-    titleTextStyle: TextStyles.medium(
-      fontSize: FontSizes.s18,
-      color: AppColors.black,
-    ),
-  ),
-  bottomAppBarTheme: BottomAppBarTheme(
-    color: AppColors.white,
-    surfaceTintColor: AppColors.white,
-  ),
-  bottomSheetTheme: BottomSheetThemeData(
-    backgroundColor: ThemeData.dark().scaffoldBackgroundColor,
-    shape: const RoundedRectangleBorder(
-      borderRadius: BorderRadius.only(
-        topLeft: Radius.circular(12),
-        topRight: Radius.circular(12),
-      ),
-    ),
-  ),
-  popupMenuTheme: PopupMenuThemeData(
-    surfaceTintColor: AppColors.white,
-    shape: const OutlineInputBorder(
-      borderRadius: appBorderRadius,
-      borderSide: BorderSide.none,
-    ),
-  ),
+final lightTheme = ThemeData(
+  splashColor: AppColors.white.withOpacity(0.5),
+  highlightColor: AppColors.white.withOpacity(0.5),
+  fontFamily: Fonts.fontFamily,
+  useMaterial3: true,
+  scaffoldBackgroundColor: AppColors.white,
+  inputDecorationTheme: inputDecorationTheme,
   textTheme: TextTheme(
     displayMedium: TextStyles.semiBold(
-      color: AppColors.greyDark30,
+      color: AppColors.black,
       fontSize: FontSizes.s24,
     ),
     headlineMedium: TextStyles.semiBold(
-      color: AppColors.greyDark30,
+      color: AppColors.black,
       fontSize: FontSizes.s18,
     ),
     titleMedium: TextStyles.semiBold(
-      color: AppColors.greyDark30,
+      color: AppColors.black,
       fontSize: FontSizes.s16,
     ),
     bodyMedium: TextStyles.regular(
-      color: AppColors.greyDark30,
+      color: AppColors.black,
       fontSize: FontSizes.s14,
     ),
     labelMedium: TextStyles.medium(
-      color: AppColors.greyDark30,
+      color: AppColors.black,
       fontSize: FontSizes.s12,
     ),
   ),
   filledButtonTheme: FilledButtonThemeData(
     style: FilledButton.styleFrom(
       maximumSize: const Size(AppSizes.maxWidth, AppSizes.filledButtonHeight),
-      backgroundColor: AppColors.primaryDefault,
+      backgroundColor: AppColors.black,
       textStyle: TextStyles.semiBold(
         color: Colors.white,
         fontSize: FontSizes.s14,
@@ -79,46 +50,94 @@ final lightTheme = ThemeData(
         borderRadius: appBorderRadiusHigh,
       ),
       minimumSize: const Size(AppSizes.maxWidth, AppSizes.filledButtonHeight),
-      disabledBackgroundColor: AppColors.wireframeLight,
-      disabledForegroundColor: AppColors.greyDark,
+      disabledBackgroundColor: AppColors.black,
+      disabledForegroundColor: AppColors.white,
     ),
   ),
   textButtonTheme: TextButtonThemeData(
     style: TextButton.styleFrom(
       padding: const EdgeInsets.all(AppSizes.tinySpacing),
       textStyle: TextStyles.medium(
-        color: AppColors.wireFrameMedium,
+        color: AppColors.black,
         fontSize: FontSizes.s14,
       ),
       backgroundColor: Colors.transparent,
-      foregroundColor: AppColors.wireFrameMedium,
+      foregroundColor: AppColors.black,
     ),
   ),
-  inputDecorationTheme: inputDecorationTheme,
-  dialogTheme: const DialogTheme(
-    shape: RoundedRectangleBorder(
-      borderRadius:
-          BorderRadius.all(Radius.circular(AppSizes.mediumCircularRadius)),
-    ),
-    backgroundColor: Colors.white,
+  textSelectionTheme: TextSelectionThemeData(
+    cursorColor: AppColors.black,
+    selectionColor: AppColors.black.withOpacity(0.1),
+    selectionHandleColor: AppColors.black,
   ),
-  progressIndicatorTheme:
-      ProgressIndicatorThemeData(color: AppColors.primaryDefault),
-
-  listTileTheme: ListTileThemeData(
-    shape: const RoundedRectangleBorder(
-      borderRadius: appBorderRadius,
-    ),
-    tileColor: AppColors.white,
-  ),
-  switchTheme: SwitchThemeData(
-    thumbColor: MaterialStatePropertyAll(AppColors.white),
-    trackColor: MaterialStatePropertyAll(AppColors.graysLight),
-  ),
-  chipTheme: ChipThemeData(
-    backgroundColor: AppColors.primaryLight,
+  progressIndicatorTheme: ProgressIndicatorThemeData(
+    color: AppColors.black,
+    refreshBackgroundColor: AppColors.black.withOpacity(0.2),
   ),
 );
+//   inputDecorationTheme: inputDecorationTheme,
+//   dialogTheme: const DialogTheme(
+//     shape: RoundedRectangleBorder(
+//       borderRadius:
+//           BorderRadius.all(Radius.circular(AppSizes.mediumCircularRadius)),
+//     ),
+//     backgroundColor: Colors.white,
+
+// final lightTheme = ThemeData(
+//   splashColor: AppColors.graysUltraLight,
+//   highlightColor: AppColors.graysUltraLight,
+//   useMaterial3: true,
+//   fontFamily: Fonts.fontFamily,
+//   scaffoldBackgroundColor: Colors.white,
+//   // ignore: deprecated_member_use
+//   backgroundColor: Colors.white,
+//   appBarTheme: AppBarTheme(
+//     scrolledUnderElevation: 0,
+//     titleTextStyle: TextStyles.medium(
+//       fontSize: FontSizes.s18,
+//       color: AppColors.primaryDark,
+//     ),
+//   ),
+//   bottomAppBarTheme: BottomAppBarTheme(
+//     color: AppColors.white,
+//     surfaceTintColor: AppColors.white,
+//   ),
+
+//   bottomSheetTheme: BottomSheetThemeData(
+//     backgroundColor: ThemeData.dark().scaffoldBackgroundColor,
+//     shape: const RoundedRectangleBorder(
+//       borderRadius: BorderRadius.only(
+//         topLeft: Radius.circular(12),
+//         topRight: Radius.circular(12),
+//       ),
+//     ),
+//   ),
+//   popupMenuTheme: PopupMenuThemeData(
+//     surfaceTintColor: AppColors.white,
+//     shape: const OutlineInputBorder(
+//       borderRadius: appBorderRadius,
+//       borderSide: BorderSide.none,
+//     ),
+//   ),
+
+//   ),
+//   progressIndicatorTheme:
+//       ProgressIndicatorThemeData(color: AppColors.white),
+
+//   listTileTheme: ListTileThemeData(
+//     shape: const RoundedRectangleBorder(
+//       borderRadius: appBorderRadius,
+//     ),
+//     tileColor: AppColors.white,
+//   ),
+//   switchTheme: SwitchThemeData(
+//     thumbColor: MaterialStatePropertyAll(AppColors.white),
+//     trackColor: MaterialStatePropertyAll(AppColors.accentDark),
+//   ),
+//   chipTheme: ChipThemeData(
+//     backgroundColor: AppColors.white,
+//   ),
+// );
 
 const appBorderRadius =
     BorderRadius.all(Radius.circular(AppSizes.normalCircularRadius));
@@ -131,27 +150,34 @@ final inputDecorationTheme = InputDecorationTheme(
   floatingLabelBehavior: FloatingLabelBehavior.always,
   isDense: true,
   filled: true,
-  fillColor: AppColors.graysInput,
-  hintStyle: _theme.textTheme.bodyMedium!.copyWith(
-    color: AppColors.wireFrameMedium2,
+  fillColor: AppColors.white,
+  hintStyle: TextStyles.regular(
+    color: AppColors.black,
+    fontSize: FontSizes.s14,
   ),
-  errorStyle: _theme.textTheme.bodyMedium!
-      .copyWith(color: AppColors.alertCritical, fontSize: FontSizes.s12),
-  labelStyle:
-      _theme.textTheme.bodyMedium!.copyWith(color: AppColors.wireFrameDark),
-  floatingLabelStyle:
-      _theme.textTheme.bodyMedium!.copyWith(color: AppColors.wireFrameDark),
+  errorStyle: TextStyles.regular(
+    color: AppColors.alertCritical,
+    fontSize: FontSizes.s14,
+  ),
+  labelStyle: TextStyles.regular(
+    color: AppColors.black,
+    fontSize: FontSizes.s14,
+  ),
+  floatingLabelStyle: TextStyles.regular(
+    color: AppColors.black,
+    fontSize: FontSizes.s14,
+  ),
   border: OutlineInputBorder(
     borderRadius: appBorderRadius,
-    borderSide: BorderSide(color: AppColors.graysLight),
+    borderSide: BorderSide(color: AppColors.accentDark),
   ),
   enabledBorder: OutlineInputBorder(
     borderRadius: appBorderRadius,
-    borderSide: BorderSide(color: AppColors.graysLight),
+    borderSide: BorderSide(color: AppColors.accentDark),
   ),
   focusedBorder: OutlineInputBorder(
     borderRadius: appBorderRadius,
-    borderSide: BorderSide(color: AppColors.primaryLight),
+    borderSide: BorderSide(color: AppColors.black),
   ),
   errorBorder: OutlineInputBorder(
     borderRadius: appBorderRadius,
@@ -163,7 +189,7 @@ final inputDecorationTheme = InputDecorationTheme(
   ),
   disabledBorder: OutlineInputBorder(
     borderRadius: appBorderRadius,
-    borderSide: BorderSide(color: AppColors.wireFrameMedium2),
+    borderSide: BorderSide(color: AppColors.black),
   ),
   contentPadding: const EdgeInsets.all(AppSizes.normalSpacing),
 );

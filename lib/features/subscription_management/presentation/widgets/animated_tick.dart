@@ -31,7 +31,7 @@ class AnimatedTick extends HookWidget {
       child: Icon(
         Icons.done_outline_rounded,
         size: 42,
-        color: AppColors.primaryDefault,
+        color: AppColors.black,
       ),
     );
   }

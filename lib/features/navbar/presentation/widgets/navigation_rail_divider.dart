@@ -11,20 +11,20 @@ class NavigationRailDivider extends StatelessWidget {
       height: double.infinity,
       margin: const EdgeInsets.only(left: AppSizes.tinySpacing),
       decoration: BoxDecoration(
-        color: AppColors.greyDark30,
+        color: AppColors.white,
         boxShadow: [
           BoxShadow(
-            color: AppColors.greyDark,
+            color: AppColors.white,
             blurRadius: 0,
             spreadRadius: 0,
           ),
           BoxShadow(
-            color: AppColors.greyDark,
+            color: AppColors.white,
             blurRadius: AppSizes.tinySpacing,
             spreadRadius: 0,
           ),
           BoxShadow(
-            color: AppColors.greyDark,
+            color: AppColors.white,
             blurRadius: AppSizes.normalSpacing,
             spreadRadius: 0,
           ),

@@ -59,10 +59,10 @@ class PhotoPulseCamera extends HookConsumerWidget {
           Flushbar(
             icon: Icon(
               Icons.info_outline_rounded,
-              color: AppColors.primaryDefault,
+              color: AppColors.white,
             ),
-            messageColor: AppColors.primaryDefault,
-            backgroundColor: AppColors.graysUltraLight,
+            messageColor: AppColors.white,
+            backgroundColor: AppColors.white,
             message: next.failure!.title,
             duration: const Duration(seconds: 3),
           ).show(context);

@@ -3,7 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:photopulse/common/domain/router/pages.dart';
 
 enum BottomNavigationItem {
-  home(icon: Icons.home_rounded, routeName: Pages.home),
+  home(
+    icon: Icons.home_rounded,
+    routeName: Pages.home,
+  ),
   uploadContent(icon: Icons.add_box_rounded, routeName: Pages.uploadContent),
   profile(icon: Icons.person_rounded, routeName: Pages.profile);
 

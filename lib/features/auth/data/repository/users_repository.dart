@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:either_dart/either.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -21,6 +22,8 @@ abstract class UsersRepository {
   EitherFailureOr<void> updateUserSubscriptionPackage(
     SubscriptionPackage subscriptionPackage,
   );
+
+  EitherFailureOr<void> incrementDailyUpload();
 }
 
 class UserRepositoryImpl with ErrorToFailureMixin implements UsersRepository {
@@ -80,6 +83,26 @@ class UserRepositoryImpl with ErrorToFailureMixin implements UsersRepository {
               'subscriptionPackage': subscriptionPackage.name,
               'isFirstLogin': false,
               'canChangeSubscription': false,
+            });
+          } else {
+            throw Exception('User not found');
+          }
+
+          return const Right(null);
+        },
+        errorResolver: const FirebaseErrorResolver(),
+      );
+
+  @override
+  EitherFailureOr<void> incrementDailyUpload() async => execute(
+        () async {
+          final userDocRef =
+              _usersCollection.doc(_firebaseAuth.currentUser?.uid);
+
+          final userDoc = await userDocRef.get();
+          if (userDoc.exists) {
+            await userDocRef.update({
+              'dailyUploads': FieldValue.increment(1),
             });
           } else {
             throw Exception('User not found');

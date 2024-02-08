@@ -10,7 +10,7 @@ abstract class AppSizes {
   static const double xLargeSpacing = 48;
   static const double bodyPaddingHorizontal = 20;
   static const double bodyPaddingVertical = 16;
-  static const double normalCircularRadius = 10;
+  static const double normalCircularRadius = 8;
   static const double highCircularRadius = 40;
   static const double filledButtonHeight = 44;
   static const double appLogo = 120;

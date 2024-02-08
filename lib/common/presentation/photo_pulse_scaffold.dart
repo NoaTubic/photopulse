@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:photopulse/common/presentation/app_sizes.dart';
-import 'package:photopulse/common/presentation/gradient_background.dart';
 
 class PhotoPulseScaffold extends StatelessWidget {
   final Widget? body;
@@ -32,24 +31,12 @@ class PhotoPulseScaffold extends StatelessWidget {
     return Scaffold(
       resizeToAvoidBottomInset: resizeToAvoidBottomInset,
       appBar: appBar,
-      body: gradientBackground
-          ? Stack(
-              children: [
-                const GradientBackground(),
-                SafeArea(
-                  child: Padding(
-                    padding: padding,
-                    child: body,
-                  ),
-                ),
-              ],
-            )
-          : SafeArea(
-              child: Padding(
-                padding: padding,
-                child: body,
-              ),
-            ),
+      body: SafeArea(
+        child: Padding(
+          padding: padding,
+          child: body,
+        ),
+      ),
       bottomNavigationBar: bottomNavigationBar,
       floatingActionButton: floatingActionButton,
       floatingActionButtonLocation: floatingActionButtonLocation ??

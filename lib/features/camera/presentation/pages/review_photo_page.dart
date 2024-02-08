@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:photopulse/common/domain/router/pages.dart';
+import 'package:photopulse/common/presentation/photo_pulse_app_bar.dart';
 import 'package:photopulse/features/camera/domain/notifiers/camera_notifier.dart';
 import 'package:photopulse/features/camera/presentation/widgets/camera_aspect_ratio.dart';
 import 'package:photopulse/features/camera/presentation/widgets/review_content_buttons.dart';
@@ -21,14 +22,15 @@ class ReviewPhotoPage extends HookConsumerWidget {
 
     return Scaffold(
       backgroundColor: AppColors.black,
-      // appBar: CareConnectAppBar.camera(
-      //   onTap: () {
-      //     if (isFromGallery != true) {
-      //       ref.read(cameraNotifierProvider.notifier).retakeContent();
-      //     }
-      //     Navigator.of(context).pop();
-      //   },
-      // ),
+      appBar: PhotoPulseAppBar.withBackNav(
+        iconColor: AppColors.white,
+        onTap: () {
+          if (isFromGallery != true) {
+            ref.read(cameraNotifierProvider.notifier).retakeContent();
+          }
+          Navigator.of(context).pop();
+        },
+      ),
       body: image != null
           ? Stack(
               children: [

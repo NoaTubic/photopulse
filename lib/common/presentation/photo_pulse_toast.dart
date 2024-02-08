@@ -26,13 +26,13 @@ class PhotoPulseToast extends StatelessWidget {
             child: BodyText(
               message,
               isBold: true,
-              color: AppColors.primaryDefault,
+              color: AppColors.black,
             ),
           ),
         ),
         icon: Icon(
           Icons.warning_amber_rounded,
-          color: AppColors.primaryDefault,
+          color: AppColors.black,
         ),
         borderRadius: const BorderRadius.all(
           Radius.circular(AppSizes.normalCircularRadius),
@@ -43,6 +43,7 @@ class PhotoPulseToast extends StatelessWidget {
             ? const EdgeInsets.only(bottom: AppSizes.xLargeSpacing)
             : EdgeInsets.zero,
         flushbarStyle: FlushbarStyle.FLOATING,
+        borderColor: AppColors.black,
         backgroundColor: AppColors.white,
         duration: DurationConstants.toastDuration,
         isDismissible: true,

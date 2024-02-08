@@ -30,7 +30,7 @@ class CurrentSubscriptionSection extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final user = ref.watch(userProvider);
     final subscriptionPackage = SubscriptionPackage.values
-        .where((s) => s == (user?.subscriptionPackage!))
+        .where((subscription) => subscription == (user?.subscriptionPackage!))
         .first;
     return Column(
       children: [
@@ -40,7 +40,7 @@ class CurrentSubscriptionSection extends ConsumerWidget {
             Image.asset(
               subscriptionPackage.iconPath,
               width: 32,
-              color: AppColors.primaryLight,
+              color: AppColors.black,
             ),
             const Gap(AppSizes.smallSpacing),
             BodyText(
@@ -66,7 +66,7 @@ class CurrentSubscriptionSection extends ConsumerWidget {
         ),
         const Gap(AppSizes.tinySpacing),
         Divider(
-          color: AppColors.graysLight,
+          color: AppColors.black,
           height: 0,
           thickness: 0.5,
           endIndent: AppSizes.compactSpacing,
