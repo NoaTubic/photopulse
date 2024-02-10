@@ -5,7 +5,7 @@ import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../features/auth/domain/notifiers/auth_notifier.dart';
-import '../../../features/home/presentation/home_page.dart';
+import '../../../features/feed/presentation/pages/home_page.dart';
 import '../router/base_router.dart';
 import '../router/go_router_router.dart';
 import '../router/routes.dart';

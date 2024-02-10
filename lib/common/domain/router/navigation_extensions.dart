@@ -1,6 +1,6 @@
 // ignore_for_file: always_use_package_imports
 // ignore_for_file: avoid-dynamic
-import 'package:go_router/go_router.dart';
+
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:photopulse/common/domain/providers/global_navigation_provider.dart';
 

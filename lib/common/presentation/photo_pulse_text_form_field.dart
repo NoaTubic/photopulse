@@ -91,6 +91,8 @@ class PhotoPulseTextFormField extends HookWidget {
     String? initialValue,
     FocusNode? focusNode,
     bool isEnabled = true,
+    Widget? suffixIcon,
+    Widget? prefixIcon,
   }) {
     return PhotoPulseTextFormField._(
       name: name,
@@ -105,6 +107,8 @@ class PhotoPulseTextFormField extends HookWidget {
       initialValue: initialValue,
       focusNode: focusNode,
       isEnabled: isEnabled,
+      suffixIcon: suffixIcon,
+      prefixIcon: prefixIcon,
     );
   }
 
@@ -275,14 +279,15 @@ class PhotoPulseTextFormField extends HookWidget {
   @override
   Widget build(BuildContext context) {
     final isObscured = useState(obscureText);
-    final controller = useTextEditingController(text: initialValue);
+    final textController =
+        controller ?? useTextEditingController(text: initialValue);
 
     useEffect(
       () {
         return () {
           // ignore: unnecessary_null_comparison
-          if (controller == null) {
-            controller.dispose();
+          if (textController == null) {
+            textController.dispose();
           }
         };
       },
@@ -294,31 +299,6 @@ class PhotoPulseTextFormField extends HookWidget {
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // if (labelText != null) ...[
-          //   RichText(
-          //     textAlign: TextAlign.start,
-          //     text: TextSpan(
-          //       children: [
-          //         TextSpan(
-          //           text: labelText,
-          //           style: Theme.of(context).inputDecorationTheme.labelStyle,
-          //           children: <TextSpan>[
-          //             isMandatory
-          //                 ? TextSpan(
-          //                     text: '*',
-          //                     style: Theme.of(context)
-          //                         .inputDecorationTheme
-          //                         .labelStyle!
-          //                         .copyWith(color: AppColors.alertCritical),
-          //                   )
-          //                 : const TextSpan(),
-          //           ],
-          //         ),
-          //       ],
-          //     ),
-          //   ),
-          //   const SizedBox(height: AppSizes.tinySpacing),
-          // ],
           FormBuilderField(
             name: name,
             autovalidateMode: autoValidateMode,
@@ -331,6 +311,8 @@ class PhotoPulseTextFormField extends HookWidget {
               controller: controller,
               onChanged: (value) {
                 field.didChange(value);
+
+                // textController.text = value;
               },
               enableInteractiveSelection: enableInteractiveSelection,
               enabled: isEnabled,

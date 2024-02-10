@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:photopulse/common/domain/router/pages.dart';
-import 'package:photopulse/features/home/presentation/home_page.dart';
+import 'package:photopulse/features/feed/presentation/pages/home_page.dart';
 import 'package:photopulse/features/profile/presentation/pages/profile_page.dart';
 import 'package:photopulse/features/upload_content/presentation/pages/upload_content_page.dart';
 import 'package:photopulse/theme/app_colors.dart';
@@ -22,6 +22,14 @@ enum BottomNavBarItem {
     ),
     routeName: UploadContentPage.routeName,
     snakeCaseTitle: Pages.uploadContent,
+  ),
+  search(
+    icon: Icon(
+      Icons.search_rounded,
+      color: Colors.black,
+    ),
+    routeName: Pages.searchPosts,
+    snakeCaseTitle: Pages.searchPosts,
   ),
   profile(
     icon: Icon(
@@ -48,6 +56,8 @@ enum BottomNavBarItem {
         return 'Home';
       case BottomNavBarItem.uploadContent:
         return 'Upload content';
+      case BottomNavBarItem.search:
+        return 'Search';
       case BottomNavBarItem.profile:
         return 'Profile';
       default:

@@ -20,7 +20,7 @@ import 'package:http/http.dart' as http;
 
 final authRepositoryProvider = Provider<AuthRepository>(
   (ref) => AuthRepositoryImpl(
-    ref.watch(userRepositoryProvider),
+    ref.watch(usersRepositoryProvider),
   ),
 );
 

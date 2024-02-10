@@ -74,6 +74,10 @@ final lightTheme = ThemeData(
     color: AppColors.black,
     refreshBackgroundColor: AppColors.black.withOpacity(0.2),
   ),
+  // datePickerTheme: DatePickerThemeData(
+  //   backgroundColor: AppColors.white,
+  //   color
+  // ),
 );
 //   inputDecorationTheme: inputDecorationTheme,
 //   dialogTheme: const DialogTheme(

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:photopulse/common/presentation/build_context_extensions.dart';
+import 'package:photopulse/theme/app_colors.dart';
 
 class BodyText extends StatelessWidget {
   final String text;
@@ -29,7 +30,7 @@ class BodyText extends StatelessWidget {
       text,
       maxLines: maxLines,
       style: context.bodyMedium?.copyWith(
-        color: color,
+        color: color ?? AppColors.black,
         fontWeight: isBold ? FontWeight.w700 : null,
         overflow: textOverflow,
         decoration: isUnderlined ? TextDecoration.underline : null,

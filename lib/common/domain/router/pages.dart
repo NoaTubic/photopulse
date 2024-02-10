@@ -6,6 +6,7 @@ abstract class Pages {
   static const String resetPassword = '/reset_password';
   static const String home = '/home';
   static const String uploadContent = '/upload_content';
+  static const String searchPosts = '/search_posts';
   static const String profile = '/profile';
   static const String subscriptionManagement = '/subscription_management';
   static const String camera = '/camera';

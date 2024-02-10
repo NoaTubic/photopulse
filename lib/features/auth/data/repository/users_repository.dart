@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:either_dart/either.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -8,7 +10,7 @@ import 'package:photopulse/features/auth/domain/entities/user.dart';
 import 'package:photopulse/features/subscription_management/domain/entities/subscription_package.dart';
 import 'package:q_architecture/q_architecture.dart';
 
-final userRepositoryProvider = Provider<UsersRepository>(
+final usersRepositoryProvider = Provider<UsersRepository>(
   (ref) => UserRepositoryImpl(FirebaseAuth.instance),
 );
 
@@ -24,6 +26,8 @@ abstract class UsersRepository {
   );
 
   EitherFailureOr<void> incrementDailyUpload();
+
+  EitherFailureOr<List<PhotoPulseUser>> getUsers();
 }
 
 class UserRepositoryImpl with ErrorToFailureMixin implements UsersRepository {
@@ -109,6 +113,15 @@ class UserRepositoryImpl with ErrorToFailureMixin implements UsersRepository {
           }
 
           return const Right(null);
+        },
+        errorResolver: const FirebaseErrorResolver(),
+      );
+
+  @override
+  EitherFailureOr<List<PhotoPulseUser>> getUsers() async => execute(
+        () async {
+          final users = await _usersCollection.get();
+          return Right(users.docs.map((doc) => doc.data()).toList());
         },
         errorResolver: const FirebaseErrorResolver(),
       );

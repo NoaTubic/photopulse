@@ -9,10 +9,11 @@ import 'package:photopulse/features/navbar/presentation/pages/nav_bar.dart';
 import 'package:photopulse/features/post/domain/entities/post.dart';
 import 'package:photopulse/features/post/presentation/pages/post_page.dart';
 import 'package:photopulse/features/profile/presentation/pages/profile_page.dart';
+import 'package:photopulse/features/search_posts/presentation/pages/search_posts_page.dart';
 import 'package:photopulse/features/subscription_management/presentation/pages/subscription_management_page.dart';
 import 'package:photopulse/features/upload_content/presentation/pages/upload_content_page.dart';
 import '../../../common/domain/utils/string_extension.dart';
-import '../../../features/home/presentation/home_page.dart';
+import '../../../features/feed/presentation/pages/home_page.dart';
 import '../../../features/auth/presentation/pages/reset_password_page.dart';
 
 final GlobalKey<NavigatorState> _homeKey =
@@ -20,6 +21,8 @@ final GlobalKey<NavigatorState> _homeKey =
 final GlobalKey<NavigatorState> _contentKey =
     GlobalKey<NavigatorState>(debugLabel: 'home');
 final GlobalKey<NavigatorState> _profileKey =
+    GlobalKey<NavigatorState>(debugLabel: 'home');
+final GlobalKey<NavigatorState> _searchKey =
     GlobalKey<NavigatorState>(debugLabel: 'home');
 
 List<RouteBase> getRoutes({
@@ -91,6 +94,16 @@ List<RouteBase> getRoutes({
                     ),
                   ),
                 ],
+              ),
+            ],
+          ),
+          StatefulShellBranch(
+            navigatorKey: _searchKey,
+            routes: [
+              GoRoute(
+                path: SearchPostsPage.routeName,
+                builder: (context, state) => const SearchPostsPage(),
+                routes: const [],
               ),
             ],
           ),

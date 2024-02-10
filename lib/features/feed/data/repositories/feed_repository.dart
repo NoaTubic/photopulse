@@ -2,32 +2,55 @@ import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:either_dart/either.dart';
+import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:photopulse/common/data/firestore/firestore_collections.dart';
+import 'package:photopulse/features/feed/data/builders/post_query_builder.dart';
 import 'package:photopulse/features/post/domain/entities/post.dart';
 import 'package:q_architecture/paginated_notifier.dart';
 import 'package:q_architecture/q_architecture.dart';
 
 final feedRepositoryProvider = Provider<FeedRepository>((ref) {
-  return FeedRepositoryImpl();
+  return FeedRepositoryImpl(ref.watch(postQueryBuilderProvider));
 });
 
 abstract class FeedRepository {
-  PaginatedEitherFailureOr<Post> getFeed(int? page);
+  PaginatedEitherFailureOr<Post> getFeed({
+    int? page,
+    String hashtag,
+    double? minImageSizeMb,
+    double? maxImageSizeMb,
+    DateTimeRange? dateTimeRange,
+    String? authorId,
+  });
 }
 
 class FeedRepositoryImpl implements FeedRepository {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   final _postsCollection = FirestoreCollections.postsCollection;
+  final PostQueryBuilder _postQueryBuilder;
+
+  FeedRepositoryImpl(this._postQueryBuilder);
 
   DocumentSnapshot? _lastDocument;
   bool _hasMorePosts = true;
   int _currentPage = 0;
 
   @override
-  PaginatedEitherFailureOr<Post> getFeed(int? page) async {
-    Query query =
-        _postsCollection.orderBy('createdAt', descending: true).limit(10);
+  PaginatedEitherFailureOr<Post> getFeed({
+    int? page,
+    String? hashtag,
+    double? minImageSizeMb,
+    double? maxImageSizeMb,
+    DateTimeRange? dateTimeRange,
+    String? authorId,
+  }) async {
+    _postQueryBuilder.addHashtagFilter(hashtag ?? '');
+    _postQueryBuilder.addSizeFilter(minImageSizeMb, maxImageSizeMb);
+    _postQueryBuilder.addDateTimeRangeFilter(dateTimeRange);
+    _postQueryBuilder.addAuthorFilter(authorId);
+
+    Query query = _postQueryBuilder.build();
 
     if (_lastDocument != null && page != null && page > 1) {
       query = query.startAfterDocument(_lastDocument!);
@@ -40,10 +63,6 @@ class FeedRepositoryImpl implements FeedRepository {
 
     if (querySnapshot.docs.length < 10) _hasMorePosts = false;
 
-    for (final doc in querySnapshot.docs) {
-      log(doc.data().runtimeType.toString());
-      log(doc.data().toString());
-    }
     final List<Post> posts =
         querySnapshot.docs.map((doc) => doc.data() as Post).toList();
 

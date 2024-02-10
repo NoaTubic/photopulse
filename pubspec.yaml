@@ -24,7 +24,7 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_form_builder: ^9.1.1
-  flutter_hooks: ^0.20.3
+
   flutter_localizations:
     sdk: flutter
   flutter_loggy: ^2.0.2
@@ -63,6 +63,8 @@ dependencies:
   extended_image: ^8.2.0
   readmore: ^2.2.0
   flutter_staggered_animations: ^1.1.1
+  material_floating_search_bar_2: ^0.5.0
+  flutter_hooks: ^0.20.5
 
 dev_dependencies:
   build_runner: ^2.4.6

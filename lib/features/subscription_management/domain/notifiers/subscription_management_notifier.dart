@@ -6,7 +6,7 @@ import 'package:q_architecture/base_state_notifier.dart';
 final subscriptionManagementNotifierProvider =
     BaseStateNotifierProvider<SubscriptionManagementNotifier, void>(
   (ref) => SubscriptionManagementNotifier(
-    ref.watch(userRepositoryProvider),
+    ref.watch(usersRepositoryProvider),
     ref,
   ),
 );

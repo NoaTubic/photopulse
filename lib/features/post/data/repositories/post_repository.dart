@@ -13,7 +13,7 @@ import 'package:q_architecture/q_architecture.dart';
 
 final postRepositoryProvider = Provider<PostRepository>((ref) {
   return PostRepositoryImpl(
-    ref.watch(userRepositoryProvider),
+    ref.watch(usersRepositoryProvider),
   );
 });
 
