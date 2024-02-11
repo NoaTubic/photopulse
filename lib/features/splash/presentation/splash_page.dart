@@ -5,7 +5,6 @@ import 'package:photopulse/common/domain/router/navigation_extensions.dart';
 import 'package:photopulse/common/domain/router/pages.dart';
 import 'package:photopulse/common/presentation/image_assets.dart';
 import 'package:photopulse/features/auth/domain/notifiers/auth_notifier.dart';
-import 'package:photopulse/features/auth/presentation/pages/login_page.dart';
 import 'package:photopulse/features/feed/presentation/pages/home_page.dart';
 
 class SplashPage extends ConsumerWidget {

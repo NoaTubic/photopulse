@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_loggy/flutter_loggy.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:loggy/loggy.dart';
 import 'package:photopulse/firebase_options.dart';
@@ -20,7 +21,10 @@ import 'main/app_environment.dart';
 import 'theme/theme.dart';
 
 Future<void> mainCommon(AppEnvironment environment) async {
-  WidgetsFlutterBinding.ensureInitialized();
+  final WidgetsBinding widgetsBinding =
+      WidgetsFlutterBinding.ensureInitialized();
+  FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
+
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
@@ -53,6 +57,8 @@ class MyApp extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    FlutterNativeSplash.remove();
+
     final baseRouter = ref.watch(baseRouterProvider);
     return MaterialApp.router(
       debugShowCheckedModeBanner: EnvInfo.environment != AppEnvironment.PROD,
