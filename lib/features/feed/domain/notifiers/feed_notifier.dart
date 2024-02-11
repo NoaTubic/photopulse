@@ -29,7 +29,7 @@ class FeedNotifier extends PaginatedNotifier<Post, Object> {
     final query = ref.read(searchQueryProvider);
     return _feedRepository.getFeed(
       page: page,
-      hashtag: '#$query.',
+      hashtag: query.isNotEmpty ? '#$query' : '',
       minImageSizeMb: filters.minImageSizeMb,
       maxImageSizeMb: filters.maxImageSizeMb,
       dateTimeRange: filters.dateTimeRange,

@@ -7,6 +7,8 @@ import 'package:photopulse/common/presentation/text/title_text.dart';
 import 'package:photopulse/common/presentation/user_avatar.dart';
 import 'package:photopulse/features/feed/presentation/widgets/feed_image.dart';
 import 'package:photopulse/features/post/domain/entities/post.dart';
+import 'package:photopulse/features/post/domain/notifiers/download_post_content_notifier.dart';
+import 'package:photopulse/features/post/presentation/pages/post_page.dart';
 import 'package:photopulse/theme/app_colors.dart';
 import 'package:photopulse/theme/theme.dart';
 import 'package:readmore/readmore.dart';
@@ -25,7 +27,7 @@ class PostTile extends StatelessWidget {
           post: post,
         ),
         const Gap(AppSizes.compactSpacing),
-        FeedImage(id: int.parse(post.id ?? '-1'), imageUrl: post.url),
+        FeedImage(id: post.id ?? '-1', imageUrl: post.url),
         const Gap(AppSizes.smallSpacing),
         Padding(
           padding: const EdgeInsets.symmetric(
@@ -136,39 +138,44 @@ class _PostHeader extends ConsumerWidget {
         //       data: (familyFeed) =>
         //           familyFeed.relation == UserRole.poa && familyFeed.isActive,
         //     ))
-        //   PopupMenuButton(
-        //     itemBuilder: (context) {
-        //       return FeedMenuItem.values
-        //           .map((item) => _buildPopupMenuItem(item))
-        //           .toList();
-        //     },
-        //     onSelected: (value) {
-        //       if (value == FeedMenuItem.editPost) {
-        //         _editPost(context, post);
-        //       } else if (value == FeedMenuItem.download) {
-        //         _downloadPostContent(ref, post);
-        //       } else {
-        //         _showHidePostDialog(context, ref);
-        //       }
-        //     },
-        //   ),
+        Theme(
+          data: ThemeData(
+            splashColor: AppColors.black.withOpacity(0.1),
+            highlightColor: AppColors.black.withOpacity(0.1),
+          ),
+          child: PopupMenuButton(
+            color: AppColors.white,
+            surfaceTintColor: AppColors.white,
+            itemBuilder: (context) {
+              return FeedMenuItem.values
+                  .map((item) => _buildPopupMenuItem(item))
+                  .toList();
+            },
+            onSelected: (value) {
+              if (value == FeedMenuItem.editPost) {
+                _editPost(context, post);
+              } else if (value == FeedMenuItem.download) {
+                _downloadPostContent(ref, post);
+              }
+            },
+          ),
+        ),
       ],
     );
   }
 
-  // void _editPost(BuildContext context, FamilyPost familyPost) =>
-  //     Navigator.of(context).pushNamed(
-  //       PostPage.routeName,
-  //       arguments: familyPost,
-  //     );
+  void _editPost(BuildContext context, Post post) =>
+      Navigator.of(context).pushNamed(
+        PostPage.routeName,
+        arguments: post,
+      );
 
-  // void _downloadPostContent(WidgetRef ref, FamilyPost familyPost) => ref
-  //     .read(downloadPostContentNotifierProvider(familyPost.id ?? -1).notifier)
-  //     .downloadContent(
-  //       url: familyPost.mediaContent!.url,
-  //       mediaType: familyPost.mediaContent!.type,
-  //       title: familyPost.title!,
-  //     );
+  void _downloadPostContent(WidgetRef ref, Post post) => ref
+      .read(downloadPostContentNotifierProvider(post.id ?? '-1').notifier)
+      .downloadContent(
+        url: post.url,
+        title: post.title,
+      );
 
   // void _showHidePostDialog(BuildContext context, WidgetRef ref) => showDialog(
   //       context: context,
@@ -185,19 +192,41 @@ class _PostHeader extends ConsumerWidget {
   //   ref.read(postNotifierProvider.notifier).hidePost(id);
   // }
 
-  // PopupMenuItem _buildPopupMenuItem(FeedMenuItem item) {
-  //   return PopupMenuItem<FeedMenuItem>(
-  //     value: item,
-  //     child: Row(
-  //       mainAxisAlignment: MainAxisAlignment.start,
-  //       children: [
-  //         SvgPicture.asset(item.icon),
-  //         const SizedBox(
-  //           width: AppSizes.smallSpacing,
-  //         ),
-  //         BodyText(item.title),
-  //       ],
-  //     ),
-  //   );
-  // }
+  PopupMenuItem _buildPopupMenuItem(FeedMenuItem item) {
+    return PopupMenuItem<FeedMenuItem>(
+      value: item,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          Icon(item.icon),
+          const SizedBox(
+            width: AppSizes.smallSpacing,
+          ),
+          BodyText(
+            item.title,
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+enum FeedMenuItem {
+  editPost(icon: Icons.edit_rounded),
+  download(icon: Icons.download_rounded);
+
+  const FeedMenuItem({
+    required this.icon,
+  });
+
+  final IconData icon;
+
+  String get title {
+    switch (this) {
+      case FeedMenuItem.editPost:
+        return 'Edit post';
+      case FeedMenuItem.download:
+        return 'Download post';
+    }
+  }
 }

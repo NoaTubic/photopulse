@@ -83,7 +83,7 @@ class PostPage extends HookConsumerWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 FeedImage(
-                  id: 1,
+                  id: '1',
                   imageUrl: post != null ? post!.url : image?.path ?? '',
                 ),
                 const SizedBox(

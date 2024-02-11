@@ -1,11 +1,15 @@
 import 'dart:developer';
 import 'dart:io';
 
+import 'package:dio/dio.dart';
 import 'package:either_dart/either.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:gallery_saver/gallery_saver.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:loggy/loggy.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:photopulse/common/data/firestore/firestore_collections.dart';
+import 'package:photopulse/common/data/providers.dart';
 import 'package:photopulse/features/auth/data/repository/users_repository.dart';
 import 'package:photopulse/features/post/domain/entities/post.dart';
 import 'package:q_architecture/paginated_notifier.dart';
@@ -14,6 +18,7 @@ import 'package:q_architecture/q_architecture.dart';
 final postRepositoryProvider = Provider<PostRepository>((ref) {
   return PostRepositoryImpl(
     ref.watch(usersRepositoryProvider),
+    ref.watch(dioDownloadProvider),
   );
 });
 
@@ -22,14 +27,16 @@ abstract class PostRepository {
   EitherFailureOr<void> deletePost(Post post);
   EitherFailureOr<void> updatePost(Post post);
   EitherFailureOr<Post> getPost(String id);
+  EitherFailureOr<void> saveImage({required String url});
 }
 
 class PostRepositoryImpl implements PostRepository {
   final _postsCollection = FirestoreCollections.postsCollection;
   final _firebaseStorage = FirebaseStorage.instance;
   final UsersRepository _usersRepository;
+  final Dio _dio;
 
-  PostRepositoryImpl(this._usersRepository);
+  PostRepositoryImpl(this._usersRepository, this._dio);
 
   @override
   EitherFailureOr<void> createPost(Post post) async {
@@ -92,4 +99,25 @@ class PostRepositoryImpl implements PostRepository {
       url: await storeImage(post.url),
     );
   }
+
+  @override
+  EitherFailureOr<void> saveImage({required String url}) async {
+    try {
+      final path = await _getPath(url, imageExtension);
+      await GallerySaver.saveImage(path);
+      return const Right(null);
+    } catch (_) {
+      return Left(Failure.generic());
+    }
+  }
+
+  Future<String> _getPath(String url, String fileExtension) async {
+    final temporaryDirectory = await getTemporaryDirectory();
+    final path = '${temporaryDirectory.path}/file.$fileExtension';
+    await _dio.download(url, path);
+    return path;
+  }
 }
+
+const String imageExtension = 'png';
+const String androidDownloadsPath = '/sdcard/download/';

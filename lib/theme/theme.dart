@@ -74,6 +74,14 @@ final lightTheme = ThemeData(
     color: AppColors.black,
     refreshBackgroundColor: AppColors.black.withOpacity(0.2),
   ),
+  popupMenuTheme: PopupMenuThemeData(
+    color: AppColors.white,
+    surfaceTintColor: AppColors.white,
+    iconColor: AppColors.black,
+    shape: const RoundedRectangleBorder(
+      borderRadius: appBorderRadius,
+    ),
+  ),
   // datePickerTheme: DatePickerThemeData(
   //   backgroundColor: AppColors.white,
   //   color

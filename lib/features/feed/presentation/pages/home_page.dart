@@ -1,5 +1,6 @@
 // ignore_for_file: always_use_package_imports
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:photopulse/common/domain/router/navigation_extensions.dart';
 import 'package:photopulse/common/domain/router/pages.dart';
@@ -14,7 +15,7 @@ import 'package:photopulse/features/search_posts/presentation/pages/search_posts
 import 'package:photopulse/features/subscription_management/presentation/pages/subscription_management_page.dart';
 import 'package:q_architecture/q_architecture.dart';
 
-class HomePage extends ConsumerWidget {
+class HomePage extends HookConsumerWidget {
   static const routeName = Pages.home;
 
   const HomePage({
@@ -24,14 +25,28 @@ class HomePage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final user = ref.watch(userProvider);
-    ref.listen(userProvider, (_, next) {
-      if (next != null && next.isFirstLogin) {
-        ref.pushReplacementNamed(
-          SubscriptionManagementPage.routeName,
-        );
-      }
-    });
+    ref.listen(
+      userProvider,
+      (_, next) {
+        if (next != null && next.isFirstLogin) {
+          ref.pushReplacementNamed(
+            SubscriptionManagementPage.routeName,
+          );
+        }
+      },
+    );
+    useEffect(() {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        ref.read(feedNotifierProvider.notifier).getInitialList();
+      });
+      return () {};
+    }, const []);
+
     return PhotoPulseScaffold(
+      padding: const EdgeInsets.symmetric(
+        horizontal: 0,
+        vertical: AppSizes.bodyPaddingVertical,
+      ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.end,

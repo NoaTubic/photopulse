@@ -7,4 +7,6 @@ abstract class DurationConstants {
   static const Duration cameraButtonAnimationDuration =
       Duration(milliseconds: 150);
   static const Duration createPostSubmitDuration = Duration(seconds: 2);
+  static const Duration visibilityAnimationDuration =
+      Duration(milliseconds: 500);
 }

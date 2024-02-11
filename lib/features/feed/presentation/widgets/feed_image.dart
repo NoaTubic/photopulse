@@ -4,11 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:photopulse/common/presentation/app_sizes.dart';
 import 'package:photopulse/common/presentation/text/display_text.dart';
+import 'package:photopulse/features/feed/presentation/widgets/download_post_content_overlay.dart';
 import 'package:photopulse/features/feed/presentation/widgets/image_viewer.dart';
 import 'package:photopulse/theme/app_colors.dart';
 
 class FeedImage extends ConsumerWidget {
-  final int id;
+  final String id;
   final String imageUrl;
 
   const FeedImage({
@@ -24,46 +25,44 @@ class FeedImage extends ConsumerWidget {
         maxHeight: AppSizes.imageViewerHeightMax,
         minHeight: AppSizes.imageViewerHeightMin,
       ),
-      child:
-          // DownloadPostContentOverlay(
-          //   id: id,
-          //   child:
-          ImageViewer(
-        imageUrl: imageUrl,
-        child: CachedNetworkImage(
+      child: DownloadPostContentOverlay(
+        id: id,
+        child: ImageViewer(
           imageUrl: imageUrl,
-          imageBuilder: (context, imageProvider) => Container(
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                image: imageProvider,
-                fit: BoxFit.fitWidth,
+          child: CachedNetworkImage(
+            imageUrl: imageUrl,
+            imageBuilder: (context, imageProvider) => Container(
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  image: imageProvider,
+                  fit: BoxFit.fitWidth,
+                ),
               ),
             ),
-          ),
-          // progressIndicatorBuilder: (context, url, progress) => Container(
-          //   color: AppColors.wireframeLight,
-          //   width: double.infinity,
-          //   child: Column(
-          //     mainAxisAlignment: MainAxisAlignment.center,
-          //     children: const [
-          //       CircularProgressIndicator(),
-          //     ],
-          //   ),
-          // ),
-          errorWidget: (context, url, error) => Image.file(
-            File(url),
-            fit: BoxFit.fitWidth,
-            errorBuilder: (
-              BuildContext context,
-              Object exception,
-              StackTrace? stackTrace,
-            ) {
-              return const _ImageError();
-            },
+            progressIndicatorBuilder: (context, url, progress) => Container(
+              color: AppColors.black.withOpacity(0.1),
+              width: double.infinity,
+              child: const Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  CircularProgressIndicator(),
+                ],
+              ),
+            ),
+            errorWidget: (context, url, error) => Image.file(
+              File(url),
+              fit: BoxFit.fitWidth,
+              errorBuilder: (
+                BuildContext context,
+                Object exception,
+                StackTrace? stackTrace,
+              ) {
+                return const _ImageError();
+              },
+            ),
           ),
         ),
       ),
-      // ),
     );
   }
 }

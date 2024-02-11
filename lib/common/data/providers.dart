@@ -22,3 +22,7 @@ final dioProvider = Provider.family<Dio, String>((ref, baseUrl) => Dio(
           LoggyDioInterceptor(requestBody: true, requestHeader: true),
         ],
       ));
+
+final dioDownloadProvider = Provider<Dio>(
+  (_) => Dio(),
+);
