@@ -8,12 +8,14 @@ class PhotoPulseTile extends StatelessWidget {
   final String label;
   final IconData icon;
   final VoidCallback? onTap;
+  final Widget? action;
 
   const PhotoPulseTile({
     super.key,
     required this.label,
     required this.icon,
     this.onTap,
+    this.action,
   });
 
   @override
@@ -49,7 +51,7 @@ class PhotoPulseTile extends StatelessWidget {
                 isBold: true,
               ),
               const Spacer(),
-              const Icon(Icons.keyboard_arrow_right_rounded),
+              action ?? const Icon(Icons.keyboard_arrow_right_rounded),
               const Gap(AppSizes.smallSpacing),
             ],
           ),

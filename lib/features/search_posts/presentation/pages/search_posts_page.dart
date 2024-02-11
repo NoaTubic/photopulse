@@ -4,11 +4,12 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:photopulse/common/domain/router/navigation_extensions.dart';
 import 'package:photopulse/common/domain/router/pages.dart';
+import 'package:photopulse/common/presentation/animated_widgets/animated_column.dart';
 import 'package:photopulse/common/presentation/app_sizes.dart';
 import 'package:photopulse/common/presentation/photo_pulse_scaffold.dart';
 import 'package:photopulse/common/presentation/photo_pulse_text_form_field.dart';
 import 'package:photopulse/common/presentation/text/text.dart';
-import 'package:photopulse/features/feed/data/repositories/feed_repository.dart';
+
 import 'package:photopulse/features/feed/domain/notifiers/feed_notifier.dart';
 import 'package:photopulse/features/feed/domain/notifiers/search_query_provider.dart';
 import 'package:photopulse/features/feed/presentation/widgets/filters_section.dart';
@@ -37,71 +38,71 @@ class SearchPostsPage extends HookConsumerWidget {
     }, [searchController]);
 
     return PhotoPulseScaffold(
-      body: SafeArea(
-        child: Column(
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Flexible(
-                  flex: 4,
-                  child: PhotoPulseTextFormField.normalTextField(
-                    controller: searchController,
-                    name: 'name',
-                    labelText: 'Search by hashtag',
-                    prefixIcon: GestureDetector(
-                      onTap: () => searchQuery.isNotEmpty
-                          ? ref
-                              .read(feedNotifierProvider.notifier)
-                              .getListOrFailure(1)
-                          : null,
-                      child: Icon(
-                        Icons.search_rounded,
-                        color: AppColors.black,
-                      ),
-                    ),
-                    suffixIcon: searchQuery.isNotEmpty
-                        ? GestureDetector(
-                            onTap: () => searchController.clear(),
-                            child: Icon(
-                              Icons.close,
-                              color: AppColors.black,
-                            ),
-                          )
+      body: AnimatedColumn(
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Flexible(
+                flex: 4,
+                child: PhotoPulseTextFormField.normalTextField(
+                  controller: searchController,
+                  name: 'name',
+                  labelText: 'Search by hashtag',
+                  prefixIcon: GestureDetector(
+                    onTap: () => searchQuery.isNotEmpty
+                        ? ref
+                            .read(feedNotifierProvider.notifier)
+                            .getListOrFailure(1)
                         : null,
+                    child: Icon(
+                      Icons.search_rounded,
+                      color: AppColors.black,
+                    ),
                   ),
+                  suffixIcon: searchQuery.isNotEmpty
+                      ? GestureDetector(
+                          onTap: () => searchController.clear(),
+                          child: Icon(
+                            Icons.close,
+                            color: AppColors.black,
+                          ),
+                        )
+                      : null,
                 ),
-                Flexible(
-                  flex: 1,
-                  child: IconButton(
-                    onPressed: () async {
-                      showDialog(
-                        context: context,
-                        builder: (context) => Dialog(
-                          insetPadding: const EdgeInsets.symmetric(
-                            horizontal: AppSizes.bodyPaddingHorizontal,
-                          ),
-                          child: FiltersSection(
-                            onClose: () {
-                              ref.pop();
-                            },
-                          ),
+              ),
+              Flexible(
+                flex: 1,
+                child: IconButton(
+                  onPressed: () async {
+                    showDialog(
+                      context: context,
+                      builder: (context) => Dialog(
+                        insetPadding: const EdgeInsets.symmetric(
+                          horizontal: AppSizes.bodyPaddingHorizontal,
                         ),
-                      );
-                    },
-                    icon: const Icon(Icons.filter_list_rounded, size: 32),
-                    color: AppColors.black,
-                  ),
+                        child: FiltersSection(
+                          onClose: () {
+                            ref.pop();
+                          },
+                        ),
+                      ),
+                    );
+                  },
+                  icon: const Icon(Icons.filter_list_rounded, size: 32),
+                  color: AppColors.black,
                 ),
-              ],
-            ),
-            Center(
-              child: FilledButton(
-                  onPressed: () =>
-                      ref.read(feedNotifierProvider.notifier).getInitialList(),
-                  child: const Text('asdasdasd')),
-            ),
-            Expanded(
+              ),
+            ],
+          ),
+          // Center(
+          //   child: FilledButton(
+          //       onPressed: () =>
+          //           ref.read(feedNotifierProvider.notifier).getInitialList(),
+          //       child: const Text('asdasdasd')),
+          // ),
+          Center(
+            child: Expanded(
               child: PaginatedListView(
                 stateNotifierProvider: feedNotifierProvider,
                 itemBuilder: (context, post, page) => PostTile(post: post),
@@ -146,9 +147,9 @@ class SearchPostsPage extends HookConsumerWidget {
                 ),
                 scrollPhysics: const BouncingScrollPhysics(),
               ),
-            )
-          ],
-        ),
+            ),
+          )
+        ],
       ),
     );
   }

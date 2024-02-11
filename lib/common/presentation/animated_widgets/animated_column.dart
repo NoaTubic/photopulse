@@ -19,7 +19,7 @@ class AnimatedColumn extends StatelessWidget {
         mainAxisAlignment: mainAxisAlignment ?? MainAxisAlignment.start,
         crossAxisAlignment: crossAxisAlignment ?? CrossAxisAlignment.start,
         children: AnimationConfiguration.toStaggeredList(
-          duration: DurationConstants.mediumAnimationDuration,
+          duration: DurationConstants.shortAnimationDuration,
           childAnimationBuilder: (widget) => SlideAnimation(
             delay: DurationConstants.extraShortAnimationDuration,
             child: FadeInAnimation(

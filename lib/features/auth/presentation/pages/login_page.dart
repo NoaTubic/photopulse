@@ -77,14 +77,11 @@ class LoginPage extends ConsumerWidget {
               const SizedBox(
                 height: AppSizes.mediumSpacing,
               ),
-              // Image.asset(
-              //   ImageAssets.logo,
-              //   height: context.isLargerThanMobile
-              //       ? AppSizes.appLogoWeb
-              //       : AppSizes.appLogo,
-              //   color: AppColors.black,
-              // ),
-              const SizedBox(height: AppSizes.smallSpacing),
+              Icon(
+                Icons.photo_camera_rounded,
+                size: 100,
+                color: AppColors.black,
+              ),
               DisplayText(
                 S.current.photo_pulse,
                 color: AppColors.black,
