@@ -9,6 +9,7 @@ import 'package:photopulse/common/domain/router/navigation_extensions.dart';
 import 'package:photopulse/common/domain/router/pages.dart';
 import 'package:photopulse/common/domain/utils/base_state_extensions.dart';
 import 'package:photopulse/common/domain/utils/form_key_extensions.dart';
+import 'package:photopulse/common/presentation/animated_widgets/animated_column.dart';
 import 'package:photopulse/common/presentation/app_sizes.dart';
 import 'package:photopulse/common/presentation/buttons/photo_pulse_button.dart';
 import 'package:photopulse/common/presentation/common_validators.dart';
@@ -54,7 +55,8 @@ class RegistrationPage extends ConsumerWidget {
         onTap: ref.pop,
       ),
       body: Center(
-        child: Column(
+        child: AnimatedColumn(
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             FormBuilder(
               key: formKey,
@@ -106,8 +108,8 @@ class RegistrationPage extends ConsumerWidget {
                 ],
               ),
             ),
-            const Gap(
-              AppSizes.normalSpacing,
+            const SizedBox(
+              height: AppSizes.normalSpacing,
             ),
             PhotoPulseButton.primary(
               label: S.current.create_new_account,
@@ -120,8 +122,8 @@ class RegistrationPage extends ConsumerWidget {
                   .watch(isFormSubmissionEnabledProvider(Pages.registration)),
               isLoading: registrationState.isLoading,
             ),
-            const Gap(
-              AppSizes.compactSpacing,
+            const SizedBox(
+              height: AppSizes.compactSpacing,
             ),
             PhotoPulseTextButton(
               onTap: ref.pop,

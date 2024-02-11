@@ -38,60 +38,65 @@ class SearchPostsPage extends HookConsumerWidget {
     }, [searchController]);
 
     return PhotoPulseScaffold(
-      body: AnimatedColumn(
+      body: Column(
         children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          AnimatedColumn(
             children: [
-              Flexible(
-                flex: 4,
-                child: PhotoPulseTextFormField.normalTextField(
-                  controller: searchController,
-                  name: 'name',
-                  labelText: 'Search by hashtag',
-                  prefixIcon: GestureDetector(
-                    onTap: () => searchQuery.isNotEmpty
-                        ? ref
-                            .read(feedNotifierProvider.notifier)
-                            .getListOrFailure(1)
-                        : null,
-                    child: Icon(
-                      Icons.search_rounded,
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Flexible(
+                    flex: 4,
+                    child: PhotoPulseTextFormField.normalTextField(
+                      controller: searchController,
+                      name: 'name',
+                      labelText: 'Search by hashtag',
+                      prefixIcon: GestureDetector(
+                        onTap: () => searchQuery.isNotEmpty
+                            ? ref
+                                .read(feedNotifierProvider.notifier)
+                                .getListOrFailure(1)
+                            : null,
+                        child: Icon(
+                          Icons.search_rounded,
+                          color: AppColors.black,
+                        ),
+                      ),
+                      suffixIcon: searchQuery.isNotEmpty
+                          ? GestureDetector(
+                              onTap: () => searchController.clear(),
+                              child: Icon(
+                                Icons.close,
+                                color: AppColors.black,
+                              ),
+                            )
+                          : null,
+                    ),
+                  ),
+                  Flexible(
+                    flex: 1,
+                    child: IconButton(
+                      onPressed: () async {
+                        showDialog(
+                          context: context,
+                          builder: (context) => Dialog(
+                            insetPadding: const EdgeInsets.symmetric(
+                              horizontal: AppSizes.bodyPaddingHorizontal,
+                            ),
+                            child: FiltersSection(
+                              onClose: () {
+                                ref.pop();
+                              },
+                            ),
+                          ),
+                        );
+                      },
+                      icon: const Icon(Icons.filter_list_rounded, size: 38),
                       color: AppColors.black,
                     ),
                   ),
-                  suffixIcon: searchQuery.isNotEmpty
-                      ? GestureDetector(
-                          onTap: () => searchController.clear(),
-                          child: Icon(
-                            Icons.close,
-                            color: AppColors.black,
-                          ),
-                        )
-                      : null,
-                ),
-              ),
-              Flexible(
-                flex: 1,
-                child: IconButton(
-                  onPressed: () async {
-                    showDialog(
-                      context: context,
-                      builder: (context) => Dialog(
-                        insetPadding: const EdgeInsets.symmetric(
-                          horizontal: AppSizes.bodyPaddingHorizontal,
-                        ),
-                        child: FiltersSection(
-                          onClose: () {
-                            ref.pop();
-                          },
-                        ),
-                      ),
-                    );
-                  },
-                  icon: const Icon(Icons.filter_list_rounded, size: 32),
-                  color: AppColors.black,
-                ),
+                ],
               ),
             ],
           ),
@@ -101,56 +106,65 @@ class SearchPostsPage extends HookConsumerWidget {
           //           ref.read(feedNotifierProvider.notifier).getInitialList(),
           //       child: const Text('asdasdasd')),
           // ),
-          Center(
-            child: Expanded(
-              child: PaginatedListView(
-                stateNotifierProvider: feedNotifierProvider,
-                itemBuilder: (context, post, page) => PostTile(post: post),
-                loading: const Center(
-                  child: CircularProgressIndicator(),
-                ),
-                emptyListBuilder: (context) => Center(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Icon(
-                        searchQuery.isEmpty
-                            ? Icons.search_rounded
-                            : Icons.search_off_rounded,
-                        size: 32,
-                        color: AppColors.black,
-                      ),
-                      const SizedBox(width: AppSizes.smallSpacing),
-                      BodyText(
-                        ref.watch(searchQueryProvider).isEmpty
-                            ? 'Enter a hashtag to search for posts.'
-                            : 'No posts found. Try another hashtag.',
-                        isBold: true,
-                      ),
-                    ],
-                  ),
-                ),
-                onError: (context, asd, a) => Row(
+          Expanded(
+            child: PaginatedListView(
+              stateNotifierProvider: feedNotifierProvider,
+              itemBuilder: (context, post, page) => PostTile(post: post),
+              loading: const Center(
+                child: CircularProgressIndicator(),
+              ),
+              emptyListBuilder: (context) => Center(
+                child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Icon(
-                      Icons.error_rounded,
+                      searchQuery.isEmpty
+                          ? Icons.search_rounded
+                          : Icons.search_off_rounded,
                       size: 32,
                       color: AppColors.black,
                     ),
                     const SizedBox(width: AppSizes.smallSpacing),
-                    const BodyText(
-                      'Something went wrong. Please try again.',
+                    BodyText(
+                      ref.watch(searchQueryProvider).isEmpty
+                          ? 'Enter a hashtag to search for posts.'
+                          : 'No posts found. Try another hashtag.',
                       isBold: true,
                     ),
                   ],
                 ),
-                scrollPhysics: const BouncingScrollPhysics(),
               ),
+              onError: (context, asd, a) => const FeedError(),
+              scrollPhysics: const BouncingScrollPhysics(),
             ),
           )
         ],
       ),
+    );
+  }
+}
+
+class FeedError extends StatelessWidget {
+  const FeedError({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Icon(
+          Icons.error_rounded,
+          size: 32,
+          color: AppColors.black,
+        ),
+        const SizedBox(width: AppSizes.smallSpacing),
+        const BodyText(
+          'Something went wrong. Please try again.',
+          isBold: true,
+        ),
+      ],
     );
   }
 }
