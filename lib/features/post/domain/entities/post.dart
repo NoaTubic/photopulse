@@ -63,6 +63,7 @@ class Post extends Equatable {
   // Map<String, dynamic> toJson() => _$PostToJson(this);
 
   factory Post.fromJson(Map<String, dynamic> json) => Post(
+        id: json['id'] as String,
         title: json['title'] as String,
         caption: json['caption'] as String,
         author: Author.fromJson(json['author']),
@@ -72,6 +73,7 @@ class Post extends Equatable {
       );
 
   Map<String, dynamic> toJson(Post post) => <String, dynamic>{
+        'id': post.id,
         'title': post.title,
         'caption': post.caption,
         'author': post.author.toJson(),

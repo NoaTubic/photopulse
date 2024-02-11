@@ -14,10 +14,10 @@ class PostTextField extends StatefulWidget {
   final List<String? Function(String?)>? validators;
   final String? initialValue;
   final Widget? action;
-  final TextEditingController controller;
+  final TextEditingController? textEditingController;
 
   const PostTextField({
-    Key? key,
+    super.key,
     required this.name,
     required this.label,
     required this.maxCharacter,
@@ -26,38 +26,39 @@ class PostTextField extends StatefulWidget {
     this.validators,
     this.initialValue,
     this.action,
-    required this.controller,
-  }) : super(key: key);
+    this.textEditingController,
+  });
 
   @override
   State<PostTextField> createState() => _PostTextFieldState();
 }
 
 class _PostTextFieldState extends State<PostTextField> {
-  // final _controller = TextEditingController();
+  late TextEditingController _controller;
 
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   _controller.text = widget.initialValue ?? '';
-  //   _controller.addListener(() {
-  //     log(
-  //       _controller.text,
-  //     );
-  //     setState(() {});
-  //   });
-  // }
+  @override
+  void initState() {
+    super.initState();
+    _controller = widget.textEditingController ?? TextEditingController();
+    _controller.text = widget.initialValue ?? '';
+    _controller.addListener(() {
+      log(
+        _controller.text,
+      );
+      setState(() {});
+    });
+  }
 
-  // @override
-  // void dispose() {
-  //   _controller.removeListener(() {});
-  //   _controller.dispose();
-  //   super.dispose();
-  // }
+  @override
+  void dispose() {
+    _controller.removeListener(() {});
+    _controller.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
-    final text = widget.controller.text;
+    final text = _controller.text;
     return Column(
       mainAxisSize: MainAxisSize.max,
       crossAxisAlignment: CrossAxisAlignment.end,
@@ -66,7 +67,7 @@ class _PostTextFieldState extends State<PostTextField> {
           name: widget.name,
           labelText: widget.label,
           textInputType: widget.textInputType,
-          textEditingController: widget.controller,
+          textEditingController: _controller,
           isMandatory: widget.isMandatory,
           maxCharacterExceeded: text.runes.length >= widget.maxCharacter,
           maxCharacters: widget.maxCharacter,

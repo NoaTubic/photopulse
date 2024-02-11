@@ -47,7 +47,14 @@ List<RouteBase> getRoutes({
               GoRoute(
                 path: HomePage.routeName,
                 builder: (context, state) => const HomePage(),
-                routes: const [],
+                routes: [
+                  GoRoute(
+                    path: PostPage.routeName.removeLeadingSlash,
+                    builder: (context, state) => PostPage(
+                      post: state.extra as Post?,
+                    ),
+                  ),
+                ],
               ),
               GoRoute(
                 path: SubscriptionManagementPage.routeName,
@@ -56,6 +63,7 @@ List<RouteBase> getRoutes({
             ],
           ),
           StatefulShellBranch(
+            navigatorKey: _contentKey,
             routes: [
               GoRoute(
                 path: UploadContentPage.routeName,
@@ -72,19 +80,20 @@ List<RouteBase> getRoutes({
                     builder: (context, state) => const PhotoPulseCamera(),
                     routes: [
                       GoRoute(
-                          path: ReviewPhotoPage.routeName.removeLeadingSlash,
-                          builder: (context, state) => ReviewPhotoPage(
-                                isFromGallery:
-                                    state.pathParameters['param'] == 'true',
-                              ),
-                          routes: [
-                            GoRoute(
-                              path: PostPage.routeName.removeLeadingSlash,
-                              builder: (context, state) => PostPage(
-                                post: state.extra as Post?,
-                              ),
+                        path: ReviewPhotoPage.routeName.removeLeadingSlash,
+                        builder: (context, state) => ReviewPhotoPage(
+                          isFromGallery:
+                              state.pathParameters['param'] == 'true',
+                        ),
+                        routes: [
+                          GoRoute(
+                            path: PostPage.routeName.removeLeadingSlash,
+                            builder: (context, state) => PostPage(
+                              post: state.extra as Post?,
                             ),
-                          ]),
+                          ),
+                        ],
+                      ),
                     ],
                   ),
                   GoRoute(

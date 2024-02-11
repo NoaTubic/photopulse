@@ -8,6 +8,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:photopulse/common/constants/constants.dart';
 import 'package:photopulse/common/constants/duration_constants.dart';
+import 'package:photopulse/common/domain/router/navigation_extensions.dart';
 import 'package:photopulse/common/domain/router/pages.dart';
 import 'package:photopulse/common/domain/utils/form_key_extensions.dart';
 import 'package:photopulse/common/presentation/animated_widgets/animated_column.dart';
@@ -26,6 +27,7 @@ import 'package:photopulse/features/post/domain/notifiers/post_notifier.dart';
 import 'package:photopulse/features/post/forms/post_form_config.dart';
 import 'package:photopulse/features/post/presentation/widgets/post_text_field.dart';
 import 'package:photopulse/theme/app_colors.dart';
+import 'package:q_architecture/base_state_notifier.dart';
 
 final isNextEnabled = StateProvider.autoDispose<bool>((_) => false);
 
@@ -44,22 +46,13 @@ class PostPage extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final image = ref.watch(cameraNotifierProvider).content ??
         ref.watch(galleryNotifierProvider).content;
-    // ref.listen(postNotifierProvider, (previous, next) {
-    //   next.maybeMap(
-    //     data: (data) {
-    //       if (data.data == PostStatus.created) {
-    //         _finishPostSubmitting(context, ref, isPoa);
-    //       } else {
-    //         Navigator.of(context).pop();
-    //       }
-    //     },
-    //     orElse: () {},
-    //   );
-    // });
+    ref.listen(postNotifierProvider, (previous, next) {
+      return switch (next) {
+        BaseData() => _finishPostSubmitting(context, ref),
+        _ => ref.pop(),
+      };
+    });
     final postChanged = ref.watch(isPostChanged);
-    final controller1 = useTextEditingController();
-    final controller2 = useTextEditingController();
-    final controller3 = useTextEditingController();
 
     return PopScope(
       // onPopInvoked: () async {
@@ -96,15 +89,14 @@ class PostPage extends HookConsumerWidget {
                   ),
                   child: FormBuilder(
                     key: formKey,
-                    // onChanged: () {
-                    //   _updateIsPostChanged(ref, post);
-                    //   _refreshNextEnabled(ref);
-                    // },
+                    onChanged: () {
+                      _updateIsPostChanged(ref, post);
+                      _refreshNextEnabled(ref);
+                    },
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         PostTextField(
-                          controller: controller1,
                           name: PostFormConfig.titleKey,
                           label: 'Title',
                           maxCharacter: Constants.postTitleMaximumCharacters,
@@ -116,7 +108,6 @@ class PostPage extends HookConsumerWidget {
                           height: AppSizes.mediumSpacing,
                         ),
                         PostTextField(
-                          controller: controller2,
                           name: PostFormConfig.captionKey,
                           label: 'Caption',
                           maxCharacter: Constants.postCaptionMaximumCharacters,
@@ -151,7 +142,7 @@ class PostPage extends HookConsumerWidget {
                                 ),
                           ),
                           // isEnabled: ref.watch(isNextEnabled) && postChanged,
-                          label: 'Create post',
+                          label: post != null ? 'Update post' : 'Create post',
                         ),
                         const SizedBox(
                           height: AppSizes.normalSpacing,
@@ -221,14 +212,14 @@ class HashtagSection extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final hashtagController = TextEditingController();
+    final hashtagController = useTextEditingController();
     final hashtagNotifier = ref.read(hashtagNotifierProvider.notifier);
     final hashtags = ref.watch(hashtagNotifierProvider);
 
     return Column(
       children: [
         PostTextField(
-          controller: hashtagController,
+          textEditingController: hashtagController,
           name: 'hashtags',
           label: 'Hashtags',
           maxCharacter: Constants.hashtagMaximumCharacters,
@@ -244,7 +235,7 @@ class HashtagSection extends HookConsumerWidget {
               onPressed: () {
                 log(hashtagController.value.text);
                 hashtagNotifier.addHashtag(hashtagController.value.text);
-                // hashtagController.clear();
+                hashtagController.clear();
               },
               style: FilledButton.styleFrom(
                 padding: const EdgeInsets.symmetric(

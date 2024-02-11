@@ -41,7 +41,11 @@ class PostRepositoryImpl implements PostRepository {
   @override
   EitherFailureOr<void> createPost(Post post) async {
     try {
-      await _postsCollection.doc(post.id).set(await _postWithFilePath(post));
+      final postRef = _postsCollection.doc();
+      final id = postRef.id;
+      await _postsCollection.doc(id).set(
+            await _postWithFilePath(post.copyWith(id: id)),
+          );
       await _usersRepository.incrementDailyUpload();
       return const Right(null);
     } catch (_, st) {
@@ -63,8 +67,7 @@ class PostRepositoryImpl implements PostRepository {
   @override
   EitherFailureOr<void> updatePost(Post post) async {
     try {
-      final postWithFilePath = await _postWithFilePath(post);
-      await _postsCollection.doc(post.id).update(postWithFilePath.toJson(post));
+      await _postsCollection.doc(post.id).update(post.toJson(post));
       return const Right(null);
     } catch (e) {
       return Left(Failure.generic());

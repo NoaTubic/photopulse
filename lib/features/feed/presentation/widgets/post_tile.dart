@@ -1,13 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:photopulse/common/domain/router/navigation_extensions.dart';
 import 'package:photopulse/common/presentation/app_sizes.dart';
 import 'package:photopulse/common/presentation/text/text.dart';
 import 'package:photopulse/common/presentation/text/title_text.dart';
 import 'package:photopulse/common/presentation/user_avatar.dart';
+import 'package:photopulse/features/auth/domain/notifiers/user_notifier.dart';
+import 'package:photopulse/features/feed/presentation/pages/home_page.dart';
 import 'package:photopulse/features/feed/presentation/widgets/feed_image.dart';
 import 'package:photopulse/features/post/domain/entities/post.dart';
 import 'package:photopulse/features/post/domain/notifiers/download_post_content_notifier.dart';
+import 'package:photopulse/features/post/domain/notifiers/hashtag_notifer.dart';
 import 'package:photopulse/features/post/presentation/pages/post_page.dart';
 import 'package:photopulse/theme/app_colors.dart';
 import 'package:photopulse/theme/theme.dart';
@@ -52,6 +56,15 @@ class PostTile extends StatelessWidget {
             horizontal: AppSizes.normalSpacing,
           ),
           child: _PostDescription(post.caption),
+        ),
+        Padding(
+          padding: const EdgeInsets.symmetric(
+            horizontal: AppSizes.normalSpacing,
+          ),
+          child: BodyText(
+            post.tags.join(' '),
+            color: AppColors.black,
+          ),
         ),
       ],
     );
@@ -147,13 +160,15 @@ class _PostHeader extends ConsumerWidget {
             color: AppColors.white,
             surfaceTintColor: AppColors.white,
             itemBuilder: (context) {
-              return FeedMenuItem.values
-                  .map((item) => _buildPopupMenuItem(item))
-                  .toList();
+              return (ref.read(userProvider)!.id != post.author.id)
+                  ? [_buildPopupMenuItem(FeedMenuItem.download)]
+                  : FeedMenuItem.values.map((item) {
+                      return _buildPopupMenuItem(item);
+                    }).toList();
             },
             onSelected: (value) {
               if (value == FeedMenuItem.editPost) {
-                _editPost(context, post);
+                _editPost(post, ref);
               } else if (value == FeedMenuItem.download) {
                 _downloadPostContent(ref, post);
               }
@@ -164,11 +179,10 @@ class _PostHeader extends ConsumerWidget {
     );
   }
 
-  void _editPost(BuildContext context, Post post) =>
-      Navigator.of(context).pushNamed(
-        PostPage.routeName,
-        arguments: post,
-      );
+  void _editPost(Post post, WidgetRef ref) {
+    ref.read(hashtagNotifierProvider.notifier).getHashtags(post.id);
+    ref.pushNamed('${HomePage.routeName}${PostPage.routeName}', data: post);
+  }
 
   void _downloadPostContent(WidgetRef ref, Post post) => ref
       .read(downloadPostContentNotifierProvider(post.id ?? '-1').notifier)

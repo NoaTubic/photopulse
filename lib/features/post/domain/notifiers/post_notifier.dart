@@ -5,6 +5,7 @@ import 'package:photopulse/features/post/data/repositories/post_repository.dart'
 import 'package:photopulse/features/post/domain/entities/author.dart';
 import 'package:photopulse/features/post/domain/entities/post.dart';
 import 'package:photopulse/features/post/domain/entities/post_form_data.dart';
+import 'package:photopulse/features/post/domain/notifiers/hashtag_notifer.dart';
 import 'package:photopulse/features/post/forms/post_form_config.dart';
 import 'package:q_architecture/base_state_notifier.dart';
 import 'package:q_architecture/q_architecture.dart';
@@ -33,13 +34,15 @@ class PostNotifier extends BaseStateNotifier<void> {
   }) async {
     final postFormData = _postUpdateRequestMapper(formMap);
     final user = ref.read(userProvider);
+    final tags = ref.read(hashtagNotifierProvider);
     if (post != null) {
       await execute(
         _postRepository.updatePost(
           post.copyWith(
-            title: postFormData.title,
-            caption: postFormData.caption,
-          ),
+              id: post.id,
+              title: postFormData.title,
+              caption: postFormData.caption,
+              tags: tags),
         ),
       );
     } else {
@@ -51,7 +54,7 @@ class PostNotifier extends BaseStateNotifier<void> {
             caption: formMap['caption'],
             url: formMap['file'],
             createdAt: Timestamp.now(),
-            tags: const [],
+            tags: tags,
           ),
         ),
       );
