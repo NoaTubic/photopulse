@@ -22,11 +22,20 @@ abstract class UsersRepository {
 
   EitherFailureOr<void> updateUserSubscriptionPackage(
     SubscriptionPackage subscriptionPackage,
+    String? userId,
   );
 
-  EitherFailureOr<void> incrementDailyUpload();
+  EitherFailureOr<void> incrementDailyUploadAndTotalUploadSize(double sizeInMB);
 
   EitherFailureOr<List<PhotoPulseUser>> getUsers();
+
+  StreamFailureOr<List<PhotoPulseUser>> getUsersStream();
+
+  EitherFailureOr<void> changeEmail(String email);
+
+  EitherFailureOr<void> changeUsername(String username, String? userId);
+
+  EitherFailureOr<void> clearStatistics(String userId);
 }
 
 class UserRepositoryImpl with ErrorToFailureMixin implements UsersRepository {
@@ -76,11 +85,12 @@ class UserRepositoryImpl with ErrorToFailureMixin implements UsersRepository {
   @override
   EitherFailureOr<void> updateUserSubscriptionPackage(
     SubscriptionPackage subscriptionPackage,
+    String? userId,
   ) async =>
       execute(
         () async {
           final userDocRef =
-              _usersCollection.doc(_firebaseAuth.currentUser?.uid);
+              _usersCollection.doc(userId ?? _firebaseAuth.currentUser?.uid);
 
           final userDoc = await userDocRef.get();
           if (userDoc.exists) {
@@ -101,7 +111,9 @@ class UserRepositoryImpl with ErrorToFailureMixin implements UsersRepository {
       );
 
   @override
-  EitherFailureOr<void> incrementDailyUpload() async => execute(
+  EitherFailureOr<void> incrementDailyUploadAndTotalUploadSize(
+          double sizeInMB) async =>
+      execute(
         () async {
           final userDocRef =
               _usersCollection.doc(_firebaseAuth.currentUser?.uid);
@@ -110,6 +122,7 @@ class UserRepositoryImpl with ErrorToFailureMixin implements UsersRepository {
           if (userDoc.exists) {
             await userDocRef.update({
               'dailyUploads': FieldValue.increment(1),
+              'totalUploadSizeInMB': FieldValue.increment(sizeInMB),
             });
           } else {
             throw Exception('User not found');
@@ -125,6 +138,72 @@ class UserRepositoryImpl with ErrorToFailureMixin implements UsersRepository {
         () async {
           final users = await _usersCollection.get();
           return Right(users.docs.map((doc) => doc.data()).toList());
+        },
+        errorResolver: const FirebaseErrorResolver(),
+      );
+
+  @override
+  StreamFailureOr<List<PhotoPulseUser>> getUsersStream() {
+    return _usersCollection.snapshots().map(
+      (snapshot) {
+        try {
+          final users = snapshot.docs.map((doc) => doc.data()).toList();
+          return Right(users);
+        } catch (e) {
+          return Left(const FirebaseErrorResolver().resolve(e));
+        }
+      },
+    );
+  }
+
+  @override
+  EitherFailureOr<void> changeEmail(String email) async => execute(() async {
+        FirebaseAuth.instance.currentUser!.verifyBeforeUpdateEmail(email);
+        return const Right(null);
+      }, errorResolver: const FirebaseErrorResolver());
+
+  @override
+  EitherFailureOr<void> changeUsername(String username, String? userId) async =>
+      execute(
+        () async {
+          final userDocRef =
+              _usersCollection.doc(userId ?? _firebaseAuth.currentUser?.uid);
+
+          final userDoc = await userDocRef.get();
+          if (userDoc.exists) {
+            await userDocRef.update(
+              {
+                'username': username,
+              },
+            );
+          } else {
+            return Left(Failure(title: S.current.user_not_found));
+          }
+
+          return const Right(null);
+        },
+        errorResolver: const FirebaseErrorResolver(),
+      );
+
+  @override
+  EitherFailureOr<void> clearStatistics(String userId) => execute(
+        () async {
+          final userDocRef = _usersCollection.doc(userId);
+
+          final userDoc = await userDocRef.get();
+          if (userDoc.exists) {
+            await userDocRef.update(
+              {
+                'dailyUploads': 0,
+                'totalUploadSizeInMB': 0,
+                'maxSpend': 0,
+              },
+            );
+          } else {
+            return Left(Failure(title: S.current.user_not_found));
+          }
+
+          return const Right(null);
         },
         errorResolver: const FirebaseErrorResolver(),
       );

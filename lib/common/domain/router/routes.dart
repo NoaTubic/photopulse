@@ -1,6 +1,7 @@
 // ignore_for_file: always_use_package_imports, avoid-unused-parameters
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:photopulse/features/admin/presentation/pages/admin_page.dart';
 import 'package:photopulse/features/auth/presentation/pages/login_page.dart';
 import 'package:photopulse/features/auth/presentation/pages/registration_page.dart';
 import 'package:photopulse/features/camera/presentation/pages/photo_pulse_camera.dart';
@@ -122,7 +123,12 @@ List<RouteBase> getRoutes({
               GoRoute(
                 path: ProfilePage.routeName,
                 builder: (context, state) => const ProfilePage(),
-                routes: const [],
+                routes: [
+                  GoRoute(
+                    path: AdminPage.routeName.removeLeadingSlash,
+                    builder: (context, state) => const AdminPage(),
+                  ),
+                ],
               ),
             ],
           ),

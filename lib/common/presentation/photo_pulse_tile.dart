@@ -7,7 +7,7 @@ import 'package:photopulse/theme/app_colors.dart';
 class PhotoPulseTile extends StatelessWidget {
   final String label;
   final IconData icon;
-  final VoidCallback? onTap;
+  final void Function()? onTap;
   final Widget? action;
 
   const PhotoPulseTile({
@@ -24,7 +24,7 @@ class PhotoPulseTile extends StatelessWidget {
       color: AppColors.white,
       borderRadius: AppSizes.normalCircularBorderRadius,
       child: InkWell(
-        onTap: onTap,
+        onTap: (onTap),
         borderRadius: const BorderRadius.all(
           Radius.circular(
             AppSizes.normalCircularRadius,

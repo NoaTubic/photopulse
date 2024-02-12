@@ -5,6 +5,7 @@ import 'package:photopulse/common/constants/firebase_constants.dart';
 import 'package:photopulse/generated/l10n.dart';
 import 'package:q_architecture/q_architecture.dart';
 
+//DESIGN PATTER: DECORATOR
 final class FirebaseErrorResolver implements ErrorResolver {
   final String? failureTitle;
 
@@ -43,6 +44,12 @@ final class FirebaseErrorResolver implements ErrorResolver {
       case FirebaseConstants.wrongPasswordError:
         return Failure.generic(
           title: failureTitle ?? S.current.login_error_wrong_credentials,
+          error: err,
+          stackTrace: stackTrace,
+        );
+      case FirebaseConstants.weakPassword:
+        return Failure.generic(
+          title: failureTitle ?? 'Weak password',
           error: err,
           stackTrace: stackTrace,
         );

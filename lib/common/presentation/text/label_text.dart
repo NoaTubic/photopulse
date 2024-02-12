@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:photopulse/common/presentation/build_context_extensions.dart';
+import 'package:photopulse/common/utils/build_context_extensions.dart';
 
 class LabelText extends StatelessWidget {
   final String text;
@@ -9,11 +9,11 @@ class LabelText extends StatelessWidget {
 
   const LabelText(
     this.text, {
-    Key? key,
+    super.key,
     this.isCentered = false,
     this.isBold = false,
     this.color,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

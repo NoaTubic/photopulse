@@ -136,6 +136,7 @@ class PostPage extends HookConsumerWidget {
                                       },
                                     ),
                                   post: post,
+                                  file: image,
                                 ),
                           ),
                           isEnabled: ref.watch(isNextEnabled) && postChanged,

@@ -919,6 +919,206 @@ class S {
       args: [],
     );
   }
+
+  /// `Admin panel`
+  String get admin_panel {
+    return Intl.message(
+      'Admin panel',
+      name: 'admin_panel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Change username`
+  String get change_username {
+    return Intl.message(
+      'Change username',
+      name: 'change_username',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Change email`
+  String get change_email {
+    return Intl.message(
+      'Change email',
+      name: 'change_email',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Theme`
+  String get theme {
+    return Intl.message(
+      'Theme',
+      name: 'theme',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Language`
+  String get language {
+    return Intl.message(
+      'Language',
+      name: 'language',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Logout`
+  String get logout {
+    return Intl.message(
+      'Logout',
+      name: 'logout',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Delete Account`
+  String get delete_account {
+    return Intl.message(
+      'Delete Account',
+      name: 'delete_account',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Privacy Policy`
+  String get privacy_policy {
+    return Intl.message(
+      'Privacy Policy',
+      name: 'privacy_policy',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `User statistics`
+  String get user_statistics {
+    return Intl.message(
+      'User statistics',
+      name: 'user_statistics',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `User actions`
+  String get user_actions {
+    return Intl.message(
+      'User actions',
+      name: 'user_actions',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `ID`
+  String get id {
+    return Intl.message(
+      'ID',
+      name: 'id',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Is admin`
+  String get is_admin {
+    return Intl.message(
+      'Is admin',
+      name: 'is_admin',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Daily uploads`
+  String get daily_uploads {
+    return Intl.message(
+      'Daily uploads',
+      name: 'daily_uploads',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `None`
+  String get none {
+    return Intl.message(
+      'None',
+      name: 'none',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Yes`
+  String get yes {
+    return Intl.message(
+      'Yes',
+      name: 'yes',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No`
+  String get no {
+    return Intl.message(
+      'No',
+      name: 'no',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Edit user info`
+  String get edit_user {
+    return Intl.message(
+      'Edit user info',
+      name: 'edit_user',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Clear statistics`
+  String get clear_statistics {
+    return Intl.message(
+      'Clear statistics',
+      name: 'clear_statistics',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Upload limit reached. Upload more tomorrow or upgrade your subscription package.`
+  String get upload_limit_reached {
+    return Intl.message(
+      'Upload limit reached. Upload more tomorrow or upgrade your subscription package.',
+      name: 'upload_limit_reached',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Incorrect password format`
+  String get incorrect_password_format {
+    return Intl.message(
+      'Incorrect password format',
+      name: 'incorrect_password_format',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

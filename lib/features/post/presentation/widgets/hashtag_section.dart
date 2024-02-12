@@ -37,7 +37,7 @@ class HashtagSection extends HookConsumerWidget {
             ),
             child: FilledButton(
               onPressed: () {
-                log(hashtagController.value.text);
+                if (hashtagController.value.text.isEmpty) return;
                 hashtagNotifier.addHashtag(hashtagController.value.text);
                 hashtagController.clear();
               },

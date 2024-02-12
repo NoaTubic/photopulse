@@ -10,8 +10,8 @@ part 'fonts.dart';
 // final _theme = ThemeData();
 
 final lightTheme = ThemeData(
-  splashColor: AppColors.white.withOpacity(0.5),
-  highlightColor: AppColors.white.withOpacity(0.5),
+  splashColor: AppColors.black.withOpacity(0.1),
+  highlightColor: AppColors.black.withOpacity(0.1),
   fontFamily: Fonts.fontFamily,
   useMaterial3: true,
   scaffoldBackgroundColor: AppColors.white,

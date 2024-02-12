@@ -1,6 +1,7 @@
 import 'package:photopulse/features/auth/data/repository/auth_repository.dart';
 
 import 'package:photopulse/features/auth/domain/entities/user_credentials.dart';
+import 'package:photopulse/features/auth/domain/notifiers/user_notifier.dart';
 import 'package:photopulse/features/auth/forms/login_form_config.dart';
 import 'package:q_architecture/base_state_notifier.dart';
 import 'package:q_architecture/q_architecture.dart';
@@ -46,5 +47,7 @@ class LoginNotifier extends BaseStateNotifier<void> {
           state = BaseState.error(failure);
           return false;
         },
+        onDataReceived: (_) =>
+            ref.read(isAnonymousProvider.notifier).state = true,
       );
 }

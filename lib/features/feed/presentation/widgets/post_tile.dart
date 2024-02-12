@@ -11,6 +11,7 @@ import 'package:photopulse/features/feed/presentation/widgets/feed_image.dart';
 import 'package:photopulse/features/post/domain/entities/post.dart';
 import 'package:photopulse/features/post/domain/notifiers/download_post_content_notifier.dart';
 import 'package:photopulse/features/post/domain/notifiers/hashtag_notifer.dart';
+import 'package:photopulse/features/post/domain/notifiers/post_notifier.dart';
 import 'package:photopulse/features/post/presentation/pages/post_page.dart';
 import 'package:photopulse/generated/l10n.dart';
 import 'package:photopulse/theme/app_colors.dart';
@@ -64,6 +65,7 @@ class PostTile extends StatelessWidget {
           child: BodyText(
             post.tags.join(' '),
             color: AppColors.black,
+            isBold: true,
           ),
         ),
       ],
@@ -150,17 +152,29 @@ class _PostHeader extends ConsumerWidget {
             color: AppColors.white,
             surfaceTintColor: AppColors.white,
             itemBuilder: (context) {
-              return (ref.read(userProvider)!.id != post.author.id)
-                  ? [_buildPopupMenuItem(FeedMenuItem.download)]
-                  : FeedMenuItem.values.map((item) {
-                      return _buildPopupMenuItem(item);
-                    }).toList();
+              if (ref.watch(isAnonymousProvider) ||
+                  (ref.read(userProvider)!.id != post.author.id &&
+                      ref.read(userProvider)!.isAdmin == false)) {
+                return [
+                  _buildPopupMenuItem(FeedMenuItem.download),
+                ];
+              } else if (ref.read(userProvider)!.isAdmin == true) {
+                return FeedMenuItem.values
+                    .map((item) => _buildPopupMenuItem(item))
+                    .toList();
+              } else {
+                return FeedMenuItem.values
+                    .map((item) => _buildPopupMenuItem(item))
+                    .toList();
+              }
             },
             onSelected: (value) {
               if (value == FeedMenuItem.editPost) {
                 _editPost(post, ref);
               } else if (value == FeedMenuItem.download) {
                 _downloadPostContent(ref, post);
+              } else {
+                _deletePost(post, ref);
               }
             },
           ),
@@ -180,6 +194,10 @@ class _PostHeader extends ConsumerWidget {
         url: post.url,
         title: post.title,
       );
+
+  void _deletePost(Post post, WidgetRef ref) {
+    ref.read(postNotifierProvider.notifier).deletePost(post);
+  }
 
   PopupMenuItem _buildPopupMenuItem(FeedMenuItem item) {
     return PopupMenuItem<FeedMenuItem>(
@@ -202,7 +220,8 @@ class _PostHeader extends ConsumerWidget {
 
 enum FeedMenuItem {
   editPost(icon: Icons.edit_rounded),
-  download(icon: Icons.download_rounded);
+  download(icon: Icons.download_rounded),
+  delete(icon: Icons.delete_rounded);
 
   const FeedMenuItem({
     required this.icon,
@@ -215,6 +234,8 @@ enum FeedMenuItem {
       case FeedMenuItem.editPost:
         return S.current.edit_post;
       case FeedMenuItem.download:
+        return S.current.delete_post;
+      case FeedMenuItem.delete:
         return S.current.delete_post;
     }
   }

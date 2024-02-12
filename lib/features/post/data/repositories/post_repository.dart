@@ -43,7 +43,8 @@ class PostRepositoryImpl implements PostRepository {
       await _postsCollection.doc(id).set(
             await _postWithFilePath(post.copyWith(id: id)),
           );
-      await _usersRepository.incrementDailyUpload();
+      await _usersRepository
+          .incrementDailyUploadAndTotalUploadSize(post.sizeInMB);
       return const Right(null);
     } catch (_, st) {
       logDebug(_, st);

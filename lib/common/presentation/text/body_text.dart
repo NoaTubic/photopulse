@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:photopulse/common/presentation/build_context_extensions.dart';
+import 'package:photopulse/common/utils/build_context_extensions.dart';
 import 'package:photopulse/theme/app_colors.dart';
 
 class BodyText extends StatelessWidget {
@@ -14,7 +14,7 @@ class BodyText extends StatelessWidget {
 
   const BodyText(
     this.text, {
-    Key? key,
+    super.key,
     this.isCentered = false,
     this.isBold = false,
     this.color,
@@ -22,7 +22,7 @@ class BodyText extends StatelessWidget {
     this.isUnderlined = false,
     this.fontSize,
     this.maxLines,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

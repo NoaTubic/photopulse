@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:photopulse/common/presentation/build_context_extensions.dart';
+import 'package:photopulse/common/utils/build_context_extensions.dart';
 import 'package:photopulse/theme/app_colors.dart';
 import 'package:photopulse/theme/theme.dart';
 
@@ -12,12 +12,12 @@ class TitleText extends StatelessWidget {
 
   const TitleText(
     this.text, {
-    Key? key,
+    super.key,
     this.isCentered = false,
     this.isBold = true,
     this.color,
     this.fontSize = FontSizes.s28,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

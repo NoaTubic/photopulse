@@ -1,15 +1,17 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:photopulse/common/domain/providers/base_router_provider.dart';
 import 'package:photopulse/common/presentation/app_sizes.dart';
-import 'package:photopulse/common/presentation/build_context_extensions.dart';
+import 'package:photopulse/common/utils/build_context_extensions.dart';
 import 'package:photopulse/common/presentation/image_assets.dart';
 import 'package:photopulse/common/presentation/text/display_text.dart';
 import 'package:photopulse/features/auth/domain/notifiers/user_notifier.dart';
 import 'package:photopulse/features/navbar/domain/notifiers/nav_bar_visibility_provider.dart';
 import 'package:photopulse/features/navbar/presentation/widgets/bottom_nav_bar_item.dart';
+import 'package:photopulse/features/navbar/presentation/widgets/navigation_rail_divider.dart';
 import 'package:photopulse/features/navbar/presentation/widgets/navigation_rail_item.dart';
 import 'package:photopulse/generated/l10n.dart';
 import 'package:photopulse/theme/app_colors.dart';
@@ -95,7 +97,7 @@ class NavBar extends ConsumerWidget {
                   )
                   .toList(),
             ),
-          // const NavigationRailDivider(),
+          if (kIsWeb) const NavigationRailDivider(),
           Expanded(child: navigationShell),
         ],
       ),

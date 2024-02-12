@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:photopulse/common/presentation/build_context_extensions.dart';
+import 'package:photopulse/common/utils/build_context_extensions.dart';
 import 'package:photopulse/theme/app_colors.dart';
 
 class HeadlineText extends StatelessWidget {
@@ -12,13 +12,13 @@ class HeadlineText extends StatelessWidget {
 
   const HeadlineText(
     this.text, {
-    Key? key,
+    super.key,
     this.isCentered = false,
     this.isBold = false,
     this.color,
     this.textOverflow,
     this.maxLines,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

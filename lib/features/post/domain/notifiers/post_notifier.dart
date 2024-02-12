@@ -1,4 +1,7 @@
+import 'dart:io';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:photopulse/common/utils/file_extensions.dart';
 import 'package:photopulse/features/auth/domain/notifiers/user_notifier.dart';
 import 'package:photopulse/features/post/data/repositories/post_repository.dart';
 import 'package:photopulse/features/post/domain/entities/author.dart';
@@ -30,6 +33,7 @@ class PostNotifier extends BaseStateNotifier<void> {
   Future<void> submitPostForm({
     required Map<String, dynamic> formMap,
     Post? post,
+    File? file,
   }) async {
     final postFormData = _postUpdateRequestMapper(formMap);
     final user = ref.read(userProvider);
@@ -54,15 +58,15 @@ class PostNotifier extends BaseStateNotifier<void> {
             url: formMap['file'],
             createdAt: Timestamp.now(),
             tags: tags,
+            sizeInMB: file?.sizeInMB ?? post!.sizeInMB,
           ),
         ),
       );
     }
   }
 
-  Future<void> deletePost(Post post) => execute(
-        _postRepository.deletePost(post),
-      );
+  Future<void> deletePost(Post post) =>
+      execute(_postRepository.deletePost(post), globalLoading: true);
 
   Future<void> updatePost(Post post) => execute(
         _postRepository.updatePost(post),

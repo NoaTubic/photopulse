@@ -15,10 +15,12 @@ class SubscriptionManagementNotifier extends BaseStateNotifier<void> {
   final UsersRepository _usersRepository;
   SubscriptionManagementNotifier(this._usersRepository, super.ref);
 
-  Future<void> updateUserSubscriptionPackage() => execute(
+  Future<void> updateUserSubscriptionPackage({String? id}) => execute(
         _usersRepository.updateUserSubscriptionPackage(
           ref.read(selectedSubscriptionPackageProvider),
+          id,
         ),
+        globalLoading: true,
       );
 }
 

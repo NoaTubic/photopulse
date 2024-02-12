@@ -26,6 +26,7 @@ class ReviewPhotoPage extends HookConsumerWidget {
         onTap: () {
           if (isFromGallery != true) {
             ref.read(cameraNotifierProvider.notifier).retakeContent();
+            ref.invalidate(cameraNotifierProvider);
           }
           Navigator.of(context).pop();
         },

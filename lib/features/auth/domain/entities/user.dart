@@ -15,6 +15,7 @@ class PhotoPulseUser {
   final int dailyUploads;
   final int maxSpend;
   final bool canChangeSubscription;
+  final double totalUploadSizeInMB;
 
   PhotoPulseUser({
     required this.id,
@@ -27,6 +28,7 @@ class PhotoPulseUser {
     this.dailyUploads = 0,
     this.maxSpend = 0,
     this.canChangeSubscription = true,
+    this.totalUploadSizeInMB = 0,
   });
 
   factory PhotoPulseUser.fromJson(Map<String, dynamic> json) =>

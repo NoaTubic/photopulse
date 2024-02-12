@@ -5,6 +5,7 @@ import 'package:photopulse/theme/app_colors.dart';
 import 'package:photopulse/theme/app_text_styles.dart';
 import 'package:photopulse/theme/theme.dart';
 
+//DESIGN PATTERN: FACTORY
 class PhotoPulseButton extends StatelessWidget {
   final String? label;
   final Widget? child;
@@ -17,7 +18,6 @@ class PhotoPulseButton extends StatelessWidget {
   final double? width;
 
   const PhotoPulseButton._({
-    Key? key,
     this.label,
     this.child,
     this.onTap,
@@ -27,7 +27,7 @@ class PhotoPulseButton extends StatelessWidget {
     this.backgroundColor,
     this.borderColor,
     this.width,
-  }) : super(key: key);
+  });
 
   factory PhotoPulseButton.primary({
     String? label,

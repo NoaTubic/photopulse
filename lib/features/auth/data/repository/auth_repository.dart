@@ -14,6 +14,7 @@ import 'package:photopulse/features/auth/data/repository/users_repository.dart';
 import 'package:photopulse/features/auth/domain/entities/github_auth_parameters.dart';
 import 'package:photopulse/features/auth/domain/entities/user.dart';
 import 'package:photopulse/features/auth/domain/entities/user_credentials.dart';
+import 'package:photopulse/features/profile/data/models/change_password_request.dart';
 import 'package:photopulse/generated/l10n.dart';
 import 'package:q_architecture/q_architecture.dart';
 import 'package:http/http.dart' as http;
@@ -45,6 +46,11 @@ abstract interface class AuthRepository {
   EitherFailureOr<void> loginAnonymously();
 
   Stream<User?> subscribeToAuthChanges();
+
+  EitherFailureOr<void> resetPassword({required String email});
+
+  EitherFailureOr<void> changePassword(
+      ChangePasswordRequest changePasswordRequest);
 
   StreamFailureOr<PhotoPulseUser> getSignedInUser();
 
@@ -199,6 +205,33 @@ class AuthRepositoryImpl with ErrorToFailureMixin implements AuthRepository {
       return user != null ? Right(user) : Left(Failure.generic());
     });
   }
+
+  @override
+  EitherFailureOr<void> changePassword(
+          ChangePasswordRequest changePasswordRequest) async =>
+      execute(() async {
+        final User? user = _firebaseAuth.currentUser;
+        final reauthenticateResult = await login(
+          userCredentials: UserCredentials(
+              email: user!.email!, password: changePasswordRequest.oldPassword),
+        );
+        return reauthenticateResult.fold(
+          (failure) => const Left(
+            Failure(title: 'Wrong password!'),
+          ),
+          (success) async =>
+              user.updatePassword(changePasswordRequest.newPassword).then(
+                    (_) => const Right(null),
+                  ),
+        );
+      }, errorResolver: const FirebaseErrorResolver());
+
+  @override
+  EitherFailureOr<void> resetPassword({required String email}) async =>
+      execute(() async {
+        await _firebaseAuth.sendPasswordResetEmail(email: email);
+        return const Right(null);
+      }, errorResolver: const FirebaseErrorResolver());
 
   @override
   Future<void> logout() async {

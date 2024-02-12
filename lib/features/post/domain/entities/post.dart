@@ -14,6 +14,7 @@ class Post extends Equatable {
   final Timestamp createdAt;
   final List<String> tags;
   final String url;
+  final double sizeInMB;
 
   const Post({
     this.id,
@@ -23,6 +24,7 @@ class Post extends Equatable {
     required this.createdAt,
     required this.tags,
     required this.url,
+    required this.sizeInMB,
   });
 
   Post copyWith({
@@ -33,6 +35,7 @@ class Post extends Equatable {
     Timestamp? createdAt,
     List<String>? tags,
     String? url,
+    double? sizeInMB,
   }) {
     return Post(
       id: id ?? this.id,
@@ -42,6 +45,7 @@ class Post extends Equatable {
       createdAt: createdAt ?? this.createdAt,
       tags: tags ?? this.tags,
       url: url ?? this.url,
+      sizeInMB: sizeInMB ?? this.sizeInMB,
     );
   }
 
@@ -64,6 +68,7 @@ class Post extends Equatable {
         createdAt: json['createdAt'] as Timestamp,
         tags: List<String>.from(json['tags'] ?? []),
         url: json['url'] as String,
+        sizeInMB: json['sizeInMB'] as double,
       );
 
   Map<String, dynamic> toJson(Post post) => <String, dynamic>{
@@ -74,6 +79,7 @@ class Post extends Equatable {
         'createdAt': post.createdAt,
         'tags': post.tags,
         'url': post.url,
+        'sizeInMB': post.sizeInMB,
       };
 
   static Timestamp _timestampFromJson(int json) =>

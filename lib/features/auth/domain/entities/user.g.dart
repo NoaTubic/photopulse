@@ -20,6 +20,8 @@ PhotoPulseUser _$PhotoPulseUserFromJson(Map<String, dynamic> json) =>
       dailyUploads: json['dailyUploads'] as int? ?? 0,
       maxSpend: json['maxSpend'] as int? ?? 0,
       canChangeSubscription: json['canChangeSubscription'] as bool? ?? true,
+      totalUploadSizeInMB:
+          (json['totalUploadSizeInMB'] as num?)?.toDouble() ?? 0,
     );
 
 Map<String, dynamic> _$PhotoPulseUserToJson(PhotoPulseUser instance) =>
@@ -35,6 +37,7 @@ Map<String, dynamic> _$PhotoPulseUserToJson(PhotoPulseUser instance) =>
       'dailyUploads': instance.dailyUploads,
       'maxSpend': instance.maxSpend,
       'canChangeSubscription': instance.canChangeSubscription,
+      'totalUploadSizeInMB': instance.totalUploadSizeInMB,
     };
 
 const _$SubscriptionPackageEnumMap = {
