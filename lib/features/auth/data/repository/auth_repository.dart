@@ -114,8 +114,8 @@ class AuthRepositoryImpl with ErrorToFailureMixin implements AuthRepository {
         () async {
           final GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
           if (googleUser == null) {
-            return const Left(
-              Failure(title: 'Google sign in cancelled'),
+            return Left(
+              Failure(title: S.current.google_sign_in_canceled),
             );
           } else {
             final googleAuth = await googleUser.authentication;

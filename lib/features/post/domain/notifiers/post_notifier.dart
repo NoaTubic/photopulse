@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:photopulse/features/auth/data/repository/users_repository.dart';
 import 'package:photopulse/features/auth/domain/notifiers/user_notifier.dart';
 import 'package:photopulse/features/post/data/repositories/post_repository.dart';
 import 'package:photopulse/features/post/domain/entities/author.dart';

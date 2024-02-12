@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:photopulse/features/feed/data/repositories/feed_repository.dart';
 import 'package:photopulse/features/feed/domain/notifiers/filters_notifier.dart';

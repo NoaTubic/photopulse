@@ -5,7 +5,6 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:photopulse/common/domain/router/pages.dart';
 import 'package:photopulse/common/presentation/photo_pulse_app_bar.dart';
 import 'package:photopulse/features/camera/domain/notifiers/camera_notifier.dart';
-import 'package:photopulse/features/camera/presentation/widgets/camera_aspect_ratio.dart';
 import 'package:photopulse/features/camera/presentation/widgets/review_content_buttons.dart';
 import 'package:photopulse/features/gallery/domain/notifier/gallery_notifier.dart';
 import 'package:photopulse/theme/app_colors.dart';
@@ -34,7 +33,9 @@ class ReviewPhotoPage extends HookConsumerWidget {
       body: image != null
           ? Stack(
               children: [
-                Positioned.fill(child: Image.file(image)),
+                Positioned.fill(
+                  child: Image.file(image),
+                ),
                 const Align(
                   alignment: Alignment.bottomCenter,
                   child: ReviewContentButtons(),

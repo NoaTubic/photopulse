@@ -1,16 +1,15 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:photopulse/common/constants/duration_constants.dart';
 import 'package:photopulse/common/presentation/app_sizes.dart';
 import 'package:photopulse/common/presentation/dialogs/permission_dialog.dart';
 import 'package:photopulse/common/presentation/text/body_text.dart';
 import 'package:photopulse/features/feed/presentation/widgets/media_container.dart';
 import 'package:photopulse/features/feed/presentation/widgets/media_overlay.dart';
 import 'package:photopulse/features/post/domain/notifiers/download_post_content_notifier.dart';
+import 'package:photopulse/generated/l10n.dart';
 import 'package:photopulse/theme/app_colors.dart';
 import 'package:q_architecture/base_state_notifier.dart';
-import 'package:q_architecture/q_architecture.dart';
 
 class DownloadPostContentOverlay extends ConsumerStatefulWidget {
   final String id;
@@ -74,11 +73,9 @@ class _DownloadPostContentOverlayState
         BaseData() => _startAnimation(),
         BaseError(failure: final _) => showDialog(
             context: context,
-            builder: (context) => const PermissionsDialog(
-              errorText:
-                  'For downloading photos, please allow the PhotoPulse app access to your storage.',
-              helperText:
-                  'Go to you settings > Permissions and turn on the photos and storage',
+            builder: (context) => PermissionsDialog(
+              errorText: S.current.storage_permission_dialog_error_text,
+              helperText: S.current.storage_permission_dialog_error_text,
               icon: Icons.download_rounded,
             ),
           ),
@@ -100,13 +97,13 @@ class _DownloadPostContentOverlayState
                     Icon(
                       Icons.check_circle_outline_rounded,
                       color: AppColors.white,
-                      size: 60,
+                      size: AppSizes.downloadPostSuccessIconSize,
                     ),
                     const SizedBox(
                       height: AppSizes.smallSpacing,
                     ),
                     BodyText(
-                      'Successfully saved!',
+                      S.current.successfully_saved,
                       color: AppColors.white,
                       isBold: true,
                     ),
@@ -121,7 +118,7 @@ class _DownloadPostContentOverlayState
 
   Future<void> _startAnimation() async {
     _controller.forward();
-    await Future.delayed(const Duration(seconds: 1), () {});
+    await Future.delayed(DurationConstants.downloadContentAnimation, () {});
     _controller.reverse();
   }
 }

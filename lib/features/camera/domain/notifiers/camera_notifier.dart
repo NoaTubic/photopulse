@@ -4,11 +4,10 @@ import 'dart:io';
 import 'package:camera/camera.dart';
 import 'package:flutter/services.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:photopulse/common/constants/constants.dart';
 import 'package:photopulse/features/camera/data/image_converter_service.dart';
 import 'package:photopulse/features/camera/domain/notifiers/camera_state.dart';
 import 'package:q_architecture/q_architecture.dart';
-
-// ignore: depend_on_referenced_packages
 import 'package:image/image.dart' as img;
 
 final cameraNotifierProvider =
@@ -55,11 +54,9 @@ class CameraNotifier extends SimpleStateNotifier<CameraState> {
           permissionRequested: true,
         );
         switch (e.code) {
-          case 'CameraAccessDenied':
-            // camera permission denied on iOS
+          case Constants.cameraAccessDeniedIOS:
             break;
-          case 'cameraPermission':
-            // camera permission denied on Android
+          case Constants.cameraAccessDeniedAndroid:
             break;
           default:
             break;

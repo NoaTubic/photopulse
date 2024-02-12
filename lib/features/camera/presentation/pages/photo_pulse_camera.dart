@@ -1,8 +1,8 @@
 import 'package:another_flushbar/flushbar.dart';
 import 'package:camera/camera.dart';
-
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:photopulse/common/constants/duration_constants.dart';
 import 'package:photopulse/common/domain/hooks/app_lifecycle_hook.dart';
 import 'package:photopulse/common/domain/router/navigation_extensions.dart';
 import 'package:photopulse/common/domain/router/pages.dart';
@@ -11,10 +11,9 @@ import 'package:photopulse/common/presentation/buttons/photo_pulse_icon_button.d
 import 'package:photopulse/common/presentation/dialogs/permission_dialog.dart';
 import 'package:photopulse/features/camera/domain/notifiers/camera_notifier.dart';
 import 'package:photopulse/features/camera/domain/notifiers/camera_state.dart';
-import 'package:photopulse/features/camera/presentation/widgets/camera_aspect_ratio.dart';
 import 'package:photopulse/features/camera/presentation/widgets/camera_button.dart';
 import 'package:photopulse/features/navbar/domain/notifiers/nav_bar_visibility_provider.dart';
-
+import 'package:photopulse/generated/l10n.dart';
 import 'package:photopulse/theme/app_colors.dart';
 import 'package:q_architecture/q_architecture.dart';
 
@@ -47,10 +46,8 @@ class PhotoPulseCamera extends HookConsumerWidget {
             barrierDismissible: false,
             context: context,
             builder: (context) => PermissionsDialog(
-              errorText:
-                  'For taking photos, please allow the PhotoPulse app access to your camera.',
-              helperText:
-                  'Go to your settings > Permissions and turn on the camera.',
+              errorText: S.current.camera_permissions_dialog_error_text,
+              helperText: S.current.camera_permissions_dialog_helper_text,
               icon: Icons.camera_alt_rounded,
               onPop: () => cameraNotifier.disposeCamera(),
             ),
@@ -64,7 +61,7 @@ class PhotoPulseCamera extends HookConsumerWidget {
             messageColor: AppColors.white,
             backgroundColor: AppColors.white,
             message: next.failure!.title,
-            duration: const Duration(seconds: 3),
+            duration: DurationConstants.toastDuration,
           ).show(context);
           cameraNotifier.resetFailure();
         }
@@ -102,7 +99,7 @@ class PhotoPulseCamera extends HookConsumerWidget {
               icon: Icon(
                 Icons.close_rounded,
                 color: AppColors.white,
-                size: 32,
+                size: AppSizes.iconMediumSize,
               ),
             ),
           ),
@@ -124,8 +121,8 @@ class PhotoPulseCamera extends HookConsumerWidget {
                       icon: state.isFlashOn ? Icons.flash_off : Icons.flash_on,
                       iconColor: AppColors.white,
                       backgroundColor: Colors.transparent,
-                      width: 44,
-                      height: 44,
+                      width: AppSizes.cameraIconSize,
+                      height: AppSizes.cameraIconSize,
                     ),
                     const CameraButton(),
                     PhotoPulseIconButton(
@@ -133,8 +130,8 @@ class PhotoPulseCamera extends HookConsumerWidget {
                       icon: Icons.refresh,
                       iconColor: AppColors.white,
                       backgroundColor: Colors.transparent,
-                      width: 44,
-                      height: 44,
+                      width: AppSizes.cameraIconSize,
+                      height: AppSizes.cameraIconSize,
                     ),
                   ],
                 ),

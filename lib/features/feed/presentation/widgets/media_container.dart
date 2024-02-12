@@ -9,13 +9,13 @@ class MediaContainer extends StatelessWidget {
   final Widget child;
 
   const MediaContainer({
-    Key? key,
+    super.key,
     this.isVisible = true,
     this.alignment = Alignment.center,
     this.fullScreenPadding = EdgeInsets.zero,
     this.padding = EdgeInsets.zero,
     required this.child,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:photopulse/common/constants/duration_constants.dart';
 import 'package:photopulse/common/domain/router/navigation_extensions.dart';
+import 'package:photopulse/common/presentation/app_sizes.dart';
 import 'package:photopulse/features/camera/domain/notifiers/camera_notifier.dart';
 import 'package:photopulse/features/camera/presentation/pages/photo_pulse_camera.dart';
 import 'package:photopulse/features/camera/presentation/pages/review_photo_page.dart';
-import 'package:photopulse/features/navbar/domain/notifiers/nav_bar_visibility_provider.dart';
-import 'package:photopulse/features/post/domain/notifiers/post_notifier.dart';
 import 'package:photopulse/features/upload_content/presentation/pages/upload_content_page.dart';
 import 'package:photopulse/theme/app_colors.dart';
 
@@ -18,11 +18,10 @@ class CameraButton extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final cameraNotifier = ref.read(cameraNotifierProvider.notifier);
-    final state = ref.watch(cameraNotifierProvider);
     final animationController = useAnimationController(
-      duration: const Duration(milliseconds: 300),
+      duration: DurationConstants.shortAnimationDuration,
     );
-    final animation = useAnimation(
+    final double animation = useAnimation(
       Tween<double>(begin: 1.0, end: 0.9).animate(animationController),
     );
 
@@ -43,7 +42,7 @@ class CameraButton extends HookConsumerWidget {
             padding: const EdgeInsets.all(1),
             child: Icon(
               Icons.circle,
-              size: 48,
+              size: AppSizes.cameraButtonSize,
               color: AppColors.white,
             ),
           ),

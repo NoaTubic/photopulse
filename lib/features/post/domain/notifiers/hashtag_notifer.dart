@@ -17,7 +17,7 @@ class HashtagNotifier extends SimpleStateNotifier<List<String>> {
     if (postId == null) return;
     final post = await _postRepository.getPost(postId);
     post.fold(
-      (failure) => log('Error getting post'),
+      (failure) => {},
       (post) {
         state = post.tags;
       },

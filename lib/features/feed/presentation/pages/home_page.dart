@@ -7,12 +7,12 @@ import 'package:photopulse/common/domain/router/pages.dart';
 import 'package:photopulse/common/presentation/app_sizes.dart';
 import 'package:photopulse/common/presentation/photo_pulse_scaffold.dart';
 import 'package:photopulse/common/presentation/text/text.dart';
-
 import 'package:photopulse/features/auth/domain/notifiers/user_notifier.dart';
 import 'package:photopulse/features/feed/domain/notifiers/feed_notifier.dart';
 import 'package:photopulse/features/feed/presentation/widgets/post_tile.dart';
 import 'package:photopulse/features/search_posts/presentation/pages/search_posts_page.dart';
 import 'package:photopulse/features/subscription_management/presentation/pages/subscription_management_page.dart';
+import 'package:photopulse/generated/l10n.dart';
 import 'package:q_architecture/q_architecture.dart';
 
 class HomePage extends HookConsumerWidget {
@@ -24,7 +24,6 @@ class HomePage extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final user = ref.watch(userProvider);
     ref.listen(
       userProvider,
       (_, next) {
@@ -44,7 +43,7 @@ class HomePage extends HookConsumerWidget {
 
     return PhotoPulseScaffold(
       padding: const EdgeInsets.symmetric(
-        horizontal: 0,
+        horizontal: AppSizes.zero,
         vertical: AppSizes.bodyPaddingVertical,
       ),
       body: Column(
@@ -70,8 +69,8 @@ class HomePage extends HookConsumerWidget {
                     ),
                     SizedBox(
                       width: MediaQuery.of(context).size.width * 0.8,
-                      child: const BodyText(
-                        'There are no posts yet.\nAdd a new one on \'Upload  content Tab\'.',
+                      child: BodyText(
+                        S.current.no_posts_yet,
                         isBold: true,
                         isCentered: true,
                       ),
@@ -79,7 +78,7 @@ class HomePage extends HookConsumerWidget {
                   ],
                 ),
               ),
-              onError: (context, asd, a) => const FeedError(),
+              onError: (_, __, ___) => const FeedError(),
               scrollPhysics: const BouncingScrollPhysics(),
             ),
           )

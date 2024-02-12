@@ -10,10 +10,10 @@ class ImageViewer extends ConsumerWidget {
   final String imageUrl;
 
   const ImageViewer({
-    Key? key,
+    super.key,
     required this.child,
     required this.imageUrl,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -54,11 +54,10 @@ class _FullScreenViewer extends HookConsumerWidget {
   final UniqueKey tag;
 
   const _FullScreenViewer({
-    Key? key,
     required this.child,
     required this.tag,
     required this.imageUrl,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

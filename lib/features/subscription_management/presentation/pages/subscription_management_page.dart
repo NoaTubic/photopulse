@@ -14,6 +14,7 @@ import 'package:photopulse/common/presentation/text/text.dart';
 import 'package:photopulse/features/auth/domain/notifiers/user_notifier.dart';
 import 'package:photopulse/features/subscription_management/domain/notifiers/subscription_management_notifier.dart';
 import 'package:photopulse/features/subscription_management/presentation/widgets/subscription_package_slider.dart';
+import 'package:photopulse/generated/l10n.dart';
 import 'package:q_architecture/base_state_notifier.dart';
 
 class SubscriptionManagementPage extends ConsumerWidget {
@@ -28,8 +29,8 @@ class SubscriptionManagementPage extends ConsumerWidget {
         return switch (next) {
           BaseData() =>
             GoRouter.of(context).canPop() ? ref.pop() : ref.pushNamed('/'),
-          BaseError() => const PhotoPulseToast(
-              message: 'Something went wrong',
+          BaseError() => PhotoPulseToast(
+              message: S.current.error_message_something_wrong,
             ).show(rootNavigatorKey.currentState!.context),
           BaseLoading() => null,
           _ => Object(),
@@ -46,7 +47,7 @@ class SubscriptionManagementPage extends ConsumerWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const HeadlineText('Please choose a prescription package'),
+            HeadlineText(S.current.headline_choose_prescription_package),
             const Gap(AppSizes.xLargeSpacing),
             const SubscriptionPackageSlider(),
             const Gap(AppSizes.xLargeSpacing),
@@ -58,7 +59,7 @@ class SubscriptionManagementPage extends ConsumerWidget {
                 onTap: () => ref
                     .read(subscriptionManagementNotifierProvider.notifier)
                     .updateUserSubscriptionPackage(),
-                label: 'Choose package',
+                label: S.current.button_label_choose_package,
               ),
             ),
           ],

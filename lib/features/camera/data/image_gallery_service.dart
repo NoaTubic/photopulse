@@ -6,6 +6,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:photopulse/features/camera/data/image_converter_service.dart';
 import 'package:photopulse/features/camera/data/image_cropper_service.dart';
 import 'package:photopulse/features/camera/data/providers.dart';
+import 'package:photopulse/generated/l10n.dart';
 import 'package:q_architecture/q_architecture.dart';
 
 final imageGalleryServiceProvider = Provider<ImageGalleryService>(
@@ -40,7 +41,7 @@ class ImageGalleryServiceImpl implements ImageGalleryService {
 
       if (pickedImage == null) {
         return Left(
-          Failure.generic(title: 'Canceled'),
+          Failure.generic(title: S.current.canceled),
         );
       } else {
         image = await _heicConverterService
@@ -51,7 +52,7 @@ class ImageGalleryServiceImpl implements ImageGalleryService {
             crop ? await _imageCropperService.cropImage(image) : image,
           );
         } else {
-          return Left(Failure.generic(title: 'Maximum image size is 50 MB'));
+          return Left(Failure.generic(title: S.current.max_image_size_error));
         }
       }
     } on PlatformException catch (_) {

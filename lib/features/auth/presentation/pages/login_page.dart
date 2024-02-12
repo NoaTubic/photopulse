@@ -1,13 +1,9 @@
 // ignore_for_file: always_use_package_imports, use_build_context_synchronously
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
-import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:photopulse/common/domain/providers/form_submission_enabled_provider.dart';
 import 'package:photopulse/common/domain/router/navigation_extensions.dart';
-import 'package:photopulse/common/domain/router/pages.dart';
 import 'package:photopulse/common/domain/utils/base_state_extensions.dart';
 import 'package:photopulse/common/domain/utils/form_key_extensions.dart';
 import 'package:photopulse/common/presentation/animated_widgets/animated_column.dart';
@@ -15,7 +11,6 @@ import 'package:photopulse/common/presentation/app_sizes.dart';
 import 'package:photopulse/common/presentation/build_context_extensions.dart';
 import 'package:photopulse/common/presentation/buttons/photo_pulse_button.dart';
 import 'package:photopulse/common/presentation/common_validators.dart';
-import 'package:photopulse/common/presentation/image_assets.dart';
 import 'package:photopulse/common/presentation/or_divider.dart';
 import 'package:photopulse/common/presentation/photo_pulse_scaffold.dart';
 import 'package:photopulse/common/presentation/buttons/photo_pulse_text_button.dart';
@@ -87,7 +82,7 @@ class LoginPage extends ConsumerWidget {
                 color: AppColors.black,
                 fontSize:
                     context.isLargerThanMobile ? FontSizes.s30 : FontSizes.s24,
-                fontFamily: 'Cocogoose Pro',
+                fontFamily: Fonts.fontLogo,
               ),
               const SizedBox(
                 height: AppSizes.mediumSpacing,
@@ -145,8 +140,7 @@ class LoginPage extends ConsumerWidget {
                       height: AppSizes.largeSpacing,
                     ),
                     PhotoPulseTextButton(
-                      onTap: () => FirebaseAuth.instance.signOut(),
-                      // loginNotifier.loginAnonymously(),
+                      onTap: () => loginNotifier.loginAnonymously(),
                       label: S.current.anonymous_login,
                     ),
                     const SizedBox(

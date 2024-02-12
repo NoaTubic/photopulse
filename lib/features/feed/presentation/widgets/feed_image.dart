@@ -6,6 +6,7 @@ import 'package:photopulse/common/presentation/app_sizes.dart';
 import 'package:photopulse/common/presentation/text/display_text.dart';
 import 'package:photopulse/features/feed/presentation/widgets/download_post_content_overlay.dart';
 import 'package:photopulse/features/feed/presentation/widgets/image_viewer.dart';
+import 'package:photopulse/generated/l10n.dart';
 import 'package:photopulse/theme/app_colors.dart';
 
 class FeedImage extends ConsumerWidget {
@@ -78,7 +79,7 @@ class _ImageError extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          const DisplayText('Whoops'),
+          DisplayText(S.current.whoops),
           const SizedBox(
             height: AppSizes.normalSpacing,
           ),

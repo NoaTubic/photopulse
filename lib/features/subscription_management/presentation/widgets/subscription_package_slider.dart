@@ -1,8 +1,6 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:photopulse/common/presentation/app_sizes.dart';
 import 'package:photopulse/features/subscription_management/domain/entities/subscription_package.dart';
 import 'package:photopulse/features/subscription_management/domain/notifiers/subscription_management_notifier.dart';
 import 'package:photopulse/features/subscription_management/presentation/widgets/subscription_package_card.dart';

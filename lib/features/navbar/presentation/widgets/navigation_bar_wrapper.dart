@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:photopulse/common/presentation/app_sizes.dart';
 
 class NavBarContentWrapper extends StatelessWidget {
-  const NavBarContentWrapper({Key? key, required this.content})
-      : super(key: key);
+  const NavBarContentWrapper({super.key, required this.content});
 
   final Widget content;
 

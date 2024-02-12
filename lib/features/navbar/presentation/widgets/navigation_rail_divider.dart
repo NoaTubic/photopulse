@@ -3,7 +3,7 @@ import 'package:photopulse/common/presentation/app_sizes.dart';
 import 'package:photopulse/theme/app_colors.dart';
 
 class NavigationRailDivider extends StatelessWidget {
-  const NavigationRailDivider({Key? key}) : super(key: key);
+  const NavigationRailDivider({super.key});
 
   @override
   Widget build(BuildContext context) {

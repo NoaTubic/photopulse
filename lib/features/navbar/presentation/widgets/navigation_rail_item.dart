@@ -5,11 +5,11 @@ import 'package:photopulse/theme/app_colors.dart';
 
 class NavigationRailItem extends StatelessWidget {
   const NavigationRailItem({
-    Key? key,
+    super.key,
     required this.icon,
     required this.title,
     required this.isSelected,
-  }) : super(key: key);
+  });
 
   final Icon icon;
   final String title;

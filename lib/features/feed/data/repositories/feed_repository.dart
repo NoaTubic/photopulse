@@ -1,10 +1,7 @@
-import 'dart:developer';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:either_dart/either.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:photopulse/common/data/firestore/firestore_collections.dart';
 import 'package:photopulse/features/feed/data/builders/post_query_builder.dart';
 import 'package:photopulse/features/post/domain/entities/post.dart';
 import 'package:q_architecture/paginated_notifier.dart';
@@ -26,8 +23,8 @@ abstract class FeedRepository {
 }
 
 class FeedRepositoryImpl implements FeedRepository {
-  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
-  final _postsCollection = FirestoreCollections.postsCollection;
+  // final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+  // final _postsCollection = FirestoreCollections.postsCollection;
   final PostQueryBuilder _postQueryBuilder;
 
   FeedRepositoryImpl(this._postQueryBuilder);

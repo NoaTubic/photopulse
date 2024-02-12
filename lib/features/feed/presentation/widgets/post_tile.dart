@@ -4,7 +4,6 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:photopulse/common/domain/router/navigation_extensions.dart';
 import 'package:photopulse/common/presentation/app_sizes.dart';
 import 'package:photopulse/common/presentation/text/text.dart';
-import 'package:photopulse/common/presentation/text/title_text.dart';
 import 'package:photopulse/common/presentation/user_avatar.dart';
 import 'package:photopulse/features/auth/domain/notifiers/user_notifier.dart';
 import 'package:photopulse/features/feed/presentation/pages/home_page.dart';
@@ -13,8 +12,9 @@ import 'package:photopulse/features/post/domain/entities/post.dart';
 import 'package:photopulse/features/post/domain/notifiers/download_post_content_notifier.dart';
 import 'package:photopulse/features/post/domain/notifiers/hashtag_notifer.dart';
 import 'package:photopulse/features/post/presentation/pages/post_page.dart';
+import 'package:photopulse/generated/l10n.dart';
 import 'package:photopulse/theme/app_colors.dart';
-import 'package:photopulse/theme/theme.dart';
+
 import 'package:readmore/readmore.dart';
 
 class PostTile extends StatelessWidget {
@@ -85,8 +85,8 @@ class _PostDescription extends StatelessWidget {
       caption,
       trimLines: 2,
       trimMode: TrimMode.Line,
-      trimCollapsedText: '\n${'View more'}',
-      trimExpandedText: '\n${'View less'}',
+      trimCollapsedText: '\n${S.current.view_more}',
+      trimExpandedText: '\n${S.current.view_less}',
       style: commentStyle,
       moreStyle: actionStyle,
       lessStyle: actionStyle,
@@ -104,9 +104,6 @@ class _PostHeader extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final style = Theme.of(context).textTheme.labelMedium?.copyWith(
-          color: AppColors.black,
-        );
     return Row(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
@@ -137,8 +134,6 @@ class _PostHeader extends ConsumerWidget {
                         post.author.username,
                         isBold: true,
                       ),
-                      // Text(post.createdAt.toDate().toLocal().toString(),
-                      //     style: style),
                     ],
                   ),
                 ),
@@ -146,11 +141,6 @@ class _PostHeader extends ConsumerWidget {
             ),
           ),
         ),
-        // if (ref.watch(familyFeedNotifierProvider).maybeWhen(
-        //       orElse: () => false,
-        //       data: (familyFeed) =>
-        //           familyFeed.relation == UserRole.poa && familyFeed.isActive,
-        //     ))
         Theme(
           data: ThemeData(
             splashColor: AppColors.black.withOpacity(0.1),
@@ -191,21 +181,6 @@ class _PostHeader extends ConsumerWidget {
         title: post.title,
       );
 
-  // void _showHidePostDialog(BuildContext context, WidgetRef ref) => showDialog(
-  //       context: context,
-  //       builder: (context) => CareConnectDialog(
-  //         title: S.current.post_hide_checker,
-  //         topButtonText: S.current.post_hide_confirm,
-  //         topButtonAction: () => _hidePost(ref, post.id ?? -1),
-  //         cancelButtonText: S.current.label_cancel,
-  //       ),
-  //     );
-
-  // void _hidePost(WidgetRef ref, int id) {
-  //   ref.read(isPostHidden(id).notifier).state = true;
-  //   ref.read(postNotifierProvider.notifier).hidePost(id);
-  // }
-
   PopupMenuItem _buildPopupMenuItem(FeedMenuItem item) {
     return PopupMenuItem<FeedMenuItem>(
       value: item,
@@ -238,9 +213,9 @@ enum FeedMenuItem {
   String get title {
     switch (this) {
       case FeedMenuItem.editPost:
-        return 'Edit post';
+        return S.current.edit_post;
       case FeedMenuItem.download:
-        return 'Download post';
+        return S.current.delete_post;
     }
   }
 }

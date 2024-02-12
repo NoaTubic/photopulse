@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:photopulse/common/constants/duration_constants.dart';
+import 'package:photopulse/common/presentation/app_sizes.dart';
 import 'package:photopulse/theme/app_colors.dart';
 
 class AnimatedTick extends HookWidget {
@@ -7,10 +9,10 @@ class AnimatedTick extends HookWidget {
   final Duration duration;
 
   const AnimatedTick({
-    Key? key,
+    super.key,
     this.isChecked = false,
-    this.duration = const Duration(milliseconds: 500),
-  }) : super(key: key);
+    this.duration = DurationConstants.mediumAnimationDuration,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +32,7 @@ class AnimatedTick extends HookWidget {
       opacity: animation,
       child: Icon(
         Icons.done_outline_rounded,
-        size: 42,
+        size: AppSizes.iconLargeSize,
         color: AppColors.black,
       ),
     );

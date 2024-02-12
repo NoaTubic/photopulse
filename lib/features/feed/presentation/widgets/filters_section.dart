@@ -6,10 +6,10 @@ import 'package:photopulse/common/presentation/app_sizes.dart';
 import 'package:photopulse/common/presentation/buttons/photo_pulse_button.dart';
 import 'package:photopulse/common/presentation/photo_pulse_text_form_field.dart';
 import 'package:photopulse/common/presentation/text/text.dart';
-import 'package:photopulse/common/presentation/user_avatar.dart';
-import 'package:photopulse/features/auth/domain/entities/user.dart';
 import 'package:photopulse/features/feed/data/repositories/feed_repository.dart';
 import 'package:photopulse/features/feed/domain/notifiers/filters_notifier.dart';
+import 'package:photopulse/features/feed/presentation/widgets/user_dropdown.dart';
+import 'package:photopulse/generated/l10n.dart';
 import 'package:photopulse/theme/app_colors.dart';
 
 class FiltersSection extends HookConsumerWidget {
@@ -71,17 +71,17 @@ class FiltersSection extends HookConsumerWidget {
                     onTap: onClose,
                     child: const Icon(
                       Icons.close,
-                      size: 30,
+                      size: AppSizes.iconMediumSize,
                     ),
                   ),
                 ),
-                const Center(
+                Center(
                   child: TitleText(
-                    'Filters',
+                    S.current.filters,
                   ),
                 ),
                 const SizedBox(height: AppSizes.smallSpacing),
-                const BodyText('Filter by user'),
+                BodyText(S.current.filter_by_user),
                 const SizedBox(height: AppSizes.smallSpacing),
                 const Row(
                   children: [
@@ -97,7 +97,7 @@ class FiltersSection extends HookConsumerWidget {
                 const SizedBox(
                   height: AppSizes.normalSpacing,
                 ),
-                const BodyText('Filter by size'),
+                BodyText(S.current.filter_by_size),
                 const SizedBox(
                   height: AppSizes.compactSpacing,
                 ),
@@ -106,8 +106,8 @@ class FiltersSection extends HookConsumerWidget {
                     Flexible(
                       child: PhotoPulseTextFormField.normalTextField(
                         controller: minSizeController,
-                        name: 'name',
-                        labelText: 'Min Size in MB',
+                        name: '',
+                        labelText: S.current.min_size_in_mb,
                       ),
                     ),
                     const SizedBox(
@@ -116,15 +116,15 @@ class FiltersSection extends HookConsumerWidget {
                     Flexible(
                       child: PhotoPulseTextFormField.normalTextField(
                           controller: maxSizeController,
-                          name: 'name',
-                          labelText: 'Max Size in MB'),
+                          name: '',
+                          labelText: S.current.max_size_in_mb),
                     )
                   ],
                 ),
                 const SizedBox(
                   height: AppSizes.normalSpacing,
                 ),
-                const BodyText('Filter by date'),
+                BodyText(S.current.filter_by_date),
                 const SizedBox(
                   height: AppSizes.compactSpacing,
                 ),
@@ -132,8 +132,8 @@ class FiltersSection extends HookConsumerWidget {
                   children: [
                     Flexible(
                       child: PhotoPulseTextFormField.pickDate(
-                        labelText: 'Select date range',
-                        name: 'name',
+                        labelText: S.current.select_date_range,
+                        name: '',
                         hintText: filterState.dateTimeRange != null
                             ? ref
                                 .watch(filtersNotifierProvider)
@@ -145,40 +145,7 @@ class FiltersSection extends HookConsumerWidget {
                         textEditingController: TextEditingController(),
                         prefixIcon: const Icon(Icons.date_range),
                         onTap: () async {
-                          final DateTimeRange? dateRange =
-                              await showDateRangePicker(
-                            context: context,
-                            firstDate: DateTime(2023),
-                            lastDate: DateTime(2100),
-                            initialDateRange: DateTimeRange(
-                              start: DateTime.now(),
-                              end: DateTime.now().add(const Duration(days: 7)),
-                            ),
-                            builder: (BuildContext context, Widget? child) {
-                              return Theme(
-                                data: ThemeData.light().copyWith(
-                                  colorScheme: ColorScheme.light(
-                                    primary: AppColors.black,
-                                    onPrimary: AppColors.white,
-                                    primaryContainer:
-                                        AppColors.black.withOpacity(0.2),
-                                    secondaryContainer:
-                                        AppColors.black.withOpacity(0.2),
-                                    surface: AppColors.white,
-                                    onSurface: AppColors.black,
-                                  ),
-                                  dialogBackgroundColor: AppColors.white,
-                                  textButtonTheme: TextButtonThemeData(
-                                    style: TextButton.styleFrom(
-                                      foregroundColor: AppColors.black,
-                                    ),
-                                  ),
-                                ),
-                                child: child!,
-                              );
-                            },
-                          );
-                          filtersNotifier.addDateTimeRange(dateRange);
+                          await _pickDateRange(context, filtersNotifier);
                         },
                       ),
                     ),
@@ -192,7 +159,7 @@ class FiltersSection extends HookConsumerWidget {
                     ref.read(feedRepositoryProvider).getFeed();
                     ref.pop();
                   },
-                  label: 'Apply filters',
+                  label: S.current.apply_filters,
                 ),
                 const SizedBox(
                   height: AppSizes.smallSpacing,
@@ -204,46 +171,39 @@ class FiltersSection extends HookConsumerWidget {
       ),
     );
   }
-}
 
-class UserDropdown extends ConsumerWidget {
-  const UserDropdown({super.key});
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final users = ref.watch(filtersNotifierProvider).users;
-    return DropdownButtonFormField<PhotoPulseUser>(
-      decoration: InputDecoration(
-        enabledBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(AppSizes.normalCircularRadius),
-            borderSide: BorderSide(color: AppColors.black)),
+  Future<void> _pickDateRange(
+      BuildContext context, FiltersNotifier filtersNotifier) async {
+    final DateTimeRange? dateRange = await showDateRangePicker(
+      context: context,
+      firstDate: DateTime(2023),
+      lastDate: DateTime(2100),
+      initialDateRange: DateTimeRange(
+        start: DateTime.now(),
+        end: DateTime.now().add(const Duration(days: 7)),
       ),
-      value: ref.watch(filtersNotifierProvider).selectedUser,
-      hint: const BodyText(
-        'Select User',
-        isBold: true,
-      ),
-      onChanged: (PhotoPulseUser? user) =>
-          ref.read(filtersNotifierProvider.notifier).changeUser(user),
-      items: users.map<DropdownMenuItem<PhotoPulseUser>>((PhotoPulseUser user) {
-        return DropdownMenuItem<PhotoPulseUser>(
-          value: user,
-          child: SizedBox(
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                UserAvatar(
-                  user.photoUrl,
-                  height: 20,
-                  width: 20,
-                ),
-                const SizedBox(width: AppSizes.smallSpacing),
-                Text(user.username),
-              ],
+      builder: (BuildContext context, Widget? child) {
+        return Theme(
+          data: ThemeData.light().copyWith(
+            colorScheme: ColorScheme.light(
+              primary: AppColors.black,
+              onPrimary: AppColors.white,
+              primaryContainer: AppColors.black.withOpacity(0.2),
+              secondaryContainer: AppColors.black.withOpacity(0.2),
+              surface: AppColors.white,
+              onSurface: AppColors.black,
+            ),
+            dialogBackgroundColor: AppColors.white,
+            textButtonTheme: TextButtonThemeData(
+              style: TextButton.styleFrom(
+                foregroundColor: AppColors.black,
+              ),
             ),
           ),
+          child: child!,
         );
-      }).toList(),
+      },
     );
+    filtersNotifier.addDateTimeRange(dateRange);
   }
 }

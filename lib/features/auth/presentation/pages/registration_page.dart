@@ -2,7 +2,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
-import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:photopulse/common/domain/providers/form_submission_enabled_provider.dart';
 import 'package:photopulse/common/domain/router/navigation_extensions.dart';
@@ -28,7 +27,7 @@ final formKey = GlobalKey<FormBuilderState>();
 final emailToVerifyProvider = StateProvider<String?>((_) => null);
 
 class RegistrationPage extends ConsumerWidget {
-  static const routeName = '/registration';
+  static const routeName = Pages.registration;
 
   const RegistrationPage({super.key});
 

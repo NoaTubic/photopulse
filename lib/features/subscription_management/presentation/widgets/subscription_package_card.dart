@@ -6,6 +6,7 @@ import 'package:photopulse/common/presentation/text/text.dart';
 import 'package:photopulse/features/subscription_management/domain/entities/subscription_package.dart';
 import 'package:photopulse/features/subscription_management/domain/notifiers/subscription_management_notifier.dart';
 import 'package:photopulse/features/subscription_management/presentation/widgets/subscription_package_card_text_row.dart';
+import 'package:photopulse/generated/l10n.dart';
 import 'package:photopulse/theme/app_colors.dart';
 import 'package:photopulse/features/subscription_management/presentation/widgets/animated_tick.dart';
 
@@ -50,7 +51,7 @@ class SubscriptionPackageCard extends ConsumerWidget {
                     : 2,
               ),
             ),
-            width: 280,
+            width: AppSizes.subscriptionPackageCardWidth,
             child: Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -58,8 +59,8 @@ class SubscriptionPackageCard extends ConsumerWidget {
                 children: [
                   Image.asset(
                     subscription.iconPath,
-                    width: 100,
-                    height: 100,
+                    width: AppSizes.subscriptionPackageIconSize,
+                    height: AppSizes.subscriptionPackageIconSize,
                     color: AppColors.black,
                   ),
                   TitleText(
@@ -67,15 +68,15 @@ class SubscriptionPackageCard extends ConsumerWidget {
                   ),
                   const Gap(AppSizes.normalSpacing),
                   SubscriptionPackageCardTextRow(
-                    label: 'Upload size:',
+                    label: S.current.upload_size,
                     value: subscription.uploadSizeLimit.toString(),
                   ),
                   SubscriptionPackageCardTextRow(
-                    label: 'Daily Upload Limit:',
+                    label: S.current.daily_upload_limit,
                     value: subscription.dailyUploadLimit.toString(),
                   ),
                   SubscriptionPackageCardTextRow(
-                    label: 'Maximum spend:',
+                    label: S.current.max_spend,
                     value: subscription.maxSpend.toString(),
                   ),
                   AnimatedTick(

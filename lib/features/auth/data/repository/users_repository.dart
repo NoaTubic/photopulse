@@ -6,6 +6,7 @@ import 'package:photopulse/common/data/firebase_error_resolver.dart';
 import 'package:photopulse/common/data/firestore/firestore_collections.dart';
 import 'package:photopulse/features/auth/domain/entities/user.dart';
 import 'package:photopulse/features/subscription_management/domain/entities/subscription_package.dart';
+import 'package:photopulse/generated/l10n.dart';
 import 'package:q_architecture/q_architecture.dart';
 
 final usersRepositoryProvider = Provider<UsersRepository>(
@@ -59,10 +60,12 @@ class UserRepositoryImpl with ErrorToFailureMixin implements UsersRepository {
   StreamFailureOr<PhotoPulseUser> getSignedInUser() {
     final currentUser = _firebaseAuth.currentUser;
 
-    return _usersCollection.doc(currentUser?.uid).snapshots().map((snapshot) {
-      final user = snapshot.data();
-      return user != null ? Right(user) : Left(Failure.generic());
-    });
+    return _usersCollection.doc(currentUser?.uid).snapshots().map(
+      (snapshot) {
+        final user = snapshot.data();
+        return user != null ? Right(user) : Left(Failure.generic());
+      },
+    );
   }
 
   @override
@@ -81,13 +84,15 @@ class UserRepositoryImpl with ErrorToFailureMixin implements UsersRepository {
 
           final userDoc = await userDocRef.get();
           if (userDoc.exists) {
-            await userDocRef.update({
-              'subscriptionPackage': subscriptionPackage.name,
-              'isFirstLogin': false,
-              'canChangeSubscription': false,
-            });
+            await userDocRef.update(
+              {
+                'subscriptionPackage': subscriptionPackage.name,
+                'isFirstLogin': false,
+                'canChangeSubscription': false,
+              },
+            );
           } else {
-            throw Exception('User not found');
+            return Left(Failure(title: S.current.user_not_found));
           }
 
           return const Right(null);

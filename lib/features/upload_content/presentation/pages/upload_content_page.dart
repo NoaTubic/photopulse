@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
-import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:photopulse/common/domain/router/navigation_extensions.dart';
 import 'package:photopulse/common/domain/router/pages.dart';
@@ -18,7 +16,7 @@ import 'package:photopulse/features/gallery/domain/notifier/gallery_notifier.dar
 import 'package:photopulse/features/gallery/domain/notifier/gallery_state.dart';
 import 'package:photopulse/features/navbar/domain/notifiers/nav_bar_visibility_provider.dart';
 import 'package:photopulse/features/subscription_management/presentation/widgets/current_subscription_section.dart';
-import 'package:photopulse/theme/app_colors.dart';
+import 'package:photopulse/generated/l10n.dart';
 import 'package:q_architecture/q_architecture.dart';
 
 class UploadContentPage extends ConsumerWidget {
@@ -47,13 +45,13 @@ class UploadContentPage extends ConsumerWidget {
     );
 
     return PhotoPulseScaffold(
-      appBar: const PhotoPulseAppBar(
-        title: 'Upload Content',
+      appBar: PhotoPulseAppBar(
+        title: S.current.upload_content,
       ),
       body: AnimatedColumn(
         children: [
           PhotoPulseTile(
-            label: 'Take photo',
+            label: S.current.take_photo,
             icon: Icons.camera_alt_rounded,
             onTap: () {
               ref
@@ -66,7 +64,7 @@ class UploadContentPage extends ConsumerWidget {
           ),
           const SizedBox(height: AppSizes.normalSpacing),
           PhotoPulseTile(
-            label: 'Load from gallery',
+            label: S.current.load_from_gallery,
             icon: Icons.image_rounded,
             onTap: () => _onGalleryButtonTapped(
               ref.watch(galleryNotifierProvider),
@@ -75,10 +73,10 @@ class UploadContentPage extends ConsumerWidget {
             ),
           ),
           const SizedBox(height: AppSizes.normalSpacing),
-          const PhotoPulseExpansionTile(
-            title: 'Subscription Package',
+          PhotoPulseExpansionTile(
+            title: S.current.subscription_package,
             leadingIcon: Icons.edit_calendar_outlined,
-            children: [
+            children: const [
               CurrentSubscriptionSection(),
             ],
           ),
@@ -97,11 +95,9 @@ void _onGalleryButtonTapped(
     showDialog(
       barrierDismissible: false,
       context: context,
-      builder: (context) => const PermissionsDialog(
-        errorText:
-            'For uploading photos, please allow the PhotoPulse app access to your gallery.',
-        helperText:
-            'Go to you settings > Permissions and turn on the photos and storage',
+      builder: (context) => PermissionsDialog(
+        errorText: S.current.gallery_permissions_dialog_error,
+        helperText: S.current.gallery_permissions_dialog_helper,
         icon: Icons.camera_alt_rounded,
       ),
     );

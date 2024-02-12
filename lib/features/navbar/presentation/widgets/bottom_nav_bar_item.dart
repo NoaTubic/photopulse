@@ -3,7 +3,7 @@ import 'package:photopulse/common/domain/router/pages.dart';
 import 'package:photopulse/features/feed/presentation/pages/home_page.dart';
 import 'package:photopulse/features/profile/presentation/pages/profile_page.dart';
 import 'package:photopulse/features/upload_content/presentation/pages/upload_content_page.dart';
-import 'package:photopulse/theme/app_colors.dart';
+import 'package:photopulse/generated/l10n.dart';
 
 enum BottomNavBarItem {
   home(
@@ -53,13 +53,13 @@ enum BottomNavBarItem {
   String get title {
     switch (this) {
       case BottomNavBarItem.home:
-        return 'Home';
+        return S.current.home_tab;
       case BottomNavBarItem.uploadContent:
-        return 'Upload content';
+        return S.current.upload_content_tab;
       case BottomNavBarItem.search:
-        return 'Search';
+        return S.current.search_tab;
       case BottomNavBarItem.profile:
-        return 'Profile';
+        return S.current.profile_tab;
       default:
         return '';
     }

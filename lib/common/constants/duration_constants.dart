@@ -9,4 +9,5 @@ abstract class DurationConstants {
   static const Duration createPostSubmitDuration = Duration(seconds: 2);
   static const Duration visibilityAnimationDuration =
       Duration(milliseconds: 500);
+  static const Duration downloadContentAnimation = Duration(seconds: 1);
 }

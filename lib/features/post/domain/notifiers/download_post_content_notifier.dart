@@ -1,9 +1,9 @@
 import 'dart:io';
-
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:photopulse/common/data/services/permission_handler_service.dart';
 import 'package:photopulse/features/post/data/repositories/post_repository.dart';
+import 'package:photopulse/generated/l10n.dart';
 import 'package:q_architecture/base_state_notifier.dart';
 import 'package:q_architecture/q_architecture.dart';
 
@@ -40,8 +40,8 @@ class DownloadPostContentNotifier extends BaseStateNotifier<void> {
       onPermissionDenied: () => state = BaseState.error(
         Failure.generic(
           title: Platform.isAndroid
-              ? 'For downloading post content, please allow the Care Connect app to access your gallery and storage.'
-              : 'For downloading post content, please allow the Care Connect app to access your gallery.',
+              ? S.current.download_post_content_permission_gallery_and_storage
+              : S.current.download_post_content_permission_gallery,
         ),
       ),
       permission: permission,

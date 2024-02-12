@@ -3,8 +3,6 @@ import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:photopulse/features/post/domain/entities/author.dart';
 
-// part 'post.g.dart';
-
 @JsonSerializable(explicitToJson: true)
 class Post extends Equatable {
   final String? id;
@@ -57,10 +55,6 @@ class Post extends Equatable {
         tags,
         url,
       ];
-
-  // factory Post.fromJson(Map<String, dynamic> json) => _$PostFromJson(json);
-
-  // Map<String, dynamic> toJson() => _$PostToJson(this);
 
   factory Post.fromJson(Map<String, dynamic> json) => Post(
         id: json['id'] as String,

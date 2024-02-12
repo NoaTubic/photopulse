@@ -1,6 +1,4 @@
-import 'dart:developer';
 import 'dart:io';
-
 import 'package:dio/dio.dart';
 import 'package:either_dart/either.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -12,7 +10,6 @@ import 'package:photopulse/common/data/firestore/firestore_collections.dart';
 import 'package:photopulse/common/data/providers.dart';
 import 'package:photopulse/features/auth/data/repository/users_repository.dart';
 import 'package:photopulse/features/post/domain/entities/post.dart';
-import 'package:q_architecture/paginated_notifier.dart';
 import 'package:q_architecture/q_architecture.dart';
 
 final postRepositoryProvider = Provider<PostRepository>((ref) {

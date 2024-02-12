@@ -6,9 +6,9 @@ import 'package:photopulse/common/presentation/text/body_text.dart';
 import 'package:photopulse/features/camera/domain/notifiers/camera_notifier.dart';
 import 'package:photopulse/features/camera/presentation/pages/photo_pulse_camera.dart';
 import 'package:photopulse/features/camera/presentation/pages/review_photo_page.dart';
-import 'package:photopulse/features/gallery/domain/notifier/gallery_notifier.dart';
 import 'package:photopulse/features/post/presentation/pages/post_page.dart';
 import 'package:photopulse/features/upload_content/presentation/pages/upload_content_page.dart';
+import 'package:photopulse/generated/l10n.dart';
 import 'package:photopulse/theme/app_colors.dart';
 
 class ReviewContentButtons extends ConsumerWidget {
@@ -46,34 +46,22 @@ class ReviewContentButtons extends ConsumerWidget {
                 foregroundColor: AppColors.white,
               ),
               child: BodyText(
-                isGallery ? 'Cancel' : 'Retake',
+                isGallery
+                    ? S.current.body_text_cancel
+                    : S.current.body_text_retake,
                 color: AppColors.white,
               ),
             ),
           ),
           Flexible(
             child: SizedBox(
-              width: 160,
-              height: 40,
+              width: AppSizes.reviewContentButtonSectionWidth,
+              height: AppSizes.reviewContentButtonSectionHeight,
               child: FilledButton(
                 onPressed: () {
                   ref.pushNamed(
                     '${UploadContentPage.routeName}${PhotoPulseCamera.routeName}${ReviewPhotoPage.routeName}${PostPage.routeName}',
                   );
-                  // Navigator.of(context).pushNamed(
-                  //   PostPage.routeName,
-                  //   arguments: cameraState.isVideo
-                  //       ? FamilyPost.onlyVideo(
-                  //           cameraState.content?.path ?? '',
-                  //           thumbnail: await VideoThumbnail.thumbnailData(
-                  //             video: cameraState.content?.path ?? '',
-                  //           ),
-                  //         )
-                  //       : FamilyPost.onlyPhoto(
-                  //           cameraState.content?.path ?? '',
-                  //           thumbnailUrl: cameraState.content?.path ?? '',
-                  //         ),
-                  // );
                 },
                 style: FilledButton.styleFrom(
                   backgroundColor: AppColors.black,
@@ -86,7 +74,7 @@ class ReviewContentButtons extends ConsumerWidget {
                 child: Row(
                   children: [
                     BodyText(
-                      'Create post',
+                      S.current.create_post_button,
                       color: AppColors.white,
                     ),
                     const Spacer(),

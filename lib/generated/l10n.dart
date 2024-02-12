@@ -300,11 +300,31 @@ class S {
     );
   }
 
+  /// `Reset Password`
+  String get reset_password {
+    return Intl.message(
+      'Reset Password',
+      name: 'reset_password',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Go back`
   String get go_back {
     return Intl.message(
       'Go back',
       name: 'go_back',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Cancel`
+  String get cancel {
+    return Intl.message(
+      'Cancel',
+      name: 'cancel',
       desc: '',
       args: [],
     );
@@ -325,6 +345,576 @@ class S {
     return Intl.message(
       'Server error occurred',
       name: 'server_error',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Google sign in cancelled`
+  String get google_sign_in_canceled {
+    return Intl.message(
+      'Google sign in cancelled',
+      name: 'google_sign_in_canceled',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `User not found`
+  String get user_not_found {
+    return Intl.message(
+      'User not found',
+      name: 'user_not_found',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Home`
+  String get home_tab {
+    return Intl.message(
+      'Home',
+      name: 'home_tab',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Upload content`
+  String get upload_content_tab {
+    return Intl.message(
+      'Upload content',
+      name: 'upload_content_tab',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Search`
+  String get search_tab {
+    return Intl.message(
+      'Search',
+      name: 'search_tab',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Profile`
+  String get profile_tab {
+    return Intl.message(
+      'Profile',
+      name: 'profile_tab',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Maximum image size is 50 MB`
+  String get max_image_size_error {
+    return Intl.message(
+      'Maximum image size is 50 MB',
+      name: 'max_image_size_error',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Canceled`
+  String get canceled {
+    return Intl.message(
+      'Canceled',
+      name: 'canceled',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `For taking photos, please allow the PhotoPulse app access to your camera.`
+  String get camera_permissions_dialog_error_text {
+    return Intl.message(
+      'For taking photos, please allow the PhotoPulse app access to your camera.',
+      name: 'camera_permissions_dialog_error_text',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Go to your settings > Permissions and turn on the camera.`
+  String get camera_permissions_dialog_helper_text {
+    return Intl.message(
+      'Go to your settings > Permissions and turn on the camera.',
+      name: 'camera_permissions_dialog_helper_text',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Cancel`
+  String get body_text_cancel {
+    return Intl.message(
+      'Cancel',
+      name: 'body_text_cancel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Retake`
+  String get body_text_retake {
+    return Intl.message(
+      'Retake',
+      name: 'body_text_retake',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Create post`
+  String get create_post_button {
+    return Intl.message(
+      'Create post',
+      name: 'create_post_button',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Create new post`
+  String get create_new_post {
+    return Intl.message(
+      'Create new post',
+      name: 'create_new_post',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Update post`
+  String get update_post {
+    return Intl.message(
+      'Update post',
+      name: 'update_post',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Title`
+  String get post_title {
+    return Intl.message(
+      'Title',
+      name: 'post_title',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Caption`
+  String get post_caption {
+    return Intl.message(
+      'Caption',
+      name: 'post_caption',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Hashtags`
+  String get post_hashtags {
+    return Intl.message(
+      'Hashtags',
+      name: 'post_hashtags',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Upload Content`
+  String get upload_content {
+    return Intl.message(
+      'Upload Content',
+      name: 'upload_content',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Take photo`
+  String get take_photo {
+    return Intl.message(
+      'Take photo',
+      name: 'take_photo',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Retake`
+  String get retake {
+    return Intl.message(
+      'Retake',
+      name: 'retake',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Load from gallery`
+  String get load_from_gallery {
+    return Intl.message(
+      'Load from gallery',
+      name: 'load_from_gallery',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Subscription Package`
+  String get subscription_package {
+    return Intl.message(
+      'Subscription Package',
+      name: 'subscription_package',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `For uploading photos, please allow the PhotoPulse app access to your gallery.`
+  String get gallery_permissions_dialog_error {
+    return Intl.message(
+      'For uploading photos, please allow the PhotoPulse app access to your gallery.',
+      name: 'gallery_permissions_dialog_error',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Go to you settings > Permissions and turn on the photos and storage`
+  String get gallery_permissions_dialog_helper {
+    return Intl.message(
+      'Go to you settings > Permissions and turn on the photos and storage',
+      name: 'gallery_permissions_dialog_helper',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Something went wrong`
+  String get error_message_something_wrong {
+    return Intl.message(
+      'Something went wrong',
+      name: 'error_message_something_wrong',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please choose a prescription package`
+  String get headline_choose_prescription_package {
+    return Intl.message(
+      'Please choose a prescription package',
+      name: 'headline_choose_prescription_package',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Choose package`
+  String get button_label_choose_package {
+    return Intl.message(
+      'Choose package',
+      name: 'button_label_choose_package',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Upload size:`
+  String get upload_size {
+    return Intl.message(
+      'Upload size:',
+      name: 'upload_size',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Uploaded today:`
+  String get uploaded_today {
+    return Intl.message(
+      'Uploaded today:',
+      name: 'uploaded_today',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Daily upload limit:`
+  String get daily_upload_limit {
+    return Intl.message(
+      'Daily upload limit:',
+      name: 'daily_upload_limit',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Maximum spend:`
+  String get max_spend {
+    return Intl.message(
+      'Maximum spend:',
+      name: 'max_spend',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Change subscription`
+  String get change_subscription {
+    return Intl.message(
+      'Change subscription',
+      name: 'change_subscription',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `You can only change your subscription package once a day`
+  String get change_subscription_error {
+    return Intl.message(
+      'You can only change your subscription package once a day',
+      name: 'change_subscription_error',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `There are no posts yet.\nAdd a new one on 'Upload  content Tab'.`
+  String get no_posts_yet {
+    return Intl.message(
+      'There are no posts yet.\nAdd a new one on \'Upload  content Tab\'.',
+      name: 'no_posts_yet',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `For downloading photos, please allow the PhotoPulse app access to your storage.`
+  String get storage_permission_dialog_error_text {
+    return Intl.message(
+      'For downloading photos, please allow the PhotoPulse app access to your storage.',
+      name: 'storage_permission_dialog_error_text',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Go to you settings > Permissions and turn on the photos and storage`
+  String get storage_permission_dialog_helper_text {
+    return Intl.message(
+      'Go to you settings > Permissions and turn on the photos and storage',
+      name: 'storage_permission_dialog_helper_text',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Successfully saved`
+  String get successfully_saved {
+    return Intl.message(
+      'Successfully saved',
+      name: 'successfully_saved',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Whoops`
+  String get whoops {
+    return Intl.message(
+      'Whoops',
+      name: 'whoops',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Filters`
+  String get filters {
+    return Intl.message(
+      'Filters',
+      name: 'filters',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Filter by user`
+  String get filter_by_user {
+    return Intl.message(
+      'Filter by user',
+      name: 'filter_by_user',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Min Size in MB`
+  String get min_size_in_mb {
+    return Intl.message(
+      'Min Size in MB',
+      name: 'min_size_in_mb',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Max Size in MB`
+  String get max_size_in_mb {
+    return Intl.message(
+      'Max Size in MB',
+      name: 'max_size_in_mb',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Filter by size`
+  String get filter_by_size {
+    return Intl.message(
+      'Filter by size',
+      name: 'filter_by_size',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Filter by date`
+  String get filter_by_date {
+    return Intl.message(
+      'Filter by date',
+      name: 'filter_by_date',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Select date range`
+  String get select_date_range {
+    return Intl.message(
+      'Select date range',
+      name: 'select_date_range',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Apply filters`
+  String get apply_filters {
+    return Intl.message(
+      'Apply filters',
+      name: 'apply_filters',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Select user`
+  String get select_user {
+    return Intl.message(
+      'Select user',
+      name: 'select_user',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `View more`
+  String get view_more {
+    return Intl.message(
+      'View more',
+      name: 'view_more',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `View less`
+  String get view_less {
+    return Intl.message(
+      'View less',
+      name: 'view_less',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Edit post`
+  String get edit_post {
+    return Intl.message(
+      'Edit post',
+      name: 'edit_post',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Download post`
+  String get download_post {
+    return Intl.message(
+      'Download post',
+      name: 'download_post',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Delete post`
+  String get delete_post {
+    return Intl.message(
+      'Delete post',
+      name: 'delete_post',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `For downloading post content, please allow the Care Connect app to access your gallery and storage.`
+  String get download_post_content_permission_gallery_and_storage {
+    return Intl.message(
+      'For downloading post content, please allow the Care Connect app to access your gallery and storage.',
+      name: 'download_post_content_permission_gallery_and_storage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `For downloading post content, please allow the Care Connect app to access your gallery.`
+  String get download_post_content_permission_gallery {
+    return Intl.message(
+      'For downloading post content, please allow the Care Connect app to access your gallery.',
+      name: 'download_post_content_permission_gallery',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Are you sure you want to go back?`
+  String get confirm_go_back_title {
+    return Intl.message(
+      'Are you sure you want to go back?',
+      name: 'confirm_go_back_title',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `If you go back now, the changes you made will be lost.`
+  String get changes_will_be_lost_body {
+    return Intl.message(
+      'If you go back now, the changes you made will be lost.',
+      name: 'changes_will_be_lost_body',
       desc: '',
       args: [],
     );
