@@ -152,21 +152,24 @@ class _PostHeader extends ConsumerWidget {
             color: AppColors.white,
             surfaceTintColor: AppColors.white,
             itemBuilder: (context) {
-              if (ref.watch(isAnonymousProvider) ||
-                  (ref.read(userProvider)!.id != post.author.id &&
-                      ref.read(userProvider)!.isAdmin == false)) {
-                return [
-                  _buildPopupMenuItem(FeedMenuItem.download),
-                ];
-              } else if (ref.read(userProvider)!.isAdmin == true) {
-                return FeedMenuItem.values
-                    .map((item) => _buildPopupMenuItem(item))
-                    .toList();
-              } else {
-                return FeedMenuItem.values
-                    .map((item) => _buildPopupMenuItem(item))
-                    .toList();
-              }
+              return FeedMenuItem.values
+                  .map((item) => _buildPopupMenuItem(item))
+                  .toList();
+              // if (ref.watch(isAnonymousProvider) ||
+              //     (ref.read(userProvider)!.id != post.author.id &&
+              //         ref.read(userProvider)!.isAdmin == false)) {
+              //   return [
+              //     _buildPopupMenuItem(FeedMenuItem.download),
+              //   ];
+              // } else if (ref.read(userProvider)!.isAdmin == true) {
+              //   return FeedMenuItem.values
+              //       .map((item) => _buildPopupMenuItem(item))
+              //       .toList();
+              // } else {
+              //   return FeedMenuItem.values
+              //       .map((item) => _buildPopupMenuItem(item))
+              //       .toList();
+              // }
             },
             onSelected: (value) {
               if (value == FeedMenuItem.editPost) {
