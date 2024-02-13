@@ -42,28 +42,12 @@ class FiltersNotifier extends SimpleStateNotifier<FiltersState> {
     );
   }
 
-  void addMinImageSize(double? minImageSizeMb) {
-    state = state.copyWith(minImageSizeMb: minImageSizeMb);
+  void toggleDateDescending() {
+    state = state.copyWith(dateDescending: !state.dateDescending);
   }
 
-  void removeMinImageSize() {
-    state = state.copyWith(minImageSizeMb: null);
-  }
-
-  void addMaxImageSize(double? maxImageSizeMb) {
-    state = state.copyWith(maxImageSizeMb: maxImageSizeMb);
-  }
-
-  void removeMaxImageSize() {
-    state = state.copyWith(maxImageSizeMb: null);
-  }
-
-  void addDateTimeRange(DateTimeRange? dateTimeRange) {
-    state = state.copyWith(dateTimeRange: dateTimeRange);
-  }
-
-  void removeDateTimeRange() {
-    state = state.copyWith(dateTimeRange: null);
+  void toggleSizeDescending() {
+    state = state.copyWith(sizeDescending: !state.sizeDescending);
   }
 
   void addAuthorId(String? authorId) {

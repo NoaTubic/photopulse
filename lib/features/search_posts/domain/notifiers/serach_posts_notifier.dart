@@ -5,18 +5,18 @@ import 'package:photopulse/features/search_posts/domain/notifiers/search_query_p
 import 'package:photopulse/features/post/domain/entities/post.dart';
 import 'package:q_architecture/paginated_notifier.dart';
 
-final feedNotifierProvider =
-    StateNotifierProvider<FeedNotifier, PaginatedState<Post>>(
-  (ref) => FeedNotifier(
+final searchPostsNotifierProvider =
+    StateNotifierProvider<SearchPostsNotifier, PaginatedState<Post>>(
+  (ref) => SearchPostsNotifier(
     ref.watch(feedRepositoryProvider),
     ref,
-  )..getInitialList(),
+  ),
 );
 
-class FeedNotifier extends PaginatedNotifier<Post, Object> {
+class SearchPostsNotifier extends PaginatedNotifier<Post, Object> {
   final FeedRepository _feedRepository;
 
-  FeedNotifier(this._feedRepository, Ref ref)
+  SearchPostsNotifier(this._feedRepository, Ref ref)
       : super(ref, const PaginatedState.loaded([]));
 
   @override

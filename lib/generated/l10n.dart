@@ -780,21 +780,41 @@ class S {
     );
   }
 
-  /// `Filter by size`
-  String get filter_by_size {
+  /// `Sort by size`
+  String get sort_by_size {
     return Intl.message(
-      'Filter by size',
-      name: 'filter_by_size',
+      'Sort by size',
+      name: 'sort_by_size',
       desc: '',
       args: [],
     );
   }
 
-  /// `Filter by date`
-  String get filter_by_date {
+  /// `Sort by date`
+  String get sort_by_date {
     return Intl.message(
-      'Filter by date',
-      name: 'filter_by_date',
+      'Sort by date',
+      name: 'sort_by_date',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Ascending`
+  String get ascending {
+    return Intl.message(
+      'Ascending',
+      name: 'ascending',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Descending`
+  String get descending {
+    return Intl.message(
+      'Descending',
+      name: 'descending',
       desc: '',
       args: [],
     );

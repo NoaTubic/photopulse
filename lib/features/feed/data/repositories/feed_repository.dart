@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:either_dart/either.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:photopulse/features/feed/data/builders/post_query_builder.dart';
+import 'package:photopulse/features/search_posts/data/builders/post_query_builder.dart';
 import 'package:photopulse/features/post/domain/entities/post.dart';
 import 'package:q_architecture/paginated_notifier.dart';
 import 'package:q_architecture/q_architecture.dart';
@@ -15,16 +15,13 @@ abstract class FeedRepository {
   PaginatedEitherFailureOr<Post> getFeed({
     int? page,
     String hashtag,
-    double? minImageSizeMb,
-    double? maxImageSizeMb,
-    DateTimeRange? dateTimeRange,
+    bool dateDescending,
+    bool sizeDescending,
     String? authorId,
   });
 }
 
 class FeedRepositoryImpl implements FeedRepository {
-  // final FirebaseFirestore _firestore = FirebaseFirestore.instance;
-  // final _postsCollection = FirestoreCollections.postsCollection;
   final PostQueryBuilder _postQueryBuilder;
 
   FeedRepositoryImpl(this._postQueryBuilder);
@@ -37,15 +34,15 @@ class FeedRepositoryImpl implements FeedRepository {
   PaginatedEitherFailureOr<Post> getFeed({
     int? page,
     String? hashtag,
-    double? minImageSizeMb,
-    double? maxImageSizeMb,
-    DateTimeRange? dateTimeRange,
+    bool dateDescending = false,
+    bool sizeDescending = false,
     String? authorId,
   }) async {
+    _postQueryBuilder.reset();
     _postQueryBuilder.addHashtagFilter(hashtag ?? '');
-    _postQueryBuilder.addSizeFilter(minImageSizeMb, maxImageSizeMb);
-    _postQueryBuilder.addDateTimeRangeFilter(dateTimeRange);
     _postQueryBuilder.addAuthorFilter(authorId);
+    _postQueryBuilder.sortByDate(dateDescending);
+    _postQueryBuilder.sortBySize(sizeDescending);
 
     Query query = _postQueryBuilder.build();
 

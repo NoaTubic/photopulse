@@ -19,9 +19,8 @@ mixin _$FiltersState {
   List<PhotoPulseUser> get users => throw _privateConstructorUsedError;
   PhotoPulseUser? get selectedUser => throw _privateConstructorUsedError;
   List<String>? get hashtags => throw _privateConstructorUsedError;
-  double? get minImageSizeMb => throw _privateConstructorUsedError;
-  double? get maxImageSizeMb => throw _privateConstructorUsedError;
-  DateTimeRange? get dateTimeRange => throw _privateConstructorUsedError;
+  bool get dateDescending => throw _privateConstructorUsedError;
+  bool get sizeDescending => throw _privateConstructorUsedError;
   String? get authorId => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -39,9 +38,8 @@ abstract class $FiltersStateCopyWith<$Res> {
       {List<PhotoPulseUser> users,
       PhotoPulseUser? selectedUser,
       List<String>? hashtags,
-      double? minImageSizeMb,
-      double? maxImageSizeMb,
-      DateTimeRange? dateTimeRange,
+      bool dateDescending,
+      bool sizeDescending,
       String? authorId});
 }
 
@@ -61,9 +59,8 @@ class _$FiltersStateCopyWithImpl<$Res, $Val extends FiltersState>
     Object? users = null,
     Object? selectedUser = freezed,
     Object? hashtags = freezed,
-    Object? minImageSizeMb = freezed,
-    Object? maxImageSizeMb = freezed,
-    Object? dateTimeRange = freezed,
+    Object? dateDescending = null,
+    Object? sizeDescending = null,
     Object? authorId = freezed,
   }) {
     return _then(_value.copyWith(
@@ -79,18 +76,14 @@ class _$FiltersStateCopyWithImpl<$Res, $Val extends FiltersState>
           ? _value.hashtags
           : hashtags // ignore: cast_nullable_to_non_nullable
               as List<String>?,
-      minImageSizeMb: freezed == minImageSizeMb
-          ? _value.minImageSizeMb
-          : minImageSizeMb // ignore: cast_nullable_to_non_nullable
-              as double?,
-      maxImageSizeMb: freezed == maxImageSizeMb
-          ? _value.maxImageSizeMb
-          : maxImageSizeMb // ignore: cast_nullable_to_non_nullable
-              as double?,
-      dateTimeRange: freezed == dateTimeRange
-          ? _value.dateTimeRange
-          : dateTimeRange // ignore: cast_nullable_to_non_nullable
-              as DateTimeRange?,
+      dateDescending: null == dateDescending
+          ? _value.dateDescending
+          : dateDescending // ignore: cast_nullable_to_non_nullable
+              as bool,
+      sizeDescending: null == sizeDescending
+          ? _value.sizeDescending
+          : sizeDescending // ignore: cast_nullable_to_non_nullable
+              as bool,
       authorId: freezed == authorId
           ? _value.authorId
           : authorId // ignore: cast_nullable_to_non_nullable
@@ -111,9 +104,8 @@ abstract class _$$FiltersStateImplCopyWith<$Res>
       {List<PhotoPulseUser> users,
       PhotoPulseUser? selectedUser,
       List<String>? hashtags,
-      double? minImageSizeMb,
-      double? maxImageSizeMb,
-      DateTimeRange? dateTimeRange,
+      bool dateDescending,
+      bool sizeDescending,
       String? authorId});
 }
 
@@ -131,9 +123,8 @@ class __$$FiltersStateImplCopyWithImpl<$Res>
     Object? users = null,
     Object? selectedUser = freezed,
     Object? hashtags = freezed,
-    Object? minImageSizeMb = freezed,
-    Object? maxImageSizeMb = freezed,
-    Object? dateTimeRange = freezed,
+    Object? dateDescending = null,
+    Object? sizeDescending = null,
     Object? authorId = freezed,
   }) {
     return _then(_$FiltersStateImpl(
@@ -149,18 +140,14 @@ class __$$FiltersStateImplCopyWithImpl<$Res>
           ? _value._hashtags
           : hashtags // ignore: cast_nullable_to_non_nullable
               as List<String>?,
-      minImageSizeMb: freezed == minImageSizeMb
-          ? _value.minImageSizeMb
-          : minImageSizeMb // ignore: cast_nullable_to_non_nullable
-              as double?,
-      maxImageSizeMb: freezed == maxImageSizeMb
-          ? _value.maxImageSizeMb
-          : maxImageSizeMb // ignore: cast_nullable_to_non_nullable
-              as double?,
-      dateTimeRange: freezed == dateTimeRange
-          ? _value.dateTimeRange
-          : dateTimeRange // ignore: cast_nullable_to_non_nullable
-              as DateTimeRange?,
+      dateDescending: null == dateDescending
+          ? _value.dateDescending
+          : dateDescending // ignore: cast_nullable_to_non_nullable
+              as bool,
+      sizeDescending: null == sizeDescending
+          ? _value.sizeDescending
+          : sizeDescending // ignore: cast_nullable_to_non_nullable
+              as bool,
       authorId: freezed == authorId
           ? _value.authorId
           : authorId // ignore: cast_nullable_to_non_nullable
@@ -176,9 +163,8 @@ class _$FiltersStateImpl implements _FiltersState {
       {required final List<PhotoPulseUser> users,
       this.selectedUser,
       final List<String>? hashtags,
-      this.minImageSizeMb,
-      this.maxImageSizeMb,
-      this.dateTimeRange,
+      required this.dateDescending,
+      required this.sizeDescending,
       this.authorId})
       : _users = users,
         _hashtags = hashtags;
@@ -204,17 +190,15 @@ class _$FiltersStateImpl implements _FiltersState {
   }
 
   @override
-  final double? minImageSizeMb;
+  final bool dateDescending;
   @override
-  final double? maxImageSizeMb;
-  @override
-  final DateTimeRange? dateTimeRange;
+  final bool sizeDescending;
   @override
   final String? authorId;
 
   @override
   String toString() {
-    return 'FiltersState(users: $users, selectedUser: $selectedUser, hashtags: $hashtags, minImageSizeMb: $minImageSizeMb, maxImageSizeMb: $maxImageSizeMb, dateTimeRange: $dateTimeRange, authorId: $authorId)';
+    return 'FiltersState(users: $users, selectedUser: $selectedUser, hashtags: $hashtags, dateDescending: $dateDescending, sizeDescending: $sizeDescending, authorId: $authorId)';
   }
 
   @override
@@ -226,12 +210,10 @@ class _$FiltersStateImpl implements _FiltersState {
             (identical(other.selectedUser, selectedUser) ||
                 other.selectedUser == selectedUser) &&
             const DeepCollectionEquality().equals(other._hashtags, _hashtags) &&
-            (identical(other.minImageSizeMb, minImageSizeMb) ||
-                other.minImageSizeMb == minImageSizeMb) &&
-            (identical(other.maxImageSizeMb, maxImageSizeMb) ||
-                other.maxImageSizeMb == maxImageSizeMb) &&
-            (identical(other.dateTimeRange, dateTimeRange) ||
-                other.dateTimeRange == dateTimeRange) &&
+            (identical(other.dateDescending, dateDescending) ||
+                other.dateDescending == dateDescending) &&
+            (identical(other.sizeDescending, sizeDescending) ||
+                other.sizeDescending == sizeDescending) &&
             (identical(other.authorId, authorId) ||
                 other.authorId == authorId));
   }
@@ -242,9 +224,8 @@ class _$FiltersStateImpl implements _FiltersState {
       const DeepCollectionEquality().hash(_users),
       selectedUser,
       const DeepCollectionEquality().hash(_hashtags),
-      minImageSizeMb,
-      maxImageSizeMb,
-      dateTimeRange,
+      dateDescending,
+      sizeDescending,
       authorId);
 
   @JsonKey(ignore: true)
@@ -259,9 +240,8 @@ abstract class _FiltersState implements FiltersState {
       {required final List<PhotoPulseUser> users,
       final PhotoPulseUser? selectedUser,
       final List<String>? hashtags,
-      final double? minImageSizeMb,
-      final double? maxImageSizeMb,
-      final DateTimeRange? dateTimeRange,
+      required final bool dateDescending,
+      required final bool sizeDescending,
       final String? authorId}) = _$FiltersStateImpl;
 
   @override
@@ -271,11 +251,9 @@ abstract class _FiltersState implements FiltersState {
   @override
   List<String>? get hashtags;
   @override
-  double? get minImageSizeMb;
+  bool get dateDescending;
   @override
-  double? get maxImageSizeMb;
-  @override
-  DateTimeRange? get dateTimeRange;
+  bool get sizeDescending;
   @override
   String? get authorId;
   @override

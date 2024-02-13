@@ -47,6 +47,7 @@ class PostNotifier extends BaseStateNotifier<void> {
               caption: postFormData.caption,
               tags: tags),
         ),
+        globalLoading: true,
       );
     } else {
       await execute(
@@ -61,6 +62,7 @@ class PostNotifier extends BaseStateNotifier<void> {
             sizeInMB: file?.sizeInMB ?? post!.sizeInMB,
           ),
         ),
+        globalLoading: true,
       );
     }
   }

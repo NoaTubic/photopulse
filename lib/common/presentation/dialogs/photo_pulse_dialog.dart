@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:photopulse/common/presentation/app_sizes.dart';
 import 'package:photopulse/common/presentation/buttons/photo_pulse_button.dart';
+import 'package:photopulse/common/presentation/buttons/photo_pulse_text_button.dart';
 import 'package:photopulse/common/presentation/text/body_text.dart';
 import 'package:photopulse/common/presentation/text/headline_text.dart';
 import 'package:photopulse/theme/app_colors.dart';
@@ -28,7 +29,7 @@ class PhotoPulseDialog extends StatelessWidget {
   final bool? disableBack;
 
   const PhotoPulseDialog({
-    Key? key,
+    super.key,
     this.topWidget,
     required this.title,
     this.bodyText,
@@ -47,7 +48,7 @@ class PhotoPulseDialog extends StatelessWidget {
     this.cancelButtonAction,
     this.buttonsPadding = EdgeInsets.zero,
     this.disableBack = false,
-  }) : super(key: key);
+  });
 
   factory PhotoPulseDialog.discardChanges({
     required WidgetRef ref,
@@ -91,12 +92,29 @@ class PhotoPulseDialog extends StatelessWidget {
     );
   }
 
-  factory PhotoPulseDialog.postSuccessful() {
-    return const PhotoPulseDialog(
+  factory PhotoPulseDialog.postSuccessful(VoidCallback onConfirmPressed) {
+    return PhotoPulseDialog(
+      mainPadding: const EdgeInsets.all(AppSizes.bodyPaddingHorizontal),
       disableBack: true,
       title: 'Post successful',
-      topWidget: Icon(Icons.task_alt_rounded),
-      bodyText: 'You content was posted to the Family Feed',
+      body: Column(
+        children: [
+          const SizedBox(height: AppSizes.smallSpacing),
+          Icon(
+            Icons.check_circle_rounded,
+            color: AppColors.black,
+            size: AppSizes.iconLargeSize,
+          ),
+          const SizedBox(height: AppSizes.normalSpacing),
+          const BodyText(
+            'Your content was posted to the feed.',
+            isCentered: true,
+            isBold: true,
+          ),
+          const SizedBox(height: AppSizes.mediumSpacing),
+          PhotoPulseTextButton(onTap: onConfirmPressed, label: 'Ok')
+        ],
+      ),
       removeBottomBodyPadding: true,
     );
   }
@@ -142,7 +160,7 @@ class PhotoPulseDialog extends StatelessWidget {
                 const SizedBox(height: AppSizes.normalSpacing),
                 HeadlineText(
                   title,
-                  isBold: false,
+                  isBold: true,
                   isCentered: true,
                   color: AppColors.black,
                 ),
@@ -198,7 +216,7 @@ class _Buttons extends StatelessWidget {
   final EdgeInsets buttonsPadding;
 
   const _Buttons({
-    Key? key,
+    super.key,
     required this.topButtonText,
     required this.topButtonAction,
     this.shouldTopActionPop = true,
@@ -207,7 +225,7 @@ class _Buttons extends StatelessWidget {
     required this.cancelButtonText,
     required this.cancelButtonAction,
     required this.buttonsPadding,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

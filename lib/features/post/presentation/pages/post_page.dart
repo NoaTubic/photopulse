@@ -7,6 +7,7 @@ import 'package:photopulse/common/constants/constants.dart';
 import 'package:photopulse/common/constants/duration_constants.dart';
 import 'package:photopulse/common/domain/router/navigation_extensions.dart';
 import 'package:photopulse/common/domain/router/pages.dart';
+import 'package:photopulse/common/domain/utils/base_state_extensions.dart';
 import 'package:photopulse/common/domain/utils/form_key_extensions.dart';
 import 'package:photopulse/common/presentation/animated_widgets/animated_column.dart';
 import 'package:photopulse/common/presentation/app_sizes.dart';
@@ -17,6 +18,7 @@ import 'package:photopulse/common/presentation/photo_pulse_scaffold.dart';
 import 'package:photopulse/features/camera/domain/notifiers/camera_notifier.dart';
 import 'package:photopulse/features/feed/presentation/widgets/feed_image.dart';
 import 'package:photopulse/features/gallery/domain/notifier/gallery_notifier.dart';
+import 'package:photopulse/features/navbar/domain/notifiers/nav_bar_visibility_provider.dart';
 import 'package:photopulse/features/post/domain/entities/post.dart';
 import 'package:photopulse/features/post/domain/notifiers/post_notifier.dart';
 import 'package:photopulse/features/post/forms/post_form_config.dart';
@@ -29,14 +31,14 @@ final isNextEnabled = StateProvider.autoDispose<bool>((_) => false);
 
 final isPostChanged = StateProvider.autoDispose<bool>((_) => false);
 
-final formKey = GlobalKey<FormBuilderState>();
-
 class PostPage extends HookConsumerWidget {
   static const routeName = Pages.postPage;
 
   final Post? post;
 
-  const PostPage({super.key, this.post});
+  PostPage({super.key, this.post});
+
+  final formKey = GlobalKey<FormBuilderState>();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -44,8 +46,10 @@ class PostPage extends HookConsumerWidget {
         ref.watch(galleryNotifierProvider).content;
     ref.listen(postNotifierProvider, (previous, next) {
       return switch (next) {
-        BaseData() => _finishPostSubmitting(context, ref),
-        _ => ref.pop(),
+        BaseData() => post != null
+            ? _finishPostEditing(context, ref)
+            : _finishPostSubmitting(context, ref),
+        _ => null,
       };
     });
     final postChanged = ref.watch(isPostChanged);
@@ -140,6 +144,7 @@ class PostPage extends HookConsumerWidget {
                                 ),
                           ),
                           isEnabled: ref.watch(isNextEnabled) && postChanged,
+                          isLoading: ref.read(postNotifierProvider).isLoading,
                           label: post != null
                               ? S.current.update_post
                               : S.current.create_post_button,
@@ -170,25 +175,41 @@ class PostPage extends HookConsumerWidget {
     BuildContext context,
   ) {
     if (formKey.isInitial() || !ref.read(isPostChanged)) {
-      Navigator.of(context).pop();
+      ref.pop();
     } else {
       PhotoPulseDialog.discardChanges(
         ref: ref,
-        onConfirmPressed: () => Navigator.of(context).pop(),
+        onConfirmPressed: () => ref.pop(),
         title: S.current.confirm_go_back_title,
         bodyText: S.current.changes_will_be_lost_body,
       ).show(context);
     }
   }
 
+  void _finishPostEditing(
+    BuildContext context,
+    WidgetRef ref,
+  ) {
+    final timer = Timer(DurationConstants.createPostSubmitDuration, () {
+      ref.pop();
+    });
+    PhotoPulseDialog.postSuccessful(ref.pop).show(context).whenComplete(() {
+      timer.cancel();
+      Navigator.of(context).pop();
+    });
+  }
+
   void _finishPostSubmitting(
     BuildContext context,
     WidgetRef ref,
   ) {
-    final timer = Timer(DurationConstants.createPostSubmitDuration, () {});
-    PhotoPulseDialog.postSuccessful()
-        .show(context)
-        .whenComplete(() => timer.cancel());
+    final timer = Timer(DurationConstants.createPostSubmitDuration, () {
+      ref.read(navBarVisibilityProvider.notifier).toggleNavBarVisibility();
+      ref.pushNamed('/');
+    });
+    PhotoPulseDialog.postSuccessful(ref.pop).show(context).whenComplete(() {
+      timer.cancel();
+    });
   }
 
   void _refreshNextEnabled(WidgetRef ref) => WidgetsBinding.instance

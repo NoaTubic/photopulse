@@ -29,8 +29,6 @@ class UploadContentPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final isUploadLimitReached =
-        ref.watch(userProvider.notifier).isUploadLimitReached;
     final isAnonymousUser = ref.watch(isAnonymousProvider);
     ref.listen<GalleryState>(
       galleryNotifierProvider,
@@ -65,7 +63,8 @@ class UploadContentPage extends ConsumerWidget {
                     label: S.current.take_photo,
                     icon: Icons.camera_alt_rounded,
                     onTap: () => CommandExecutor(
-                      condition: isUploadLimitReached,
+                      condition:
+                          ref.read(userProvider.notifier).isUploadLimitReached,
                       trueCommand: UploadContentCommand(
                           ref: ref, context: context, isGallery: false),
                       falseCommand: ShowToastCommand(
@@ -77,7 +76,8 @@ class UploadContentPage extends ConsumerWidget {
                     label: S.current.load_from_gallery,
                     icon: Icons.image_rounded,
                     onTap: () => CommandExecutor(
-                      condition: isUploadLimitReached,
+                      condition:
+                          ref.read(userProvider.notifier).isUploadLimitReached,
                       trueCommand: UploadContentCommand(
                           ref: ref, context: context, isGallery: true),
                       falseCommand: ShowToastCommand(

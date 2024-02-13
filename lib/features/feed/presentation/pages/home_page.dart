@@ -34,12 +34,6 @@ class HomePage extends HookConsumerWidget {
         }
       },
     );
-    useEffect(() {
-      WidgetsBinding.instance.addPostFrameCallback((_) {
-        ref.read(feedNotifierProvider.notifier).getInitialList();
-      });
-      return () {};
-    }, const []);
 
     return PhotoPulseScaffold(
       padding: const EdgeInsets.symmetric(
@@ -61,12 +55,8 @@ class HomePage extends HookConsumerWidget {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const Icon(
-                      Icons.remove_circle_rounded,
-                    ),
-                    const SizedBox(
-                      height: AppSizes.smallSpacing,
-                    ),
+                    const Icon(Icons.remove_circle_rounded),
+                    const SizedBox(height: AppSizes.smallSpacing),
                     SizedBox(
                       width: MediaQuery.of(context).size.width * 0.8,
                       child: BodyText(

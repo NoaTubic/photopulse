@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -11,9 +10,10 @@ import 'package:photopulse/common/presentation/photo_pulse_text_form_field.dart'
 import 'package:photopulse/common/presentation/text/text.dart';
 
 import 'package:photopulse/features/feed/domain/notifiers/feed_notifier.dart';
-import 'package:photopulse/features/feed/domain/notifiers/search_query_provider.dart';
-import 'package:photopulse/features/feed/presentation/widgets/filters_section.dart';
+import 'package:photopulse/features/search_posts/domain/notifiers/search_query_provider.dart';
+import 'package:photopulse/features/search_posts/presentation/widgets/filters_section.dart';
 import 'package:photopulse/features/feed/presentation/widgets/post_tile.dart';
+import 'package:photopulse/features/search_posts/domain/notifiers/serach_posts_notifier.dart';
 import 'package:photopulse/theme/app_colors.dart';
 import 'package:q_architecture/q_architecture.dart';
 
@@ -38,82 +38,84 @@ class SearchPostsPage extends HookConsumerWidget {
     }, [searchController]);
 
     return PhotoPulseScaffold(
+      padding: const EdgeInsets.symmetric(
+        horizontal: AppSizes.zero,
+        vertical: AppSizes.bodyPaddingVertical,
+      ),
       body: Column(
         children: [
           AnimatedColumn(
             children: [
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Flexible(
-                    flex: 4,
-                    child: PhotoPulseTextFormField.normalTextField(
-                      controller: searchController,
-                      name: 'name',
-                      labelText: 'Search by hashtag',
-                      prefixIcon: GestureDetector(
-                        onTap: () => searchQuery.isNotEmpty
-                            ? ref
-                                .read(feedNotifierProvider.notifier)
-                                .getListOrFailure(1)
-                            : null,
-                        child: Icon(
-                          Icons.search_rounded,
-                          color: AppColors.black,
-                        ),
-                      ),
-                      suffixIcon: searchQuery.isNotEmpty
-                          ? GestureDetector(
-                              onTap: () => searchController.clear(),
-                              child: Icon(
-                                Icons.close,
-                                color: AppColors.black,
-                              ),
-                            )
-                          : null,
-                    ),
-                  ),
-                  Flexible(
-                    flex: 1,
-                    child: IconButton(
-                      onPressed: () async {
-                        showDialog(
-                          context: context,
-                          builder: (context) => Dialog(
-                            insetPadding: const EdgeInsets.symmetric(
-                              horizontal: AppSizes.bodyPaddingHorizontal,
-                            ),
-                            child: FiltersSection(
-                              onClose: () {
-                                ref.pop();
-                              },
-                            ),
+              Padding(
+                padding: const EdgeInsets.symmetric(
+                    horizontal: AppSizes.bodyPaddingHorizontal),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Flexible(
+                      flex: 4,
+                      child: PhotoPulseTextFormField.normalTextField(
+                        controller: searchController,
+                        name: 'name',
+                        labelText: 'Search by hashtag',
+                        prefixIcon: GestureDetector(
+                          onTap: () => searchQuery.isNotEmpty
+                              ? ref
+                                  .read(searchPostsNotifierProvider.notifier)
+                                  .getInitialList()
+                              : null,
+                          child: Icon(
+                            Icons.search_rounded,
+                            color: AppColors.black,
                           ),
-                        );
-                      },
-                      icon: const Icon(Icons.filter_list_rounded, size: 38),
-                      color: AppColors.black,
+                        ),
+                        suffixIcon: searchQuery.isNotEmpty
+                            ? GestureDetector(
+                                onTap: () => searchController.clear(),
+                                child: Icon(
+                                  Icons.close,
+                                  color: AppColors.black,
+                                ),
+                              )
+                            : null,
+                      ),
                     ),
-                  ),
-                ],
+                    Flexible(
+                      flex: 1,
+                      child: IconButton(
+                        onPressed: () async {
+                          showDialog(
+                            context: context,
+                            builder: (context) => Dialog(
+                              insetPadding: const EdgeInsets.symmetric(
+                                horizontal: AppSizes.bodyPaddingHorizontal,
+                              ),
+                              child: FiltersSection(
+                                onClose: () {
+                                  ref.pop();
+                                },
+                              ),
+                            ),
+                          );
+                        },
+                        icon: const Icon(Icons.filter_list_rounded, size: 38),
+                        color: AppColors.black,
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ],
           ),
-          // Center(
-          //   child: FilledButton(
-          //       onPressed: () =>
-          //           ref.read(feedNotifierProvider.notifier).getInitialList(),
-          //       child: const Text('asdasdasd')),
-          // ),
           Expanded(
             child: PaginatedListView(
-              stateNotifierProvider: feedNotifierProvider,
+              stateNotifierProvider: searchPostsNotifierProvider,
               itemBuilder: (context, post, page) => PostTile(post: post),
               loading: const Center(
                 child: CircularProgressIndicator(),
               ),
-              emptyListBuilder: (context) => Center(
+              emptyListBuilder: (_) => Center(
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -134,7 +136,7 @@ class SearchPostsPage extends HookConsumerWidget {
                   ],
                 ),
               ),
-              onError: (context, asd, a) => const FeedError(),
+              onError: (_, __, ___) => const FeedError(),
               scrollPhysics: const BouncingScrollPhysics(),
             ),
           )
