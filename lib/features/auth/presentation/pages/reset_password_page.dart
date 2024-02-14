@@ -35,9 +35,8 @@ class ResetPasswordPage extends HookConsumerWidget {
       body: AnimatedColumn(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          const BodyText('Forgot your password?'),
-          const BodyText(
-              'Please enter your email address to reset your password.'),
+          BodyText(S.current.forgot_password),
+          BodyText(S.current.forgot_password_helper),
           const SizedBox(height: AppSizes.mediumSpacing),
           FormBuilder(
             key: formKey,

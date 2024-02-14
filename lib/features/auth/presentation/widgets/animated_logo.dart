@@ -1,5 +1,7 @@
 import 'package:flutter/widgets.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:photopulse/common/constants/duration_constants.dart';
+import 'package:photopulse/common/presentation/app_sizes.dart';
 import 'package:photopulse/common/presentation/image_assets.dart';
 import 'package:photopulse/common/presentation/text/display_text.dart';
 import 'package:photopulse/common/utils/build_context_extensions.dart';
@@ -12,11 +14,10 @@ class AnimatedLogo extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    final animationController = useAnimationController(
-      duration: const Duration(milliseconds: 2500),
-    );
+    final animationController =
+        useAnimationController(duration: DurationConstants.logoAnimation);
 
-    final zoomRotationAnimation = Tween(begin: 0.0, end: 1.0).animate(
+    final zoomRotationAnimation = _scaleTween.animate(
       CurvedAnimation(
         parent: animationController,
         curve: Curves.easeInOut,
@@ -38,27 +39,28 @@ class AnimatedLogo extends HookWidget {
                 child: Image.asset(
                   ImageAssets.pulse,
                   color: AppColors.black.withOpacity(0.2),
-                  width: 180,
-                  height: 180,
+                  width: AppSizes.pulseLogoSize,
+                  height: AppSizes.pulseLogoSize,
                 ),
               ),
             ),
             Padding(
-              padding: const EdgeInsets.only(top: 28),
+              padding: const EdgeInsets.only(top: AppSizes.mediumLargeSpacing),
               child: Center(
                 child: AnimatedBuilder(
                   animation: zoomRotationAnimation,
                   builder: (context, child) {
-                    final scale = 0.55 + 0.5 * zoomRotationAnimation.value;
-                    final rotation = 3 * 3.14 * zoomRotationAnimation.value;
+                    final scale = _scaleFactor * zoomRotationAnimation.value;
+                    final rotation =
+                        _rotationFactor * zoomRotationAnimation.value;
                     return Transform.scale(
                       scale: scale,
                       child: Transform.rotate(
                         angle: rotation,
                         child: Image.asset(
                           ImageAssets.cameraLogo,
-                          width: 120,
-                          height: 120,
+                          width: AppSizes.cameraLogoSize,
+                          height: AppSizes.cameraLogoSize,
                           color: AppColors.black,
                         ),
                       ),
@@ -83,3 +85,7 @@ class AnimatedLogo extends HookWidget {
     );
   }
 }
+
+const double _scaleFactor = 0.55 + 0.5;
+const double _rotationFactor = 3 * 3.14;
+final Tween<double> _scaleTween = Tween(begin: 0.0, end: 1.0);

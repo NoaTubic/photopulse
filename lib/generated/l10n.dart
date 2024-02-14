@@ -250,6 +250,26 @@ class S {
     );
   }
 
+  /// `Please enter your email address to reset your password.`
+  String get forgot_password_helper {
+    return Intl.message(
+      'Please enter your email address to reset your password.',
+      name: 'forgot_password_helper',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Password reset email has been sent`
+  String get password_reset_email_sent {
+    return Intl.message(
+      'Password reset email has been sent',
+      name: 'password_reset_email_sent',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Continue without signing in`
   String get anonymous_login {
     return Intl.message(
@@ -325,6 +345,66 @@ class S {
     return Intl.message(
       'Cancel',
       name: 'cancel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Verify Email`
+  String get verify_email {
+    return Intl.message(
+      'Verify Email',
+      name: 'verify_email',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Almost ready to start using`
+  String get verify_email_subtitle {
+    return Intl.message(
+      'Almost ready to start using',
+      name: 'verify_email_subtitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please check your inbox and verify your email address.`
+  String get verify_email_helper {
+    return Intl.message(
+      'Please check your inbox and verify your email address.',
+      name: 'verify_email_helper',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Didn't receive verification email?  `
+  String get didnt_receive_verification_email {
+    return Intl.message(
+      'Didn\'t receive verification email?  ',
+      name: 'didnt_receive_verification_email',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Resend `
+  String get resend_verification_email {
+    return Intl.message(
+      'Resend ',
+      name: 'resend_verification_email',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Verification email has been sent`
+  String get verification_email_resend_success {
+    return Intl.message(
+      'Verification email has been sent',
+      name: 'verification_email_resend_success',
       desc: '',
       args: [],
     );

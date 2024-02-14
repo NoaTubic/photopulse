@@ -4,6 +4,7 @@ import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:photopulse/common/domain/router/navigation_extensions.dart';
+import 'package:photopulse/common/domain/router/pages.dart';
 import 'package:photopulse/common/domain/utils/base_state_extensions.dart';
 import 'package:photopulse/common/domain/utils/form_key_extensions.dart';
 import 'package:photopulse/common/presentation/animated_widgets/animated_column.dart';
@@ -29,7 +30,7 @@ import 'package:photopulse/generated/l10n.dart';
 import 'package:q_architecture/base_state_notifier.dart';
 
 class LoginPage extends HookConsumerWidget {
-  static const routeName = '/login';
+  static const routeName = Pages.login;
 
   LoginPage({super.key});
 
@@ -65,8 +66,8 @@ class LoginPage extends HookConsumerWidget {
       accountRecoveryNotifierProvider,
       (_, next) async {
         return switch (next) {
-          BaseData() => const PhotoPulseToast(
-              message: 'Password reset email sent!',
+          BaseData() => PhotoPulseToast(
+              message: S.current.password_reset_email_sent,
             ).show(context),
           BaseError(failure: final failure) => PhotoPulseToast(
               message: failure.title,

@@ -7,6 +7,7 @@ abstract class AppSizes {
   static const double compactSpacing = 12;
   static const double normalSpacing = 16;
   static const double mediumSpacing = 24;
+  static const double mediumLargeSpacing = 28;
   static const double largeSpacing = 32;
   static const double xLargeSpacing = 48;
   static const double bodyPaddingHorizontal = 20;
@@ -43,9 +44,11 @@ abstract class AppSizes {
   static const double userDropdownAvatarSize = 20;
   static const double hashtagAddButtonWidth = 64;
   static const double hashtagAddButtonHeight = 22;
-
   static const double reviewContentButtonSectionWidth = 160;
   static const double reviewContentButtonSectionHeight = 40;
+  static const double cameraLogoSize = 120;
+  static const double pulseLogoSize = 180;
+  static const double verifyEmailIconSize = 80;
 
   static const double navigationRailWidth = 330;
   static const double navigationRailBreakingPoint = 640;

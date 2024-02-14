@@ -10,4 +10,5 @@ abstract class DurationConstants {
   static const Duration visibilityAnimationDuration =
       Duration(milliseconds: 500);
   static const Duration downloadContentAnimation = Duration(seconds: 1);
+  static const Duration logoAnimation = Duration(milliseconds: 2500);
 }
