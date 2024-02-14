@@ -84,7 +84,7 @@ dev_dependencies:
   state_notifier_test: ^0.0.10
 
 flutter_native_splash:
-  image: assets/images/logo.png
+  image: assets/images/launcher.png
   color: "#FFFFFF"
   android_12:
     color: "#FFFFFF"
