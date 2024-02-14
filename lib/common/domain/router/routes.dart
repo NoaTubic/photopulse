@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:photopulse/features/admin/presentation/pages/admin_page.dart';
 import 'package:photopulse/features/auth/presentation/pages/login_page.dart';
 import 'package:photopulse/features/auth/presentation/pages/registration_page.dart';
+import 'package:photopulse/features/auth/presentation/pages/verify_email_page.dart';
 import 'package:photopulse/features/camera/presentation/pages/photo_pulse_camera.dart';
 import 'package:photopulse/features/camera/presentation/pages/review_photo_page.dart';
 import 'package:photopulse/features/navbar/presentation/pages/nav_bar.dart';
@@ -136,20 +137,22 @@ List<RouteBase> getRoutes({
       ),
       GoRoute(
         path: LoginPage.routeName,
-        builder: (context, state) => const LoginPage(),
+        builder: (context, state) => LoginPage(),
         routes: [
           GoRoute(
-            path: ResetPasswordPage.routeName.lastPart,
+            path: ResetPasswordPage.routeName.removeLeadingSlash,
             builder: (context, state) => const ResetPasswordPage(),
           ),
           GoRoute(
             path: RegistrationPage.routeName.lastPart,
             builder: (context, state) => const RegistrationPage(),
+            routes: [
+              GoRoute(
+                path: VerifyEmailPage.routeName.removeLeadingSlash,
+                builder: (context, state) => const VerifyEmailPage(),
+              ),
+            ],
           ),
         ],
       ),
-      // GoRoute(
-      //   path: SubscriptionManagementPage.routeName,
-      //   builder: (context, state) => const SubscriptionManagementPage(),
-      // ),
     ];

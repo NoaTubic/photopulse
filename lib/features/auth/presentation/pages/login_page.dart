@@ -8,7 +8,6 @@ import 'package:photopulse/common/domain/utils/base_state_extensions.dart';
 import 'package:photopulse/common/domain/utils/form_key_extensions.dart';
 import 'package:photopulse/common/presentation/animated_widgets/animated_column.dart';
 import 'package:photopulse/common/presentation/app_sizes.dart';
-import 'package:photopulse/common/utils/build_context_extensions.dart';
 import 'package:photopulse/common/presentation/buttons/photo_pulse_button.dart';
 import 'package:photopulse/common/presentation/common_validators.dart';
 import 'package:photopulse/common/presentation/or_divider.dart';
@@ -16,8 +15,6 @@ import 'package:photopulse/common/presentation/photo_pulse_scaffold.dart';
 import 'package:photopulse/common/presentation/buttons/photo_pulse_text_button.dart';
 import 'package:photopulse/common/presentation/photo_pulse_text_form_field.dart';
 import 'package:photopulse/common/presentation/photo_pulse_toast.dart';
-import 'package:photopulse/common/presentation/text/display_text.dart';
-import 'package:photopulse/common/presentation/text/text.dart';
 import 'package:photopulse/features/auth/domain/notifiers/account_recovery_notifier.dart';
 import 'package:photopulse/features/auth/domain/notifiers/auth_notifier.dart';
 import 'package:photopulse/features/auth/domain/notifiers/auth_state.dart';
@@ -26,18 +23,17 @@ import 'package:photopulse/features/auth/domain/notifiers/user_notifier.dart';
 import 'package:photopulse/features/auth/forms/login_form_config.dart';
 import 'package:photopulse/features/auth/presentation/pages/registration_page.dart';
 import 'package:photopulse/features/auth/presentation/pages/reset_password_page.dart';
+import 'package:photopulse/features/auth/presentation/widgets/animated_logo.dart';
 import 'package:photopulse/features/auth/presentation/widgets/social_login_section.dart';
 import 'package:photopulse/generated/l10n.dart';
-import 'package:photopulse/theme/app_colors.dart';
-import 'package:photopulse/theme/theme.dart';
 import 'package:q_architecture/base_state_notifier.dart';
 
-final formKey = GlobalKey<FormBuilderState>();
-
-class LoginPage extends ConsumerWidget {
+class LoginPage extends HookConsumerWidget {
   static const routeName = '/login';
 
-  const LoginPage({super.key});
+  LoginPage({super.key});
+
+  final formKey = GlobalKey<FormBuilderState>();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -87,24 +83,9 @@ class LoginPage extends ConsumerWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const SizedBox(
-                height: AppSizes.mediumSpacing,
-              ),
-              Icon(
-                Icons.photo_camera_rounded,
-                size: 100,
-                color: AppColors.black,
-              ),
-              DisplayText(
-                S.current.photo_pulse,
-                color: AppColors.black,
-                fontSize:
-                    context.isLargerThanMobile ? FontSizes.s30 : FontSizes.s24,
-                fontFamily: Fonts.fontLogo,
-              ),
-              const SizedBox(
-                height: AppSizes.mediumSpacing,
-              ),
+              const AnimatedLogo(),
+              const SizedBox(height: AppSizes.normalSpacing),
+              const SizedBox(height: AppSizes.mediumSpacing),
               FormBuilder(
                 key: formKey,
                 child: Column(
@@ -153,6 +134,9 @@ class LoginPage extends ConsumerWidget {
                       onTap: () => ref.pushNamed(
                         '$routeName${RegistrationPage.routeName}',
                       ),
+                    ),
+                    const SizedBox(
+                      height: AppSizes.normalSpacing,
                     ),
                     const OrDivider(),
                     const SocialLoginSection(),

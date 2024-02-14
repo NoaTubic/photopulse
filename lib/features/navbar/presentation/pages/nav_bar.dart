@@ -55,7 +55,7 @@ class NavBar extends ConsumerWidget {
                 child: Row(
                   children: [
                     Image.asset(
-                      ImageAssets.logo,
+                      ImageAssets.cameraLogo,
                       height: context.isLargerThanMobile
                           ? AppSizes.appLogoWeb
                           : AppSizes.appLogo,

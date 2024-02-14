@@ -19,6 +19,7 @@ import 'package:photopulse/common/presentation/photo_pulse_text_form_field.dart'
 import 'package:photopulse/common/presentation/photo_pulse_toast.dart';
 import 'package:photopulse/features/auth/domain/notifiers/registration_notifier.dart';
 import 'package:photopulse/features/auth/forms/registration_form_config.dart';
+import 'package:photopulse/features/auth/presentation/pages/login_page.dart';
 import 'package:photopulse/features/auth/presentation/pages/verify_email_page.dart';
 import 'package:photopulse/generated/l10n.dart';
 import 'package:q_architecture/base_state_notifier.dart';
@@ -40,7 +41,9 @@ class RegistrationPage extends ConsumerWidget {
         ref.read(emailToVerifyProvider.notifier).state = formKey
             .currentState?.fields[RegistrationFormConfig.emailKey]?.value;
         return switch (next) {
-          BaseData() => ref.pushReplacementNamed(VerifyEmailPage.routeName),
+          BaseData() => ref.pushReplacementNamed(
+              '${LoginPage.routeName}${RegistrationPage.routeName}${VerifyEmailPage.routeName}',
+            ),
           BaseError(failure: final failure) => PhotoPulseToast(
               message: failure.title,
             ).show(context),

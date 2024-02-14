@@ -25,11 +25,11 @@ PODS:
   - Firebase/Storage (10.20.0):
     - Firebase/CoreOnly
     - FirebaseStorage (~> 10.20.0)
-  - firebase_auth (4.16.0):
+  - firebase_auth (4.17.4):
     - Firebase/Auth (= 10.20.0)
     - firebase_core
     - Flutter
-  - firebase_core (2.25.3):
+  - firebase_core (2.25.4):
     - Firebase/CoreOnly (= 10.20.0)
     - Flutter
   - firebase_storage (11.6.4):
@@ -90,6 +90,8 @@ PODS:
   - flutter_native_splash (0.0.1):
     - Flutter
   - flutter_secure_storage (6.0.0):
+    - Flutter
+  - gallery_saver (0.0.1):
     - Flutter
   - google_sign_in_ios (0.0.1):
     - Flutter
@@ -190,6 +192,7 @@ DEPENDENCIES:
   - flutter_image_compress_common (from `.symlinks/plugins/flutter_image_compress_common/ios`)
   - flutter_native_splash (from `.symlinks/plugins/flutter_native_splash/ios`)
   - flutter_secure_storage (from `.symlinks/plugins/flutter_secure_storage/ios`)
+  - gallery_saver (from `.symlinks/plugins/gallery_saver/ios`)
   - google_sign_in_ios (from `.symlinks/plugins/google_sign_in_ios/darwin`)
   - image_cropper (from `.symlinks/plugins/image_cropper/ios`)
   - image_picker_ios (from `.symlinks/plugins/image_picker_ios/ios`)
@@ -260,6 +263,8 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/flutter_native_splash/ios"
   flutter_secure_storage:
     :path: ".symlinks/plugins/flutter_secure_storage/ios"
+  gallery_saver:
+    :path: ".symlinks/plugins/gallery_saver/ios"
   google_sign_in_ios:
     :path: ".symlinks/plugins/google_sign_in_ios/darwin"
   image_cropper:
@@ -294,8 +299,8 @@ SPEC CHECKSUMS:
   cloud_firestore: 29c11f5505013f7027beb0b46121d1f3d2933e34
   device_info_plus: c6fb39579d0f423935b0c9ce7ee2f44b71b9fce6
   Firebase: 10c8cb12fb7ad2ae0c09ffc86cd9c1ab392a0031
-  firebase_auth: 50e205714f2f30db4908f68c485e4cbf1c8c2701
-  firebase_core: 96a734ae596de989b81a66f8a205f54485263555
+  firebase_auth: 29a10d4129d53aa690c10dbd838ed1a059ef0c9b
+  firebase_core: a46c312d8bae4defa3d009b2aa7b5b413aeb394e
   firebase_storage: cab6237615be4a29f042640cc6364d54e1b6ffc4
   FirebaseAppCheckInterop: 69fc7d8f6a1cbfa973efb8d1723651de30d12525
   FirebaseAuth: 9c5c400d2c3055d8ae3a0284944c86fa95d48dac
@@ -312,10 +317,11 @@ SPEC CHECKSUMS:
   FirebaseFirestoreInternalBinary: fd49261dc34f45113d26d22c16d0e4ec70259b8f
   FirebaseSharedSwift: 2fbf73618288b7a36b2014b957745dcdd781389e
   FirebaseStorage: 8505bae8ac6662474b5b50e07759fb2765c15746
-  Flutter: f04841e97a9d0b0a8025694d0796dd46242b2854
+  Flutter: e0871f40cf51350855a761d2e70bf5af5b9b5de7
   flutter_image_compress_common: ec1d45c362c9d30a3f6a0426c297f47c52007e3e
   flutter_native_splash: 52501b97d1c0a5f898d687f1646226c1f93c56ef
   flutter_secure_storage: 23fc622d89d073675f2eaa109381aefbcf5a49be
+  gallery_saver: 9fc173c9f4fcc48af53b2a9ebea1b643255be542
   google_sign_in_ios: 1bfaf6607b44cd1b24c4d4bc39719870440f9ce1
   GoogleSignIn: b232380cf495a429b8095d3178a8d5855b42e842
   GoogleUtilities: 0759d1a57ebb953965c2dfe0ba4c82e95ccc2e34

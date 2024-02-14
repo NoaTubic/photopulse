@@ -20,7 +20,7 @@ class SplashPage extends ConsumerWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Center(
-            child: Image.asset(ImageAssets.logo),
+            child: Image.asset(ImageAssets.cameraLogo),
           ),
         ],
       ),

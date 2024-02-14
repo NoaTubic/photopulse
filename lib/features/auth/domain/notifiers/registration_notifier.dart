@@ -39,4 +39,6 @@ class RegistrationNotifier extends BaseStateNotifier<void> {
       },
     );
   }
+
+  Future<void> verifyEmail() async => _authRepository.verifyEmail();
 }
