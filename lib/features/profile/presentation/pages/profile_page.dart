@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:photopulse/common/domain/router/navigation_extensions.dart';
 import 'package:photopulse/common/domain/router/pages.dart';
@@ -109,32 +108,34 @@ class ProfilePage extends ConsumerWidget {
                       user?.photoUrl,
                       width: AppSizes.largeAvatarRadius,
                     ),
-                    const SizedBox(height: AppSizes.normalSpacing),
+                    const SizedBox(height: AppSizes.largeSpacing),
                     Column(
                       children: [
                         PhotoPulseTile(
+                          onTap: () => showDialog(
+                            context: context,
+                            builder: (BuildContext context) =>
+                                ChangeUserInfoDialog.username(),
+                          ),
                           label: user?.username ?? '',
                           icon: Icons.person_rounded,
-                          action: PhotoPulseTextButton(
-                            onTap: () => showDialog(
-                              context: context,
-                              builder: (BuildContext context) =>
-                                  ChangeUserInfoDialog.username(),
-                            ),
-                            label: S.current.change_username,
+                          action: BodyText(
+                            S.current.change_username,
+                            isBold: true,
                           ),
                         ),
                         const SizedBox(height: AppSizes.normalSpacing),
                         PhotoPulseTile(
+                          onTap: () => showDialog(
+                            context: context,
+                            builder: (BuildContext context) =>
+                                ChangeUserInfoDialog.email(),
+                          ),
                           label: user?.email ?? '',
                           icon: Icons.email_rounded,
-                          action: PhotoPulseTextButton(
-                            onTap: () => showDialog(
-                              context: context,
-                              builder: (BuildContext context) =>
-                                  ChangeUserInfoDialog.email(),
-                            ),
-                            label: S.current.change_email,
+                          action: BodyText(
+                            S.current.change_email,
+                            isBold: true,
                           ),
                         ),
                         const SizedBox(height: AppSizes.normalSpacing),
@@ -147,14 +148,14 @@ class ProfilePage extends ConsumerWidget {
                         ),
                         const SizedBox(height: AppSizes.normalSpacing),
                         PhotoPulseTile(
-                          label: 'Change password',
+                          onTap: () => showDialog(
+                            context: context,
+                            builder: (BuildContext context) =>
+                                ChangePasswordDialog(),
+                          ),
+                          label: S.current.change_password,
                           icon: Icons.lock_rounded,
                           action: GestureDetector(
-                            onTap: () => showDialog(
-                              context: context,
-                              builder: (BuildContext context) =>
-                                  ChangePasswordDialog(),
-                            ),
                             child: Icon(
                               Icons.keyboard_arrow_right_rounded,
                               color: AppColors.black,
@@ -162,39 +163,16 @@ class ProfilePage extends ConsumerWidget {
                           ),
                         ),
                         const SizedBox(height: AppSizes.normalSpacing),
-                        PhotoPulseTile(
-                          label: S.current.theme,
-                          icon: Icons.contrast_rounded,
-                          action: Container(
-                            decoration: BoxDecoration(
-                              border: Border.all(
-                                color: AppColors.black,
-                                width: 1,
-                              ),
-                              borderRadius: BorderRadius.circular(100),
-                              color: AppColors.white,
-                            ),
-                            height: 40,
-                            child: CupertinoSwitch(
-                              thumbColor: AppColors.black,
-                              activeColor: AppColors.black.withOpacity(0.07),
-                              value: true,
-                              onChanged: (_) {},
-                            ),
-                          ),
-                        ),
-                        const SizedBox(height: AppSizes.normalSpacing),
-                        PhotoPulseTile(
-                          label: S.current.language,
-                          icon: Icons.language_rounded,
-                          action: Icon(
-                            Icons.keyboard_arrow_down_rounded,
-                            color: AppColors.black,
-                          ),
+                        PhotoPulseExpansionTile(
+                          title: S.current.language,
+                          leadingIcon: Icons.language_rounded,
+                          children: const [
+                            // CurrentSubscriptionSection(),
+                          ],
                         ),
                       ],
                     ),
-                    const SizedBox(height: AppSizes.normalSpacing),
+                    const SizedBox(height: AppSizes.largeSpacing),
                     PhotoPulseButton.primary(
                       onTap: () =>
                           ref.read(authNotifierProvider.notifier).logout(),

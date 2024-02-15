@@ -35,9 +35,12 @@ class LogEntry {
                 ? PhotoPulseUser.fromJson(
                     json['beforeData'] as Map<String, dynamic>)
                 : Post.fromJson(json['beforeData'] as Map<String, dynamic>),
-        afterData: (json['collection'] as String) == 'users'
-            ? PhotoPulseUser.fromJson(json['afterData'] as Map<String, dynamic>)
-            : Post.fromJson(json['afterData'] as Map<String, dynamic>),
+        afterData: json['afterData'] == null
+            ? null
+            : (json['collection'] as String) == 'users'
+                ? PhotoPulseUser.fromJson(
+                    json['afterData'] as Map<String, dynamic>)
+                : Post.fromJson(json['afterData'] as Map<String, dynamic>),
       );
 
   Map<String, dynamic> toJson() => {

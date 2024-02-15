@@ -35,4 +35,9 @@ class PhotoPulseUser {
       _$PhotoPulseUserFromJson(json);
 
   Map<String, dynamic> toJson() => _$PhotoPulseUserToJson(this);
+
+  @override
+  String toString() {
+    return 'PhotoPulseUser\n id: $id \n username: $username \n email: $email \n photoUrl: $photoUrl \n isAdmin: $isAdmin \n isFirstLogin: $isFirstLogin \n subscriptionPackage: $subscriptionPackage \n dailyUploads: $dailyUploads \n maxSpend: $maxSpend \n canChangeSubscription: $canChangeSubscription \n totalUploadSizeInMB: $totalUploadSizeInMB';
+  }
 }

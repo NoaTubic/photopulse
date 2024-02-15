@@ -62,13 +62,6 @@ class RegistrationPage extends ConsumerWidget {
           children: [
             FormBuilder(
               key: formKey,
-              onChanged: () => refreshNextEnabled(
-                formKey: formKey,
-                isFormSubmissionEnabledProvider:
-                    isFormSubmissionEnabledProvider,
-                ref: ref,
-                formIdentifier: Pages.registration,
-              ),
               child: Column(
                 children: [
                   PhotoPulseTextFormField.normalTextField(
@@ -120,8 +113,6 @@ class RegistrationPage extends ConsumerWidget {
                     .read(registrationNotifierProvider.notifier)
                     .register(formMap),
               ),
-              isEnabled: ref
-                  .watch(isFormSubmissionEnabledProvider(Pages.registration)),
               isLoading: registrationState.isLoading,
             ),
             const SizedBox(

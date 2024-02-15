@@ -1050,6 +1050,16 @@ class S {
     );
   }
 
+  /// `Change password`
+  String get change_password {
+    return Intl.message(
+      'Change password',
+      name: 'change_password',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Theme`
   String get theme {
     return Intl.message(

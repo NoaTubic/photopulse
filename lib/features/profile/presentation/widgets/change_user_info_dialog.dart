@@ -5,6 +5,7 @@ import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:photopulse/common/domain/router/navigation_extensions.dart';
+import 'package:photopulse/common/domain/utils/base_state_extensions.dart';
 import 'package:photopulse/common/presentation/app_sizes.dart';
 import 'package:photopulse/common/presentation/buttons/photo_pulse_button.dart';
 import 'package:photopulse/common/presentation/buttons/photo_pulse_text_button.dart';
@@ -100,6 +101,7 @@ class ChangeUserInfoDialog extends HookConsumerWidget {
                   ref.pop();
                 }
               },
+              isLoading: ref.watch(userDataNotifierProvider).isLoading,
             ),
             const Gap(AppSizes.compactSpacing),
             PhotoPulseTextButton(

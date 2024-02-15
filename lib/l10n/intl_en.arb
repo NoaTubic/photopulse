@@ -100,6 +100,7 @@
   "admin_panel": "Admin panel",
   "change_username": "Change username",
   "change_email": "Change email",
+  "change_password": "Change password",
   "theme": "Theme",
   "language": "Language",
   "logout": "Logout",

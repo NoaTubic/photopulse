@@ -12,6 +12,7 @@ import 'package:photopulse/features/admin/domain/entities/log_entry.dart';
 import 'package:photopulse/features/admin/domain/notifiers/logs_notifier.dart';
 import 'package:photopulse/features/admin/domain/notifiers/users_notifier.dart';
 import 'package:photopulse/features/admin/presentation/widgets/admin_tab_view.dart';
+import 'package:photopulse/features/admin/presentation/widgets/log_entry_tile.dart';
 import 'package:photopulse/features/admin/presentation/widgets/user_tile.dart';
 import 'package:photopulse/generated/l10n.dart';
 
@@ -49,10 +50,6 @@ class AdminPage extends ConsumerWidget {
             },
           ),
           ListView.separated(
-            padding: const EdgeInsets.symmetric(
-              vertical: AppSizes.bodyPaddingVertical,
-              horizontal: AppSizes.bodyPaddingHorizontal,
-            ),
             itemCount: logs.length,
             itemBuilder: (context, index) {
               return LogEntryTile(logEntry: logs[index]);
@@ -63,26 +60,6 @@ class AdminPage extends ConsumerWidget {
           ),
         ],
       ),
-    );
-  }
-}
-
-class LogEntryTile extends StatelessWidget {
-  final LogEntry logEntry;
-
-  const LogEntryTile({super.key, required this.logEntry});
-
-  @override
-  Widget build(BuildContext context) {
-    return ListTile(
-      title: BodyText(logEntry.eventType.toUpperCase()),
-      subtitle: Text('${logEntry.collection} - ${logEntry.documentId}'),
-      trailing: Text(
-          DateFormat('dd/MM/yyyy HH:mm').format(logEntry.timestamp.toDate())),
-      onTap: () {
-        // Implement what happens when you tap on a log entry
-        // Possibly navigate to a detailed screen
-      },
     );
   }
 }

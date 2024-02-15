@@ -11,6 +11,7 @@ class BodyText extends StatelessWidget {
   final TextOverflow? textOverflow;
   final double? fontSize;
   final int? maxLines;
+  final TextAlign? textAlign;
 
   const BodyText(
     this.text, {
@@ -22,6 +23,7 @@ class BodyText extends StatelessWidget {
     this.isUnderlined = false,
     this.fontSize,
     this.maxLines,
+    this.textAlign = TextAlign.start,
   });
 
   @override
@@ -36,7 +38,7 @@ class BodyText extends StatelessWidget {
         decoration: isUnderlined ? TextDecoration.underline : null,
         fontSize: fontSize,
       ),
-      textAlign: isCentered ? TextAlign.center : TextAlign.justify,
+      textAlign: isCentered ? TextAlign.center : textAlign,
     );
   }
 }

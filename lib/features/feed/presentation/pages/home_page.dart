@@ -1,6 +1,5 @@
 // ignore_for_file: always_use_package_imports
 import 'package:flutter/material.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:photopulse/common/domain/router/navigation_extensions.dart';
 import 'package:photopulse/common/domain/router/pages.dart';

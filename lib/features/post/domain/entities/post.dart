@@ -87,6 +87,11 @@ class Post extends Equatable {
 
   static int _timestampToJson(Timestamp timestamp) =>
       const TimestampConverter().toJson(timestamp);
+
+  @override
+  String toString() {
+    return 'Post\n id: $id\n title: $title\n caption: $caption\n author: $author\n createdAt: $createdAt\n tags: $tags\n url: $url\n sizeInMB: $sizeInMB';
+  }
 }
 
 class TimestampConverter implements JsonConverter<Timestamp, int> {
