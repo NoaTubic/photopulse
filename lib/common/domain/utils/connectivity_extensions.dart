@@ -16,7 +16,7 @@ extension ConnectivityExtensions on WidgetRef {
         }
         //TODO: add handler
         // ignore: avoid_print
-        print(newConnectionStatus?.newStatusMessage);
+        print(newConnectionStatus.newStatusMessage);
       },
     );
   }

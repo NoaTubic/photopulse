@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
+import 'package:photopulse/features/post/data/models/post_isar_model.dart';
 import 'package:photopulse/features/post/domain/entities/author.dart';
 
 class Post extends Equatable {
@@ -91,6 +92,21 @@ class Post extends Equatable {
   String toString() {
     return 'Post\n id: $id\n title: $title\n caption: $caption\n author: $author\n createdAt: $createdAt\n tags: $tags\n url: $url\n sizeInMB: $sizeInMB';
   }
+
+  factory Post.postFromIsar(PostIsarModel model) => Post(
+      id: model.id!.toString(),
+      title: model.title!,
+      caption: model.caption!,
+      author: Author(
+        id: model.author!.id!,
+        username: model.author!.username!,
+        email: model.author!.email!,
+        photoUrl: model.author!.photoUrl!,
+      ),
+      createdAt: Timestamp.fromDate(model.createdAt!),
+      tags: model.tags!,
+      url: model.url!,
+      sizeInMB: model.sizeInMB!);
 }
 
 class TimestampConverter implements JsonConverter<Timestamp, int> {

@@ -27,7 +27,7 @@ class PostsLocalDataSource extends BaseLocalDataSource<PostIsarModel> {
   Future<List<Post>> getCachedPosts() async {
     final posts =
         await readMultiple((db) => db.postIsarModels.where().findAll());
-    return posts.map((post) => postFromIsar(post)).toList();
+    return posts.map((post) => Post.postFromIsar(post)).toList();
   }
 
   @override
