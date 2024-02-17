@@ -1,4 +1,7 @@
+import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:photopulse/common/domain/notifiers/connectivity_notifier.dart';
+import 'package:photopulse/common/domain/utils/connection_status.dart';
 import 'package:photopulse/features/feed/data/repositories/feed_repository.dart';
 import 'package:photopulse/features/feed/domain/notifiers/filters_notifier.dart';
 import 'package:photopulse/features/search_posts/domain/notifiers/search_query_provider.dart';
@@ -32,6 +35,7 @@ class FeedNotifier extends PaginatedNotifier<Post, Object> {
       dateDescending: filters.dateDescending,
       sizeDescending: filters.sizeDescending,
       authorId: filters.authorId,
+      isOnline: ref.read(connectivityProvider) == ConnectionStatus.online,
     );
   }
 }

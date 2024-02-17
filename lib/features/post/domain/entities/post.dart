@@ -3,7 +3,6 @@ import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:photopulse/features/post/domain/entities/author.dart';
 
-@JsonSerializable(explicitToJson: true)
 class Post extends Equatable {
   final String? id;
   final String title;

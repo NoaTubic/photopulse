@@ -1,9 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:photopulse/features/auth/domain/entities/user.dart';
 import 'package:photopulse/features/post/domain/entities/post.dart';
 
-@JsonSerializable()
 class LogEntry {
   final String userId;
   final String documentId;
