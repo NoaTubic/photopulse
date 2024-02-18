@@ -33,23 +33,29 @@ const PostIsarModelSchema = CollectionSchema(
       name: r'createdAt',
       type: IsarType.dateTime,
     ),
-    r'sizeInMB': PropertySchema(
+    r'location': PropertySchema(
       id: 3,
+      name: r'location',
+      type: IsarType.object,
+      target: r'LocationIsarModel',
+    ),
+    r'sizeInMB': PropertySchema(
+      id: 4,
       name: r'sizeInMB',
       type: IsarType.double,
     ),
     r'tags': PropertySchema(
-      id: 4,
+      id: 5,
       name: r'tags',
       type: IsarType.stringList,
     ),
     r'title': PropertySchema(
-      id: 5,
+      id: 6,
       name: r'title',
       type: IsarType.string,
     ),
     r'url': PropertySchema(
-      id: 6,
+      id: 7,
       name: r'url',
       type: IsarType.string,
     )
@@ -61,7 +67,10 @@ const PostIsarModelSchema = CollectionSchema(
   idName: r'id',
   indexes: {},
   links: {},
-  embeddedSchemas: {r'AuthorIsarModel': AuthorIsarModelSchema},
+  embeddedSchemas: {
+    r'AuthorIsarModel': AuthorIsarModelSchema,
+    r'LocationIsarModel': LocationIsarModelSchema
+  },
   getId: _postIsarModelGetId,
   getLinks: _postIsarModelGetLinks,
   attach: _postIsarModelAttach,
@@ -86,6 +95,14 @@ int _postIsarModelEstimateSize(
     final value = object.caption;
     if (value != null) {
       bytesCount += 3 + value.length * 3;
+    }
+  }
+  {
+    final value = object.location;
+    if (value != null) {
+      bytesCount += 3 +
+          LocationIsarModelSchema.estimateSize(
+              value, allOffsets[LocationIsarModel]!, allOffsets);
     }
   }
   {
@@ -129,10 +146,16 @@ void _postIsarModelSerialize(
   );
   writer.writeString(offsets[1], object.caption);
   writer.writeDateTime(offsets[2], object.createdAt);
-  writer.writeDouble(offsets[3], object.sizeInMB);
-  writer.writeStringList(offsets[4], object.tags);
-  writer.writeString(offsets[5], object.title);
-  writer.writeString(offsets[6], object.url);
+  writer.writeObject<LocationIsarModel>(
+    offsets[3],
+    allOffsets,
+    LocationIsarModelSchema.serialize,
+    object.location,
+  );
+  writer.writeDouble(offsets[4], object.sizeInMB);
+  writer.writeStringList(offsets[5], object.tags);
+  writer.writeString(offsets[6], object.title);
+  writer.writeString(offsets[7], object.url);
 }
 
 PostIsarModel _postIsarModelDeserialize(
@@ -150,10 +173,15 @@ PostIsarModel _postIsarModelDeserialize(
     ),
     caption: reader.readStringOrNull(offsets[1]),
     createdAt: reader.readDateTimeOrNull(offsets[2]),
-    sizeInMB: reader.readDoubleOrNull(offsets[3]),
-    tags: reader.readStringList(offsets[4]),
-    title: reader.readStringOrNull(offsets[5]),
-    url: reader.readStringOrNull(offsets[6]),
+    location: reader.readObjectOrNull<LocationIsarModel>(
+      offsets[3],
+      LocationIsarModelSchema.deserialize,
+      allOffsets,
+    ),
+    sizeInMB: reader.readDoubleOrNull(offsets[4]),
+    tags: reader.readStringList(offsets[5]),
+    title: reader.readStringOrNull(offsets[6]),
+    url: reader.readStringOrNull(offsets[7]),
   );
   return object;
 }
@@ -176,12 +204,18 @@ P _postIsarModelDeserializeProp<P>(
     case 2:
       return (reader.readDateTimeOrNull(offset)) as P;
     case 3:
-      return (reader.readDoubleOrNull(offset)) as P;
+      return (reader.readObjectOrNull<LocationIsarModel>(
+        offset,
+        LocationIsarModelSchema.deserialize,
+        allOffsets,
+      )) as P;
     case 4:
-      return (reader.readStringList(offset)) as P;
+      return (reader.readDoubleOrNull(offset)) as P;
     case 5:
-      return (reader.readStringOrNull(offset)) as P;
+      return (reader.readStringList(offset)) as P;
     case 6:
+      return (reader.readStringOrNull(offset)) as P;
+    case 7:
       return (reader.readStringOrNull(offset)) as P;
     default:
       throw IsarError('Unknown property with id $propertyId');
@@ -597,6 +631,24 @@ extension PostIsarModelQueryFilter
         includeLower: includeLower,
         upper: upper,
         includeUpper: includeUpper,
+      ));
+    });
+  }
+
+  QueryBuilder<PostIsarModel, PostIsarModel, QAfterFilterCondition>
+      locationIsNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNull(
+        property: r'location',
+      ));
+    });
+  }
+
+  QueryBuilder<PostIsarModel, PostIsarModel, QAfterFilterCondition>
+      locationIsNotNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNotNull(
+        property: r'location',
       ));
     });
   }
@@ -1243,6 +1295,13 @@ extension PostIsarModelQueryObject
       return query.object(q, r'author');
     });
   }
+
+  QueryBuilder<PostIsarModel, PostIsarModel, QAfterFilterCondition> location(
+      FilterQuery<LocationIsarModel> q) {
+    return QueryBuilder.apply(this, (query) {
+      return query.object(q, r'location');
+    });
+  }
 }
 
 extension PostIsarModelQueryLinks
@@ -1456,6 +1515,13 @@ extension PostIsarModelQueryProperty
   QueryBuilder<PostIsarModel, DateTime?, QQueryOperations> createdAtProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'createdAt');
+    });
+  }
+
+  QueryBuilder<PostIsarModel, LocationIsarModel?, QQueryOperations>
+      locationProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'location');
     });
   }
 
@@ -2223,3 +2289,418 @@ extension AuthorIsarModelQueryFilter
 
 extension AuthorIsarModelQueryObject
     on QueryBuilder<AuthorIsarModel, AuthorIsarModel, QFilterCondition> {}
+
+// coverage:ignore-file
+// ignore_for_file: duplicate_ignore, non_constant_identifier_names, constant_identifier_names, invalid_use_of_protected_member, unnecessary_cast, prefer_const_constructors, lines_longer_than_80_chars, require_trailing_commas, inference_failure_on_function_invocation, unnecessary_parenthesis, unnecessary_raw_strings, unnecessary_null_checks, join_return_with_assignment, prefer_final_locals, avoid_js_rounded_ints, avoid_positional_boolean_parameters, always_specify_types
+
+const LocationIsarModelSchema = Schema(
+  name: r'LocationIsarModel',
+  id: 560711934803356750,
+  properties: {
+    r'latitude': PropertySchema(
+      id: 0,
+      name: r'latitude',
+      type: IsarType.double,
+    ),
+    r'longitude': PropertySchema(
+      id: 1,
+      name: r'longitude',
+      type: IsarType.double,
+    ),
+    r'name': PropertySchema(
+      id: 2,
+      name: r'name',
+      type: IsarType.string,
+    )
+  },
+  estimateSize: _locationIsarModelEstimateSize,
+  serialize: _locationIsarModelSerialize,
+  deserialize: _locationIsarModelDeserialize,
+  deserializeProp: _locationIsarModelDeserializeProp,
+);
+
+int _locationIsarModelEstimateSize(
+  LocationIsarModel object,
+  List<int> offsets,
+  Map<Type, List<int>> allOffsets,
+) {
+  var bytesCount = offsets.last;
+  {
+    final value = object.name;
+    if (value != null) {
+      bytesCount += 3 + value.length * 3;
+    }
+  }
+  return bytesCount;
+}
+
+void _locationIsarModelSerialize(
+  LocationIsarModel object,
+  IsarWriter writer,
+  List<int> offsets,
+  Map<Type, List<int>> allOffsets,
+) {
+  writer.writeDouble(offsets[0], object.latitude);
+  writer.writeDouble(offsets[1], object.longitude);
+  writer.writeString(offsets[2], object.name);
+}
+
+LocationIsarModel _locationIsarModelDeserialize(
+  Id id,
+  IsarReader reader,
+  List<int> offsets,
+  Map<Type, List<int>> allOffsets,
+) {
+  final object = LocationIsarModel(
+    latitude: reader.readDoubleOrNull(offsets[0]),
+    longitude: reader.readDoubleOrNull(offsets[1]),
+    name: reader.readStringOrNull(offsets[2]),
+  );
+  return object;
+}
+
+P _locationIsarModelDeserializeProp<P>(
+  IsarReader reader,
+  int propertyId,
+  int offset,
+  Map<Type, List<int>> allOffsets,
+) {
+  switch (propertyId) {
+    case 0:
+      return (reader.readDoubleOrNull(offset)) as P;
+    case 1:
+      return (reader.readDoubleOrNull(offset)) as P;
+    case 2:
+      return (reader.readStringOrNull(offset)) as P;
+    default:
+      throw IsarError('Unknown property with id $propertyId');
+  }
+}
+
+extension LocationIsarModelQueryFilter
+    on QueryBuilder<LocationIsarModel, LocationIsarModel, QFilterCondition> {
+  QueryBuilder<LocationIsarModel, LocationIsarModel, QAfterFilterCondition>
+      latitudeIsNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNull(
+        property: r'latitude',
+      ));
+    });
+  }
+
+  QueryBuilder<LocationIsarModel, LocationIsarModel, QAfterFilterCondition>
+      latitudeIsNotNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNotNull(
+        property: r'latitude',
+      ));
+    });
+  }
+
+  QueryBuilder<LocationIsarModel, LocationIsarModel, QAfterFilterCondition>
+      latitudeEqualTo(
+    double? value, {
+    double epsilon = Query.epsilon,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'latitude',
+        value: value,
+        epsilon: epsilon,
+      ));
+    });
+  }
+
+  QueryBuilder<LocationIsarModel, LocationIsarModel, QAfterFilterCondition>
+      latitudeGreaterThan(
+    double? value, {
+    bool include = false,
+    double epsilon = Query.epsilon,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'latitude',
+        value: value,
+        epsilon: epsilon,
+      ));
+    });
+  }
+
+  QueryBuilder<LocationIsarModel, LocationIsarModel, QAfterFilterCondition>
+      latitudeLessThan(
+    double? value, {
+    bool include = false,
+    double epsilon = Query.epsilon,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'latitude',
+        value: value,
+        epsilon: epsilon,
+      ));
+    });
+  }
+
+  QueryBuilder<LocationIsarModel, LocationIsarModel, QAfterFilterCondition>
+      latitudeBetween(
+    double? lower,
+    double? upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+    double epsilon = Query.epsilon,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'latitude',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+        epsilon: epsilon,
+      ));
+    });
+  }
+
+  QueryBuilder<LocationIsarModel, LocationIsarModel, QAfterFilterCondition>
+      longitudeIsNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNull(
+        property: r'longitude',
+      ));
+    });
+  }
+
+  QueryBuilder<LocationIsarModel, LocationIsarModel, QAfterFilterCondition>
+      longitudeIsNotNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNotNull(
+        property: r'longitude',
+      ));
+    });
+  }
+
+  QueryBuilder<LocationIsarModel, LocationIsarModel, QAfterFilterCondition>
+      longitudeEqualTo(
+    double? value, {
+    double epsilon = Query.epsilon,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'longitude',
+        value: value,
+        epsilon: epsilon,
+      ));
+    });
+  }
+
+  QueryBuilder<LocationIsarModel, LocationIsarModel, QAfterFilterCondition>
+      longitudeGreaterThan(
+    double? value, {
+    bool include = false,
+    double epsilon = Query.epsilon,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'longitude',
+        value: value,
+        epsilon: epsilon,
+      ));
+    });
+  }
+
+  QueryBuilder<LocationIsarModel, LocationIsarModel, QAfterFilterCondition>
+      longitudeLessThan(
+    double? value, {
+    bool include = false,
+    double epsilon = Query.epsilon,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'longitude',
+        value: value,
+        epsilon: epsilon,
+      ));
+    });
+  }
+
+  QueryBuilder<LocationIsarModel, LocationIsarModel, QAfterFilterCondition>
+      longitudeBetween(
+    double? lower,
+    double? upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+    double epsilon = Query.epsilon,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'longitude',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+        epsilon: epsilon,
+      ));
+    });
+  }
+
+  QueryBuilder<LocationIsarModel, LocationIsarModel, QAfterFilterCondition>
+      nameIsNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNull(
+        property: r'name',
+      ));
+    });
+  }
+
+  QueryBuilder<LocationIsarModel, LocationIsarModel, QAfterFilterCondition>
+      nameIsNotNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNotNull(
+        property: r'name',
+      ));
+    });
+  }
+
+  QueryBuilder<LocationIsarModel, LocationIsarModel, QAfterFilterCondition>
+      nameEqualTo(
+    String? value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'name',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<LocationIsarModel, LocationIsarModel, QAfterFilterCondition>
+      nameGreaterThan(
+    String? value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'name',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<LocationIsarModel, LocationIsarModel, QAfterFilterCondition>
+      nameLessThan(
+    String? value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'name',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<LocationIsarModel, LocationIsarModel, QAfterFilterCondition>
+      nameBetween(
+    String? lower,
+    String? upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'name',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<LocationIsarModel, LocationIsarModel, QAfterFilterCondition>
+      nameStartsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.startsWith(
+        property: r'name',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<LocationIsarModel, LocationIsarModel, QAfterFilterCondition>
+      nameEndsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.endsWith(
+        property: r'name',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<LocationIsarModel, LocationIsarModel, QAfterFilterCondition>
+      nameContains(String value, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.contains(
+        property: r'name',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<LocationIsarModel, LocationIsarModel, QAfterFilterCondition>
+      nameMatches(String pattern, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.matches(
+        property: r'name',
+        wildcard: pattern,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<LocationIsarModel, LocationIsarModel, QAfterFilterCondition>
+      nameIsEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'name',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<LocationIsarModel, LocationIsarModel, QAfterFilterCondition>
+      nameIsNotEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        property: r'name',
+        value: '',
+      ));
+    });
+  }
+}
+
+extension LocationIsarModelQueryObject
+    on QueryBuilder<LocationIsarModel, LocationIsarModel, QFilterCondition> {}

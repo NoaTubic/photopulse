@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
+import 'package:photopulse/features/location/domain/entities/post_location.dart';
 import 'package:photopulse/features/post/data/models/post_isar_model.dart';
 import 'package:photopulse/features/post/domain/entities/author.dart';
 
@@ -15,6 +16,7 @@ class Post extends Equatable {
   final List<String> tags;
   final String url;
   final double sizeInMB;
+  final PostLocation? location;
 
   const Post({
     this.id,
@@ -25,6 +27,7 @@ class Post extends Equatable {
     required this.tags,
     required this.url,
     required this.sizeInMB,
+    this.location,
   });
 
   Post copyWith({
@@ -36,6 +39,7 @@ class Post extends Equatable {
     List<String>? tags,
     String? url,
     double? sizeInMB,
+    PostLocation? location,
   }) {
     return Post(
       id: id ?? this.id,
@@ -46,6 +50,7 @@ class Post extends Equatable {
       tags: tags ?? this.tags,
       url: url ?? this.url,
       sizeInMB: sizeInMB ?? this.sizeInMB,
+      location: location ?? this.location,
     );
   }
 
@@ -58,6 +63,8 @@ class Post extends Equatable {
         createdAt,
         tags,
         url,
+        sizeInMB,
+        location,
       ];
 
   factory Post.fromJson(Map<String, dynamic> json) => Post(
@@ -69,6 +76,9 @@ class Post extends Equatable {
         tags: List<String>.from(json['tags'] ?? []),
         url: json['url'] as String,
         sizeInMB: json['sizeInMB'] as double,
+        location: json['location'] == null
+            ? null
+            : PostLocation.fromJson(json['location']),
       );
 
   Map<String, dynamic> toJson(Post post) => <String, dynamic>{
@@ -80,6 +90,7 @@ class Post extends Equatable {
         'tags': post.tags,
         'url': post.url,
         'sizeInMB': post.sizeInMB,
+        'location': post.location?.toJson(),
       };
 
   static Timestamp _timestampFromJson(int json) =>
@@ -90,23 +101,31 @@ class Post extends Equatable {
 
   @override
   String toString() {
-    return 'Post\n id: $id\n title: $title\n caption: $caption\n author: $author\n createdAt: $createdAt\n tags: $tags\n url: $url\n sizeInMB: $sizeInMB';
+    return 'Post\n id: $id\n title: $title\n caption: $caption\n author: $author\n createdAt: $createdAt\n tags: $tags\n url: $url\n sizeInMB: $sizeInMB\n location: ${location?.name}';
   }
 
   factory Post.postFromIsar(PostIsarModel model) => Post(
-      id: model.id!.toString(),
-      title: model.title!,
-      caption: model.caption!,
-      author: Author(
-        id: model.author!.id!,
-        username: model.author!.username!,
-        email: model.author!.email!,
-        photoUrl: model.author!.photoUrl!,
-      ),
-      createdAt: Timestamp.fromDate(model.createdAt!),
-      tags: model.tags!,
-      url: model.url!,
-      sizeInMB: model.sizeInMB!);
+        id: model.id!.toString(),
+        title: model.title!,
+        caption: model.caption!,
+        author: Author(
+          id: model.author!.id!,
+          username: model.author!.username!,
+          email: model.author!.email!,
+          photoUrl: model.author!.photoUrl!,
+        ),
+        createdAt: Timestamp.fromDate(model.createdAt!),
+        tags: model.tags!,
+        url: model.url!,
+        sizeInMB: model.sizeInMB!,
+        location: model.location == null
+            ? null
+            : PostLocation(
+                name: model.location!.name!,
+                longitude: model.location!.longitude!,
+                latitude: model.location!.latitude!,
+              ),
+      );
 }
 
 class TimestampConverter implements JsonConverter<Timestamp, int> {

@@ -12,6 +12,7 @@ class PostIsarModel {
   List<String>? tags;
   String? url;
   double? sizeInMB;
+  LocationIsarModel? location;
 
   PostIsarModel(
     this.id, {
@@ -22,6 +23,7 @@ class PostIsarModel {
     this.tags,
     this.url,
     this.sizeInMB,
+    this.location,
   });
 }
 
@@ -40,6 +42,19 @@ class AuthorIsarModel {
   });
 }
 
+@embedded
+class LocationIsarModel {
+  String? name;
+  double? longitude;
+  double? latitude;
+
+  LocationIsarModel({
+    this.name,
+    this.longitude,
+    this.latitude,
+  });
+}
+
 PostIsarModel postToIsar(Post post) => PostIsarModel(
       null,
       title: post.title,
@@ -54,4 +69,11 @@ PostIsarModel postToIsar(Post post) => PostIsarModel(
       tags: post.tags,
       url: post.url,
       sizeInMB: post.sizeInMB,
+      location: post.location == null
+          ? null
+          : LocationIsarModel(
+              name: post.location!.name,
+              longitude: post.location!.longitude,
+              latitude: post.location!.latitude,
+            ),
     );
