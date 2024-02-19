@@ -44,6 +44,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Change language"),
         "change_password":
             MessageLookupByLibrary.simpleMessage("Change password"),
+        "change_profile_image":
+            MessageLookupByLibrary.simpleMessage("Change profile image"),
         "change_subscription":
             MessageLookupByLibrary.simpleMessage("Change subscription"),
         "change_subscription_error": MessageLookupByLibrary.simpleMessage(
@@ -166,6 +168,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "privacy_policy":
             MessageLookupByLibrary.simpleMessage("Privacy Policy"),
         "profile_tab": MessageLookupByLibrary.simpleMessage("Profile"),
+        "remove_profile_image":
+            MessageLookupByLibrary.simpleMessage("Remove profile image"),
         "required_email":
             MessageLookupByLibrary.simpleMessage("Email is required"),
         "required_field":

@@ -12,7 +12,9 @@ import 'package:photopulse/common/presentation/buttons/photo_pulse_text_button.d
 
 import 'package:photopulse/common/presentation/photo_pulse_text_form_field.dart';
 import 'package:photopulse/common/presentation/text/text.dart';
+import 'package:photopulse/features/admin/domain/notifiers/users_notifier.dart';
 import 'package:photopulse/features/auth/domain/notifiers/user_data_notifier.dart';
+import 'package:photopulse/features/auth/domain/notifiers/user_notifier.dart';
 import 'package:photopulse/theme/app_colors.dart';
 
 final formKey = GlobalKey<FormBuilderState>();
@@ -46,6 +48,7 @@ class ChangeUserInfoDialog extends HookConsumerWidget {
                 FormBuilderValidators.email(),
               ]
             : [FormBuilderValidators.required()];
+    final user = ref.watch(userProvider);
 
     return Dialog(
       insetPadding: const EdgeInsets.all(AppSizes.normalSpacing),
@@ -97,6 +100,7 @@ class ChangeUserInfoDialog extends HookConsumerWidget {
                           .read(userDataNotifierProvider.notifier)
                           .changeUsername(
                             username: controller.text,
+                            userId: (user?.isAdmin ?? false) ? user!.id : null,
                           );
                   ref.pop();
                 }

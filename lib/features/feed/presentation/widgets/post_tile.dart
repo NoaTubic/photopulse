@@ -114,13 +114,7 @@ class _PostHeader extends ConsumerWidget {
         const Gap(AppSizes.normalSpacing),
         Expanded(
           child: GestureDetector(
-            onTap: () {
-              // if (!post.author.canViewProfile) return;
-              // ref
-              //     .read(viewUserProfileProvider.notifier)
-              //     .getUserProfile(post.author.id);
-              // Navigator.of(context).pushNamed(ViewUserPage.routeName);
-            },
+            onTap: null,
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
@@ -161,9 +155,6 @@ class _PostHeader extends ConsumerWidget {
             color: AppColors.white,
             surfaceTintColor: AppColors.white,
             itemBuilder: (context) {
-              // return FeedMenuItem.values
-              //     .map((item) => _buildPopupMenuItem(item))
-              //     .toList();
               if (ref.watch(isAnonymousProvider) ||
                   (ref.read(userProvider)!.id != post.author.id &&
                       ref.read(userProvider)!.isAdmin == false)) {

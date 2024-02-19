@@ -47,6 +47,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Promijeni jezik"),
         "change_password":
             MessageLookupByLibrary.simpleMessage("Promijeni lozinku"),
+        "change_profile_image":
+            MessageLookupByLibrary.simpleMessage("Change profile image"),
         "change_subscription":
             MessageLookupByLibrary.simpleMessage("Promijeni pretplatu"),
         "change_subscription_error": MessageLookupByLibrary.simpleMessage(
@@ -173,6 +175,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "privacy_policy":
             MessageLookupByLibrary.simpleMessage("Politika privatnosti"),
         "profile_tab": MessageLookupByLibrary.simpleMessage("Profil"),
+        "remove_profile_image":
+            MessageLookupByLibrary.simpleMessage("Remove profile image"),
         "required_email":
             MessageLookupByLibrary.simpleMessage("Email je obavezan"),
         "required_field":

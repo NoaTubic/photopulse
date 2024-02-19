@@ -129,5 +129,7 @@
   "change_language": "Promijeni jezik",
   "croatian": "Hrvatski",
   "english": "Engleski",
-  "directions": "Upute"
+  "directions": "Upute",
+  "change_profile_image": "Change profile image",
+  "remove_profile_image": "Remove profile image"
 }

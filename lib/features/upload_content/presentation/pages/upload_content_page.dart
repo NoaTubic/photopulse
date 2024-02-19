@@ -18,6 +18,7 @@ import 'package:photopulse/features/camera/presentation/pages/review_photo_page.
 import 'package:photopulse/features/gallery/domain/notifier/gallery_notifier.dart';
 import 'package:photopulse/features/gallery/domain/notifier/gallery_state.dart';
 import 'package:photopulse/features/navbar/domain/notifiers/nav_bar_visibility_provider.dart';
+import 'package:photopulse/features/subscription_management/presentation/pages/subscription_management_page.dart';
 import 'package:photopulse/features/subscription_management/presentation/widgets/current_subscription_section.dart';
 import 'package:photopulse/features/upload_content/domain/commands/upload_content_command.dart';
 import 'package:photopulse/generated/l10n.dart';
@@ -89,7 +90,10 @@ class UploadContentPage extends ConsumerWidget {
                     title: S.current.subscription_package,
                     leadingIcon: Icons.edit_calendar_outlined,
                     children: const [
-                      CurrentSubscriptionSection(),
+                      CurrentSubscriptionSection(
+                        routeName:
+                            '${UploadContentPage.routeName}${SubscriptionManagementPage.routeName}',
+                      ),
                     ],
                   ),
                 ],

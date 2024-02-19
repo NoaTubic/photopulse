@@ -86,7 +86,7 @@ class PostRepositoryImpl implements PostRepository {
     }
   }
 
-  Future<String> storeImage(
+  Future<String> _storeImage(
     String path,
   ) async {
     final imageRef = _firebaseStorage.ref().child('photos').child(path);
@@ -97,7 +97,7 @@ class PostRepositoryImpl implements PostRepository {
 
   Future<Post> _postWithFilePath(Post post) async {
     return post.copyWith(
-      url: await storeImage(post.url),
+      url: await _storeImage(post.url),
     );
   }
 

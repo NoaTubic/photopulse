@@ -15,9 +15,11 @@ import 'package:photopulse/common/presentation/user_avatar.dart';
 import 'package:photopulse/features/admin/presentation/pages/admin_page.dart';
 import 'package:photopulse/features/auth/domain/notifiers/auth_notifier.dart';
 import 'package:photopulse/features/auth/domain/notifiers/user_notifier.dart';
+import 'package:photopulse/features/profile/domain/notifiers/profile_picture_notifier.dart';
 import 'package:photopulse/features/profile/presentation/widgets/change_language_tile.dart';
 import 'package:photopulse/features/profile/presentation/widgets/change_password_dialog.dart';
 import 'package:photopulse/features/profile/presentation/widgets/change_user_info_dialog.dart';
+import 'package:photopulse/features/subscription_management/presentation/pages/subscription_management_page.dart';
 import 'package:photopulse/features/subscription_management/presentation/widgets/current_subscription_section.dart';
 import 'package:photopulse/generated/l10n.dart';
 import 'package:photopulse/theme/app_colors.dart';
@@ -108,6 +110,18 @@ class ProfilePage extends ConsumerWidget {
                     UserAvatar(
                       user?.photoUrl,
                       width: AppSizes.largeAvatarRadius,
+                      height: AppSizes.largeAvatarRadius,
+                      withChangeAndRemoveButton: true,
+                      onChangeTap: () => ref
+                          .read(profilePictureNotifierProvider.notifier)
+                          .changeProfilePicture(
+                            userId: (user?.isAdmin ?? false) ? user!.id : null,
+                          ),
+                      onRemoveTap: () => ref
+                          .read(profilePictureNotifierProvider.notifier)
+                          .removeProfilePicture(
+                            userId: (user?.isAdmin ?? false) ? user!.id : null,
+                          ),
                     ),
                     const SizedBox(height: AppSizes.largeSpacing),
                     Column(
@@ -144,7 +158,9 @@ class ProfilePage extends ConsumerWidget {
                           title: S.current.subscription_package,
                           leadingIcon: Icons.edit_calendar_outlined,
                           children: const [
-                            CurrentSubscriptionSection(),
+                            CurrentSubscriptionSection(
+                                routeName:
+                                    '${ProfilePage.routeName}${SubscriptionManagementPage.routeName}'),
                           ],
                         ),
                         const SizedBox(height: AppSizes.normalSpacing),

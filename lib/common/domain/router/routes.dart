@@ -139,6 +139,12 @@ List<RouteBase> getRoutes({
                     path: AdminPage.routeName.removeLeadingSlash,
                     builder: (context, state) => const AdminPage(),
                   ),
+                  GoRoute(
+                    path:
+                        SubscriptionManagementPage.routeName.removeLeadingSlash,
+                    builder: (context, state) =>
+                        const SubscriptionManagementPage(),
+                  ),
                 ],
               ),
             ],

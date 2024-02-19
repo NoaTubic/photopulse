@@ -15,7 +15,9 @@ import 'package:photopulse/theme/app_colors.dart';
 import 'package:photopulse/theme/theme.dart';
 
 class CurrentSubscriptionSection extends ConsumerWidget {
+  final String routeName;
   const CurrentSubscriptionSection({
+    required this.routeName,
     super.key,
   });
 
@@ -70,7 +72,7 @@ class CurrentSubscriptionSection extends ConsumerWidget {
           child: InkWell(
             onTap: user.canChangeSubscription
                 ? () => ref.pushNamed(
-                      '${UploadContentPage.routeName}${SubscriptionManagementPage.routeName}',
+                      routeName,
                     )
                 : () => PhotoPulseToast(
                         message: S.current.change_subscription_error)

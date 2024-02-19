@@ -1,6 +1,9 @@
+import 'dart:io';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:either_dart/either.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:photopulse/common/data/firebase_error_resolver.dart';
 import 'package:photopulse/common/data/firestore/firestore_collections.dart';
@@ -36,6 +39,10 @@ abstract class UsersRepository {
   EitherFailureOr<void> changeUsername(String username, String? userId);
 
   EitherFailureOr<void> clearStatistics(String userId);
+
+  EitherFailureOr<void> changeProfilePicture(String imageUrl, String? userId);
+
+  EitherFailureOr<void> removeProfilePicture(String? userId);
 }
 
 class UserRepositoryImpl with ErrorToFailureMixin implements UsersRepository {
@@ -207,4 +214,60 @@ class UserRepositoryImpl with ErrorToFailureMixin implements UsersRepository {
         },
         errorResolver: const FirebaseErrorResolver(),
       );
+
+  @override
+  EitherFailureOr<void> changeProfilePicture(
+          String imageUrl, String? userId) async =>
+      execute(
+        () async {
+          final path = await _storeImage(imageUrl);
+          final userDocRef =
+              _usersCollection.doc(userId ?? _firebaseAuth.currentUser?.uid);
+
+          final userDoc = await userDocRef.get();
+          if (userDoc.exists) {
+            await userDocRef.update(
+              {
+                'photoUrl': path,
+              },
+            );
+          } else {
+            return Left(Failure(title: S.current.user_not_found));
+          }
+
+          return const Right(null);
+        },
+        errorResolver: const FirebaseErrorResolver(),
+      );
+
+  @override
+  EitherFailureOr<void> removeProfilePicture(String? userId) async => execute(
+        () async {
+          final userDocRef =
+              _usersCollection.doc(userId ?? _firebaseAuth.currentUser?.uid);
+
+          final userDoc = await userDocRef.get();
+          if (userDoc.exists) {
+            await userDocRef.update(
+              {
+                'photoUrl': '',
+              },
+            );
+          } else {
+            return Left(Failure(title: S.current.user_not_found));
+          }
+
+          return const Right(null);
+        },
+        errorResolver: const FirebaseErrorResolver(),
+      );
+
+  Future<String> _storeImage(
+    String path,
+  ) async {
+    final imageRef = FirebaseStorage.instance.ref().child('photos').child(path);
+    await imageRef.putFile(File(path));
+    final imageUrl = await imageRef.getDownloadURL();
+    return imageUrl;
+  }
 }

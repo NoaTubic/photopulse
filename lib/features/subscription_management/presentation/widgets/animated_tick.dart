@@ -11,7 +11,7 @@ class AnimatedTick extends HookWidget {
   const AnimatedTick({
     super.key,
     this.isChecked = false,
-    this.duration = DurationConstants.mediumAnimationDuration,
+    this.duration = DurationConstants.logoAnimation,
   });
 
   @override

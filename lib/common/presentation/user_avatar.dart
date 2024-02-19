@@ -3,6 +3,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:photopulse/common/presentation/app_sizes.dart';
 import 'package:photopulse/common/presentation/text/body_text.dart';
+import 'package:photopulse/generated/l10n.dart';
 import 'package:photopulse/theme/app_colors.dart';
 
 class UserAvatar extends StatelessWidget {
@@ -39,25 +40,26 @@ class UserAvatar extends StatelessWidget {
             height: height,
             imageBuilder: (context, imageProvider) => Container(
               decoration: BoxDecoration(
-                borderRadius: const BorderRadius.all(Radius.circular(100)),
+                borderRadius: const BorderRadius.all(
+                  Radius.circular(100),
+                ),
                 image: DecorationImage(
                   image: imageProvider,
                   fit: BoxFit.cover,
                 ),
               ),
             ),
-            // placeholder: (context, url) => const BaseLoadingWidget(
-            //   child: CircleAvatar(
-            //     radius: AppSizes.normalSpacing,
-            //   ),
-            // ),
+            progressIndicatorBuilder: (context, url, progress) =>
+                const CircularProgressIndicator(),
             errorWidget: (context, url, error) => Container(
               decoration: BoxDecoration(
                 borderRadius: const BorderRadius.all(Radius.circular(100)),
                 border: Border.all(color: AppColors.black),
               ),
               child: ClipRRect(
-                borderRadius: const BorderRadius.all(Radius.circular(100)),
+                borderRadius: const BorderRadius.all(
+                  Radius.circular(100),
+                ),
                 child: Image.file(
                   File(url),
                   fit: BoxFit.fitWidth,
@@ -88,8 +90,8 @@ class UserAvatar extends StatelessWidget {
                 GestureDetector(
                   onTap: onChangeTap,
                   child: BodyText(
-                    'Change profile image',
-                    color: AppColors.white,
+                    S.current.change_profile_image,
+                    isBold: true,
                   ),
                 ),
                 const SizedBox(
@@ -98,8 +100,8 @@ class UserAvatar extends StatelessWidget {
                 GestureDetector(
                   onTap: onRemoveTap,
                   child: BodyText(
-                    'Remove profile image',
-                    color: AppColors.white,
+                    S.current.remove_profile_image,
+                    isBold: true,
                   ),
                 ),
               ],
