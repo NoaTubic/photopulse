@@ -13,4 +13,5 @@ abstract class Pages {
   static const String reviewPhoto = '/review_photo';
   static const String postPage = '/post_page';
   static const String admin = '/admin';
+  static const String map = '/map';
 }

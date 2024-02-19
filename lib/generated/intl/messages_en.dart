@@ -78,6 +78,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "didnt_receive_verification_email":
             MessageLookupByLibrary.simpleMessage(
                 "Didn\'t receive verification email?  "),
+        "directions": MessageLookupByLibrary.simpleMessage("Directions"),
         "dont_have_account":
             MessageLookupByLibrary.simpleMessage("Don’t have an account?"),
         "download_post": MessageLookupByLibrary.simpleMessage("Download post"),

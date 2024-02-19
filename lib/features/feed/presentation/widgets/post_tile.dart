@@ -3,11 +3,13 @@ import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:photopulse/common/domain/router/navigation_extensions.dart';
 import 'package:photopulse/common/presentation/app_sizes.dart';
+import 'package:photopulse/common/presentation/buttons/photo_pulse_text_button.dart';
 import 'package:photopulse/common/presentation/text/text.dart';
 import 'package:photopulse/common/presentation/user_avatar.dart';
 import 'package:photopulse/common/utils/date_time_extensions.dart';
 import 'package:photopulse/features/feed/presentation/pages/home_page.dart';
 import 'package:photopulse/features/feed/presentation/widgets/feed_image.dart';
+import 'package:photopulse/features/map/presentation/pages/map_page.dart';
 import 'package:photopulse/features/post/domain/entities/post.dart';
 import 'package:photopulse/features/post/domain/notifiers/download_post_content_notifier.dart';
 import 'package:photopulse/features/post/domain/notifiers/hashtag_notifer.dart';
@@ -139,6 +141,12 @@ class _PostHeader extends ConsumerWidget {
                       BodyText(post.createdAt.toDate().postLabel)
                     ],
                   ),
+                ),
+                PhotoPulseTextButton(
+                  label: post.location?.name ?? '',
+                  onTap: () => ref.pushNamed(
+                      '${HomePage.routeName}${MapPage.routeName}',
+                      data: post.location),
                 ),
               ],
             ),

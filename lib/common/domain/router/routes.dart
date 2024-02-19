@@ -1,12 +1,15 @@
 // ignore_for_file: always_use_package_imports, avoid-unused-parameters
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:latlong2/latlong.dart';
 import 'package:photopulse/features/admin/presentation/pages/admin_page.dart';
 import 'package:photopulse/features/auth/presentation/pages/login_page.dart';
 import 'package:photopulse/features/auth/presentation/pages/registration_page.dart';
 import 'package:photopulse/features/auth/presentation/pages/verify_email_page.dart';
 import 'package:photopulse/features/camera/presentation/pages/photo_pulse_camera.dart';
 import 'package:photopulse/features/camera/presentation/pages/review_photo_page.dart';
+import 'package:photopulse/features/location/domain/entities/post_location.dart';
+import 'package:photopulse/features/map/presentation/pages/map_page.dart';
 import 'package:photopulse/features/navbar/presentation/pages/nav_bar.dart';
 import 'package:photopulse/features/post/domain/entities/post.dart';
 import 'package:photopulse/features/post/presentation/pages/post_page.dart';
@@ -54,6 +57,13 @@ List<RouteBase> getRoutes({
                     path: PostPage.routeName.removeLeadingSlash,
                     builder: (context, state) => PostPage(
                       post: state.extra as Post?,
+                    ),
+                    routes: const [],
+                  ),
+                  GoRoute(
+                    path: MapPage.routeName.removeLeadingSlash,
+                    builder: (context, state) => MapPage(
+                      location: state.extra as PostLocation,
                     ),
                   ),
                 ],

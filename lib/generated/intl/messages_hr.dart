@@ -81,6 +81,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "didnt_receive_verification_email":
             MessageLookupByLibrary.simpleMessage(
                 "Niste primili email za potvrdu?"),
+        "directions": MessageLookupByLibrary.simpleMessage("Upute"),
         "dont_have_account":
             MessageLookupByLibrary.simpleMessage("Nemate račun?"),
         "download_post": MessageLookupByLibrary.simpleMessage("Preuzmi objavu"),
