@@ -23,6 +23,7 @@ dependencies:
   cupertino_icons: ^1.0.6
   device_info_plus: ^9.1.2
   dio: ^5.4.0
+  dropdown_button2: ^1.9.4
   either_dart: ^1.0.0
   equatable: ^2.0.5
   extended_image: ^8.2.0

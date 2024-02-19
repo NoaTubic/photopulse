@@ -16,6 +16,8 @@ abstract interface class LocalStorageService {
   Future<void> writeOAuth2Credentials(Credentials credentials);
   Future<Credentials?> readOAuth2Credentials();
   Future<void> deleteOAuth2Credentials();
+  Future<void> writeLocalization(String language);
+  Future<String?> readLocalization(String language);
 }
 
 class LocalStorageServiceImpl implements LocalStorageService {
@@ -103,11 +105,22 @@ class LocalStorageServiceImpl implements LocalStorageService {
       await sharedPreferences.setBool(key, true);
     }
   }
+
+  @override
+  Future<String?> readLocalization(String value) {
+    return _readSecure(LocalStorageKey.localization);
+  }
+
+  @override
+  Future<void> writeLocalization(String language) async {
+    await _writeSecure(key: LocalStorageKey.localization, value: language);
+  }
 }
 
 enum LocalStorageKey {
   token('token'),
-  oauth2Credentials('oauth2Credentials');
+  oauth2Credentials('oauth2Credentials'),
+  localization('localization');
 
   final String key;
   const LocalStorageKey(this.key);

@@ -34,7 +34,7 @@ class FeedNotifier extends PaginatedNotifier<Post, Object> {
       dateDescending: filters.dateDescending,
       sizeDescending: filters.sizeDescending,
       authorId: filters.authorId,
-      isOnline: ref.read(connectivityProvider) == ConnectionStatus.online,
+      isOnline: ref.read(connectivityProvider) != ConnectionStatus.offline,
     );
   }
 }

@@ -9,6 +9,8 @@ import 'package:photopulse/common/presentation/text/text.dart';
 import 'package:photopulse/features/auth/domain/notifiers/user_notifier.dart';
 import 'package:photopulse/features/feed/domain/notifiers/feed_notifier.dart';
 import 'package:photopulse/features/feed/presentation/widgets/post_tile.dart';
+import 'package:photopulse/features/location/domain/domain/notifiers/location_list_noifier.dart';
+import 'package:photopulse/features/location/domain/domain/notifiers/location_notifier.dart';
 import 'package:photopulse/features/search_posts/presentation/pages/search_posts_page.dart';
 import 'package:photopulse/features/subscription_management/presentation/pages/subscription_management_page.dart';
 import 'package:photopulse/generated/l10n.dart';
@@ -34,6 +36,8 @@ class HomePage extends HookConsumerWidget {
       },
     );
 
+    ref.watch(locationNotifierProvider);
+    ref.watch(locationListNotifierProvider);
     return PhotoPulseScaffold(
       padding: const EdgeInsets.symmetric(
         horizontal: AppSizes.zero,

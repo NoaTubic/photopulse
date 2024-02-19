@@ -9,6 +9,7 @@ import 'package:flutter_loggy/flutter_loggy.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:loggy/loggy.dart';
+import 'package:photopulse/common/domain/notifiers/localization_notifier.dart';
 import 'package:photopulse/firebase_options.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
 
@@ -60,15 +61,19 @@ class MyApp extends ConsumerWidget {
     FlutterNativeSplash.remove();
 
     final baseRouter = ref.watch(baseRouterProvider);
+    final locale = ref.watch(localizationNotifierProvider);
+
     return MaterialApp.router(
       debugShowCheckedModeBanner: EnvInfo.environment != AppEnvironment.PROD,
       title: EnvInfo.appTitle,
       theme: lightTheme,
       themeMode: ThemeMode.system,
+      locale: locale,
       localizationsDelegates: const [
         S.delegate,
         ...GlobalMaterialLocalizations.delegates,
       ],
+      supportedLocales: S.delegate.supportedLocales,
       routerDelegate: baseRouter.routerDelegate,
       routeInformationParser: baseRouter.routeInformationParser,
       routeInformationProvider: baseRouter.routeInformationProvider,

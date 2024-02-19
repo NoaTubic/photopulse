@@ -14,6 +14,11 @@ class PostLocation {
     required this.latitude,
   });
 
+  @override
+  String toString() {
+    return name;
+  }
+
   factory PostLocation.fromJson(Map<String, dynamic> json) =>
       _$PostLocationFromJson(json);
 

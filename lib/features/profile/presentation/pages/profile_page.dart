@@ -15,6 +15,7 @@ import 'package:photopulse/common/presentation/user_avatar.dart';
 import 'package:photopulse/features/admin/presentation/pages/admin_page.dart';
 import 'package:photopulse/features/auth/domain/notifiers/auth_notifier.dart';
 import 'package:photopulse/features/auth/domain/notifiers/user_notifier.dart';
+import 'package:photopulse/features/profile/presentation/widgets/change_language_tile.dart';
 import 'package:photopulse/features/profile/presentation/widgets/change_password_dialog.dart';
 import 'package:photopulse/features/profile/presentation/widgets/change_user_info_dialog.dart';
 import 'package:photopulse/features/subscription_management/presentation/widgets/current_subscription_section.dart';
@@ -163,13 +164,7 @@ class ProfilePage extends ConsumerWidget {
                           ),
                         ),
                         const SizedBox(height: AppSizes.normalSpacing),
-                        PhotoPulseExpansionTile(
-                          title: S.current.language,
-                          leadingIcon: Icons.language_rounded,
-                          children: const [
-                            // CurrentSubscriptionSection(),
-                          ],
-                        ),
+                        const ChangeLanguageTile(),
                       ],
                     ),
                     const SizedBox(height: AppSizes.largeSpacing),
