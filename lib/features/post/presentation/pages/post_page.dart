@@ -11,6 +11,7 @@ import 'package:photopulse/common/domain/utils/base_state_extensions.dart';
 import 'package:photopulse/common/domain/utils/form_key_extensions.dart';
 import 'package:photopulse/common/presentation/animated_widgets/animated_column.dart';
 import 'package:photopulse/common/presentation/app_sizes.dart';
+import 'package:photopulse/common/presentation/base_dropdown.dart';
 import 'package:photopulse/common/presentation/buttons/photo_pulse_button.dart';
 import 'package:photopulse/common/presentation/dialogs/photo_pulse_dialog.dart';
 import 'package:photopulse/common/presentation/photo_pulse_app_bar.dart';
@@ -18,6 +19,9 @@ import 'package:photopulse/common/presentation/photo_pulse_scaffold.dart';
 import 'package:photopulse/features/camera/domain/notifiers/camera_notifier.dart';
 import 'package:photopulse/features/feed/presentation/widgets/feed_image.dart';
 import 'package:photopulse/features/gallery/domain/notifier/gallery_notifier.dart';
+import 'package:photopulse/features/location/domain/domain/notifiers/location_list_noifier.dart';
+import 'package:photopulse/features/location/domain/domain/notifiers/location_notifier.dart';
+import 'package:photopulse/features/location/domain/entities/post_location.dart';
 import 'package:photopulse/features/navbar/domain/notifiers/nav_bar_visibility_provider.dart';
 import 'package:photopulse/features/post/domain/entities/post.dart';
 import 'package:photopulse/features/post/domain/notifiers/post_notifier.dart';
@@ -53,6 +57,7 @@ class PostPage extends HookConsumerWidget {
       };
     });
     final postChanged = ref.watch(isPostChanged);
+    ref.watch(locationNotifierProvider);
 
     return PopScope(
       // onPopInvoked: () async {
@@ -126,23 +131,36 @@ class PostPage extends HookConsumerWidget {
                         const SizedBox(
                           height: AppSizes.mediumSpacing,
                         ),
+                        BaseDropdown<PostLocation>(
+                          onChanged: (postLocation) => ref
+                              .read(locationListNotifierProvider.notifier)
+                              .changeLocation(postLocation!),
+                          values:
+                              ref.watch(locationListNotifierProvider).locations,
+                          hint: ref
+                                  .watch(locationListNotifierProvider)
+                                  .selectedLocation
+                                  ?.name ??
+                              '',
+                        ),
+                        const SizedBox(
+                          height: AppSizes.mediumSpacing,
+                        ),
                         PhotoPulseButton.primary(
-                          onTap: () => formKey.submitForm(
-                            (formMap) => ref
-                                .read(postNotifierProvider.notifier)
-                                .submitPostForm(
-                                  formMap: Map.from(formMap)
-                                    ..addAll(
-                                      {
-                                        PostFormConfig.filePathKey: post != null
-                                            ? post!.url
-                                            : image?.path ?? '',
-                                      },
-                                    ),
-                                  post: post,
-                                  file: image,
-                                ),
-                          ),
+                          onTap: () => formKey.submitForm((formMap) => ref
+                              .read(postNotifierProvider.notifier)
+                              .submitPostForm(
+                                formMap: Map.from(formMap)
+                                  ..addAll(
+                                    {
+                                      PostFormConfig.filePathKey: post != null
+                                          ? post!.url
+                                          : image?.path ?? '',
+                                    },
+                                  ),
+                                post: post,
+                                file: image,
+                              )),
                           isEnabled: ref.watch(isNextEnabled) && postChanged,
                           isLoading: ref.read(postNotifierProvider).isLoading,
                           label: post != null
@@ -217,11 +235,13 @@ class PostPage extends HookConsumerWidget {
           formKey.currentState?.isValid ?? false);
 
   void _updateIsPostChanged(WidgetRef ref, Post? post) =>
-      WidgetsBinding.instance.addPostFrameCallback((_) {
-        final formState = formKey.currentState?..saveAndValidate();
-        final formMap = formState?.value;
-        ref.read(isPostChanged.notifier).state =
-            formMap?[PostFormConfig.captionKey] != post?.caption ||
-                formMap?[PostFormConfig.titleKey] != post?.title;
-      });
+      WidgetsBinding.instance.addPostFrameCallback(
+        (_) {
+          final formState = formKey.currentState?..saveAndValidate();
+          final formMap = formState?.value;
+          ref.read(isPostChanged.notifier).state =
+              formMap?[PostFormConfig.captionKey] != post?.caption ||
+                  formMap?[PostFormConfig.titleKey] != post?.title;
+        },
+      );
 }

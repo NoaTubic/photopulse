@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:photopulse/features/auth/data/repository/users_repository.dart';
 import 'package:photopulse/features/auth/domain/entities/user.dart';

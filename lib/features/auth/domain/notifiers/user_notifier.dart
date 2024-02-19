@@ -1,6 +1,5 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:photopulse/features/auth/data/repository/auth_repository.dart';
-import 'package:photopulse/features/auth/data/repository/users_repository.dart';
 import 'package:photopulse/features/auth/domain/entities/user.dart';
 import 'package:q_architecture/q_architecture.dart';
 
@@ -8,7 +7,6 @@ final userProvider = StateNotifierProvider<UserNotifier, PhotoPulseUser?>(
   (ref) {
     return UserNotifier(
       ref.watch(authRepositoryProvider),
-      ref.watch(usersRepositoryProvider),
       ref,
     )..getUser();
   },
@@ -18,10 +16,8 @@ final isAnonymousProvider = StateProvider<bool>((ref) => false);
 
 class UserNotifier extends SimpleStateNotifier<PhotoPulseUser?> {
   final AuthRepository _authRepository;
-  final UsersRepository _usersRepository;
 
-  UserNotifier(this._authRepository, this._usersRepository, Ref ref)
-      : super(ref, null);
+  UserNotifier(this._authRepository, Ref ref) : super(ref, null);
 
   bool get isFirstLogin => state?.isFirstLogin ?? false;
 
@@ -37,8 +33,6 @@ class UserNotifier extends SimpleStateNotifier<PhotoPulseUser?> {
             (failure) => null,
             (user) {
               state = user;
-
-              // setUser(user.id);
             },
           );
         },

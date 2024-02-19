@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:isar/isar.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:photopulse/features/post/data/models/post_isar_model.dart';
 
 abstract class BaseLocalDataSource<T> {
   @protected
@@ -43,7 +44,7 @@ abstract class BaseLocalDataSource<T> {
 
     if (Isar.instanceNames.isEmpty) {
       return Isar.open(
-        [],
+        [PostIsarModelSchema],
         inspector: true,
         directory: dir.path,
       );

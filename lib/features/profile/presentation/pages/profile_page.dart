@@ -44,7 +44,7 @@ class ProfilePage extends ConsumerWidget {
                     const SizedBox(height: AppSizes.normalSpacing),
                     const Center(
                       child: HeadlineText(
-                        'Please login or register to acesss all profile features',
+                        'Please login or register to access all profile features',
                         isBold: true,
                         isCentered: true,
                       ),

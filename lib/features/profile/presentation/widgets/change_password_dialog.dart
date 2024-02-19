@@ -9,7 +9,6 @@ import 'package:photopulse/common/domain/utils/form_key_extensions.dart';
 import 'package:photopulse/common/presentation/app_sizes.dart';
 import 'package:photopulse/common/presentation/buttons/photo_pulse_button.dart';
 import 'package:photopulse/common/presentation/buttons/photo_pulse_text_button.dart';
-import 'package:photopulse/common/presentation/common_validators.dart';
 import 'package:photopulse/common/presentation/photo_pulse_text_form_field.dart';
 import 'package:photopulse/common/presentation/photo_pulse_toast.dart';
 import 'package:photopulse/common/presentation/text/text.dart';

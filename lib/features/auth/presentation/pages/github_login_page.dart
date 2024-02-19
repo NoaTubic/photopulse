@@ -123,8 +123,8 @@ import 'package:webview_flutter/webview_flutter.dart';
 
 class GitHubSignInPage extends StatelessWidget {
   const GitHubSignInPage({
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {

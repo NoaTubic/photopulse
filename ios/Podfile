@@ -49,6 +49,7 @@ post_install do |installer|
         '$(inherited)',
         'PERMISSION_PHOTOS=1',
         'PERMISSION_CAMERA=1',
+        'BYPASS_PERMISSION_LOCATION_ALWAYS=1'
       ]
     end
   end

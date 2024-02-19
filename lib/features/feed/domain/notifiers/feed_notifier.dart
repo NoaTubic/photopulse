@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:photopulse/common/domain/notifiers/connectivity_notifier.dart';
 import 'package:photopulse/common/domain/utils/connection_status.dart';

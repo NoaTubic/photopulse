@@ -1,18 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:photopulse/common/domain/router/navigation_extensions.dart';
 import 'package:photopulse/common/presentation/app_sizes.dart';
 import 'package:photopulse/common/presentation/buttons/photo_pulse_button.dart';
-import 'package:photopulse/common/presentation/photo_pulse_text_form_field.dart';
 import 'package:photopulse/common/presentation/text/text.dart';
-import 'package:photopulse/features/feed/data/repositories/feed_repository.dart';
 import 'package:photopulse/features/feed/domain/notifiers/filters_notifier.dart';
 import 'package:photopulse/features/feed/presentation/widgets/user_dropdown.dart';
 import 'package:photopulse/features/search_posts/domain/notifiers/serach_posts_notifier.dart';
 import 'package:photopulse/features/search_posts/presentation/widgets/sorting_switcher.dart';
 import 'package:photopulse/generated/l10n.dart';
-import 'package:photopulse/theme/app_colors.dart';
 
 class FiltersSection extends HookConsumerWidget {
   final VoidCallback onClose;
@@ -24,7 +20,6 @@ class FiltersSection extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final filtersNotifier = ref.read(filtersNotifierProvider.notifier);
-    final filterState = ref.watch(filtersNotifierProvider);
 
     return IntrinsicHeight(
       child: Center(

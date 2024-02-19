@@ -1,6 +1,7 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:photopulse/features/location/data/repositories/location_repository.dart';
+import 'package:photopulse/features/location/domain/domain/notifiers/location_list_noifier.dart';
 import 'package:photopulse/features/location/domain/domain/notifiers/location_state.dart';
 import 'package:q_architecture/q_architecture.dart';
 
@@ -9,7 +10,7 @@ final locationNotifierProvider =
   (ref) => LocationNotifier(
     ref.read(locationRepositoryProvider),
     ref,
-  ),
+  ).._init(),
 );
 
 class LocationNotifier extends SimpleStateNotifier<LocationState> {
@@ -36,7 +37,7 @@ class LocationNotifier extends SimpleStateNotifier<LocationState> {
           location: location,
           isLoading: false,
         );
-
+        ref.read(locationListNotifierProvider.notifier).getPlacemarks();
         isGranted = true;
       },
     );

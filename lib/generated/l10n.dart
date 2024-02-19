@@ -1229,6 +1229,86 @@ class S {
       args: [],
     );
   }
+
+  /// `min ago`
+  String get minutes_abbreviation {
+    return Intl.message(
+      'min ago',
+      name: 'minutes_abbreviation',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `h ago`
+  String get hours_abbreviation {
+    return Intl.message(
+      'h ago',
+      name: 'hours_abbreviation',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `d ago`
+  String get day_abbreviation {
+    return Intl.message(
+      'd ago',
+      name: 'day_abbreviation',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `w ago`
+  String get week_abbreviation {
+    return Intl.message(
+      'w ago',
+      name: 'week_abbreviation',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `month`
+  String get month {
+    return Intl.message(
+      'month',
+      name: 'month',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `months`
+  String get months {
+    return Intl.message(
+      'months',
+      name: 'months',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `year`
+  String get year {
+    return Intl.message(
+      'year',
+      name: 'year',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `years`
+  String get years {
+    return Intl.message(
+      'years',
+      name: 'years',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

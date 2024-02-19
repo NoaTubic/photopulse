@@ -117,5 +117,13 @@
   "edit_user": "Edit user info",
   "clear_statistics": "Clear statistics",
   "upload_limit_reached": "Upload limit reached. Upload more tomorrow or upgrade your subscription package.",
-  "incorrect_password_format": "Incorrect password format"
+  "incorrect_password_format": "Incorrect password format",
+  "minutes_abbreviation": "min ago",
+  "hours_abbreviation": "h ago",
+  "day_abbreviation": "d ago",
+  "week_abbreviation": "w ago",
+  "month": "month",
+  "months": "months",
+  "year": "year",
+  "years": "years"
 }

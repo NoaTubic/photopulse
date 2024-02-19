@@ -5,7 +5,7 @@ import 'package:photopulse/common/domain/router/navigation_extensions.dart';
 import 'package:photopulse/common/presentation/app_sizes.dart';
 import 'package:photopulse/common/presentation/text/text.dart';
 import 'package:photopulse/common/presentation/user_avatar.dart';
-import 'package:photopulse/features/auth/domain/notifiers/user_notifier.dart';
+import 'package:photopulse/common/utils/date_time_extensions.dart';
 import 'package:photopulse/features/feed/presentation/pages/home_page.dart';
 import 'package:photopulse/features/feed/presentation/widgets/feed_image.dart';
 import 'package:photopulse/features/post/domain/entities/post.dart';
@@ -15,8 +15,8 @@ import 'package:photopulse/features/post/domain/notifiers/post_notifier.dart';
 import 'package:photopulse/features/post/presentation/pages/post_page.dart';
 import 'package:photopulse/generated/l10n.dart';
 import 'package:photopulse/theme/app_colors.dart';
-
 import 'package:readmore/readmore.dart';
+import 'package:photopulse/features/auth/domain/notifiers/user_notifier.dart';
 
 class PostTile extends StatelessWidget {
   final Post post;
@@ -136,6 +136,7 @@ class _PostHeader extends ConsumerWidget {
                         post.author.username,
                         isBold: true,
                       ),
+                      BodyText(post.createdAt.toDate().postLabel)
                     ],
                   ),
                 ),
@@ -152,24 +153,24 @@ class _PostHeader extends ConsumerWidget {
             color: AppColors.white,
             surfaceTintColor: AppColors.white,
             itemBuilder: (context) {
-              return FeedMenuItem.values
-                  .map((item) => _buildPopupMenuItem(item))
-                  .toList();
-              // if (ref.watch(isAnonymousProvider) ||
-              //     (ref.read(userProvider)!.id != post.author.id &&
-              //         ref.read(userProvider)!.isAdmin == false)) {
-              //   return [
-              //     _buildPopupMenuItem(FeedMenuItem.download),
-              //   ];
-              // } else if (ref.read(userProvider)!.isAdmin == true) {
-              //   return FeedMenuItem.values
-              //       .map((item) => _buildPopupMenuItem(item))
-              //       .toList();
-              // } else {
-              //   return FeedMenuItem.values
-              //       .map((item) => _buildPopupMenuItem(item))
-              //       .toList();
-              // }
+              // return FeedMenuItem.values
+              //     .map((item) => _buildPopupMenuItem(item))
+              //     .toList();
+              if (ref.watch(isAnonymousProvider) ||
+                  (ref.read(userProvider)!.id != post.author.id &&
+                      ref.read(userProvider)!.isAdmin == false)) {
+                return [
+                  _buildPopupMenuItem(FeedMenuItem.download),
+                ];
+              } else if (ref.read(userProvider)!.isAdmin == true) {
+                return FeedMenuItem.values
+                    .map((item) => _buildPopupMenuItem(item))
+                    .toList();
+              } else {
+                return FeedMenuItem.values
+                    .map((item) => _buildPopupMenuItem(item))
+                    .toList();
+              }
             },
             onSelected: (value) {
               if (value == FeedMenuItem.editPost) {

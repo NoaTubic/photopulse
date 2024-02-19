@@ -1,8 +1,8 @@
 import 'dart:io';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:photopulse/common/utils/file_extensions.dart';
 import 'package:photopulse/features/auth/domain/notifiers/user_notifier.dart';
+import 'package:photopulse/features/location/domain/domain/notifiers/location_list_noifier.dart';
 import 'package:photopulse/features/post/data/repositories/post_repository.dart';
 import 'package:photopulse/features/post/domain/entities/author.dart';
 import 'package:photopulse/features/post/domain/entities/post.dart';
@@ -42,10 +42,11 @@ class PostNotifier extends BaseStateNotifier<void> {
       await execute(
         _postRepository.updatePost(
           post.copyWith(
-              id: post.id,
-              title: postFormData.title,
-              caption: postFormData.caption,
-              tags: tags),
+            id: post.id,
+            title: postFormData.title,
+            caption: postFormData.caption,
+            tags: tags,
+          ),
         ),
         globalLoading: true,
       );
@@ -60,6 +61,7 @@ class PostNotifier extends BaseStateNotifier<void> {
             createdAt: Timestamp.now(),
             tags: tags,
             sizeInMB: file?.sizeInMB ?? post!.sizeInMB,
+            location: ref.read(locationListNotifierProvider).selectedLocation,
           ),
         ),
         globalLoading: true,

@@ -8,8 +8,6 @@ import 'package:photopulse/common/presentation/app_sizes.dart';
 import 'package:photopulse/common/presentation/photo_pulse_scaffold.dart';
 import 'package:photopulse/common/presentation/photo_pulse_text_form_field.dart';
 import 'package:photopulse/common/presentation/text/text.dart';
-
-import 'package:photopulse/features/feed/domain/notifiers/feed_notifier.dart';
 import 'package:photopulse/features/search_posts/domain/notifiers/search_query_provider.dart';
 import 'package:photopulse/features/search_posts/presentation/widgets/filters_section.dart';
 import 'package:photopulse/features/feed/presentation/widgets/post_tile.dart';

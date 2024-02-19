@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -40,6 +39,7 @@ class HashtagSection extends HookConsumerWidget {
                 if (hashtagController.value.text.isEmpty) return;
                 hashtagNotifier.addHashtag(hashtagController.value.text);
                 hashtagController.clear();
+                FocusScope.of(context).unfocus();
               },
               style: FilledButton.styleFrom(
                 padding: const EdgeInsets.symmetric(
