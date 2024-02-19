@@ -16,7 +16,7 @@ class FiltersState with _$FiltersState {
 
   factory FiltersState.initial() => const FiltersState(
         users: [],
-        dateDescending: false,
+        dateDescending: true,
         sizeDescending: false,
       );
 }
