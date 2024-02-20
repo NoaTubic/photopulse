@@ -24,7 +24,7 @@ class LogsNotifier extends SimpleStateNotifier<List<LogEntry>> {
     _logsSubscription = _logsRepository.getLogs().listen(
       (eitherFailureOrUsers) {
         eitherFailureOrUsers.fold(
-          (failure) => state = [], // Handle failure state
+          (failure) => state = [],
           (logs) => state = logs,
         );
       },

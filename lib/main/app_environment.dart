@@ -3,19 +3,19 @@ enum AppEnvironment {
   DEV(
     env: 'dev',
     appTitle: 'App Dev',
-    apiBaseUrl: 'https://q.agency',
+    apiBaseUrl: '',
     assetBaseUrl: 'ASSET_BASE_DEV',
   ),
   PROD(
     env: 'prod',
     appTitle: 'App Prod',
-    apiBaseUrl: 'https://q.agency',
+    apiBaseUrl: '',
     assetBaseUrl: 'ASSET_BASE_PROD',
   ),
   STAGING(
     env: 'staging',
     appTitle: 'App Staging',
-    apiBaseUrl: 'https://q.agency',
+    apiBaseUrl: '',
     assetBaseUrl: 'ASSET_BASE_STAGING',
   );
 

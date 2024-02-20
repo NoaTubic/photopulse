@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:intl/intl.dart';
+import 'package:photopulse/common/constants/constants.dart';
 import 'package:photopulse/common/presentation/app_sizes.dart';
 import 'package:photopulse/common/presentation/text/body_text.dart';
 import 'package:photopulse/features/admin/domain/entities/log_entry.dart';
 import 'package:photopulse/features/auth/domain/entities/user.dart';
 import 'package:photopulse/features/post/domain/entities/post.dart';
+import 'package:photopulse/generated/l10n.dart';
 import 'package:photopulse/theme/app_colors.dart';
 
 void showLogEntryDialog(BuildContext context, LogEntry logEntry) {
@@ -15,8 +17,8 @@ void showLogEntryDialog(BuildContext context, LogEntry logEntry) {
       return AlertDialog(
         backgroundColor: AppColors.white,
         surfaceTintColor: AppColors.white,
-        title: const BodyText(
-          'Log Entry Details',
+        title: BodyText(
+          S.current.log_entry_details,
           isBold: true,
         ),
         content: SingleChildScrollView(
@@ -24,25 +26,26 @@ void showLogEntryDialog(BuildContext context, LogEntry logEntry) {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              BodyText('Event Type: ${logEntry.eventType.toUpperCase()}'),
+              BodyText(
+                  '${S.current.event_type}: ${logEntry.eventType.toUpperCase()}'),
               const Gap(AppSizes.tinySpacing),
-              BodyText('Collection: ${logEntry.collection}'),
+              BodyText('${S.current.collection}: ${logEntry.collection}'),
               const Gap(AppSizes.tinySpacing),
-              BodyText('Document ID: ${logEntry.documentId}'),
+              BodyText('${S.current.document_id}: ${logEntry.documentId}'),
               const Gap(AppSizes.tinySpacing),
               BodyText(
-                  'Timestamp: ${DateFormat('dd/MM/yyyy HH:mm').format(logEntry.timestamp.toDate())}'),
+                  '${S.current.timestamp}: ${DateFormat(Constants.dateFormat).format(logEntry.timestamp.toDate())}'),
               _buildExpandableDataView(
-                  'Before Data', logEntry.beforeData, context),
+                  S.current.before_data, logEntry.beforeData, context),
               const Gap(AppSizes.tinySpacing),
               _buildExpandableDataView(
-                  'After Data', logEntry.afterData, context),
+                  S.current.after_data, logEntry.afterData, context),
             ],
           ),
         ),
-        actions: <Widget>[
+        actions: [
           TextButton(
-            child: const BodyText('Close'),
+            child: BodyText(S.current.close),
             onPressed: () {
               Navigator.of(context).pop();
             },
@@ -73,9 +76,9 @@ Widget _buildExpandableDataView(
                 : (data as Post).toString()),
           )
         else
-          const Padding(
-            padding: EdgeInsets.all(AppSizes.smallSpacing),
-            child: BodyText('No data available'),
+          Padding(
+            padding: const EdgeInsets.all(AppSizes.smallSpacing),
+            child: BodyText(S.current.no_data_available),
           ),
       ],
     ),

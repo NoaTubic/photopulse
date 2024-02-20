@@ -10,13 +10,12 @@ import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:loggy/loggy.dart';
 import 'package:photopulse/common/domain/notifiers/localization_notifier.dart';
+import 'package:photopulse/common/utils/q_logger.dart';
 import 'package:photopulse/firebase_options.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
-
 import 'common/domain/providers/base_router_provider.dart';
 import 'common/presentation/base_widget.dart';
 import 'common/utils/custom_provider_observer.dart';
-import 'common/utils/q_logger.dart';
 import 'generated/l10n.dart';
 import 'main/app_environment.dart';
 import 'theme/theme.dart';
@@ -59,12 +58,11 @@ class MyApp extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     FlutterNativeSplash.remove();
-
     final baseRouter = ref.watch(baseRouterProvider);
     final locale = ref.watch(localizationNotifierProvider);
 
     return MaterialApp.router(
-      debugShowCheckedModeBanner: EnvInfo.environment != AppEnvironment.PROD,
+      debugShowCheckedModeBanner: false,
       title: EnvInfo.appTitle,
       theme: lightTheme,
       themeMode: ThemeMode.system,

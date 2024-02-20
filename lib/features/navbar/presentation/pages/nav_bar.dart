@@ -69,7 +69,7 @@ class NavBar extends ConsumerWidget {
                       fontSize: context.isLargerThanMobile
                           ? FontSizes.s30
                           : FontSizes.s24,
-                      fontFamily: 'Cocogoose Pro',
+                      fontFamily: Fonts.fontLogo,
                     ),
                   ],
                 ),

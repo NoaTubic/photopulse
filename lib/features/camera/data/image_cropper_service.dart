@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:image_cropper/image_cropper.dart';
+import 'package:photopulse/generated/l10n.dart';
 import 'package:photopulse/theme/app_colors.dart';
 
 final imageCropperServiceProvider = Provider<ImageCropperService>((ref) {
@@ -25,7 +26,7 @@ class ImageCropperServiceImpl implements ImageCropperService {
       ],
       uiSettings: [
         AndroidUiSettings(
-          toolbarTitle: 'Edit image',
+          toolbarTitle: S.current.edit_image,
           toolbarColor: AppColors.white,
           toolbarWidgetColor: AppColors.black,
           activeControlsWidgetColor: AppColors.black,

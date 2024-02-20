@@ -7,9 +7,7 @@ import 'package:photopulse/common/presentation/photo_pulse_toast.dart';
 import 'package:photopulse/common/presentation/text/text.dart';
 import 'package:photopulse/features/auth/domain/notifiers/user_notifier.dart';
 import 'package:photopulse/features/subscription_management/domain/entities/subscription_package.dart';
-import 'package:photopulse/features/subscription_management/presentation/pages/subscription_management_page.dart';
 import 'package:photopulse/features/subscription_management/presentation/widgets/subscription_package_card_text_row.dart';
-import 'package:photopulse/features/upload_content/presentation/pages/upload_content_page.dart';
 import 'package:photopulse/generated/l10n.dart';
 import 'package:photopulse/theme/app_colors.dart';
 import 'package:photopulse/theme/theme.dart';
@@ -62,7 +60,7 @@ class CurrentSubscriptionSection extends ConsumerWidget {
         const Gap(AppSizes.tinySpacing),
         Divider(
           color: AppColors.black,
-          height: 0,
+          height: AppSizes.zero,
           thickness: 0.5,
           endIndent: AppSizes.compactSpacing,
           indent: AppSizes.compactSpacing,

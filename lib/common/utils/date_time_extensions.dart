@@ -24,7 +24,7 @@ extension DateTimeExtensions on DateTime {
 
   String get postLabel {
     if (timePassed.inSeconds <= DurationConstants.secondsInMinute) {
-      return '1 min ago';
+      return '1 ${S.current.minutes_abbreviation}';
     } else if (timePassed.inMinutes < DurationConstants.minutesInHour) {
       return '${timePassed.inMinutes} ${S.current.minutes_abbreviation}';
     } else if (timePassed.inHours < DurationConstants.hoursInDay) {

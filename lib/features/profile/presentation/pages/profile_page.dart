@@ -45,9 +45,9 @@ class ProfilePage extends ConsumerWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                     const SizedBox(height: AppSizes.normalSpacing),
-                    const Center(
+                    Center(
                       child: HeadlineText(
-                        'Please login or register to access all profile features',
+                        S.current.anonymous_info,
                         isBold: true,
                         isCentered: true,
                       ),
@@ -97,7 +97,6 @@ class ProfilePage extends ConsumerWidget {
             : SingleChildScrollView(
                 child: AnimatedColumn(
                   children: [
-                    // if (user?.isAdmin ?? false)
                     Align(
                       alignment: Alignment.topRight,
                       child: PhotoPulseTextButton(

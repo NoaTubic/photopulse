@@ -1,7 +1,6 @@
 // ignore_for_file: always_use_package_imports, avoid-unused-parameters
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:latlong2/latlong.dart';
 import 'package:photopulse/features/admin/presentation/pages/admin_page.dart';
 import 'package:photopulse/features/auth/presentation/pages/login_page.dart';
 import 'package:photopulse/features/auth/presentation/pages/registration_page.dart';
@@ -24,20 +23,16 @@ import '../../../features/auth/presentation/pages/reset_password_page.dart';
 final GlobalKey<NavigatorState> _homeKey =
     GlobalKey<NavigatorState>(debugLabel: 'home');
 final GlobalKey<NavigatorState> _contentKey =
-    GlobalKey<NavigatorState>(debugLabel: 'home');
+    GlobalKey<NavigatorState>(debugLabel: 'content');
 final GlobalKey<NavigatorState> _profileKey =
-    GlobalKey<NavigatorState>(debugLabel: 'home');
+    GlobalKey<NavigatorState>(debugLabel: 'profile');
 final GlobalKey<NavigatorState> _searchKey =
-    GlobalKey<NavigatorState>(debugLabel: 'home');
+    GlobalKey<NavigatorState>(debugLabel: 'search');
 
 List<RouteBase> getRoutes({
   required GlobalKey<NavigatorState> rootNavigatorKey,
 }) =>
     [
-      // GoRoute(
-      //   path: Pages.splash,
-      //   redirect: (context, state) => Pages.splash,
-      // ),
       GoRoute(
         path: '/',
         redirect: (context, state) => HomePage.routeName,

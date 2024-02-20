@@ -25,8 +25,8 @@ class LogsRepositoryImpl implements LogsRepository {
         try {
           final logs = snapshot.docs.map((doc) => doc.data()).toList();
           return Right(logs);
-        } catch (e) {
-          return Left(const FirebaseErrorResolver().resolve(e));
+        } catch (exception) {
+          return Left(const FirebaseErrorResolver().resolve(exception));
         }
       },
     );

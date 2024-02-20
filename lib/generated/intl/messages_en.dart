@@ -23,10 +23,17 @@ class MessageLookup extends MessageLookupByLibrary {
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "admin_panel": MessageLookupByLibrary.simpleMessage("Admin panel"),
+        "after_data": MessageLookupByLibrary.simpleMessage("After Data"),
+        "anonymous_content_upload": MessageLookupByLibrary.simpleMessage(
+            "Please login or register to upload content."),
+        "anonymous_info": MessageLookupByLibrary.simpleMessage(
+            "Please login or register to access all profile features"),
         "anonymous_login":
             MessageLookupByLibrary.simpleMessage("Continue without signing in"),
         "apply_filters": MessageLookupByLibrary.simpleMessage("Apply filters"),
         "ascending": MessageLookupByLibrary.simpleMessage("Ascending"),
+        "back_online": MessageLookupByLibrary.simpleMessage("Back online"),
+        "before_data": MessageLookupByLibrary.simpleMessage("Before Data"),
         "body_text_cancel": MessageLookupByLibrary.simpleMessage("Cancel"),
         "body_text_retake": MessageLookupByLibrary.simpleMessage("Retake"),
         "button_label_choose_package":
@@ -56,12 +63,18 @@ class MessageLookup extends MessageLookupByLibrary {
             "If you go back now, the changes you made will be lost."),
         "clear_statistics":
             MessageLookupByLibrary.simpleMessage("Clear statistics"),
+        "close": MessageLookupByLibrary.simpleMessage("Close"),
+        "collection": MessageLookupByLibrary.simpleMessage("Collection: "),
         "confirm_go_back_title": MessageLookupByLibrary.simpleMessage(
             "Are you sure you want to go back?"),
+        "confirm_new_password":
+            MessageLookupByLibrary.simpleMessage("Confirm new password"),
         "confirm_password":
             MessageLookupByLibrary.simpleMessage("Confirm password"),
         "confirm_password_required": MessageLookupByLibrary.simpleMessage(
             "Confirm password is required"),
+        "content_posted": MessageLookupByLibrary.simpleMessage(
+            "Your content was posted to the feed"),
         "create_new_account":
             MessageLookupByLibrary.simpleMessage("Create new account"),
         "create_new_post":
@@ -77,10 +90,13 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Delete Account"),
         "delete_post": MessageLookupByLibrary.simpleMessage("Delete post"),
         "descending": MessageLookupByLibrary.simpleMessage("Descending"),
+        "device_settings":
+            MessageLookupByLibrary.simpleMessage("Go to device settings"),
         "didnt_receive_verification_email":
             MessageLookupByLibrary.simpleMessage(
                 "Didn\'t receive verification email?  "),
         "directions": MessageLookupByLibrary.simpleMessage("Directions"),
+        "document_id": MessageLookupByLibrary.simpleMessage("Document ID: "),
         "dont_have_account":
             MessageLookupByLibrary.simpleMessage("Don’t have an account?"),
         "download_post": MessageLookupByLibrary.simpleMessage("Download post"),
@@ -90,6 +106,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "download_post_content_permission_gallery_and_storage":
             MessageLookupByLibrary.simpleMessage(
                 "For downloading post content, please allow the Care Connect app to access your gallery and storage."),
+        "edit_image": MessageLookupByLibrary.simpleMessage("Edit image"),
         "edit_post": MessageLookupByLibrary.simpleMessage("Edit post"),
         "edit_user": MessageLookupByLibrary.simpleMessage("Edit user info"),
         "email": MessageLookupByLibrary.simpleMessage("Email"),
@@ -102,8 +119,9 @@ class MessageLookup extends MessageLookupByLibrary {
             "Please enter your password to continue."),
         "enter_your_username": MessageLookupByLibrary.simpleMessage(
             "Please enter your username to continue."),
-        "error_message_something_wrong":
-            MessageLookupByLibrary.simpleMessage("Something went wrong"),
+        "error_message_something_wrong": MessageLookupByLibrary.simpleMessage(
+            "Something went wrong. Please try again."),
+        "event_type": MessageLookupByLibrary.simpleMessage("Event Type: "),
         "filter_by_user":
             MessageLookupByLibrary.simpleMessage("Filter by user"),
         "filters": MessageLookupByLibrary.simpleMessage("Filters"),
@@ -123,6 +141,7 @@ class MessageLookup extends MessageLookupByLibrary {
                 "Please choose a prescription package"),
         "home_tab": MessageLookupByLibrary.simpleMessage("Home"),
         "hours_abbreviation": MessageLookupByLibrary.simpleMessage("h ago"),
+        "i_understand": MessageLookupByLibrary.simpleMessage("I understand"),
         "id": MessageLookupByLibrary.simpleMessage("ID"),
         "incorrect_password_format":
             MessageLookupByLibrary.simpleMessage("Incorrect password format"),
@@ -134,6 +153,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "language": MessageLookupByLibrary.simpleMessage("Language"),
         "load_from_gallery":
             MessageLookupByLibrary.simpleMessage("Load from gallery"),
+        "log_entry_details":
+            MessageLookupByLibrary.simpleMessage("Log Entry Details"),
         "login": MessageLookupByLibrary.simpleMessage("Log In"),
         "login_error_email_already_in_user":
             MessageLookupByLibrary.simpleMessage("Email already in use"),
@@ -150,11 +171,20 @@ class MessageLookup extends MessageLookupByLibrary {
         "minutes_abbreviation": MessageLookupByLibrary.simpleMessage("min ago"),
         "month": MessageLookupByLibrary.simpleMessage("month"),
         "months": MessageLookupByLibrary.simpleMessage("months"),
+        "new_email": MessageLookupByLibrary.simpleMessage("New email"),
+        "new_password": MessageLookupByLibrary.simpleMessage("New password"),
+        "new_username": MessageLookupByLibrary.simpleMessage("New username"),
         "no": MessageLookupByLibrary.simpleMessage("No"),
+        "no_data_available":
+            MessageLookupByLibrary.simpleMessage("No data available"),
         "no_posts_yet": MessageLookupByLibrary.simpleMessage(
             "There are no posts yet.\nAdd a new one on \'Upload  content Tab\'."),
         "none": MessageLookupByLibrary.simpleMessage("None"),
+        "old_password": MessageLookupByLibrary.simpleMessage("Old password"),
+        "or": MessageLookupByLibrary.simpleMessage("or"),
         "password": MessageLookupByLibrary.simpleMessage("Password"),
+        "password_changed":
+            MessageLookupByLibrary.simpleMessage("Password changed"),
         "password_reset_email_sent": MessageLookupByLibrary.simpleMessage(
             "Password reset email has been sent"),
         "passwords_dont_match":
@@ -164,10 +194,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "photo_pulse": MessageLookupByLibrary.simpleMessage("PhotoPulse"),
         "post_caption": MessageLookupByLibrary.simpleMessage("Caption"),
         "post_hashtags": MessageLookupByLibrary.simpleMessage("Hashtags"),
+        "post_successful":
+            MessageLookupByLibrary.simpleMessage("Post successful"),
         "post_title": MessageLookupByLibrary.simpleMessage("Title"),
         "privacy_policy":
             MessageLookupByLibrary.simpleMessage("Privacy Policy"),
         "profile_tab": MessageLookupByLibrary.simpleMessage("Profile"),
+        "quit": MessageLookupByLibrary.simpleMessage("Yes, quit"),
+        "quit_check": MessageLookupByLibrary.simpleMessage("Yes, quit?"),
         "remove_profile_image":
             MessageLookupByLibrary.simpleMessage("Remove profile image"),
         "required_email":
@@ -179,6 +213,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "reset_password":
             MessageLookupByLibrary.simpleMessage("Reset Password"),
         "retake": MessageLookupByLibrary.simpleMessage("Retake"),
+        "search_by_hashtag":
+            MessageLookupByLibrary.simpleMessage("Search by hashtag"),
+        "search_empty": MessageLookupByLibrary.simpleMessage(
+            "No posts found. Try another hashtag."),
+        "search_start": MessageLookupByLibrary.simpleMessage(
+            "Enter a hashtag to search for posts."),
         "search_tab": MessageLookupByLibrary.simpleMessage("Search"),
         "select_date_range":
             MessageLookupByLibrary.simpleMessage("Select date range"),
@@ -199,8 +239,16 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Successfully saved"),
         "take_photo": MessageLookupByLibrary.simpleMessage("Take photo"),
         "theme": MessageLookupByLibrary.simpleMessage("Theme"),
+        "timestamp": MessageLookupByLibrary.simpleMessage("Timestamp: "),
+        "total_size_uploaded":
+            MessageLookupByLibrary.simpleMessage("Total size uploaded (MB)"),
         "unknown_error_occurred":
             MessageLookupByLibrary.simpleMessage("Unknown error occurred"),
+        "unsaved_changes": MessageLookupByLibrary.simpleMessage(
+            "Are you sure you want to quit?"),
+        "unsaved_changes_helper": MessageLookupByLibrary.simpleMessage(
+            "If you quit now, the changes you made will be lost."),
+        "update": MessageLookupByLibrary.simpleMessage("Update"),
         "update_post": MessageLookupByLibrary.simpleMessage("Update post"),
         "upload_content":
             MessageLookupByLibrary.simpleMessage("Upload Content"),
@@ -227,11 +275,14 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Almost ready to start using"),
         "view_less": MessageLookupByLibrary.simpleMessage("View less"),
         "view_more": MessageLookupByLibrary.simpleMessage("View more"),
+        "weak_password": MessageLookupByLibrary.simpleMessage("Weak password"),
         "week_abbreviation": MessageLookupByLibrary.simpleMessage("w ago"),
         "whoops": MessageLookupByLibrary.simpleMessage("Whoops"),
         "year": MessageLookupByLibrary.simpleMessage("year"),
         "years": MessageLookupByLibrary.simpleMessage("years"),
         "yes": MessageLookupByLibrary.simpleMessage("Yes"),
+        "you_are_offline":
+            MessageLookupByLibrary.simpleMessage("You are offline"),
         "your_email": MessageLookupByLibrary.simpleMessage("Your email"),
         "your_password": MessageLookupByLibrary.simpleMessage("Your password")
       };

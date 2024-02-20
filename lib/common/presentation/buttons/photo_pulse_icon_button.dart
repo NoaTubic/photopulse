@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:photopulse/common/presentation/app_sizes.dart';
 
 class PhotoPulseIconButton extends StatelessWidget {
   final IconData icon;
@@ -10,16 +11,16 @@ class PhotoPulseIconButton extends StatelessWidget {
   final double width;
   final double height;
   const PhotoPulseIconButton({
-    Key? key,
+    super.key,
     required this.icon,
     this.onTap,
     this.backgroundColor = Colors.white,
     this.foregroundColor = Colors.white,
     this.iconColor,
     this.borderColor = Colors.transparent,
-    this.width = 48,
-    this.height = 60,
-  }) : super(key: key);
+    this.width = AppSizes.iconButtonWidth,
+    this.height = AppSizes.iconButtonHeight,
+  });
 
   @override
   Widget build(BuildContext context) {

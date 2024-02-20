@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:photopulse/common/presentation/app_sizes.dart';
 import 'package:photopulse/common/presentation/text/body_text.dart';
+import 'package:photopulse/generated/l10n.dart';
 import 'package:photopulse/theme/app_colors.dart';
 
 class OrDivider extends StatelessWidget {
   const OrDivider({
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -23,12 +24,12 @@ class OrDivider extends StatelessWidget {
               color: AppColors.black,
             ),
           ),
-          const BodyText('OR'),
+          BodyText(S.current.or.toUpperCase()),
           Expanded(
             child: Divider(
               indent: AppSizes.tinySpacing,
               endIndent: AppSizes.compactSpacing,
-              thickness: 1,
+              thickness: AppSizes.dividerHeight,
               color: AppColors.black,
             ),
           ),

@@ -98,7 +98,7 @@ class UserTile extends ConsumerWidget {
                   ),
                 ),
                 ListTile(
-                  title: const BodyText('Total size uploaded (MB)'),
+                  title: BodyText(S.current.total_size_uploaded),
                   subtitle: BodyText(
                     '${user.totalUploadSizeInMB.rounded(2)} MB',
                     isBold: true,

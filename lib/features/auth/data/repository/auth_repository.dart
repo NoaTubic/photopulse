@@ -1,23 +1,17 @@
 // ignore_for_file: always_use_package_imports
-import 'dart:convert';
-
 import 'package:either_dart/either.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:photopulse/common/data/firebase_error_resolver.dart';
 import 'package:photopulse/common/data/firestore/firestore_collections.dart';
-import 'package:photopulse/common/data/generic_error_resolver.dart';
-import 'package:photopulse/features/auth/data/constants/github_auth_constants.dart';
 import 'package:photopulse/features/auth/data/model/registration_request.dart';
 import 'package:photopulse/features/auth/data/repository/users_repository.dart';
-import 'package:photopulse/features/auth/domain/entities/github_auth_parameters.dart';
 import 'package:photopulse/features/auth/domain/entities/user.dart';
 import 'package:photopulse/features/auth/domain/entities/user_credentials.dart';
 import 'package:photopulse/features/profile/data/models/change_password_request.dart';
 import 'package:photopulse/generated/l10n.dart';
 import 'package:q_architecture/q_architecture.dart';
-import 'package:http/http.dart' as http;
 
 final authRepositoryProvider = Provider<AuthRepository>(
   (ref) => AuthRepositoryImpl(
@@ -37,11 +31,6 @@ abstract interface class AuthRepository {
   });
 
   EitherFailureOr<void> loginWithGoogle();
-
-  EitherFailureOr<void> loginWithGitHub({
-    required GithubAuthParameters parameters,
-    required String code,
-  });
 
   EitherFailureOr<void> loginAnonymously();
 
@@ -135,52 +124,6 @@ class AuthRepositoryImpl with ErrorToFailureMixin implements AuthRepository {
           return const Right(null);
         },
         errorResolver: const FirebaseErrorResolver(),
-      );
-
-  @override
-  EitherFailureOr<void> loginWithGitHub({
-    required GithubAuthParameters parameters,
-    required String code,
-  }) =>
-      execute(
-        () async {
-          final Map<String, String> headers = {'Accept': 'application/json'};
-
-          final response = await http.post(
-            Uri.parse(GithubAuthConstants.getAccessTokenUrl),
-            headers: headers,
-            body: {
-              'client_id': parameters.clientId,
-              'client_secret': parameters.clientSecret,
-              'code': code,
-            },
-          );
-
-          final body = json.decode(utf8.decode(response.bodyBytes));
-          final bool hasError = body['error'] != null;
-          if (hasError) {
-            return Left(
-              Failure(
-                title: body['error_description'] ??
-                    'Unknown Error: ${body.toString()}',
-              ),
-            );
-          }
-
-          // Use cookies in subsequent requests, if necessary
-          // Example: http.get(Uri.parse('someUrl'), headers: {'Cookie': getCookieHeader()});
-
-          final AuthCredential credential = GithubAuthProvider.credential(
-            body['access_token'],
-          );
-
-          await _firebaseAuth.signInWithCredential(credential).then(
-                (_) => _usersRepository.initializeUser(),
-              );
-
-          return const Right(null);
-        },
-        errorResolver: const GenericErrorResolver(),
       );
 
   @override

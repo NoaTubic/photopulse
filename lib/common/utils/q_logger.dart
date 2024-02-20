@@ -8,15 +8,15 @@ import 'package:loggy/loggy.dart';
 
 import '../../main/app_environment.dart';
 
-class QLogger extends StatelessWidget {
-  const QLogger._({Key? key}) : super(key: key);
+class PPLogger extends StatelessWidget {
+  const PPLogger._();
 
   static void showLogger(BuildContext context) {
     if (!EnvInfo.isProduction || kDebugMode) {
       showModalBottomSheet<void>(
         context: context,
         isScrollControlled: true,
-        builder: (BuildContext context) => const QLogger._(),
+        builder: (BuildContext context) => const PPLogger._(),
       );
     }
   }

@@ -1,3 +1,6 @@
+// ignore_for_file: deprecated_member_use
+//ignore_for_file: avoid-ignoring-return-values, prefer-extracting-callbacks
+
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:photopulse/common/presentation/app_sizes.dart';
@@ -5,9 +8,9 @@ import 'package:photopulse/common/presentation/buttons/photo_pulse_button.dart';
 import 'package:photopulse/common/presentation/buttons/photo_pulse_text_button.dart';
 import 'package:photopulse/common/presentation/text/body_text.dart';
 import 'package:photopulse/common/presentation/text/headline_text.dart';
+import 'package:photopulse/generated/l10n.dart';
 import 'package:photopulse/theme/app_colors.dart';
 
-//ignore_for_file: avoid-ignoring-return-values, prefer-extracting-callbacks
 class PhotoPulseDialog extends StatelessWidget {
   final Widget? topWidget;
   final String title;
@@ -62,8 +65,8 @@ class PhotoPulseDialog extends StatelessWidget {
       title: title,
       bodyText: bodyText,
       topButtonAction: () => onConfirmPressed(),
-      topButtonText: topButtonText ?? 'Yes, quit',
-      bottomButtonText: 'Cancel',
+      topButtonText: topButtonText ?? S.current.quit_check,
+      bottomButtonText: S.current.cancel,
       buttonsPadding: buttonsPadding,
     );
   }
@@ -96,7 +99,7 @@ class PhotoPulseDialog extends StatelessWidget {
     return PhotoPulseDialog(
       mainPadding: const EdgeInsets.all(AppSizes.bodyPaddingHorizontal),
       disableBack: true,
-      title: 'Post successful',
+      title: S.current.post_successful,
       body: Column(
         children: [
           const SizedBox(height: AppSizes.smallSpacing),
@@ -106,8 +109,8 @@ class PhotoPulseDialog extends StatelessWidget {
             size: AppSizes.iconLargeSize,
           ),
           const SizedBox(height: AppSizes.normalSpacing),
-          const BodyText(
-            'Your content was posted to the feed.',
+          BodyText(
+            S.current.content_posted,
             isCentered: true,
             isBold: true,
           ),
@@ -143,10 +146,11 @@ class PhotoPulseDialog extends StatelessWidget {
         child: Container(
           decoration: const BoxDecoration(
             color: Colors.white,
-            borderRadius: BorderRadius.all(Radius.circular(16)),
+            borderRadius: BorderRadius.all(
+                Radius.circular(AppSizes.normalCircularRadius)),
           ),
           constraints: const BoxConstraints(
-            maxWidth: 600,
+            maxWidth: AppSizes.dialogMaxWidth,
           ),
           padding: mainPadding ?? const EdgeInsets.all(AppSizes.largeSpacing),
           margin: const EdgeInsets.symmetric(
@@ -216,7 +220,6 @@ class _Buttons extends StatelessWidget {
   final EdgeInsets buttonsPadding;
 
   const _Buttons({
-    super.key,
     required this.topButtonText,
     required this.topButtonAction,
     this.shouldTopActionPop = true,

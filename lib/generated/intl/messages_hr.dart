@@ -24,11 +24,19 @@ class MessageLookup extends MessageLookupByLibrary {
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "admin_panel":
             MessageLookupByLibrary.simpleMessage("Administratorska ploča"),
+        "after_data": MessageLookupByLibrary.simpleMessage("Podaci poslije"),
+        "anonymous_content_upload": MessageLookupByLibrary.simpleMessage(
+            "Molimo prijavite se ili registrirajte kako bi koristili funkcionalnost prijenosa sadržaja."),
+        "anonymous_info": MessageLookupByLibrary.simpleMessage(
+            "Molim Vas prijavite se ili registrirajte kako bi koristili sve funkcionalnosti."),
         "anonymous_login":
             MessageLookupByLibrary.simpleMessage("Nastavite bez prijave"),
         "apply_filters":
             MessageLookupByLibrary.simpleMessage("Primijeni filtere"),
         "ascending": MessageLookupByLibrary.simpleMessage("Uzlazno"),
+        "back_online": MessageLookupByLibrary.simpleMessage(
+            "Ponovno ste spojeni na internet"),
+        "before_data": MessageLookupByLibrary.simpleMessage("Podaci prije"),
         "body_text_cancel": MessageLookupByLibrary.simpleMessage("Odustani"),
         "body_text_retake":
             MessageLookupByLibrary.simpleMessage("Ponovno snimi"),
@@ -59,12 +67,18 @@ class MessageLookup extends MessageLookupByLibrary {
             "Ako se sada vratite, izgubit ćete sve napravljene promjene."),
         "clear_statistics":
             MessageLookupByLibrary.simpleMessage("Očisti statistiku"),
+        "close": MessageLookupByLibrary.simpleMessage("Zatvori"),
+        "collection": MessageLookupByLibrary.simpleMessage("Kolekcija: "),
         "confirm_go_back_title": MessageLookupByLibrary.simpleMessage(
             "Jeste li sigurni da želite ići natrag?"),
+        "confirm_new_password":
+            MessageLookupByLibrary.simpleMessage("Potvrdi novu lozinku"),
         "confirm_password":
             MessageLookupByLibrary.simpleMessage("Potvrdite lozinku"),
         "confirm_password_required":
             MessageLookupByLibrary.simpleMessage("Potvrda lozinke je obavezna"),
+        "content_posted":
+            MessageLookupByLibrary.simpleMessage("Sadžaj objavljen"),
         "create_new_account":
             MessageLookupByLibrary.simpleMessage("Kreirajte novi račun"),
         "create_new_post":
@@ -80,10 +94,13 @@ class MessageLookup extends MessageLookupByLibrary {
         "delete_account": MessageLookupByLibrary.simpleMessage("Obriši račun"),
         "delete_post": MessageLookupByLibrary.simpleMessage("Izbriši objavu"),
         "descending": MessageLookupByLibrary.simpleMessage("Silazno"),
+        "device_settings":
+            MessageLookupByLibrary.simpleMessage("Postavke uređaja"),
         "didnt_receive_verification_email":
             MessageLookupByLibrary.simpleMessage(
                 "Niste primili email za potvrdu?"),
         "directions": MessageLookupByLibrary.simpleMessage("Upute"),
+        "document_id": MessageLookupByLibrary.simpleMessage("ID dokumenta: "),
         "dont_have_account":
             MessageLookupByLibrary.simpleMessage("Nemate račun?"),
         "download_post": MessageLookupByLibrary.simpleMessage("Preuzmi objavu"),
@@ -93,6 +110,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "download_post_content_permission_gallery_and_storage":
             MessageLookupByLibrary.simpleMessage(
                 "Za preuzimanje sadržaja objave, molimo dopustite Care Connect aplikaciji pristup vašoj galeriji i pohrani."),
+        "edit_image": MessageLookupByLibrary.simpleMessage("Uredi sliku"),
         "edit_post": MessageLookupByLibrary.simpleMessage("Uredi objavu"),
         "edit_user":
             MessageLookupByLibrary.simpleMessage("Uredi informacije korisnika"),
@@ -108,6 +126,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Unesite svoje korisničko ime za nastavak."),
         "error_message_something_wrong":
             MessageLookupByLibrary.simpleMessage("Nešto je pošlo po krivu"),
+        "event_type": MessageLookupByLibrary.simpleMessage("Vrsta događaja: "),
         "filter_by_user":
             MessageLookupByLibrary.simpleMessage("Filtriraj po korisniku"),
         "filters": MessageLookupByLibrary.simpleMessage("Filteri"),
@@ -128,6 +147,7 @@ class MessageLookup extends MessageLookupByLibrary {
                 "Molimo odaberite paket pretplate"),
         "home_tab": MessageLookupByLibrary.simpleMessage("Početna"),
         "hours_abbreviation": MessageLookupByLibrary.simpleMessage("sat prije"),
+        "i_understand": MessageLookupByLibrary.simpleMessage("Razumijem"),
         "id": MessageLookupByLibrary.simpleMessage("ID"),
         "incorrect_password_format":
             MessageLookupByLibrary.simpleMessage("Neispravan format lozinke"),
@@ -139,6 +159,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "language": MessageLookupByLibrary.simpleMessage("Jezik"),
         "load_from_gallery":
             MessageLookupByLibrary.simpleMessage("Učitaj iz galerije"),
+        "log_entry_details":
+            MessageLookupByLibrary.simpleMessage("Detalji o zapisu dnevnika"),
         "login": MessageLookupByLibrary.simpleMessage("Prijava"),
         "login_error_email_already_in_user":
             MessageLookupByLibrary.simpleMessage("Email je već u upotrebi"),
@@ -157,11 +179,21 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("min prije"),
         "month": MessageLookupByLibrary.simpleMessage("mjesec"),
         "months": MessageLookupByLibrary.simpleMessage("mjeseci"),
+        "new_email": MessageLookupByLibrary.simpleMessage("Novi email"),
+        "new_password": MessageLookupByLibrary.simpleMessage("Nova lozinka"),
+        "new_username":
+            MessageLookupByLibrary.simpleMessage("Novo korisničko ime"),
         "no": MessageLookupByLibrary.simpleMessage("Ne"),
+        "no_data_available":
+            MessageLookupByLibrary.simpleMessage("Podaci nisu dostupni"),
         "no_posts_yet": MessageLookupByLibrary.simpleMessage(
             "Još nema objava.\nDodajte novu na kartici \'Prijenos sadržaja\'."),
         "none": MessageLookupByLibrary.simpleMessage("Nijedan"),
+        "old_password": MessageLookupByLibrary.simpleMessage("Stara lozinka"),
+        "or": MessageLookupByLibrary.simpleMessage("ili"),
         "password": MessageLookupByLibrary.simpleMessage("Lozinka"),
+        "password_changed":
+            MessageLookupByLibrary.simpleMessage("Lozinka promijenjena"),
         "password_reset_email_sent": MessageLookupByLibrary.simpleMessage(
             "Email za resetiranje lozinke je poslan"),
         "passwords_dont_match":
@@ -171,10 +203,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "photo_pulse": MessageLookupByLibrary.simpleMessage("PhotoPulse"),
         "post_caption": MessageLookupByLibrary.simpleMessage("Opis"),
         "post_hashtags": MessageLookupByLibrary.simpleMessage("Hashtagovi"),
+        "post_successful":
+            MessageLookupByLibrary.simpleMessage("Objava uspješna"),
         "post_title": MessageLookupByLibrary.simpleMessage("Naslov"),
         "privacy_policy":
             MessageLookupByLibrary.simpleMessage("Politika privatnosti"),
         "profile_tab": MessageLookupByLibrary.simpleMessage("Profil"),
+        "quit": MessageLookupByLibrary.simpleMessage("Da, izađi"),
+        "quit_check": MessageLookupByLibrary.simpleMessage("Yes, quit?"),
         "remove_profile_image":
             MessageLookupByLibrary.simpleMessage("Remove profile image"),
         "required_email":
@@ -186,6 +222,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "reset_password":
             MessageLookupByLibrary.simpleMessage("Resetiraj lozinku"),
         "retake": MessageLookupByLibrary.simpleMessage("Ponovno snimi"),
+        "search_by_hashtag":
+            MessageLookupByLibrary.simpleMessage("Pretraži po hashtagu"),
+        "search_empty": MessageLookupByLibrary.simpleMessage(
+            "Nema rezultata za traženi hashtag"),
+        "search_start": MessageLookupByLibrary.simpleMessage(
+            "Unesite hastag za pretragu objava"),
         "search_tab": MessageLookupByLibrary.simpleMessage("Traži"),
         "select_date_range":
             MessageLookupByLibrary.simpleMessage("Odaberi raspon datuma"),
@@ -209,8 +251,16 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Uspješno spremljeno"),
         "take_photo": MessageLookupByLibrary.simpleMessage("Snimi fotografiju"),
         "theme": MessageLookupByLibrary.simpleMessage("Tema"),
+        "timestamp": MessageLookupByLibrary.simpleMessage("Vremenska oznaka: "),
+        "total_size_uploaded":
+            MessageLookupByLibrary.simpleMessage("Ukupno učitano (MB):"),
         "unknown_error_occurred": MessageLookupByLibrary.simpleMessage(
             "Došlo je do nepoznate pogreške"),
+        "unsaved_changes": MessageLookupByLibrary.simpleMessage(
+            "Jeste li sigurni da želite izaći?"),
+        "unsaved_changes_helper": MessageLookupByLibrary.simpleMessage(
+            "Ako sad izađete, izgubit ćete sve napravljene promjene."),
+        "update": MessageLookupByLibrary.simpleMessage("Ažuriraj"),
         "update_post": MessageLookupByLibrary.simpleMessage("Ažuriraj objavu"),
         "upload_content":
             MessageLookupByLibrary.simpleMessage("Prijenos sadržaja"),
@@ -238,12 +288,15 @@ class MessageLookup extends MessageLookupByLibrary {
             "Gotovo ste spremni za početak korištenja"),
         "view_less": MessageLookupByLibrary.simpleMessage("Pogledaj manje"),
         "view_more": MessageLookupByLibrary.simpleMessage("Pogledaj više"),
+        "weak_password": MessageLookupByLibrary.simpleMessage("Slaba lozinka"),
         "week_abbreviation":
             MessageLookupByLibrary.simpleMessage("tjedan prije"),
         "whoops": MessageLookupByLibrary.simpleMessage("Ups"),
         "year": MessageLookupByLibrary.simpleMessage("godina"),
         "years": MessageLookupByLibrary.simpleMessage("godine"),
         "yes": MessageLookupByLibrary.simpleMessage("Da"),
+        "you_are_offline":
+            MessageLookupByLibrary.simpleMessage("Niste spojeni na internet"),
         "your_email": MessageLookupByLibrary.simpleMessage("Vaš email"),
         "your_password": MessageLookupByLibrary.simpleMessage("Vaša lozinka")
       };

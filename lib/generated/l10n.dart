@@ -180,6 +180,16 @@ class S {
     );
   }
 
+  /// `Weak password`
+  String get weak_password {
+    return Intl.message(
+      'Weak password',
+      name: 'weak_password',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Log In`
   String get login {
     return Intl.message(
@@ -550,6 +560,16 @@ class S {
     );
   }
 
+  /// `Edit image`
+  String get edit_image {
+    return Intl.message(
+      'Edit image',
+      name: 'edit_image',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Create post`
   String get create_post_button {
     return Intl.message(
@@ -680,10 +700,10 @@ class S {
     );
   }
 
-  /// `Something went wrong`
+  /// `Something went wrong. Please try again.`
   String get error_message_something_wrong {
     return Intl.message(
-      'Something went wrong',
+      'Something went wrong. Please try again.',
       name: 'error_message_something_wrong',
       desc: '',
       args: [],
@@ -725,6 +745,16 @@ class S {
     return Intl.message(
       'Uploaded today:',
       name: 'uploaded_today',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Total size uploaded (MB)`
+  String get total_size_uploaded {
+    return Intl.message(
+      'Total size uploaded (MB)',
+      name: 'total_size_uploaded',
       desc: '',
       args: [],
     );
@@ -1365,6 +1395,326 @@ class S {
     return Intl.message(
       'Remove profile image',
       name: 'remove_profile_image',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Log Entry Details`
+  String get log_entry_details {
+    return Intl.message(
+      'Log Entry Details',
+      name: 'log_entry_details',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Event Type: `
+  String get event_type {
+    return Intl.message(
+      'Event Type: ',
+      name: 'event_type',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Collection: `
+  String get collection {
+    return Intl.message(
+      'Collection: ',
+      name: 'collection',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Document ID: `
+  String get document_id {
+    return Intl.message(
+      'Document ID: ',
+      name: 'document_id',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Timestamp: `
+  String get timestamp {
+    return Intl.message(
+      'Timestamp: ',
+      name: 'timestamp',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Before Data`
+  String get before_data {
+    return Intl.message(
+      'Before Data',
+      name: 'before_data',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `After Data`
+  String get after_data {
+    return Intl.message(
+      'After Data',
+      name: 'after_data',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Close`
+  String get close {
+    return Intl.message(
+      'Close',
+      name: 'close',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No data available`
+  String get no_data_available {
+    return Intl.message(
+      'No data available',
+      name: 'no_data_available',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `You are offline`
+  String get you_are_offline {
+    return Intl.message(
+      'You are offline',
+      name: 'you_are_offline',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Back online`
+  String get back_online {
+    return Intl.message(
+      'Back online',
+      name: 'back_online',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `I understand`
+  String get i_understand {
+    return Intl.message(
+      'I understand',
+      name: 'i_understand',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Go to device settings`
+  String get device_settings {
+    return Intl.message(
+      'Go to device settings',
+      name: 'device_settings',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Yes, quit?`
+  String get quit_check {
+    return Intl.message(
+      'Yes, quit?',
+      name: 'quit_check',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Yes, quit`
+  String get quit {
+    return Intl.message(
+      'Yes, quit',
+      name: 'quit',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Post successful`
+  String get post_successful {
+    return Intl.message(
+      'Post successful',
+      name: 'post_successful',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Your content was posted to the feed`
+  String get content_posted {
+    return Intl.message(
+      'Your content was posted to the feed',
+      name: 'content_posted',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Are you sure you want to quit?`
+  String get unsaved_changes {
+    return Intl.message(
+      'Are you sure you want to quit?',
+      name: 'unsaved_changes',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `If you quit now, the changes you made will be lost.`
+  String get unsaved_changes_helper {
+    return Intl.message(
+      'If you quit now, the changes you made will be lost.',
+      name: 'unsaved_changes_helper',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `or`
+  String get or {
+    return Intl.message(
+      'or',
+      name: 'or',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please login or register to access all profile features`
+  String get anonymous_info {
+    return Intl.message(
+      'Please login or register to access all profile features',
+      name: 'anonymous_info',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Old password`
+  String get old_password {
+    return Intl.message(
+      'Old password',
+      name: 'old_password',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `New password`
+  String get new_password {
+    return Intl.message(
+      'New password',
+      name: 'new_password',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Confirm new password`
+  String get confirm_new_password {
+    return Intl.message(
+      'Confirm new password',
+      name: 'confirm_new_password',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Password changed`
+  String get password_changed {
+    return Intl.message(
+      'Password changed',
+      name: 'password_changed',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `New email`
+  String get new_email {
+    return Intl.message(
+      'New email',
+      name: 'new_email',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `New username`
+  String get new_username {
+    return Intl.message(
+      'New username',
+      name: 'new_username',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Update`
+  String get update {
+    return Intl.message(
+      'Update',
+      name: 'update',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Search by hashtag`
+  String get search_by_hashtag {
+    return Intl.message(
+      'Search by hashtag',
+      name: 'search_by_hashtag',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Enter a hashtag to search for posts.`
+  String get search_start {
+    return Intl.message(
+      'Enter a hashtag to search for posts.',
+      name: 'search_start',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No posts found. Try another hashtag.`
+  String get search_empty {
+    return Intl.message(
+      'No posts found. Try another hashtag.',
+      name: 'search_empty',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please login or register to upload content.`
+  String get anonymous_content_upload {
+    return Intl.message(
+      'Please login or register to upload content.',
+      name: 'anonymous_content_upload',
       desc: '',
       args: [],
     );

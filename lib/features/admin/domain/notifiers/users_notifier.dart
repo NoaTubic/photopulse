@@ -23,7 +23,7 @@ class UsersNotifier extends SimpleStateNotifier<List<PhotoPulseUser>> {
     _usersSubscription = _usersRepository.getUsersStream().listen(
       (eitherFailureOrUsers) {
         eitherFailureOrUsers.fold(
-          (failure) => state = [], // Handle failure state
+          (failure) => state = [],
           (users) => state = users,
         );
       },

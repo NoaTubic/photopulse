@@ -1,11 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/services.dart';
 import 'package:photopulse/common/constants/firebase_constants.dart';
-
 import 'package:photopulse/generated/l10n.dart';
 import 'package:q_architecture/q_architecture.dart';
 
-//DESIGN PATTER: DECORATOR
 final class FirebaseErrorResolver implements ErrorResolver {
   final String? failureTitle;
 
@@ -49,7 +47,7 @@ final class FirebaseErrorResolver implements ErrorResolver {
         );
       case FirebaseConstants.weakPassword:
         return Failure.generic(
-          title: failureTitle ?? 'Weak password',
+          title: failureTitle ?? S.current.weak_password,
           error: err,
           stackTrace: stackTrace,
         );

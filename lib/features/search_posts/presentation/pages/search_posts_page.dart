@@ -9,9 +9,11 @@ import 'package:photopulse/common/presentation/photo_pulse_scaffold.dart';
 import 'package:photopulse/common/presentation/photo_pulse_text_form_field.dart';
 import 'package:photopulse/common/presentation/text/text.dart';
 import 'package:photopulse/features/search_posts/domain/notifiers/search_query_provider.dart';
+import 'package:photopulse/features/search_posts/presentation/widgets/feed_error.dart';
 import 'package:photopulse/features/search_posts/presentation/widgets/filters_section.dart';
 import 'package:photopulse/features/feed/presentation/widgets/post_tile.dart';
 import 'package:photopulse/features/search_posts/domain/notifiers/serach_posts_notifier.dart';
+import 'package:photopulse/generated/l10n.dart';
 import 'package:photopulse/theme/app_colors.dart';
 import 'package:q_architecture/q_architecture.dart';
 
@@ -55,8 +57,8 @@ class SearchPostsPage extends HookConsumerWidget {
                       flex: 4,
                       child: PhotoPulseTextFormField.normalTextField(
                         controller: searchController,
-                        name: 'name',
-                        labelText: 'Search by hashtag',
+                        name: '',
+                        labelText: S.current.search_by_hashtag,
                         prefixIcon: GestureDetector(
                           onTap: () => searchQuery.isNotEmpty
                               ? ref
@@ -127,8 +129,8 @@ class SearchPostsPage extends HookConsumerWidget {
                     const SizedBox(width: AppSizes.smallSpacing),
                     BodyText(
                       ref.watch(searchQueryProvider).isEmpty
-                          ? 'Enter a hashtag to search for posts.'
-                          : 'No posts found. Try another hashtag.',
+                          ? S.current.search_start
+                          : S.current.search_empty,
                       isBold: true,
                     ),
                   ],
@@ -140,31 +142,6 @@ class SearchPostsPage extends HookConsumerWidget {
           )
         ],
       ),
-    );
-  }
-}
-
-class FeedError extends StatelessWidget {
-  const FeedError({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Icon(
-          Icons.error_rounded,
-          size: 32,
-          color: AppColors.black,
-        ),
-        const SizedBox(width: AppSizes.smallSpacing),
-        const BodyText(
-          'Something went wrong. Please try again.',
-          isBold: true,
-        ),
-      ],
     );
   }
 }

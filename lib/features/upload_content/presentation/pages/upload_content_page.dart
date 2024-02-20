@@ -112,9 +112,9 @@ class UploadContentPage extends ConsumerWidget {
           ),
           if (isAnonymousUser) ...[
             const SizedBox(height: AppSizes.largeSpacing),
-            const Center(
+            Center(
               child: HeadlineText(
-                'Please login or register to upload content.',
+                S.current.anonymous_content_upload,
                 isBold: true,
                 isCentered: true,
               ),

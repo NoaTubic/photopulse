@@ -1,7 +1,6 @@
 //ignore_for_file: unused_element
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:oauth2/oauth2.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 final localStorageServiceProvider = Provider<LocalStorageService>(
@@ -13,9 +12,7 @@ final localStorageServiceProvider = Provider<LocalStorageService>(
 
 abstract interface class LocalStorageService {
   Future<void> deleteAll();
-  Future<void> writeOAuth2Credentials(Credentials credentials);
-  Future<Credentials?> readOAuth2Credentials();
-  Future<void> deleteOAuth2Credentials();
+
   Future<void> writeLocalization(String language);
   Future<String?> readLocalization(String language);
 }
@@ -34,28 +31,6 @@ class LocalStorageServiceImpl implements LocalStorageService {
 
   Future<SharedPreferences> get _sharedPrefs async {
     return _sharedPreferencesInstance ??= await _sharedPreferencesFuture;
-  }
-
-  @override
-  Future<Credentials?> readOAuth2Credentials() async {
-    final json = await _readSecure(LocalStorageKey.oauth2Credentials);
-    if (json == null) {
-      return null;
-    }
-    return Credentials.fromJson(json);
-  }
-
-  @override
-  Future<void> writeOAuth2Credentials(Credentials credentials) async {
-    await _writeSecure(
-      key: LocalStorageKey.oauth2Credentials,
-      value: credentials.toJson(),
-    );
-  }
-
-  @override
-  Future<void> deleteOAuth2Credentials() async {
-    await _deleteSecure(LocalStorageKey.oauth2Credentials);
   }
 
   @override
@@ -119,7 +94,6 @@ class LocalStorageServiceImpl implements LocalStorageService {
 
 enum LocalStorageKey {
   token('token'),
-  oauth2Credentials('oauth2Credentials'),
   localization('localization');
 
   final String key;

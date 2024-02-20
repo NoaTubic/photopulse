@@ -9,12 +9,11 @@ import 'package:photopulse/common/domain/utils/base_state_extensions.dart';
 import 'package:photopulse/common/presentation/app_sizes.dart';
 import 'package:photopulse/common/presentation/buttons/photo_pulse_button.dart';
 import 'package:photopulse/common/presentation/buttons/photo_pulse_text_button.dart';
-
 import 'package:photopulse/common/presentation/photo_pulse_text_form_field.dart';
 import 'package:photopulse/common/presentation/text/text.dart';
-import 'package:photopulse/features/admin/domain/notifiers/users_notifier.dart';
 import 'package:photopulse/features/auth/domain/notifiers/user_data_notifier.dart';
 import 'package:photopulse/features/auth/domain/notifiers/user_notifier.dart';
+import 'package:photopulse/generated/l10n.dart';
 import 'package:photopulse/theme/app_colors.dart';
 
 final formKey = GlobalKey<FormBuilderState>();
@@ -37,10 +36,12 @@ class ChangeUserInfoDialog extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final controller = useTextEditingController();
-    final String title =
-        type == UserInfoType.email ? 'Change Email' : 'Change Username';
-    final String hintText =
-        type == UserInfoType.email ? 'New Email' : 'New Username';
+    final String title = type == UserInfoType.email
+        ? S.current.change_email
+        : S.current.change_username;
+    final String hintText = type == UserInfoType.email
+        ? S.current.new_email
+        : S.current.new_username;
     final List<String? Function(String?)> validators =
         type == UserInfoType.email
             ? [
@@ -89,7 +90,7 @@ class ChangeUserInfoDialog extends HookConsumerWidget {
             ),
             const Gap(AppSizes.mediumSpacing),
             PhotoPulseButton.primary(
-              label: 'Update',
+              label: S.current.update,
               onTap: () {
                 if (formKey.currentState?.saveAndValidate() ?? false) {
                   type == UserInfoType.email
@@ -109,7 +110,7 @@ class ChangeUserInfoDialog extends HookConsumerWidget {
             ),
             const Gap(AppSizes.compactSpacing),
             PhotoPulseTextButton(
-              label: 'Cancel',
+              label: S.current.cancel,
               onTap: ref.pop,
             ),
           ],

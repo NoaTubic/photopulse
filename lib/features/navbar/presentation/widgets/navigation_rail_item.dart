@@ -39,13 +39,6 @@ class NavigationRailItem extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           icon,
-          // SvgPicture.asset(
-          //   iconPath,
-          //   colorFilter: ColorFilter.mode(
-          //     isSelected ? AppColors.primaryDark : AppColors.greyDark30,
-          //     BlendMode.srcIn,
-          //   ),
-          // ),
           const SizedBox(
             width: AppSizes.normalSpacing,
           ),

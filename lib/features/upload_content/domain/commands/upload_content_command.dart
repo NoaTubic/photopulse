@@ -10,7 +10,6 @@ import 'package:photopulse/features/upload_content/presentation/pages/upload_con
 import 'package:photopulse/generated/l10n.dart';
 import 'package:q_architecture/q_architecture.dart';
 
-//DESIGN PATTER: COMMAND
 class UploadContentCommand implements Command {
   final WidgetRef ref;
   final BuildContext context;

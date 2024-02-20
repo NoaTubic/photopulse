@@ -19,7 +19,7 @@ class PhotoPulseAppBar extends StatelessWidget implements PreferredSizeWidget {
   final Widget? flexibleSpace;
 
   const PhotoPulseAppBar({
-    Key? key,
+    super.key,
     this.title,
     this.titleColor,
     this.leading,
@@ -33,7 +33,7 @@ class PhotoPulseAppBar extends StatelessWidget implements PreferredSizeWidget {
     this.titleOnly = false,
     this.height,
     this.flexibleSpace,
-  }) : super(key: key);
+  });
 
   factory PhotoPulseAppBar.withBackNav({
     String title = '',

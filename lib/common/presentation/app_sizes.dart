@@ -49,10 +49,16 @@ abstract class AppSizes {
   static const double cameraLogoSize = 120;
   static const double pulseLogoSize = 180;
   static const double verifyEmailIconSize = 80;
-
+  static const double iconButtonWidth = 48;
+  static const double iconButtonHeight = 60;
+  static const double permissionDialogHeight = 112;
+  static const double dialogMaxWidth = 600;
   static const double navigationRailWidth = 330;
   static const double navigationRailBreakingPoint = 640;
-
+  static const double dropdownElevation = 3;
+  static const double dropdownHeight = 20;
+  static const double dropdownWidth = 160;
+  static const double dividerHeight = 1;
   static const BorderRadiusGeometry normalCircularBorderRadius =
       BorderRadius.all(
     Radius.circular(normalCircularRadius),

@@ -1,11 +1,12 @@
+import 'package:photopulse/generated/l10n.dart';
+
 enum ConnectionStatus {
   undefined,
   online,
   offline;
 
   String get newStatusMessage {
-    //TODO: add localized strings
-    if (this == offline) return 'You are offline';
-    return 'You are back online';
+    if (this == offline) return S.current.you_are_offline;
+    return S.current.back_online;
   }
 }

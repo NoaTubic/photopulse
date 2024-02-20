@@ -153,8 +153,6 @@ class PhotoPulseButton extends StatelessWidget {
             width: 1,
             style: BorderStyle.solid,
           ),
-          // disabledBackgroundColor: backgroundColor!,
-          // disabledForegroundColor: textColor,
         ),
         child: isLoading
             ? Container(

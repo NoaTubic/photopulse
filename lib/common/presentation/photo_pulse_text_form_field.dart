@@ -45,7 +45,7 @@ class PhotoPulseTextFormField extends HookWidget {
   final FocusNode? focusNode;
 
   const PhotoPulseTextFormField._({
-    Key? key,
+    super.key,
     this.validators,
     required this.name,
     this.hintText = '',
@@ -76,7 +76,7 @@ class PhotoPulseTextFormField extends HookWidget {
     this.enableInteractiveSelection,
     this.readOnly = false,
     this.focusNode,
-  }) : super(key: key);
+  });
 
   factory PhotoPulseTextFormField.normalTextField({
     required String name,

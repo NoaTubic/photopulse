@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:photopulse/common/presentation/app_sizes.dart';
+import 'package:photopulse/generated/l10n.dart';
 import 'package:photopulse/theme/app_colors.dart';
 
 enum SortOrder {
@@ -28,7 +29,6 @@ class SortingSwitcher extends HookWidget {
     return Row(
       mainAxisSize: MainAxisSize.min,
       children: [
-        // Ascending Tab
         GestureDetector(
           onTap: () {
             if (sortOrder.value != SortOrder.ascending) {
@@ -42,7 +42,7 @@ class SortingSwitcher extends HookWidget {
                 horizontal: AppSizes.normalSpacing),
             decoration: buildDecoration(sortOrder.value == SortOrder.ascending),
             child: Text(
-              'Ascending',
+              S.current.ascending,
               style: TextStyle(
                 color: sortOrder.value == SortOrder.ascending
                     ? AppColors.white
@@ -52,7 +52,6 @@ class SortingSwitcher extends HookWidget {
           ),
         ),
         const SizedBox(width: AppSizes.smallSpacing),
-        // Descending Tab
         GestureDetector(
           onTap: () {
             if (sortOrder.value != SortOrder.descending) {
@@ -67,7 +66,7 @@ class SortingSwitcher extends HookWidget {
             decoration:
                 buildDecoration(sortOrder.value == SortOrder.descending),
             child: Text(
-              'Descending',
+              S.current.descending,
               style: TextStyle(
                 color: sortOrder.value == SortOrder.descending
                     ? AppColors.white

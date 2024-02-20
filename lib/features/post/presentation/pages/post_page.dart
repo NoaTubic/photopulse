@@ -60,12 +60,11 @@ class PostPage extends HookConsumerWidget {
     ref.watch(locationNotifierProvider);
 
     return PopScope(
-      // onPopInvoked: () async {
-      //   // return ref.read(postNotifierProvider).maybeWhen(
-      //   //       loading: () => false,
-      //   //       orElse: () => true,
-      //   //     );
-      // },
+      onPopInvoked: (_) {
+        _cancelPostForm(ref, context);
+
+        false;
+      },
       child: PhotoPulseScaffold(
         appBar: PhotoPulseAppBar.withBackNav(
           title:
@@ -74,7 +73,6 @@ class PostPage extends HookConsumerWidget {
             _cancelPostForm(ref, context);
           },
         ),
-        // padding: EdgeInsets.zero,
         body: SingleChildScrollView(
           child: Center(
             child: AnimatedColumn(

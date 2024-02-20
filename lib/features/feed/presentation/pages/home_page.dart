@@ -11,7 +11,7 @@ import 'package:photopulse/features/feed/domain/notifiers/feed_notifier.dart';
 import 'package:photopulse/features/feed/presentation/widgets/post_tile.dart';
 import 'package:photopulse/features/location/domain/domain/notifiers/location_list_noifier.dart';
 import 'package:photopulse/features/location/domain/domain/notifiers/location_notifier.dart';
-import 'package:photopulse/features/search_posts/presentation/pages/search_posts_page.dart';
+import 'package:photopulse/features/search_posts/presentation/widgets/feed_error.dart';
 import 'package:photopulse/features/subscription_management/presentation/pages/subscription_management_page.dart';
 import 'package:photopulse/generated/l10n.dart';
 import 'package:q_architecture/q_architecture.dart';

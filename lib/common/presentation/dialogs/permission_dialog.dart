@@ -4,6 +4,7 @@ import 'package:permission_handler/permission_handler.dart';
 import 'package:photopulse/common/presentation/app_sizes.dart';
 import 'package:photopulse/common/presentation/dialogs/photo_pulse_dialog.dart';
 import 'package:photopulse/common/presentation/text/body_text.dart';
+import 'package:photopulse/generated/l10n.dart';
 import 'package:photopulse/theme/app_colors.dart';
 
 class PermissionsDialog extends ConsumerWidget {
@@ -13,12 +14,12 @@ class PermissionsDialog extends ConsumerWidget {
   final VoidCallback? onPop;
 
   const PermissionsDialog({
-    Key? key,
+    super.key,
     required this.errorText,
     this.helperText,
     required this.icon,
     this.onPop,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -42,7 +43,7 @@ class PermissionsDialog extends ConsumerWidget {
               ),
             ),
             width: double.infinity,
-            height: 112,
+            height: AppSizes.permissionDialogHeight,
             child: Icon(
               icon,
               // ignore: deprecated_member_use
@@ -73,8 +74,8 @@ class PermissionsDialog extends ConsumerWidget {
       mainPadding: const EdgeInsets.only(bottom: AppSizes.largeSpacing),
       buttonsPadding:
           const EdgeInsets.symmetric(horizontal: AppSizes.largeSpacing),
-      topButtonText: 'I understand',
-      bottomButtonText: 'Go to device settings',
+      topButtonText: S.current.i_understand,
+      bottomButtonText: S.current.device_settings,
       bottomButtonAction: openAppSettings,
       topButtonAction: () => null,
     );

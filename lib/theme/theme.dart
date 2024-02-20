@@ -7,8 +7,6 @@ import 'app_text_styles.dart';
 
 part 'fonts.dart';
 
-// final _theme = ThemeData();
-
 final lightTheme = ThemeData(
   splashColor: AppColors.black.withOpacity(0.1),
   highlightColor: AppColors.black.withOpacity(0.1),

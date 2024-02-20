@@ -14,6 +14,7 @@ import 'package:photopulse/common/presentation/photo_pulse_toast.dart';
 import 'package:photopulse/common/presentation/text/text.dart';
 import 'package:photopulse/features/profile/domain/notifiers/change_password_notifier.dart';
 import 'package:photopulse/features/profile/forms/change_password_form_config.dart';
+import 'package:photopulse/generated/l10n.dart';
 import 'package:photopulse/theme/app_colors.dart';
 import 'package:q_architecture/base_state_notifier.dart';
 
@@ -34,8 +35,8 @@ class ChangePasswordDialog extends HookConsumerWidget {
         return switch (next) {
           BaseData() => {
               ref.pop(),
-              const PhotoPulseToast(
-                message: 'PasswordChanged',
+              PhotoPulseToast(
+                message: S.current.password_changed,
               ).show(context),
             },
           BaseError(failure: final failure) => PhotoPulseToast(
@@ -65,8 +66,8 @@ class ChangePasswordDialog extends HookConsumerWidget {
                   color: AppColors.black,
                 ),
                 const Gap(AppSizes.compactSpacing),
-                const HeadlineText(
-                  'Change Password',
+                HeadlineText(
+                  S.current.change_password,
                   isBold: true,
                 ),
               ],
@@ -79,10 +80,9 @@ class ChangePasswordDialog extends HookConsumerWidget {
                 children: [
                   PhotoPulseTextFormField.passwordTextField(
                     name: ChangePasswordFormConfig.oldPasswordKey,
-                    labelText: 'Old Password',
+                    labelText: S.current.old_password,
                     validators: [
                       FormBuilderValidators.required(),
-                      // CommonValidators.password(),
                     ],
                   ),
                   const SizedBox(
@@ -90,10 +90,9 @@ class ChangePasswordDialog extends HookConsumerWidget {
                   ),
                   PhotoPulseTextFormField.passwordTextField(
                     name: ChangePasswordFormConfig.newPasswordKey,
-                    labelText: 'New Password',
+                    labelText: S.current.new_password,
                     validators: [
                       FormBuilderValidators.required(),
-                      // CommonValidators.password(),
                     ],
                   ),
                   const SizedBox(
@@ -101,7 +100,7 @@ class ChangePasswordDialog extends HookConsumerWidget {
                   ),
                   PhotoPulseTextFormField.passwordTextField(
                     name: ChangePasswordFormConfig.repeatedPasswordKey,
-                    labelText: 'Confirm New Password',
+                    labelText: S.current.confirm_new_password,
                     validators: [
                       ChangePasswordFormConfig.passwordMatch(
                         password: password,
@@ -116,7 +115,7 @@ class ChangePasswordDialog extends HookConsumerWidget {
             ),
             const Gap(AppSizes.normalSpacing),
             PhotoPulseButton.primary(
-              label: 'Change password',
+              label: S.current.change_password,
               onTap: () {
                 refreshMatchingPasswords(ref);
                 formKey.submitForm(
@@ -132,7 +131,7 @@ class ChangePasswordDialog extends HookConsumerWidget {
             ),
             const Gap(AppSizes.compactSpacing),
             PhotoPulseTextButton(
-              label: 'Cancel',
+              label: S.current.cancel,
               onTap: ref.pop,
             ),
           ],
