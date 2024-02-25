@@ -1,6 +1,0 @@
-#include "Generated.xcconfig"
-
-FLUTTER_TARGET=lib/main/main_dev.dart
-ASSET_PREFIX=dev
-BUNDLE_NAME=PhotoPulse Dev
-BUNDLE_DISPLAY_NAME=PhotoPulse Dev
