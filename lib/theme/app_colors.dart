@@ -1,38 +1,25 @@
 import 'package:flutter/material.dart';
 
-final class AppColors extends ThemeExtension<AppColors> {
-  final Color? defaultColor;
-  final Color? secondary;
-  final Color? background;
+abstract class AppColors {
+  static final Color black = HexColor.fromHex('#121212');
+  static final Color white = HexColor.fromHex('#FFFFFF');
+  static final Color accentDark = HexColor.fromHex('#2B2B2B');
 
-  const AppColors({
-    required this.defaultColor,
-    required this.secondary,
-    required this.background,
-  });
+  static final Color mainLight = HexColor.fromHex('#FFFFFF');
+  static final Color secondaryLight = HexColor.fromHex('#1C1C1C');
+  static final Color accentLight = HexColor.fromHex('#F3F2F2');
 
-  @override
-  AppColors copyWith({
-    Color? defaultColor,
-    Color? secondary,
-    Color? background,
-  }) {
-    return AppColors(
-      defaultColor: defaultColor ?? this.defaultColor,
-      secondary: secondary ?? this.secondary,
-      background: background ?? this.background,
-    );
-  }
+  static final Color alertCritical = HexColor.fromHex('#FC3A40');
+}
 
-  @override
-  AppColors lerp(AppColors? other, double t) {
-    if (other is! AppColors) {
-      return this;
+extension HexColor on Color {
+  static Color fromHex(String hexColorString) {
+    var tmpHexColorString = hexColorString.replaceAll('#', '');
+    if (tmpHexColorString.length == 6) {
+      tmpHexColorString = '0xFF$tmpHexColorString';
+    } else {
+      tmpHexColorString = '0x$tmpHexColorString';
     }
-    return AppColors(
-      defaultColor: Color.lerp(defaultColor, other.defaultColor, t),
-      secondary: Color.lerp(secondary, other.secondary, t),
-      background: Color.lerp(background, other.background, t),
-    );
+    return Color(int.parse(tmpHexColorString));
   }
 }

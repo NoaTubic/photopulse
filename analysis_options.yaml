@@ -55,7 +55,6 @@ analyzer:
     sized_box_for_whitespace: error
     avoid_unnecessary_containers: error
     dead_code: error
-    unused_import: error
     duplicate_import: error
     avoid_print: error
     parameter_assignments: error
@@ -129,10 +128,7 @@ dart_code_metrics:
     - no-object-declaration
     - prefer-correct-identifier-length:
         min-identifier-length: 2
-        exceptions:
-          [
-            "i"
-          ]
+        exceptions: ["i"]
         severity: error
     - prefer-correct-test-file-name
     - prefer-correct-type-name:

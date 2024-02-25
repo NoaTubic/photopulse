@@ -1,53 +1,78 @@
 import 'package:flutter/material.dart';
+import 'package:photopulse/theme/theme.dart';
 
-final class AppTextStyles extends ThemeExtension<AppTextStyles> {
-  final TextStyle? regular;
-  final TextStyle? bold;
-  final TextStyle? boldLarge;
-
-  const AppTextStyles({
-    required this.regular,
-    required this.bold,
-    required this.boldLarge,
-  });
-
-  @override
-  AppTextStyles copyWith({
-    TextStyle? regular,
-    TextStyle? bold,
-    TextStyle? boldLarge,
+abstract class TextStyles {
+  static TextStyle light({
+    double fontSize = FontSizes.s16,
+    required Color color,
   }) {
-    return AppTextStyles(
-      regular: regular ?? this.regular,
-      bold: bold ?? this.bold,
-      boldLarge: boldLarge ?? this.boldLarge,
+    return _textStyle(
+      fontSize,
+      Fonts.fontFamily,
+      FontWeights.light,
+      color,
     );
   }
 
-  @override
-  AppTextStyles lerp(AppTextStyles? other, double t) {
-    if (other is! AppTextStyles) {
-      return this;
-    }
-    return AppTextStyles(
-      regular: TextStyle.lerp(regular, other.regular, t),
-      bold: TextStyle.lerp(bold, other.bold, t),
-      boldLarge: TextStyle.lerp(boldLarge, other.boldLarge, t),
+  static TextStyle medium({
+    double fontSize = FontSizes.s16,
+    required Color color,
+  }) {
+    return _textStyle(
+      fontSize,
+      Fonts.fontFamily,
+      FontWeights.medium,
+      color,
     );
   }
-}
 
-AppTextStyles getAppTextStyles({required Color defaultColor}) {
-  final baseTextStyle = TextStyle(
-    color: defaultColor,
-    fontSize: 14,
-    fontWeight: FontWeight.w400,
-    letterSpacing: 0,
-  );
-  return AppTextStyles(
-    regular: baseTextStyle,
-    bold: baseTextStyle.copyWith(fontWeight: FontWeight.w700),
-    boldLarge:
-        baseTextStyle.copyWith(fontWeight: FontWeight.w700, fontSize: 24),
-  );
+  static TextStyle regular({
+    double fontSize = FontSizes.s16,
+    required Color color,
+  }) {
+    return _textStyle(
+      fontSize,
+      Fonts.fontFamily,
+      FontWeights.regular,
+      color,
+    );
+  }
+
+  static TextStyle semiBold({
+    double fontSize = FontSizes.s16,
+    required Color color,
+  }) {
+    return _textStyle(
+      fontSize,
+      Fonts.fontFamily,
+      FontWeights.semiBold,
+      color,
+    );
+  }
+
+  static TextStyle bold({
+    double fontSize = FontSizes.s16,
+    required Color color,
+  }) {
+    return _textStyle(
+      fontSize,
+      Fonts.fontFamily,
+      FontWeights.bold,
+      color,
+    );
+  }
+
+  static TextStyle _textStyle(
+    double fontSize,
+    String fontFamily,
+    FontWeight fontWeight,
+    Color color,
+  ) {
+    return TextStyle(
+      fontSize: fontSize,
+      fontFamily: fontFamily,
+      fontWeight: fontWeight,
+      color: color,
+    );
+  }
 }

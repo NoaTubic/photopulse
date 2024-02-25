@@ -18,7 +18,7 @@ config file has following variables that can be configured:
 connected with project management platform
 * ENVIRONMENT - default "staging", you can change to the desired environment tag
 you need
-* ISSUE_BASE_URL - default "https://teamwork.q.agency/app/tasks/", can be changed
+* ISSUE_BASE_URL - default "", can be changed
 to the desired project management platform, e.g. Jira which will be used as a 
 link to the ticket mentioned in the git commit
 * DESTINATION_TEMPLATE - default "release_notes_md_template.txt", which template

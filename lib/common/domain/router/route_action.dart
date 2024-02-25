@@ -1,5 +1,4 @@
 // ignore_for_file: always_use_package_imports
-// ignore_for_file: avoid-dynamic
 
 import 'base_router.dart';
 

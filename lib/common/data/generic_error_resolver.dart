@@ -1,7 +1,6 @@
 // ignore_for_file: always_use_package_imports
+import 'package:photopulse/generated/l10n.dart';
 import 'package:q_architecture/q_architecture.dart';
-
-import '../../generated/l10n.dart';
 
 final class GenericErrorResolver implements ErrorResolver {
   final String? failureTitle;
