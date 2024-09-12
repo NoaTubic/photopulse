@@ -22,11 +22,6 @@ abstract class UsersRepository {
 
   Future<void> deleteSignedInUser();
 
-  EitherFailureOr<void> updateUserSubscriptionPackage(
-    SubscriptionPackage subscriptionPackage,
-    String? userId,
-  );
-
   EitherFailureOr<void> incrementDailyUploadAndTotalUploadSize(double sizeInMB);
 
   EitherFailureOr<List<PhotoPulseUser>> getUsers();
@@ -87,34 +82,6 @@ class UserRepositoryImpl with ErrorToFailureMixin implements UsersRepository {
   Future<void> deleteSignedInUser() {
     throw UnimplementedError();
   }
-
-  @override
-  EitherFailureOr<void> updateUserSubscriptionPackage(
-    SubscriptionPackage subscriptionPackage,
-    String? userId,
-  ) async =>
-      execute(
-        () async {
-          final userDocRef =
-              _usersCollection.doc(userId ?? _firebaseAuth.currentUser?.uid);
-
-          final userDoc = await userDocRef.get();
-          if (userDoc.exists) {
-            await userDocRef.update(
-              {
-                'subscriptionPackage': subscriptionPackage.name,
-                'isFirstLogin': false,
-                'canChangeSubscription': false,
-              },
-            );
-          } else {
-            return Left(Failure(title: S.current.user_not_found));
-          }
-
-          return const Right(null);
-        },
-        errorResolver: const FirebaseErrorResolver(),
-      );
 
   @override
   EitherFailureOr<void> incrementDailyUploadAndTotalUploadSize(
