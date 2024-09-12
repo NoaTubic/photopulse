@@ -2,8 +2,9 @@ import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:either_dart/either.dart';
 import 'package:firebase_storage/firebase_storage.dart';
-import 'package:gallery_saver/gallery_saver.dart';
+// import 'package:gallery_saver/gallery_saver.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:image_gallery_saver/image_gallery_saver.dart';
 import 'package:loggy/loggy.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:photopulse/common/data/firestore/firestore_collections.dart';
@@ -105,7 +106,7 @@ class PostRepositoryImpl implements PostRepository {
   EitherFailureOr<void> saveImage({required String url}) async {
     try {
       final path = await _getPath(url, imageExtension);
-      await GallerySaver.saveImage(path);
+      await ImageGallerySaver.saveFile(path);
       return const Right(null);
     } catch (_) {
       return Left(Failure.generic());
