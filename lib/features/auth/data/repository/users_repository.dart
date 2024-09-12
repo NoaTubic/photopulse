@@ -7,7 +7,6 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:photopulse/common/data/firebase_error_resolver.dart';
 import 'package:photopulse/common/data/firestore/firestore_collections.dart';
 import 'package:photopulse/features/auth/domain/entities/user.dart';
-import 'package:photopulse/features/subscription_management/domain/entities/subscription_package.dart';
 import 'package:photopulse/generated/l10n.dart';
 import 'package:q_architecture/q_architecture.dart';
 

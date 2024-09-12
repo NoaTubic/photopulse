@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:photopulse/features/auth/presentation/widgets/animated_logo.dart';
+import 'package:photopulse/features/login/presentation/widgets/animated_logo.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 import 'package:photopulse/generated/l10n.dart';
 

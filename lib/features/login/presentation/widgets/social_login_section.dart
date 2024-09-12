@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:photopulse/common/presentation/buttons/photo_pulse_button.dart';
 import 'package:photopulse/common/presentation/image_assets.dart';
-import 'package:photopulse/features/auth/domain/notifiers/login_notifier.dart';
+import 'package:photopulse/features/login/domain/notifiers/login_notifier.dart';
 
 class SocialLoginSection extends ConsumerWidget {
   const SocialLoginSection({

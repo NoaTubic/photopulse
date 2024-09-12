@@ -1,13 +1,11 @@
 // ignore_for_file: avoid_print
-
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
 import 'package:photopulse/main.dart' as app;
 import 'package:photopulse/main/app_environment.dart';
 
-// flutter test integration_test/subscription_management_test.dart --flavor dev -d 9571e0ea
-
+// flutter test integration_test/login_test.dart --flavor dev -d 9571e0ea
 void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
 
@@ -20,49 +18,38 @@ void main() {
     }
   };
 
-  group('Subscription Management Flow', () {
-    testWidgets('User can view and change subscription package',
+  group('Login Flow', () {
+    testWidgets('User can login with email and password',
         (WidgetTester tester) async {
       try {
         app.mainCommon(AppEnvironment.DEV);
         await tester.pumpAndSettle();
         print('App loaded');
 
-        // Login
+        // Enter email and password
         await tester.enterText(
             find.byKey(const Key('Email')), 'noatubic@gmail.com');
         await tester.enterText(find.byKey(const Key('Password')), 'password');
+        print('Entered login credentials');
+
+        // Tap login button
         await tester.tap(find.byKey(const Key('LoginButton')));
         await tester.pumpAndSettle(const Duration(seconds: 5));
-        print('Logged in');
+        print('Tapped login button');
 
-        // Navigate to Profile page
+        // Verify successful login
+        expect(find.byKey(const Key('HomeScreen')), findsOneWidget);
+        print('Verified successful login');
+
+        // Check for user-specific element on the home screen
+        expect(find.byKey(const Key('Profile')), findsOneWidget);
+        print('Found user-specific element');
+
+        // Optional: Navigate to profile page to further verify login
         await tester.tap(find.byKey(const Key('Profile')));
         await tester.pumpAndSettle(const Duration(seconds: 2));
-        print('Navigated to Profile');
-
-        // Expand subscription management section
-        await tester.tap(find.byKey(const Key('SubscriptionManagementTile')));
-        await tester.pumpAndSettle();
-        print('Expanded subscription management');
-
-        // Tap on "Change Subscription" button
-        await tester.tap(find.byKey(const Key('ChangeSubscriptionButton')));
-        await tester.pumpAndSettle(const Duration(seconds: 2));
-        print('Tapped Change Subscription');
-
-        // Verify initial package is Pro
-        expect(find.text('PRO'), findsOneWidget);
-        print('Verified PRO package');
-
-        // Tap the "Confirm" button to apply the Pro subscription
-        await tester.tap(find.byKey(const Key('ConfirmChangeButton')));
-        await tester.pumpAndSettle(const Duration(seconds: 5));
-        print('Confirmed subscription change');
-
-        // Verify the subscription change to Free
-        expect(find.text('FREE'), findsOneWidget);
-        print('Verified FREE package');
+        expect(find.text('noatubic@gmail.com'), findsOneWidget);
+        print('Verified user email in profile');
       } catch (e, stackTrace) {
         print('Test encountered an error: $e');
         print('Stack trace: $stackTrace');

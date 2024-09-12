@@ -1,22 +1,19 @@
 // ignore_for_file: always_use_package_imports
 import 'package:either_dart/either.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:google_sign_in/google_sign_in.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:photopulse/common/data/firebase_error_resolver.dart';
 import 'package:photopulse/common/data/firestore/firestore_collections.dart';
 import 'package:photopulse/features/auth/data/model/registration_request.dart';
-import 'package:photopulse/features/auth/data/repository/users_repository.dart';
 import 'package:photopulse/features/auth/domain/entities/user.dart';
 import 'package:photopulse/features/auth/domain/entities/user_credentials.dart';
+import 'package:photopulse/features/login/data/repositories/login_repository.dart';
+import 'package:photopulse/features/login/data/wrappers/google_wrapper.dart';
 import 'package:photopulse/features/profile/data/models/change_password_request.dart';
-import 'package:photopulse/generated/l10n.dart';
 import 'package:q_architecture/q_architecture.dart';
 
 final authRepositoryProvider = Provider<AuthRepository>(
-  (ref) => AuthRepositoryImpl(
-    ref.watch(usersRepositoryProvider),
-  ),
+  (ref) => AuthRepositoryImpl(ref.watch(loginRepositoryProvider)),
 );
 
 abstract interface class AuthRepository {
@@ -25,14 +22,6 @@ abstract interface class AuthRepository {
   });
 
   EitherFailureOr<void> verifyEmail();
-
-  EitherFailureOr<void> login({
-    required UserCredentials userCredentials,
-  });
-
-  EitherFailureOr<void> loginWithGoogle();
-
-  EitherFailureOr<void> loginAnonymously();
 
   Stream<User?> subscribeToAuthChanges();
 
@@ -48,11 +37,14 @@ abstract interface class AuthRepository {
 
 class AuthRepositoryImpl with ErrorToFailureMixin implements AuthRepository {
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
-  final GoogleSignIn _googleSignIn = GoogleSignIn();
-  final UsersRepository _usersRepository;
+
   final _usersCollection = FirestoreCollections.usersCollection;
 
-  AuthRepositoryImpl(this._usersRepository);
+  final LoginRepository _loginRepository;
+
+  AuthRepositoryImpl(
+    this._loginRepository,
+  );
 
   @override
   EitherFailureOr<void> register({
@@ -85,57 +77,6 @@ class AuthRepositoryImpl with ErrorToFailureMixin implements AuthRepository {
       );
 
   @override
-  EitherFailureOr<void> login({
-    required UserCredentials userCredentials,
-  }) =>
-      execute(
-        () async {
-          await _firebaseAuth.signInWithEmailAndPassword(
-            email: userCredentials.email,
-            password: userCredentials.password,
-          );
-
-          if (!_firebaseAuth.currentUser!.emailVerified) {
-            return Left(Failure(title: S.current.email_not_verified));
-          }
-          await _usersRepository.initializeUser();
-          return const Right(null);
-        },
-        errorResolver: const FirebaseErrorResolver(),
-      );
-
-  @override
-  EitherFailureOr<void> loginWithGoogle() => execute(
-        () async {
-          final GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
-          if (googleUser == null) {
-            return Left(
-              Failure(title: S.current.google_sign_in_canceled),
-            );
-          } else {
-            final googleAuth = await googleUser.authentication;
-            final authCredential = GoogleAuthProvider.credential(
-              idToken: googleAuth.idToken,
-              accessToken: googleAuth.accessToken,
-            );
-            await _firebaseAuth.signInWithCredential(authCredential);
-          }
-          await _usersRepository.initializeUser();
-          return const Right(null);
-        },
-        errorResolver: const FirebaseErrorResolver(),
-      );
-
-  @override
-  EitherFailureOr<void> loginAnonymously() => execute(
-        () async {
-          await _firebaseAuth.signInAnonymously();
-          return const Right(null);
-        },
-        errorResolver: const FirebaseErrorResolver(),
-      );
-
-  @override
   Stream<User?> subscribeToAuthChanges() async* {
     yield* _firebaseAuth.authStateChanges();
   }
@@ -154,7 +95,7 @@ class AuthRepositoryImpl with ErrorToFailureMixin implements AuthRepository {
           ChangePasswordRequest changePasswordRequest) async =>
       execute(() async {
         final User? user = _firebaseAuth.currentUser;
-        final reauthenticateResult = await login(
+        final reauthenticateResult = await _loginRepository.login(
           userCredentials: UserCredentials(
               email: user!.email!, password: changePasswordRequest.oldPassword),
         );
@@ -180,7 +121,7 @@ class AuthRepositoryImpl with ErrorToFailureMixin implements AuthRepository {
   Future<void> logout() async {
     try {
       await _firebaseAuth.signOut();
-      await _googleSignIn.signOut();
+      await GoogleWrapper().signOut();
     } catch (_) {}
   }
 }

@@ -2,7 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:photopulse/features/admin/presentation/pages/admin_page.dart';
-import 'package:photopulse/features/auth/presentation/pages/login_page.dart';
+import 'package:photopulse/features/login/presentation/pages/login_page.dart';
 import 'package:photopulse/features/auth/presentation/pages/registration_page.dart';
 import 'package:photopulse/features/auth/presentation/pages/verify_email_page.dart';
 import 'package:photopulse/features/camera/presentation/pages/photo_pulse_camera.dart';

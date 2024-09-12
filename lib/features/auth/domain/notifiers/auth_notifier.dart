@@ -3,7 +3,7 @@ import 'package:flutter/foundation.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:photopulse/features/auth/domain/notifiers/user_notifier.dart';
-import 'package:photopulse/features/auth/presentation/pages/login_page.dart';
+import 'package:photopulse/features/login/presentation/pages/login_page.dart';
 import '../../../../common/domain/providers/base_router_provider.dart';
 import '../../../feed/presentation/pages/home_page.dart';
 import '../../data/repository/auth_repository.dart';

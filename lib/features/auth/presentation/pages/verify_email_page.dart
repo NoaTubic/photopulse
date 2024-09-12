@@ -11,7 +11,7 @@ import 'package:photopulse/common/presentation/photo_pulse_toast.dart';
 import 'package:photopulse/common/presentation/text/text.dart';
 import 'package:photopulse/common/utils/build_context_extensions.dart';
 import 'package:photopulse/features/auth/domain/notifiers/registration_notifier.dart';
-import 'package:photopulse/features/auth/presentation/pages/login_page.dart';
+import 'package:photopulse/features/login/presentation/pages/login_page.dart';
 import 'package:photopulse/features/auth/presentation/widgets/text_button_row.dart';
 import 'package:photopulse/generated/l10n.dart';
 import 'package:photopulse/theme/app_colors.dart';

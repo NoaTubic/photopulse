@@ -19,13 +19,13 @@ import 'package:photopulse/common/presentation/photo_pulse_toast.dart';
 import 'package:photopulse/features/auth/domain/notifiers/account_recovery_notifier.dart';
 import 'package:photopulse/features/auth/domain/notifiers/auth_notifier.dart';
 import 'package:photopulse/features/auth/domain/notifiers/auth_state.dart';
-import 'package:photopulse/features/auth/domain/notifiers/login_notifier.dart';
+import 'package:photopulse/features/login/domain/notifiers/login_notifier.dart';
 import 'package:photopulse/features/auth/domain/notifiers/user_notifier.dart';
 import 'package:photopulse/features/auth/forms/login_form_config.dart';
 import 'package:photopulse/features/auth/presentation/pages/registration_page.dart';
 import 'package:photopulse/features/auth/presentation/pages/reset_password_page.dart';
-import 'package:photopulse/features/auth/presentation/widgets/animated_logo.dart';
-import 'package:photopulse/features/auth/presentation/widgets/social_login_section.dart';
+import 'package:photopulse/features/login/presentation/widgets/animated_logo.dart';
+import 'package:photopulse/features/login/presentation/widgets/social_login_section.dart';
 import 'package:photopulse/generated/l10n.dart';
 import 'package:q_architecture/base_state_notifier.dart';
 
