@@ -84,6 +84,7 @@ class LoginPage extends HookConsumerWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
+              const SizedBox(height: AppSizes.normalSpacing),
               const AnimatedLogo(),
               const SizedBox(height: AppSizes.normalSpacing),
               const SizedBox(height: AppSizes.mediumSpacing),
@@ -92,6 +93,7 @@ class LoginPage extends HookConsumerWidget {
                 child: Column(
                   children: [
                     PhotoPulseTextFormField.normalTextField(
+                      key: const Key('Email'),
                       autoValidateMode: AutovalidateMode.onUserInteraction,
                       textInputType: TextInputType.emailAddress,
                       name: LoginFormConfig.emailKey,
@@ -102,6 +104,7 @@ class LoginPage extends HookConsumerWidget {
                       labelText: S.current.email,
                     ),
                     PhotoPulseTextFormField.passwordTextField(
+                      key: const Key('Password'),
                       name: LoginFormConfig.passwordKey,
                       validators: [
                         FormBuilderValidators.required(),
@@ -112,6 +115,7 @@ class LoginPage extends HookConsumerWidget {
                       height: AppSizes.normalSpacing,
                     ),
                     PhotoPulseButton.primary(
+                      key: const Key('LoginButton'),
                       label: S.current.login,
                       onTap: () => formKey.submitForm(
                         (formMap) => loginNotifier.login(formMap),

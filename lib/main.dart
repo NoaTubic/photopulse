@@ -21,9 +21,9 @@ import 'main/app_environment.dart';
 import 'theme/theme.dart';
 
 Future<void> mainCommon(AppEnvironment environment) async {
-  final WidgetsBinding widgetsBinding =
-      WidgetsFlutterBinding.ensureInitialized();
-  FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
+  // final WidgetsBinding widgetsBinding =
+  //     WidgetsFlutterBinding.ensureInitialized();
+  // FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
 
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,

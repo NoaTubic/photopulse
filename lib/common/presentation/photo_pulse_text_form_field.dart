@@ -93,6 +93,7 @@ class PhotoPulseTextFormField extends HookWidget {
     bool isEnabled = true,
     Widget? suffixIcon,
     Widget? prefixIcon,
+    Key? key,
   }) {
     return PhotoPulseTextFormField._(
       name: name,
@@ -109,6 +110,7 @@ class PhotoPulseTextFormField extends HookWidget {
       isEnabled: isEnabled,
       suffixIcon: suffixIcon,
       prefixIcon: prefixIcon,
+      key: key,
     );
   }
 
@@ -119,6 +121,7 @@ class PhotoPulseTextFormField extends HookWidget {
     AutovalidateMode? autoValidateMode,
     isMandatory = false,
     String? errorText,
+    Key? key,
   }) {
     return PhotoPulseTextFormField._(
       name: name,
@@ -128,6 +131,7 @@ class PhotoPulseTextFormField extends HookWidget {
       obscureText: true,
       isMandatory: isMandatory,
       errorText: errorText,
+      key: key,
     );
   }
 
@@ -307,6 +311,7 @@ class PhotoPulseTextFormField extends HookWidget {
                 : null,
             initialValue: initialValue,
             builder: (field) => TextField(
+              key: key,
               focusNode: focusNode,
               controller: controller,
               onChanged: (value) {

@@ -47,7 +47,7 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyD_YB9ntgunNWHWJu60k_boBSOFq5zya6A',
+    apiKey: 'AIzaSyBify1GHRYdAUqG3m9qjng8I-fzXVHKYKw',
     appId: '1:1022619391177:web:0d744ab2f0b26a6ccd2918',
     messagingSenderId: '1022619391177',
     projectId: 'photopulse-cd89c',
@@ -57,7 +57,7 @@ class DefaultFirebaseOptions {
   );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyDdht2O0GB5LgdqLEFTA0Oo3lH4gWBTetY',
+    apiKey: 'AIzaSyBXIQi0MEI2dGMhvgod0-8WFx7jC15UEA0',
     appId: '1:1022619391177:android:4577ec38c2c70defcd2918',
     messagingSenderId: '1022619391177',
     projectId: 'photopulse-cd89c',
@@ -65,13 +65,15 @@ class DefaultFirebaseOptions {
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyAeIWv0nhoVFlzsWITPqTs8pSHZ3SYNlqE',
+    apiKey: 'AIzaSyDaDo6M3k7oGENZAZKhESbparFbh8Fp85U',
     appId: '1:1022619391177:ios:e2978533ef8af60acd2918',
     messagingSenderId: '1022619391177',
     projectId: 'photopulse-cd89c',
     storageBucket: 'photopulse-cd89c.appspot.com',
-    androidClientId: '1022619391177-q5gcot254jvs69n02l6tv1ng9j68j5p1.apps.googleusercontent.com',
-    iosClientId: '1022619391177-fmv0fmpisvrih0p5qoq61hhatp4egsf7.apps.googleusercontent.com',
+    androidClientId:
+        '1022619391177-q5gcot254jvs69n02l6tv1ng9j68j5p1.apps.googleusercontent.com',
+    iosClientId:
+        '1022619391177-fmv0fmpisvrih0p5qoq61hhatp4egsf7.apps.googleusercontent.com',
     iosBundleId: 'com.omnithread.photopulse',
   );
 }

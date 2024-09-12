@@ -27,6 +27,7 @@ class PhotoPulseButton extends StatelessWidget {
     this.backgroundColor,
     this.borderColor,
     this.width,
+    super.key,
   });
 
   factory PhotoPulseButton.primary({
@@ -35,6 +36,7 @@ class PhotoPulseButton extends StatelessWidget {
     bool isLoading = false,
     required void Function()? onTap,
     final bool? isEnabled,
+    Key? key,
   }) {
     return PhotoPulseButton._(
       label: label,
@@ -43,6 +45,7 @@ class PhotoPulseButton extends StatelessWidget {
       isLoading: isLoading,
       borderColor: AppColors.black,
       backgroundColor: AppColors.black,
+      key: key,
       child: child,
     );
   }

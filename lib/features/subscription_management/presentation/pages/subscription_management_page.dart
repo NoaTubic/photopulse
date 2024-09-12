@@ -41,7 +41,10 @@ class SubscriptionManagementPage extends ConsumerWidget {
     return PhotoPulseScaffold(
       appBar: ref.watch(userProvider)!.isFirstLogin
           ? null
-          : PhotoPulseAppBar.withBackNav(onTap: () => ref.pop()),
+          : PhotoPulseAppBar.withBackNav(
+              onTap: () => ref.pop(),
+              key: const Key('BackButton'),
+            ),
       padding: EdgeInsets.zero,
       body: Center(
         child: Column(
@@ -52,6 +55,7 @@ class SubscriptionManagementPage extends ConsumerWidget {
             const SubscriptionPackageSlider(),
             const Gap(AppSizes.xLargeSpacing),
             Padding(
+              key: const Key('ConfirmChangeButton'),
               padding: const EdgeInsetsDirectional.symmetric(
                 horizontal: AppSizes.xLargeSpacing,
               ),

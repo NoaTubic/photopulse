@@ -154,6 +154,7 @@ class ProfilePage extends ConsumerWidget {
                         ),
                         const SizedBox(height: AppSizes.normalSpacing),
                         PhotoPulseExpansionTile(
+                          key: const Key('SubscriptionManagementTile'),
                           title: S.current.subscription_package,
                           leadingIcon: Icons.edit_calendar_outlined,
                           children: const [

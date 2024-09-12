@@ -40,12 +40,14 @@ class PhotoPulseAppBar extends StatelessWidget implements PreferredSizeWidget {
     required void Function() onTap,
     Color iconColor = Colors.black,
     Color? titleColor,
+    key,
   }) =>
       PhotoPulseAppBar(
         title: title,
         titleColor: titleColor,
         titleAlignment: Alignment.topCenter,
         leading: GestureDetector(
+          key: key,
           onTap: onTap,
           child: Icon(
             Icons.arrow_back_rounded,

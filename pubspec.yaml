@@ -82,11 +82,21 @@ dev_dependencies:
   flutter_lints: ^3.0.1
   flutter_test:
     sdk: flutter
+  integration_test:
+    sdk: flutter
   freezed: ^2.3.5
   isar_generator: ^3.1.0+1
   json_serializable: ^6.7.1
   mocktail: ^1.0.1
   state_notifier_test: ^0.0.10
+  patrol: ^3.7.1
+
+patrol:
+  app_name: PhotoPulse
+  android:
+    package_name: com.omnithread.photopulse.dev
+  ios:
+    bundle_id: com.omnithread.photopulse.dev
 
 flutter_native_splash:
   image: assets/images/launcher.png

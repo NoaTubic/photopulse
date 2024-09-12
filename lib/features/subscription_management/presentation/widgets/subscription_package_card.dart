@@ -30,6 +30,11 @@ class SubscriptionPackageCard extends ConsumerWidget {
         color: AppColors.white.withOpacity(0.5),
         borderRadius: AppSizes.normalCircularBorderRadius,
         child: InkWell(
+          key: Key(subscription == SubscriptionPackage.pro
+              ? 'ProPackageOption'
+              : subscription == SubscriptionPackage.gold
+                  ? 'GoldPackageOption'
+                  : 'DefaultPackageOption'),
           splashColor: AppColors.white.withOpacity(0.3),
           highlightColor: AppColors.white.withOpacity(0.3),
           onTap: onTap,

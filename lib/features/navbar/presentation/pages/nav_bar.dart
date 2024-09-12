@@ -122,6 +122,7 @@ class NavBar extends ConsumerWidget {
                 destinations: bottomNavBarItems
                     .map(
                       (tab) => NavigationDestination(
+                        key: Key(tab.title),
                         icon: tab.icon,
                         label: tab.title,
                       ),

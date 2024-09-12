@@ -59,6 +59,7 @@ class _PhotoPulseExpansionTileState extends State<PhotoPulseExpansionTile> {
                 ? const Icon(Icons.keyboard_arrow_up_rounded)
                 : const Icon(Icons.keyboard_arrow_down_rounded),
             title: BodyText(
+              key: const Key('currentPackageLabel'),
               widget.title,
               isBold: true,
             ),

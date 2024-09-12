@@ -68,6 +68,7 @@ class CurrentSubscriptionSection extends ConsumerWidget {
         Material(
           color: Colors.transparent,
           child: InkWell(
+            key: const Key('ChangeSubscriptionButton'),
             onTap: user.canChangeSubscription
                 ? () => ref.pushNamed(
                       routeName,
